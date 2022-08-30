@@ -11,10 +11,14 @@
     Icon ต่างๆ
 
 ### redux
-    npm install @reduxjs/toolkit react-redux
+    npm install @reduxjs/toolkit redux react-redux redux-devtools-extension 
+
 
 ### axios
     npm install axios
+
+### moment react
+    npm install moment react-moment
 # T---------------------------------------------------------------T
 
 
