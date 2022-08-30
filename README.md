@@ -23,6 +23,9 @@
 
 ### Ant-design
     npm install antd
+
+### Boostrap
+    npm install react-bootstrap bootstrap
 # T---------------------------------------------------------------T
 
 
