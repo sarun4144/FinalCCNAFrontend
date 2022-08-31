@@ -26,6 +26,9 @@
 
 ### Boostrap
     npm install react-bootstrap bootstrap
+
+### Tostify
+    npm install --save react-toastify
 # T---------------------------------------------------------------T
 
 

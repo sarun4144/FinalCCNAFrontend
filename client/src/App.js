@@ -12,9 +12,9 @@ function App() {
       <BrowserRouter>
     <Routes>
       <Route exact path="/" element={<><Header/><Banner/></>}/>
-      <Route path ="/about" element={<About />}/>
-      <Route path ="/login" element={<Login />}/>
-      <Route path ="/register" element={<Register />}/>
+      <Route path ="/about" element={<><Header/><About /></>}/>
+      <Route path ="/login" element={<><Header/><Login /></>}/>
+      <Route path ="/register" element={<><Header/><Register /></>}/>
     </Routes>
     </BrowserRouter>
   </div>

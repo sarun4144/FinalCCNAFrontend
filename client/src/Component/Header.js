@@ -10,7 +10,11 @@ import { Link} from "react-router-dom"
     console.log(click);
     const closeMobileMenu = () => setClick(false);
   return (
-    <div className="header">
+    //แถวกับหลัก
+    <div className="row" >   
+     <div className="col-md-1"></div>
+    <div className='col-md-10'>
+    <div className="header"> 
       <div className="container">
         <div className="header-con">
             <div className="logo-container">
@@ -44,7 +48,10 @@ import { Link} from "react-router-dom"
             </div>
         </div>
       </div>
+    </div> 
     </div>
+    <div className="col-1"></div>
+    </div>  
   )
 }
 

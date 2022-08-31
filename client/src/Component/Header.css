@@ -1,3 +1,4 @@
+
 .container {
     max-width: 960px;
     margin: 0 auto;
@@ -7,19 +8,20 @@
     background: #333;
     height: 80px;
     animation-name: Nav;
-    animation-duration: 2s; 
-    border: 1px solid;
-   
+    animation-duration: 2s;
+    margin-top: 50px;
 }
+
 @keyframes Nav {
-   from{height: 10px;}
-   from{background-color: #fff;}
-   
+    from{height: 10px;}
+    from{background-color: #fff;}
+
   }
 .header-con {
     display: flex;
     justify-content: space-between;
     height: 80px;
+    width: 1200px;
     align-items: center;
 }
 .logo-container a{
@@ -27,10 +29,18 @@
     font-weight: bold;
     font-size: 2rem;
     animation-name: font;
+    animation-delay: 2.1s;
     animation-duration: 2s;
     color: #fff;
 }
-
+.logo-container a:hover{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 2rem;
+    color: rgb(28, 121, 184);
+    transition: all 0.5s ease;
+    
+}
 @keyframes font {
     from{ color:#333;}
     to{color: #fff;}
@@ -43,16 +53,29 @@
   
 }
 .menu li {
-    padding-right: 2rem;
+    padding-right: 5rem;
+    padding-top: 10px;
 }
 .menu li a {
+    font-size: 20px;
     text-decoration: none;
     color: #fff;
+}
+.menu li a:hover {
+    text-decoration: none;
+    color: rgb(28, 121, 184);
+    transition: all 0.5s ease;
 }
 .mobile-menu {
     display: none;
 }
 @media screen and (max-width: 480px) {
+    .header{
+        margin: 0 auto;
+    }
+    .header-con {
+        width: auto; 
+    }
     .logo-container a {
         font-size: 1.5rem;
 
@@ -75,7 +98,7 @@
         top: 64px;
         right: 0%;
         opacity: 0;
-       
+       padding-bottom: 10px;
        
     }
     .menu.active {
@@ -90,6 +113,11 @@
     }
     .menu li {
         padding-right: 0 ;
+    }
+    .menu li a {
+        font-size: 15px;
+        text-decoration: none;
+        color: #fff;
     }
     .menu-link {
         display: flex;

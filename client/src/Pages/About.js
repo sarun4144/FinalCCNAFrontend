@@ -1,7 +1,12 @@
 import React from "react";
 import { Link} from "react-router-dom"
 function About() {
-  return <Link to="/"> THIS IS THE About PAGE</Link>;
+  return (
+    <div className="App">
+       <Link to="/" > THIS IS THE About PAGE</Link>
+    </div>
+ 
+  )
 }
 
 export default About;
