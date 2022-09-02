@@ -1,8 +1,6 @@
 
 .container {
-    max-width: 960px;
     margin: 0 auto;
-    
 }
 .header {
     background: #333;
@@ -21,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     height: 80px;
-    width: 1200px;
+    width: 100%;
     align-items: center;
 }
 .logo-container a{
@@ -69,7 +67,43 @@
 .mobile-menu {
     display: none;
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 1281px) and (min-width: 992px){
+    .header{
+        margin: 0 auto;
+    }
+    .header-con {
+        width: auto; 
+    }
+    .logo-container a {
+        font-size: 1.5rem;
+
+    }
+    .menu li a {
+        font-size: 15px;
+        text-decoration: none;
+        color: #fff;
+    }
+
+}
+
+@media screen and (max-width: 991px) and (min-width: 481px){
+    .header{
+        margin: 0 auto;
+    }
+  
+    .logo-container a {
+        font-size: 1.0rem;
+
+    }
+    .menu li a {
+        font-size: 10px;
+        text-decoration: none;
+        color: #fff;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
     .header{
         margin: 0 auto;
     }

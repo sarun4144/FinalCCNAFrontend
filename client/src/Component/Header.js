@@ -12,8 +12,8 @@ import { Link} from "react-router-dom"
   return (
     //แถวกับหลัก
     <div className="row" >   
-     <div className="col-md-1"></div>
-    <div className='col-md-10'>
+     <div className="col-xl-1"></div>
+    <div className='col-xl-10'>
     <div className="header"> 
       <div className="container">
         <div className="header-con">
@@ -30,7 +30,7 @@ import { Link} from "react-router-dom"
                         <li className="menu-link" onClick={closeMobileMenu}>
                             <Link to="/about">About Us</Link>
                         </li>
-                        <li className="menu-link" onClick={closeMobileMenu}>
+                        <li className="menu-link"  onClick={closeMobileMenu}>
                             <Link to="/register">Register</Link>
                         </li>
                         <li className="menu-link" onClick={closeMobileMenu}>
@@ -50,7 +50,7 @@ import { Link} from "react-router-dom"
       </div>
     </div> 
     </div>
-    <div className="col-1"></div>
+    <div className="col-xl-1"></div>
     </div>  
   )
 }

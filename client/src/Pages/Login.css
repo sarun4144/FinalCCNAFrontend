@@ -8,7 +8,6 @@
     padding: 10px;
 }
 .submit{
-    margin-left: 30%;
     background: rgb(0, 0, 0);
     display: inline-block;
     padding: .5rem 1rem;
@@ -26,12 +25,24 @@
     background-color: rgb(68, 224, 68);
 }
 .title{
-    margin-left: 10px;
+    text-align: center;
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 767px) and (min-width: 490px){
     .title{
+        padding-top: 10px;
+        font-size: 37px;
+    }
+    .submit{
         margin: 0 auto;
-        font-size: 20px;
+    }
+    .card {
+        margin-top: 25px;
+    }
+}
+@media screen and (max-width: 490px) {
+    .title{
+        font-size: 25px;
+        padding-top: 10px;
     }
     .submit{
         margin: 0 auto;

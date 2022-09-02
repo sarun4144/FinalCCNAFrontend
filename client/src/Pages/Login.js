@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-
 import {login} from '../Function/Auth'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Register.css'
+import './Login.css'
 function Login() {
     const [value,setValue] = useState({
          email:" " ,
@@ -34,17 +33,18 @@ function Login() {
                 <div className="col-md-6 offset-md-3"  >
                     <div className="card">
                         <div className="row">
-                            <div class="col order-last"></div>
-                            <div className="col" >
+                            <div class="col-1 "></div>
+                            <div className="col-10"  style={{backgroundColor:'lightblue'}}> 
                                  <h1 className="title">เข้าสู่ระบบ</h1>
                             </div>
-                            <div class="col order-first"></div>
+                            <div class="col-1"></div>
                          </div>
                          <form onSubmit={handleSubmit}>
                          <div className="form-group" >
                             <label>Email: </label>
                                 <input className="form-control"type="email"name="email" autoFocus placeholder="Email" onChange={handleChange}/>
                             </div>
+                            <br/>
                                 <div className="form-group">   
                             <label >Password:</label>
                                 <input className="form-control" type="password" name="password" placeholder="รหัสผ่าน" onChange={handleChange} required/>
@@ -53,7 +53,7 @@ function Login() {
 
                                 <div className="row">
                                 <div className="col-4" ></div>
-                                <div className="col-4"> <button className="submit">Login</button> </div>
+                                <div className="col-4" > <button className="submit">Login</button> </div>
                                 <div className="col-4"></div>
                             
                             </div>
