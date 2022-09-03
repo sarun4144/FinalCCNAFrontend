@@ -8,7 +8,7 @@ export const register = async (value) =>
     }
 });
 
-export const login = async (value) =>
+export const userlogin = async (value) =>
   await axios.post(process.env.REACT_APP_API + "/login", value,{
     headers: {
         'Content-Type': 'application/json'

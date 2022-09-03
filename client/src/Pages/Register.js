@@ -1,15 +1,16 @@
 import React,{useState} from "react";
+import { useNavigate } from "react-router-dom";
 import {register} from '../Function/Auth';
 import { toast } from 'react-toastify';
 import './Register.css'
 function Register({history}){
+    const navigate = useNavigate();
     const [value,setValue] = useState({
         username:" ",
         password:" ",
         conpassword:" " ,
         email:" " 
     })
-
 
     const handleChange = (e) =>{
         setValue({
@@ -25,6 +26,7 @@ function Register({history}){
         }else{
             register(value).then((res) => {      
             toast.success('สมัครสมาชิกสำเร็จ');
+            navigate("/login")
         })
         .catch((err) => {
           toast.error(err.response.data);

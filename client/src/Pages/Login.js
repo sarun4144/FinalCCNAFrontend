@@ -1,17 +1,29 @@
 import React, { useState } from "react";
-import {login} from '../Function/Auth'
-import {Logins} from '../Store/userSilce'
+import { useNavigate } from "react-router-dom";
+import {userlogin} from '../Function/Auth'
+import {login} from '../Store/userSilce'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css'
 import { toast } from 'react-toastify';
-import { useDispatch} from 'react-redux'
-function Login({ history }) {
+import { useDispatch } from 'react-redux'
+function Login() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [value,setValue] = useState({
          email:" " ,
          password:" "
        
     })
+
+    const roleBaseRedirect = (role) => {
+        console.log(role);
+        if (role === "admin") {
+          navigate("/admin/home");
+        } else {
+          navigate("/user/home");
+        }
+      };
+
     const handleChange = (e) =>{
         setValue({
             ...value,[e.target.name]:e.target.value,
@@ -20,11 +32,17 @@ function Login({ history }) {
     const handleSubmit = (e) =>{
         e.preventDefault()
         console.log(value);
-        login(value).then((res) => {
+        userlogin(value).then((res) => {
           console.log(res.data);
           toast.success("ล็อกอินสำเร็จ")
-          dispatch(Logins(value))
-          history.push('/')
+          const payload = {
+            token: res.data.token,
+            username:res.data.payload.Euser.username,
+            role:res.data.payload.Euser.role
+        }
+          dispatch(login(payload))
+            localStorage.setItem('token',res.data.token)
+            roleBaseRedirect(res.data.payload.Euser.role);
         })
         .catch((err) => {
           console.log(err.response.data);
