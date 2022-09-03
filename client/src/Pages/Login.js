@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import {login} from '../Function/Auth'
+import {Logins} from '../Store/userSilce'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css'
-function Login() {
+import { toast } from 'react-toastify';
+import { useDispatch} from 'react-redux'
+function Login({ history }) {
+    const dispatch = useDispatch();
     const [value,setValue] = useState({
          email:" " ,
          password:" "
@@ -18,12 +22,13 @@ function Login() {
         console.log(value);
         login(value).then((res) => {
           console.log(res.data);
-          alert("ล็อกอินสำเร็จ");
-          
+          toast.success("ล็อกอินสำเร็จ")
+          dispatch(Logins(value))
+          history.push('/')
         })
         .catch((err) => {
           console.log(err.response.data);
-          alert(err.response.data);
+          toast.error(err.response.data);
         });
         }
 

@@ -11,9 +11,7 @@ import { Link} from "react-router-dom"
     const closeMobileMenu = () => setClick(false);
   return (
     //แถวกับหลัก
-    <div className="row" >   
-     <div className="col-xl-1"></div>
-    <div className='col-xl-10'>
+    
     <div className="header"> 
       <div className="container">
         <div className="header-con">
@@ -49,9 +47,7 @@ import { Link} from "react-router-dom"
         </div>
       </div>
     </div> 
-    </div>
-    <div className="col-xl-1"></div>
-    </div>  
+ 
   )
 }
 

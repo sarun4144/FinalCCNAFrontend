@@ -8,10 +8,11 @@
     padding: 10px;
 }
 .submit{
+
     margin-left: 30%;
     background: rgb(0, 0, 0);
     display: inline-block;
-    padding: .5rem 2rem;
+    padding: .5rem 1rem;
     text-decoration: none;
     color: rgb(255, 255, 255);
     border: 2px solid transparent;
@@ -31,11 +32,11 @@
 
 @media screen and (max-width: 767px) and (min-width: 490px){
     .title{
-        padding-top: 10px;
+        padding-top: 5px;
         font-size: 37px;
     }
     .submit{
-        margin: 0 auto;
+        margin-left: 20%;
     }
     .card {
         margin-top: 25px;
@@ -44,10 +45,12 @@
 @media screen and (max-width: 490px) {
     .title{
         font-size: 25px;
-        padding-top: 10px;
+        padding-top: 5px;
     }
     .submit{
+        font-size: 15px;
         margin: 0 auto;
+        padding: .5rem 0.5rem;
     }
     .card {
         margin-top: 25px;

@@ -1,14 +1,16 @@
 import React,{useState} from "react";
 import {register} from '../Function/Auth';
-
+import { toast } from 'react-toastify';
 import './Register.css'
-function Register(){
+function Register({history}){
     const [value,setValue] = useState({
         username:" ",
         password:" ",
         conpassword:" " ,
         email:" " 
     })
+
+
     const handleChange = (e) =>{
         setValue({
             ...value,[e.target.name]:e.target.value,
@@ -19,16 +21,13 @@ function Register(){
         e.preventDefault()
         console.log(value);
         if(value.password !== value.conpassword || value.password < 6 ){
-            alert("รหัสผ่านไม่ตรงกันหรือน้อยกว่า 8 ตัว กรุณากรอกรหัสผ่านอีกครั้ง");
+            toast.error("รหัสผ่านไม่ตรงกันหรือน้อยกว่า 6 ตัว ");
         }else{
-            register(value)
-        .then((res) => {
-          console.log(res.data);
-          alert("สมัครสมาชิกสำเร็จ");
+            register(value).then((res) => {      
+            toast.success('สมัครสมาชิกสำเร็จ');
         })
         .catch((err) => {
-          console.log(err.response.data);
-          alert(err.response.data);
+          toast.error(err.response.data);
         });
         }
     }
@@ -66,10 +65,9 @@ function Register(){
                                 </div>
                                 
                                 <br/> 
-                                    
                                 <div className="row">
                                 <div className="col-4" ></div>
-                                <div className="col-4" > <button className="submit">Login</button> </div>
+                                <div className="col-4" > <button className="submit">ลงทะเบียน</button> </div>
                                 <div className="col-4"></div>
                             
                             </div>

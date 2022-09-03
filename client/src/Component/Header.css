@@ -7,7 +7,7 @@
     height: 80px;
     animation-name: Nav;
     animation-duration: 2s;
-    margin-top: 50px;
+    
 }
 
 @keyframes Nav {

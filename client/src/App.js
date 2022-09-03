@@ -5,11 +5,14 @@ import About from './Pages/About';
 import Banner from './Component/Banner';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <> 
     <div>
       <BrowserRouter>
+      <ToastContainer/>
     <Routes>
       <Route exact path="/" element={<><Header/><Banner/></>}/>
       <Route path ="/about" element={<><Header/><About /></>}/>

@@ -8,9 +8,7 @@ let bannerData = {
 
 function Banner() {
     return (
-        <div className="row" > 
-     <div className="col-md-1"></div>
-    <div className='col-md-10'>
+     
     
         <div className="banner-bg">
             <div className="container">
@@ -25,9 +23,9 @@ function Banner() {
                 </div>
             </div>
         </div>
-            </div>
-        <div className="col-md-1"></div>
-        </div>  
+      
+  
+         
     )
 }
 
