@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {userlogin} from '../Function/Auth'
 import {login} from '../Store/userSilce'
+import Swal from 'sweetalert2'
+import Toast from "../Alert/Success";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css'
-import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux'
 function Login() {
     const navigate = useNavigate();
@@ -34,19 +35,32 @@ function Login() {
         console.log(value);
         userlogin(value).then((res) => {
           console.log(res.data);
-          toast.success("ล็อกอินสำเร็จ")
+          Toast.fire({
+            position:'top-end',
+            icon:'success',
+            title:'เข้าสู่ระบบสำเร็จ'
+        })  
           const payload = {
             token: res.data.token,
-            username:res.data.payload.Euser.username,
-            role:res.data.payload.Euser.role
+            username:res.data.payload.user.username,
+            role:res.data.payload.user.role
         }
           dispatch(login(payload))
             localStorage.setItem('token',res.data.token)
-            roleBaseRedirect(res.data.payload.Euser.role);
+            roleBaseRedirect(res.data.payload.user.role);
         })
         .catch((err) => {
           console.log(err.response.data);
-          toast.error(err.response.data);
+
+          Swal.fire({
+            position:'top',
+            title: 'Error!',
+            text: err.response.data,
+            icon: 'error',
+            iconColor:'Red',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง'
+          })
         });
         }
 

@@ -7,11 +7,8 @@ import { Link} from "react-router-dom"
  function Header() {
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
-    console.log(click);
     const closeMobileMenu = () => setClick(false);
   return (
-    //แถวกับหลัก
-    
     <div className="header"> 
       <div className="container">
         <div className="header-con">

@@ -1,9 +1,11 @@
 import React,{useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {register} from '../Function/Auth';
-import { toast } from 'react-toastify';
+import Swal from 'sweetalert2'
+import Toast from "../Alert/Success";
 import './Register.css'
-function Register({history}){
+
+function Register(){
     const navigate = useNavigate();
     const [value,setValue] = useState({
         username:" ",
@@ -21,15 +23,33 @@ function Register({history}){
     const handleSubmit = (e) =>{
         e.preventDefault()
         console.log(value);
-        if(value.password !== value.conpassword || value.password < 6 ){
-            toast.error("รหัสผ่านไม่ตรงกันหรือน้อยกว่า 6 ตัว ");
+        if(value.password !== value.conpassword ){
+            Swal.fire({
+                position:'top',
+                title: 'รหัสผ่านไม่ตรงกัน',
+                text: 'กรุณากรอกรหัสใหม่',
+                icon: 'error',
+                iconColor:'Red'
+              })
         }else{
-            register(value).then((res) => {      
-            toast.success('สมัครสมาชิกสำเร็จ');
+            register(value).then((res) => {    
+                Toast.fire({
+                    position:'top-end',
+                    icon:'success',
+                    title:'สมัครสมาชิกสำเร็จ'
+                })  
             navigate("/login")
         })
         .catch((err) => {
-          toast.error(err.response.data);
+            Swal.fire({
+                position:'top',
+                title: 'Error!',
+                text: err.response.data,
+                icon: 'error',
+                iconColor:'Red',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'ตกลง'
+              })
         });
         }
     }

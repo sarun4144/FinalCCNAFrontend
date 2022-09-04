@@ -1,5 +1,10 @@
+import React,{ useState , useEffect } from 'react';
 import './App.css';
 import { BrowserRouter ,Route, Routes } from "react-router-dom"
+
+import {login} from './Store/userSilce'
+import { useDispatch } from 'react-redux'
+//notification
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,9 +21,33 @@ import Home from './Component/user/Home';
 //adminpage
 import Ahome from './Component/admin/Ahome';
 
+//function
+import {currentuser} from './Function/Auth'
+
+ 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+   
+    const idtoken = localStorage.token
+  if(idtoken){
+    currentuser(idtoken)
+    .then(res =>{
+      const payload = {
+        token: idtoken,
+        username:res.data.username,
+        role:res.data.role
+    }
+    dispatch(login(payload))
+      console.log(res.data)
+    }).catch(err =>{
+      console.log(err);
+    })
+  }
+  })
+  
   return (
-    <> 
+  
     <div>
       <BrowserRouter>
       <ToastContainer/>
@@ -35,7 +64,7 @@ function App() {
     </Routes>
     </BrowserRouter>
   </div>
-    </>
+   
   );
 }
 

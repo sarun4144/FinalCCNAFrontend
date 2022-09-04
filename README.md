@@ -30,6 +30,9 @@
 ### Tostify
     npm install --save react-toastify
 
+### sweet alert 
+    npm install sweetalert2
+
 ### Mui
     npm install @mui/material @emotion/react @emotion/styled
     
