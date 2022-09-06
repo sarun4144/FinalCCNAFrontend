@@ -1,13 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
- text: " ",
- role:"",
- token:" ",
  user:[],
- currentuser:[],
 
-};
+}
 
 export const userSlice = createSlice({
   name:'userStore',
@@ -15,16 +11,13 @@ export const userSlice = createSlice({
   reducers:{
         login:(state,action)=>{
             state.user = action.payload
-            state.currentuser = action.payload
         },
-        logout:(state)=>{
-            state.text="Logout user"
+        logout:(state,action)=>{
+            state.user = action.payload
+            localStorage.clear();
         },
-        Currentuser:(state,action)=>{
-          state.currentuser = action.payload
-      },
   },
   
 });
-export const {login,logout,Currentuser} = userSlice.actions;
+export const {login,logout} = userSlice.actions;
 export default userSlice.reducer;

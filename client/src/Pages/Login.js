@@ -26,9 +26,7 @@ function Login() {
       };
 
     const handleChange = (e) =>{
-        setValue({
-            ...value,[e.target.name]:e.target.value,
-        })
+        setValue({...value,[e.target.name]:e.target.value,})
     }
     const handleSubmit = (e) =>{
         e.preventDefault()

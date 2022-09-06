@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Banner.css"
+import "./ComponentCSS/Banner.css"
 import { Link} from "react-router-dom"
 let bannerData = {
     title: "Welcome to Pre-CCNA exame Website",
@@ -8,8 +8,6 @@ let bannerData = {
 
 function Banner() {
     return (
-     
-    
         <div className="banner-bg">
             <div className="container">
                 <div className="banner-con">
