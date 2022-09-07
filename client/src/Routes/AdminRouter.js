@@ -3,21 +3,20 @@ import { useSelector } from 'react-redux'
 import LoadingToRedirect from './LoadingToRedirect'
 import { currentadmin } from '../Function/Auth'
  const AdminRoute  =  ({children}) =>  {
-    const  User  =  useSelector((state) => ({...state}))
-    const Token = User.userStore.user.token
+    const user =  useSelector((state) => ({...state}))
+    const Token =user.userStore.user.token
     const [ok , setOk] = useState(false)
    useEffect(() => {
-    if(User && Token){
+    if(user && Token){
         currentadmin(Token).then(res => {
-            console.log("Admin",res)
+           console.log("Admin",res)
             setOk(true)
         }).catch(err => {
-            console.log(err)
+           console.log(err)
             setOk(false)
         })
     }
-
-   })
+   },[Token])
     return ok
     ? children
     : <LoadingToRedirect />

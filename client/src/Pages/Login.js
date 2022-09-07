@@ -68,11 +68,11 @@ function Login() {
                 <div className="col-md-6 offset-md-3"  >
                     <div className="card">
                         <div className="row">
-                            <div class="col-1 "></div>
+                            <div className="col-1 "></div>
                             <div className="col-10"  style={{backgroundColor:'lightblue'}}> 
                                  <h1 className="title">เข้าสู่ระบบ</h1>
                             </div>
-                            <div class="col-1"></div>
+                            <div className="col-1"></div>
                          </div>
                          <form onSubmit={handleSubmit}>
                          <div className="form-group" >

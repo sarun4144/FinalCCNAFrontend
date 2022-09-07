@@ -21,6 +21,45 @@ import { logout } from '../Store/userSilce';
       }
         try { 
         if(user.userStore.user.token){
+            if(user.userStore.user.role ==='admin'){
+                return (
+                    <nav className="header"> 
+                            <div className="logo-container">
+                                <Link to="/">Pre-CCNA<IoMdPaper /></Link>
+                                 </div>
+                            <div className="header-con">
+                            <ul className={click ? "menu active" : " menu"}>
+                                        <li className="menu-link" onClick={closeMobileMenu}>
+                                            <Link to="/admin/home">AdminMenu</Link>
+                                        </li>
+                                        <li className="menu-link" onClick={closeMobileMenu}>
+                                            <Link to="/store">คลังข้อสอบ</Link>
+                                        </li>
+                                        <li className="menu-link" onClick={closeMobileMenu}>
+                                            <Link to="/info">อะไรคือ CCNA?</Link>
+                                        </li>
+                                        <li className="menu-link" onClick={closeMobileMenu}>
+                                            <Link to="/about">About Us</Link>
+                                        </li>
+                                      
+                                        <li className="menu-link" onClick={Logout} >
+                                            <Link to="/">Logout</Link>
+                                        </li>
+                                   
+                                    </ul>
+                        </div>
+                         <div className="mobile-menu" onClick={handleClick}>
+                                    {click ? (
+                                        
+                                        <FiX />
+                                    ) : (
+                                        <FiMenu />
+                                    )}
+                
+                                 </div>
+                      </nav> 
+                  )
+            }
             return (
                 <nav className="header"> 
                         <div className="logo-container">

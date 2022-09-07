@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter ,Route, Routes } from "react-router-dom"
 
 import {login} from './Store/userSilce'
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 //notification
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,12 +15,14 @@ import Banner from './Component/Banner';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Content from './Component/Cotent'
-
+import Store from './Pages/Store';
 //userpage
 import Home from './Component/user/Home';
+import ManagAdmin from './Component/admin/ManageAdmin';
+import ExamAdd from './Component/admin/ExamAdd';
 
 //adminpage
-import Ahome from './Component/admin/Ahome';
+import Adminhome from './Component/admin/Adminhome';
 
 //function
 import {currentuser} from './Function/Auth'
@@ -60,11 +62,16 @@ function App() {
       <Route path ="/about" element={<><Header/><About /></>}/>
       <Route path ="/login" element={<><Header/><Login /></>}/>
       <Route path ="/register" element={<><Header/><Register /></>}/>
+      <Route path ="/store" element={<><Header/><Store /></>}/>
 
 
-     <Route path ="/user/home" element={<UserRoute><><Header/> <Home /></> </UserRoute>}/>
+    <Route path ="/user/home" element={<UserRoute><><Header/> <Home /></> </UserRoute>}/>
 
-     <Route path ="/admin/home" element={<AdminRoute> <><Header/><Ahome /></> </AdminRoute>}/>
+    <Route path ="/admin/home" element={<AdminRoute> <><Header/><Adminhome /></> </AdminRoute>}/>
+    <Route path ="/admin/manageadmin" element={<AdminRoute> <><Header/><ManagAdmin /></> </AdminRoute>}/>
+    <Route path ="/admin/examadd" element={<AdminRoute> <><Header/><ExamAdd /></> </AdminRoute>}/>
+  
+
     </Routes>
     </BrowserRouter>
   </div>

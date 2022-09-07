@@ -23,7 +23,7 @@ const LoadingToRedirect = () => {
               navigate('/')
             }
         
-        })
+        },[count])
           
         }
             
