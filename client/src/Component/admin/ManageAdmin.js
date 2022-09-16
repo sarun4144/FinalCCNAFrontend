@@ -3,13 +3,18 @@ import Switch  from '@mui/material/Switch';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbaradmin from './Navadmin';
 import { useSelector } from "react-redux";
+import { AiFillDelete,AiFillEdit } from "react-icons/ai";
+import * as moment from 'moment';
+//alert
+import Swal from 'sweetalert2' 
+import Confirm from "../../Alert/Confirm";
 //function
-import {listUser,changRole} from '../../Function/Person'
+import {listUser,changeStatus,changeRole,removeUser,changePassword} from '../../Function/Person'
 
 function ManagAdmin() {
   const user =  useSelector((state) => ({...state}))
   const [data, setData] = useState([]);
-  const Token =user.userStore.user.token
+  const Token = user.userStore.user.token
   console.log("Data", data);
   useEffect(() => {
     //code
@@ -23,29 +28,103 @@ function ManagAdmin() {
       console.log(err.response.data)
     })
   }
-
-  const handleOnchange = (checked,id) => {
-    console.log(checked)
+  const handleChangeStatus = (e,id) => {
     const value = {
       id: id,
-      enabled: checked,
+      enabled: e.target.checked,
     };
-    console.log("Value",value);
-    changRole(Token,value).then((res) => {
+    console.log(user.userStore.user.token,value)
+    changeStatus(user.userStore.user.token,value).then((res) => {
       console.log(res);
+      loadData(user.userStore.user.token);
     })
     .catch((err) => {
       console.log(err.response);
     });
   };
+
+  const handleChangeRole = (e,id) => {
+    const value = {
+      id: id,
+      role: e.target.value,
+    };
+    console.log(user.userStore.user.token,value)
+    changeRole(user.userStore.user.token,value).then((res) => {
+      console.log(res);
+      loadData(user.userStore.user.token);
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+  };
+
+  const handleRemove = (id) => {
+    Confirm.fire({
+      title: 'ยืนยัน!!',
+      text: "คุณต้องการจะลบ User ใช่หรืไม่",
+      icon: 'warning',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+        title:'ลบ User สำเร็จ!',
+        text: 'User ได้ถูกลบแล้ว',
+        icon:'success'
+       } ) 
+        console.log(user.userStore.user.token,id)
+        removeUser(user.userStore.user.token,id).then((res) => {
+        console.log("Delete",res);
+        loadData(user.userStore.user.token);
+       }).catch((err) => {
+        console.log(err.response);
+       });
+      }
+    })
+   
+    
+  }
+  const [values,setValues] = useState({
+    id: "",
+    password:""
+  })
+  const ShowEdit = async(id) => {
+   const {value:password} = await Swal.fire({
+      title: 'แก้ไข',
+      input: 'password',
+      inputLabel: 'Your email address',
+      inputPlaceholder: 'Enter your password address',
+      confirmButtonText: 'ยืนยัน',
+      confirmButtonColor: 'green',
+      inputAttributes: {
+        autocapitalize: 'off',
+        autocorrect: 'off',
+      }
+    })
+    if(password){
+       setValues({...values,id:id,password:password});
+       Swal.fire({
+        title: 'แก้ไข Password สำเร็จ',
+        confirmButtonText: 'ยืนยัน',
+        confirmButtonColor: 'green',
+       })
+       changePassword(user.userStore.user.token,values.id,{values})
+        .then(res =>{
+          console.log('Password',res)
+          loadData(user.userStore.user.token);
+       }).catch(err =>{
+          console.log(err.response)
+       })
+    }
+    
+  }
+  const roleData = ["admin", "user"];
   return (
     <div className='container-fluid'>
         <div className='row'>
             <div className="col-md-2">
                 <Navbaradmin/>
             </div>
-            <div className='col-md-8' >
-            <div className="card">
+            <div className='col' >
+            <h1>Admin Management Page</h1>
             <table className="table">
     <thead>
     <tr>
@@ -55,32 +134,74 @@ function ManagAdmin() {
       <th scope="col">Status</th>
       <th scope="col">Create</th>
       <th scope="col">Update</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
   {data.map((item, index) => 
   <tr>
-      <th scope="row">{item.username}</th>
-      <td>{item.email}</td>
-      <td>{item.role}</td>
+      <th >{item.email}</th>
+      <td>{item.username}</td>
       <td>
-      <Switch checked	={item.enabled} color="success" onChange={(checked)=>handleOnchange(checked, item._id)} />
+        {item.role === 'admin'
+        ?  
+      <select 
+      className="form-select" 
+      style={{width:"100px",backgroundColor:"lightgreen"}} 
+      defaultValue ={item.role} 
+      onChange={e => handleChangeRole(e, item._id)}
+      > 
+      {roleData.map((item,index)=>
+      <option value={item} key={index}> 
+        {item} 
+      </option>
+      )}
+     
+      </select>
+      : <select 
+      className="form-select" 
+      style={{width:"100px",backgroundColor:"lightskyblue"}} 
+      defaultValue ={item.role} 
+      onChange={e => handleChangeRole(e, item._id)}
+      > 
+      {roleData.map((item,index)=>
+      <option value={item} key={index}> 
+        {item} 
+      </option>
+      )}
+     
+      </select>
+      }
       </td>
-      <td>{item.createdAt}</td>
-      <td>{item.updatedAt}</td>
+      
+      <td>
+      <Switch checked	={item.enabled} color="success" onChange={e=>handleChangeStatus(e, item._id)} />
+      </td>
+      <td>
+        {moment(item.createdAt).locale("th").format("ll")}
+      </td>
+      <td>  
+      {moment(item.updatedAt)
+                      .locale("th")
+                      .startOf(item.updatedAt)
+                      .fromNow()}
+      </td>
+      <td>
+      <button type="button" className="btn btn-danger"> <AiFillDelete  onClick={()=>handleRemove(item._id)}/> </button>
+      <button type="button" className="btn btn-secondary"><AiFillEdit  onClick={()=>ShowEdit(item._id)}/></button>
+      </td>
     </tr>
-  
   )}
-    
   </tbody>
 </table>
             </div>
             </div>
             <div className='col-md-2'>
             </div>
-        </div>
     </div>
   )
+        
+
 }
 
 export default ManagAdmin 

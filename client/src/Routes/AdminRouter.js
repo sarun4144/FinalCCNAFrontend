@@ -10,7 +10,7 @@ import { currentadmin } from '../Function/Auth'
     if(user && Token){
         currentadmin(Token).then(res => {
            console.log("Admin",res)
-            setOk(true)
+            setOk(true) 
         }).catch(err => {
            console.log(err)
             setOk(false)

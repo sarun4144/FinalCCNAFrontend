@@ -38,6 +38,7 @@ function ExamAdd() {
               confirmButtonColor: '#3085d6',
               confirmButtonText: 'ตกลง'
             })
+            console.log(err)
       });
       
   }

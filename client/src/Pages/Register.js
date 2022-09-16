@@ -37,7 +37,8 @@ function Register(){
                     position:'top-end',
                     icon:'success',
                     title:'สมัครสมาชิกสำเร็จ'
-                })  
+                })
+                console.log(res)  
             navigate("/login")
         })
         .catch((err) => {
@@ -56,7 +57,7 @@ function Register(){
     return(
         <div className="container">
             <div className="row" >            
-                <div className="col-md-6 offset-md-3"  >
+                <div className="col-md-6 offset-md-3" >
                     <div className="card">
                     <div className="row">
                     <div class="col-1"></div>
