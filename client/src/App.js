@@ -18,12 +18,13 @@ import Content from './Component/Cotent'
 import Store from './Pages/Store';
 //userpage
 import Home from './Component/user/Home';
-import ManagAdmin from './Component/admin/ManageAdmin';
-import ExamAdd from './Component/admin/ExamAdd';
 
 //adminpage
 import Adminhome from './Component/admin/Adminhome';
-
+import ManagAdmin from './Component/admin/ManageAdmin';
+import ExamAdd from './Component/admin/ExamAdd';
+import CategoryAdd from './Component/admin/CategoryAdd';
+import ExamChoices from './Component/admin/ExamChoices';
 //function
 import {currentuser} from './Function/Auth'
 
@@ -70,7 +71,11 @@ function App() {
     <Route path ="/admin/home" element={<AdminRoute> <><Header/><Adminhome /></> </AdminRoute>}/>
     <Route path ="/admin/manageadmin" element={<AdminRoute> <><Header/><ManagAdmin /></> </AdminRoute>}/>
     <Route path ="/admin/examadd" element={<AdminRoute> <><Header/><ExamAdd /></> </AdminRoute>}/>
-  
+    <Route path ="/admin/categoryadd" element={<AdminRoute> <><Header/><CategoryAdd /></> </AdminRoute>}/>
+    
+    <Route path ="/admin/examchoices" element={<AdminRoute> <><Header/><ExamChoices /></> </AdminRoute>}/>
+    
+    
 
     </Routes>
     </BrowserRouter>

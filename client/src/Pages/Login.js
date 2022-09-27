@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux'
 function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [loading,setloading] = useState(true);
     const [value,setValue] = useState({
          email:" " ,
          password:" "
@@ -32,6 +33,7 @@ function Login() {
         e.preventDefault()
         console.log(value);
         userlogin(value).then((res) => {
+          setloading(false);
           console.log(res.data);
           Toast.fire({
             position:'top-end',
@@ -49,7 +51,7 @@ function Login() {
         })
         .catch((err) => {
           console.log(err.response.data);
-
+          setloading(false);
           Swal.fire({
             position:'top',
             title: 'Error!',
@@ -62,15 +64,22 @@ function Login() {
         });
         }
 
+        
+
     return(
         <div className="container">
             <div className="row" >            
                 <div className="col-md-6 offset-md-3"  >
+                  
                     <div className="card">
                         <div className="row">
                             <div className="col-1 "></div>
                             <div className="col-10"  style={{backgroundColor:'lightblue'}}> 
-                                 <h1 className="title">เข้าสู่ระบบ</h1>
+                            {loading
+                              ?  <h1 className="title">เข้าสู่ระบบ</h1>
+                              :  <h1 className="title">เข้าสู่ระบบผิดพลาด</h1>
+                              }
+    
                             </div>
                             <div className="col-1"></div>
                          </div>

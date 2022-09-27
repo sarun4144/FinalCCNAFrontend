@@ -7,9 +7,8 @@
     border-radius: 10px;
     padding: 10px;
 }
-.submit{
-
-    margin-left: 30%;
+.submitre{
+    margin-left: 20%;
     background: rgb(0, 0, 0);
     display: inline-block;
     padding: .5rem 1rem;
@@ -20,7 +19,7 @@
     border-radius: 5px;
     text-transform: uppercase;
 }
-.submit:hover{
+.submitre:hover{
     border: 4px solid rgb(68, 224, 68);
     background: transparent;
     color: rgb(0, 0, 0);

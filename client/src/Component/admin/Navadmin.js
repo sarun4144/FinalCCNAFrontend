@@ -19,6 +19,10 @@ const Navbaradmin = () => {
           {/* <a href=""></a> */}
           <Link to="/admin/examadd"> เพิ่มข้อสอบ</Link>
         </li>
+        <li className="nav-item">
+          {/* <a href=""></a> */}
+          <Link to="/admin/categoryadd"> เพิ่มหมวดหมู่</Link>
+        </li>
         
       </ul>
     </nav>
