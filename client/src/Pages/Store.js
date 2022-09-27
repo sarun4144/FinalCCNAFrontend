@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { listexam,currentexam } from "../Function/Exam"
-
+import { listexam } from "../Function/Exam"
+import {checkin} from "../Store/examSilce"
 //Notify
 
 //CSS
@@ -16,6 +16,7 @@ function Store() {
   const Token = user.userStore.user.token
   console.log("Data", exame);
   useEffect(() => {
+    localStorage.removeItem("examid")
     //code
     loadData(Token)
   }, [Token]);
@@ -27,9 +28,9 @@ function Store() {
     })
   }
  
-  function EditBTN(id){
-    console.log("ID :",id)
-
+ async function EditBTN(id){
+    await dispatch(checkin(id))
+    localStorage.setItem('examid',id)
     navigate("/admin/examchoices");
   }
   function SeeExam(id){

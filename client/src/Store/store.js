@@ -5,7 +5,7 @@ import examSlice from "./examSilce";
 export const store = configureStore({
     reducer:{
         userStore:userSilce,
-        Exam:examSlice
+        examStore:examSlice
     }
 
 })

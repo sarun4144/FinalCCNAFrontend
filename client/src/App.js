@@ -3,6 +3,8 @@ import './App.css';
 import { BrowserRouter ,Route, Routes } from "react-router-dom"
 
 import {login} from './Store/userSilce'
+import { checkin } from './Store/examSilce';
+
 import { useDispatch} from 'react-redux'
 //notification
 import { ToastContainer} from 'react-toastify';
@@ -37,6 +39,8 @@ function App() {
   const dispatch = useDispatch()
   useEffect(()=>{
     const idtoken = localStorage.token
+    const examid = localStorage.examid
+  
   if(idtoken){
     currentuser(idtoken)
     .then(res =>{
@@ -50,6 +54,12 @@ function App() {
     }).catch(err =>{
       console.log(err);
     })
+  }
+  if(examid){
+    const EXAM = {
+     examid: examid,
+  }
+    dispatch(checkin(EXAM))
   }
   },[dispatch])
   
