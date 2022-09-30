@@ -111,8 +111,6 @@ function ExamChoices() {
               }
             
           }
-
-
           i += 1
         }
       }
