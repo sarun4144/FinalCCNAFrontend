@@ -28,8 +28,11 @@ function Store() {
     })
   }
  
- async function EditBTN(id){
-    await dispatch(checkin(id))
+  function EditBTN(id){
+    const EXAM = {
+      examid: id,
+   }
+     dispatch(checkin(EXAM))
     localStorage.setItem('examid',id)
     navigate("/admin/examchoices");
   }

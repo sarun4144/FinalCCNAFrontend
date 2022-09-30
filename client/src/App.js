@@ -55,7 +55,7 @@ function App() {
       console.log(err);
     })
   }
-  if(examid){
+  if(examid){ 
     const EXAM = {
      examid: examid,
   }

@@ -31,7 +31,6 @@ function Login() {
     }
     const handleSubmit = (e) =>{
         e.preventDefault()
-        console.log(value);
         userlogin(value).then((res) => {
           setloading(false);
           console.log(res.data);
