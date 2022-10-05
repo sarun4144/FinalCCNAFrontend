@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { examadd } from '../../Function/Exam'
+import { listCategory } from "../../Function/Category";
 import Swal from 'sweetalert2'
 import Toast from "../../Alert/Success";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,8 +10,21 @@ function ExamAdd() {
   const [value, setValue] = useState({
     name: " ",
     title: " ",
+    Categoryid:"633dae85f16653366e8b1270"
   })
+  const [Data, setData] = useState([])
+  useEffect(() => {
+    loadData()
 
+  }, [])
+
+  function loadData() {
+    listCategory().then((res) => {
+      setData(res.data)
+    }).catch(err => {
+      console.log(err);
+    })
+  }
   const handleChange = (e) => {
     setValue({
       ...value, [e.target.name]: e.target.value,
@@ -26,7 +40,7 @@ function ExamAdd() {
         icon: 'success',
         title: 'เพิ่มข้อสอบสำเร็จ'
       })
-      navigate("/store")
+     navigate("/store")
     })
       .catch((err) => {
         Swal.fire({
@@ -47,14 +61,27 @@ function ExamAdd() {
       <div className='card'>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label form="exampleFormControlInput1">ชื่อข้อสอบ</label>
+            <label htmlFor="exampleFormControlInput1">ชื่อข้อสอบ</label>
             <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="ชื่อข้อสอบ" rows="3" name="name" onChange={handleChange} required />
           </div>
           <br />
 
           <div className="form-group">
-            <label form="exampleFormControlInput1">Titel</label>
+            <label htmlFor="exampleFormControlInput1">Titel</label>
             <input className="form-control" id="exampleFormControlInput1" name="title" onChange={handleChange} required></input>
+          </div>
+          <br />
+          <div className="form-group">
+            <label htmlFor="exampleFormControlSelect1">Category</label>
+
+            <select className="form-control" id="exampleFormControlSelect1" name="Categoryid" onChange={handleChange}>
+            <option selected value={"633dae85f16653366e8b1270"}>Selected Category</option>
+              {Data.map((item, index) =>
+                <option key={index} value={item._id}>{item.name}</option>
+
+              )}
+            </select>
+
           </div>
           <br />
           <button type="submit" className="btn btn-primary">Submit</button>

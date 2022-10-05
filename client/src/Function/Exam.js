@@ -29,8 +29,22 @@ export const listexam = async (authtoken) =>
       id
     }
 });
-  export const examchoicesinclude = async (id,Adddata) =>
-  await axios.post(process.env.REACT_APP_API + "/examchoicesinclude/"+id,Adddata,
+  export const examChoiceschange = async (id,payload) =>
+  await axios.post(process.env.REACT_APP_API + "/examChoiceschange/"+id,payload,
+  {
+    headers:{
+      id
+    }
+});
+  export const examChoicesdelete = async (id,deletedata) =>
+  await axios.post(process.env.REACT_APP_API + "/examChoicesdelete/"+id,deletedata,
+  {
+    headers:{
+      id
+    }
+});
+  export const examReset = async (id,data) =>
+  await axios.post(process.env.REACT_APP_API + "/examReset/"+id,data,
   {
     headers:{
       id

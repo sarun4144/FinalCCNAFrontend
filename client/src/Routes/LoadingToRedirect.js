@@ -32,9 +32,7 @@ const LoadingToRedirect = () => {
     })
     
   return  (
-      <div>
-      <h1>No Permission </h1>
-      </div>
+      <div>  </div>
       )
 };
 

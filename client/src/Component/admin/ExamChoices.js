@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { currentexam, examchoicesadd } from "../../Function/Exam"
+import { currentexam, examchoicesadd, examChoiceschange, examChoicesdelete, examReset } from "../../Function/Exam"
 import Toast from "../../Alert/Success";
 
 
@@ -10,14 +10,17 @@ function ExamChoices() {
   const [value, setValue] = useState({
 
   })
-  const [value2, setValue2] = useState({
 
+  const [value2, setValue2] = useState({
+    Question: null
   })
   const store = useSelector((state) => ({ ...state }))
   const EXid = store.examStore.exam.examid
   const Data = Object.values(data);
+  console.log("DATA", data)
   useEffect(() => {
     loadData(EXid)
+
   }, [EXid])
 
   function loadData(id) {
@@ -28,26 +31,63 @@ function ExamChoices() {
     })
   }
   function AddExam(num) {
-    const NUM = {
-      Num: num,
+    const Num = {
+      Num: num
     }
-    console.log(NUM)
-    examchoicesadd(EXid, NUM)
+    console.log(num)
+    examchoicesadd(EXid, Num)
       .then(res => {
         Toast.fire({
           position: 'top-end',
           icon: 'success',
           title: res.data
         })
-        loadData(EXid);
+        loadData(EXid)
+      }).catch(err => {
+        console.log(err);
+      })
+  }
+  function reSet(exam) {
+    const NewData = {
+      
+    }
+    var i = 0;
+    var res = Object.keys(exam)
+    try {
+      while (i < res.length) {
+        NewData[`${i + 1}`] = exam[`${res[i]}`];
+        delete exam[`${res[i]}`];
+        i++;
+      }
+    } catch {
+      console.log("ERROR")
+    }
+    console.log(NewData)
+    examReset(EXid, NewData)
+      .then(res => {
+        Toast.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: res.data
+        })
+        loadData(EXid)
       }).catch(err => {
         console.log(err);
       })
 
-
   }
-  let Values = {
-    Question: "",
+
+  function Delete(index) {
+    const Num = {
+      Num: index
+    }
+    console.log(index)
+    examChoicesdelete(EXid, Num)
+      .then(res => {
+        reSet(res.data.exdata)
+      }).catch(err => {
+        console.log(err);
+      })
   }
 
   const handleChange = () => {
@@ -63,61 +103,54 @@ function ExamChoices() {
       ...value, [e.target.name]: e.target.value,
     })
   };
-  const payload = {
-    Question: "",
-    Choices: []
-  }
-  const Edit = async (Questions, Choices) => {
+
+
+  const Edit = async (Questions, Choices,index) => {
+    const Values = {
+      Question: "",
+    }
+    const payload = {
+      Question: "",
+      Choices: [],
+      Num:index
+    }
     const result = Object.values(value);
     Values.Question = Questions
     Values.Choices = Choices
+    /*
+    console.log("value2", value2.Question)
     console.log("value", value)
     console.log("result", result)
+    console.log("Values", Values)
+    */
     try {
-      if (value2.Question) {
-        Values.Question = value2.Question
-        payload.Question = value2.Question
-        console.log("Values", Values)
-        console.log("payload", payload)
-
-      } else {
-        console.log("failValues", Values)
+      if (value2.Question == null) {
         payload.Question = Values.Question
+        console.log("payload", payload)
+      } else {
+        payload.Question = value2.Question
+        console.log("payload", payload)
       }
-      if (result.length > 0) {
-        let i = 0
-        let p = 0
-        let k = 0
-        let object = value
-        let Pair = Object.keys(Values.Choices)
-        let Num = Object.keys(object)
-        console.log(Num, { object }, Pair)
-        while (i < Values.Choices.length) {
-          if (Num[i] === Pair[i]) {
-            payload.Choices.push(result[p])
-            p += 1
-            k += 1
-          }
-          if (Pair[i] !== Num[i] || Pair[i] === null) {
-            for (let n = 0; n < Num.length; n++) {
-              if (Pair[i] === Num[n]) {
-                payload.Choices.push(result[p])
-                p += 1
-                k += 1
-                break;
-              }
-                payload.Choices.push(Values.Choices[k])
-                k += 1
-              }
-            
-          }
-          i += 1
+      let i = 0
+      while (i < Values.Choices.length) {
+        if (value[i] !== undefined) {
+          payload.Choices[i] = value[i]
+        } else {
+          payload.Choices[i] = Values.Choices[i]
         }
+        i++
       }
+
     } catch (err) {
-      console.log(err)
+
     }
     console.log("Finalpayload", payload)
+    examChoiceschange(EXid, payload)
+      .then(res => {
+
+      }).catch(err => {
+        console.log(err);
+      })
   };
 
   return (
@@ -146,7 +179,8 @@ function ExamChoices() {
                   <textarea name={numI} className="form-control" rows="1" defaultValue={num} onChange={handleChangeC} ></textarea>
                 </div>
               )}
-              <button className="btn btn-primary" onClick={(Question) => Edit(item.Question, item.Choices)}>Addexam</button>
+              <button className="btn btn-primary" onClick={(Question) => Edit(item.Question, item.Choices,index+1)}>Addexam</button>
+              <button className="btn btn-danger" onClick={() => Delete(index + 1)}>Delete</button>
             </div>
           </fieldset>
         </div>
