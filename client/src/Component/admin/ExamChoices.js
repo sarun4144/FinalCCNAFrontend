@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { currentexam, examchoicesadd, examChoiceschange, examChoicesdelete, examReset } from "../../Function/Exam"
 import Toast from "../../Alert/Success";
-
+import { AiFillDelete, AiFillEdit, AiOutlinePlus } from "react-icons/ai";
+import Confirm from "../../Alert/Confirm";
+import Swal from 'sweetalert2'
 
 function ExamChoices() {
+
   const [data, setData] = useState({});
+  const Data = Object.values(data);
   const [isDisabled, setIsDisabled] = useState(true);
   const [value, setValue] = useState({
 
@@ -16,8 +20,7 @@ function ExamChoices() {
   })
   const store = useSelector((state) => ({ ...state }))
   const EXid = store.examStore.exam.examid
-  const Data = Object.values(data);
-  console.log("DATA", data)
+
   useEffect(() => {
     loadData(EXid)
 
@@ -48,9 +51,7 @@ function ExamChoices() {
       })
   }
   function reSet(exam) {
-    const NewData = {
-      
-    }
+    const NewData = {}
     var i = 0;
     var res = Object.keys(exam)
     try {
@@ -62,7 +63,6 @@ function ExamChoices() {
     } catch {
       console.log("ERROR")
     }
-    console.log(NewData)
     examReset(EXid, NewData)
       .then(res => {
         Toast.fire({
@@ -82,13 +82,29 @@ function ExamChoices() {
       Num: index
     }
     console.log(index)
-    examChoicesdelete(EXid, Num)
-      .then(res => {
-        reSet(res.data.exdata)
-      }).catch(err => {
-        console.log(err);
-      })
+    Confirm.fire({
+      title: 'ยืนยัน!!',
+      text: "คุณต้องการจะลบ User ใช่หรืไม่",
+      icon: 'warning',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'ลบ User สำเร็จ!',
+          text: 'User ได้ถูกลบแล้ว',
+          icon: 'success'
+        })
+        examChoicesdelete(EXid, Num)
+          .then(res => {
+            setIsDisabled(true)
+            reSet(res.data.exdata)
+            loadData(EXid)
+          }).catch(err => {
+            console.log(err);
+          })
+      }
+    })
   }
+
 
   const handleChange = () => {
     setIsDisabled(!isDisabled)
@@ -105,16 +121,16 @@ function ExamChoices() {
   };
 
 
-  const Edit = async (Questions, Choices,index) => {
+  const Edit = async (Questions, Choices, index) => {
     const Values = {
       Question: "",
     }
     const payload = {
       Question: "",
       Choices: [],
-      Num:index
+      Num: index
     }
-    const result = Object.values(value);
+    //const result = Object.values(value);
     Values.Question = Questions
     Values.Choices = Choices
     /*
@@ -140,22 +156,40 @@ function ExamChoices() {
         }
         i++
       }
+      if (i = Values.Choices) {
+        examChoiceschange(EXid, payload)
+          .then(res => {
+            Toast.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: res.data
+            })
+            loadData(EXid)
+          }).catch(err => {
+            console.log(err);
+          })
+      }
 
     } catch (err) {
 
     }
-    console.log("Finalpayload", payload)
-    examChoiceschange(EXid, payload)
-      .then(res => {
 
-      }).catch(err => {
-        console.log(err);
-      })
   };
+
+  function selectAdd(Questions, Choices, index) {
+    const payload = {
+      Question: Questions,
+      Choices: Choices,
+      Num: index
+    }
+    let d = payload.Choices.length + 1
+    payload.Choices[d] = " "
+    console.log(payload.Choices)
+  }
 
   return (
     <div className="container" >
-      <div className="sticky-top" style={{ marginLeft: "110%" }}>
+      <div className="sticky-top" >
         <div className="form-check">
           <input onChange={() => handleChange()} className="form-check-input" type="checkbox" />
           <label className="form-check-label" >
@@ -171,22 +205,32 @@ function ExamChoices() {
             <div className="form-group">
               <label> QuestionNumber: {index + 1}</label>
               <textarea key={item.id} name="Question" className="form-control" defaultValue={item.Question} onChange={handleChangeQ} rows="2"></textarea>
+
               <div className="form-group">
               </div>
+              <button type="button" className="btn btn-primary" onClick={(Question) => selectAdd(item.Question, item.Choices, index + 1)}><AiOutlinePlus /></button>
               {item.Choices.map((num, numI) =>
                 <div className="form-group">
-                  <label>{numI + 1}</label>
-                  <textarea name={numI} className="form-control" rows="1" defaultValue={num} onChange={handleChangeC} ></textarea>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <label>{numI + 1}</label>
+                        <th> <textarea name={numI} className="form-control" rows="1" defaultValue={num} onChange={handleChangeC} ></textarea></th>
+                        <th>
+                          <button type="button" className="btn btn-danger"> <AiFillDelete /> </button>
+                        </th>
+                      </tr>
+                    </thead>
+                  </table>
                 </div>
               )}
-              <button className="btn btn-primary" onClick={(Question) => Edit(item.Question, item.Choices,index+1)}>Addexam</button>
-              <button className="btn btn-danger" onClick={() => Delete(index + 1)}>Delete</button>
+              <button className="btn btn-secondary" onClick={(Question) => Edit(item.Question, item.Choices, index + 1)}><AiFillEdit /></button>
+              <button className="btn btn-danger" onClick={() => Delete(index + 1)}><AiFillDelete /> </button>
             </div>
           </fieldset>
         </div>
 
       )}
-
 
     </div>
   )

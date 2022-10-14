@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { listexam } from "../Function/Exam"
-import {checkin} from "../Store/examSilce"
+import { checkin } from "../Store/examSilce"
 //Notify
 
 //CSS
@@ -27,16 +27,16 @@ function Store() {
       console.log(err.response.data)
     })
   }
- 
-  function EditBTN(id){
+
+  function EditBTN(id) {
     const EXAM = {
       examid: id,
-   }
-     dispatch(checkin(EXAM))
-    localStorage.setItem('examid',id)
+    }
+    dispatch(checkin(EXAM))
+    localStorage.setItem('examid', id)
     navigate("/admin/examchoices");
   }
-  function SeeExam(id){
+  function SeeExam(id) {
     navigate("/admin/home");
   }
 
@@ -44,6 +44,7 @@ function Store() {
     if (user.userStore.user.role === 'admin') {
       return (
         <div className='container'>
+
           {exame.map((item) =>
             <div className='card'>
               <div >
@@ -53,8 +54,8 @@ function Store() {
                 <div className="form-group">
                   <h4 form="exampleFormControlInput1" >{item.title}</h4>
                 </div>
-                <button type="submit" className="btn btn-primary"onClick={()=>SeeExam(item._id)}>ดูข้อสอบ</button>
-              <button type="submit" className="btn btn-danger" onClick={()=>EditBTN(item._id)}>แก้ไข</button>
+                <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id)}>ดูข้อสอบ</button>
+                <button type="submit" className="btn btn-danger" onClick={() => EditBTN(item._id)}>แก้ไข</button>
               </div>
             </div>
           )}

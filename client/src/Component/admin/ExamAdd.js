@@ -75,7 +75,6 @@ function ExamAdd() {
             <label htmlFor="exampleFormControlSelect1">Category</label>
 
             <select className="form-control" id="exampleFormControlSelect1" name="Categoryid" onChange={handleChange}>
-            <option selected value={"633dae85f16653366e8b1270"}>Selected Category</option>
               {Data.map((item, index) =>
                 <option key={index} value={item._id}>{item.name}</option>
 

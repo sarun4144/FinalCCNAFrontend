@@ -23,7 +23,7 @@ function Header() {
         if (user.userStore.user.token) {
             if (user.userStore.user.role === 'admin') {
                 return (
-                    <nav className="header">
+                    <nav className="header">    
                         <div className="logo-container">
                             <Link to="/">Pre-CCNA<IoMdPaper /></Link>
                         </div>
