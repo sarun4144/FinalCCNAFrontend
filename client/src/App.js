@@ -18,6 +18,7 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Content from './Component/Cotent'
 import Store from './Pages/Store';
+import Info from './Pages/Info';
 //userpage
 import Home from './Component/user/Home';
 
@@ -70,6 +71,7 @@ function App() {
       <ToastContainer/>
     <Routes>
       <Route exact path="/" element={<><Header/><Banner/><Content/></>}/>
+      <Route path ="/Info" element={<><Header/><Info /></>}/>
       <Route path ="/about" element={<><Header/><About /></>}/>
       <Route path ="/login" element={<><Header/><Login /></>}/>
       <Route path ="/register" element={<><Header/><Register /></>}/>
