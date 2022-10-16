@@ -13,7 +13,7 @@ export const userlogin = async (value) =>
     headers: {
         'Content-Type': 'application/json'
     }
-});
+}); 
 
 export const currentuser = async (authtoken) =>
   await axios.post(process.env.REACT_APP_API + "/current-user", {},

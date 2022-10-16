@@ -10,7 +10,6 @@ function Header() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state) => ({ ...state }))
-    console.log("User-Nav", user)
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);

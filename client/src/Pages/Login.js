@@ -33,7 +33,6 @@ function Login() {
     e.preventDefault()
     userlogin(value).then((res) => {
       setloading(false);
-      console.log(res.data);
       Toast.fire({
         position: 'top-end',
         icon: 'success',

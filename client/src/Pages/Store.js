@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { listexam } from "../Function/Exam"
 import { checkin } from "../Store/examSilce"
+import { checkout } from "../Store/examSilce";
 //Notify
 
 //CSS
@@ -14,12 +15,11 @@ function Store() {
   const dispatch = useDispatch()
   const [exame, setData] = useState([]);
   const Token = user.userStore.user.token
-  console.log("Data", exame);
   useEffect(() => {
-    localStorage.removeItem("examid")
     //code
+    dispatch(checkout(null))
     loadData(Token)
-  }, [Token]);
+  }, [Token,dispatch]);
   const loadData = (authtoken) => {
     listexam(authtoken).then(res => {
       setData(res.data)

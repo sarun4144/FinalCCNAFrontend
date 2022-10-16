@@ -10,8 +10,12 @@ export const examSlice = createSlice({
     checkin:(state,action)=>{
       state.exam = action.payload
   },
+    checkout:(state,action)=>{
+      state.exam = action.payload
+      localStorage.removeItem("examid")
+  },
   },
   
 });
-export const {checkin} = examSlice.actions;
+export const {checkin,checkout} = examSlice.actions;
 export default examSlice.reducer;

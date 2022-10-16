@@ -12,15 +12,14 @@ function ExamChoices() {
   const Data = Object.values(data);
   const [isDisabled, setIsDisabled] = useState(true);
   const [value, setValue] = useState({
-
   })
-
+  const [Head, setHead] = useState({
+  })
   const [value2, setValue2] = useState({
     Question: null
   })
   const store = useSelector((state) => ({ ...state }))
   const EXid = store.examStore.exam.examid
-
   useEffect(() => {
     loadData(EXid)
 
@@ -29,6 +28,7 @@ function ExamChoices() {
   function loadData(id) {
     currentexam(id).then((res) => {
       setData(res.data.exdata)
+      setHead(res.data)
     }).catch(err => {
       console.log(err);
     })
@@ -60,20 +60,21 @@ function ExamChoices() {
         delete exam[`${res[i]}`];
         i++;
       }
+      examReset(EXid, NewData)
+        .then(res => {
+          Toast.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: res.data
+          })
+          loadData(EXid)
+        }).catch(err => {
+          console.log(err);
+        })
     } catch {
       console.log("ERROR")
     }
-    examReset(EXid, NewData)
-      .then(res => {
-        Toast.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: res.data
-        })
-        loadData(EXid)
-      }).catch(err => {
-        console.log(err);
-      })
+
 
   }
 
@@ -124,6 +125,7 @@ function ExamChoices() {
   const Edit = async (Questions, Choices, index) => {
     const Values = {
       Question: "",
+      Choices: [],
     }
     const payload = {
       Question: "",
@@ -149,7 +151,7 @@ function ExamChoices() {
       }
       let i = 0
       while (i < Values.Choices.length) {
-        if (value[i] !== undefined) {
+        if (value[i] !== " " && value[i] !== undefined) {
           payload.Choices[i] = value[i]
         } else {
           payload.Choices[i] = Values.Choices[i]
@@ -157,6 +159,7 @@ function ExamChoices() {
         i++
       }
       if (i = Values.Choices) {
+        console.log(payload)
         examChoiceschange(EXid, payload)
           .then(res => {
             Toast.fire({
@@ -176,15 +179,29 @@ function ExamChoices() {
 
   };
 
-  function selectAdd(Questions, Choices, index) {
-    const payload = {
-      Question: Questions,
-      Choices: Choices,
-      Num: index
+  function selectAdd(Questions2, Choices2, index2) {
+    let d = Choices2.length
+    Choices2[d] = " "
+    console.log(Choices2)
+    Edit(Questions2, Choices2, index2)
+  }
+  function selectDelete(Questions3, Choices3, index3, numI) {
+    let i = 0;
+    var Choice = []
+    try {
+      while (i < Choices3.length) {
+        if (i !== numI) {
+          Choice.push(Choices3[i])
+          i++;
+        } else {
+          i++;
+        }
+      }
+
+    } catch (err) {
+
     }
-    let d = payload.Choices.length + 1
-    payload.Choices[d] = " "
-    console.log(payload.Choices)
+    Edit(Questions3, Choice, index3)
   }
 
   return (
@@ -198,27 +215,29 @@ function ExamChoices() {
         </div>
         <button type="submit" className="btn btn-primary" onClick={() => AddExam(Data.length + 1)}>Addexam</button>
       </div>
+      <div className="card" >
+
+      </div>
       {Data.map((item, index) =>
         <div className="card" >
 
           <fieldset disabled={isDisabled}>
             <div className="form-group">
               <label> QuestionNumber: {index + 1}</label>
-              <textarea key={item.id} name="Question" className="form-control" defaultValue={item.Question} onChange={handleChangeQ} rows="2"></textarea>
-
+              <textarea name="Question" className="form-control" onChange={handleChangeQ} rows="1">{item.Question}</textarea>
               <div className="form-group">
               </div>
-              <button type="button" className="btn btn-primary" onClick={(Question) => selectAdd(item.Question, item.Choices, index + 1)}><AiOutlinePlus /></button>
+              <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1)}><AiOutlinePlus /></button>
               {item.Choices.map((num, numI) =>
                 <div className="form-group">
-                  <table class="table">
+                  <table className="table">
                     <thead>
                       <tr>
                         <label>{numI + 1}</label>
-                        <th> <textarea name={numI} className="form-control" rows="1" defaultValue={num} onChange={handleChangeC} ></textarea></th>
-                        <th>
-                          <button type="button" className="btn btn-danger"> <AiFillDelete /> </button>
-                        </th>
+                        <td> <textarea name={numI} className="form-control" rows="1" defaultValue={num} onChange={handleChangeC} ></textarea></td>
+                        <td>
+                          <button type="button" className="btn btn-danger" onClick={(Questions2) => selectDelete(item.Question, item.Choices, index + 1, numI)}> <AiFillDelete /> </button>
+                        </td>
                       </tr>
                     </thead>
                   </table>
