@@ -50,3 +50,10 @@ export const listexam = async (authtoken) =>
       id
     }
 });
+  export const examHeadChange = async (id,payload) =>
+  await axios.post(process.env.REACT_APP_API + "/examHeadChange/"+id,payload,
+  {
+    headers:{
+      payload
+    }
+});

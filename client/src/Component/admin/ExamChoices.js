@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { currentexam, examchoicesadd, examChoiceschange, examChoicesdelete, examReset ,} from "../../Function/Exam"
+import { currentexam, examchoicesadd, examChoiceschange, examChoicesdelete, examReset, examHeadChange } from "../../Function/Exam"
 import { listCategory } from "../../Function/Category";
 import Toast from "../../Alert/Success";
 import { AiFillDelete, AiFillEdit, AiOutlinePlus } from "react-icons/ai";
@@ -8,7 +8,6 @@ import Confirm from "../../Alert/Confirm";
 import Swal from 'sweetalert2'
 
 function ExamChoices() {
-
   const [data, setData] = useState([]);
   const [cat, setCat] = useState([]);
   const [Head, setHead] = useState([]);
@@ -25,11 +24,11 @@ function ExamChoices() {
   const EXid = store.examStore.exam.examid
   const Catname = store.examStore.exam.category
   const Catid = store.examStore.exam.catid
- console.log(cat)
+
   useEffect(() => {
     loadData(EXid)
-
-  }, [EXid])
+    
+  },[EXid])
 
   function loadData(id) {
     currentexam(id).then((res) => {
@@ -132,8 +131,8 @@ function ExamChoices() {
     })
   };
   const handleChangeh = (e) => {
-    setValue({
-      ...value, [e.target.name]: e.target.value,
+    setValue3({
+      ...value3, [e.target.name]: e.target.value,
     })
   };
 
@@ -176,7 +175,6 @@ function ExamChoices() {
         i++
       }
       if (i = Values.Choices) {
-        console.log(payload)
         examChoiceschange(EXid, payload)
           .then(res => {
             Toast.fire({
@@ -220,12 +218,40 @@ function ExamChoices() {
     }
     Edit(Questions3, Choice, index3)
   }
-  function EditH(Question,title,category){
-    const payload ={
-      Question:Head.name,
+  function EditH() {
+    const payload = {
+      QuestionName: Head.name,
       title: Head.title,
       Categoryid: Catid
     }
+    try {
+      if (value3.QuestionName) {
+        payload.QuestionName = value3.QuestionName
+      }
+      if (value3.title) {
+        payload.title = value3.title
+      }
+      if (value3.Categoryid) {
+        payload.Categoryid = value3.Categoryid
+      }
+      examHeadChange(EXid,payload)
+        .then(res => {
+          Toast.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: res.data
+          })
+          localStorage.setItem('catid', value3.Categoryid)
+          loadData(EXid)
+          
+        }).catch(err => {
+          console.log(err);
+        })
+    } catch (err) {
+
+    }
+
+
   }
   return (
     <div className="container" >
@@ -240,22 +266,22 @@ function ExamChoices() {
       </div>
       <div className="card" >
         <h4> QuestionName : {Head.name}</h4>
-        <textarea name="Question" className="form-control" onChange={handleChangeh} defaultValue={Head.name}></textarea>
+        <textarea name="QuestionName" className="form-control" onChange={handleChangeh} defaultValue={Head.name}>{Head.name}</textarea>
         <h4> Title : {Head.title}</h4>
-        <textarea name="Question" className="form-control" onChange={handleChangeh} defaultValue={Head.title}></textarea>
+        <textarea name="Title" className="form-control" onChange={handleChangeh} defaultValue={Head.title}></textarea>
         <div className="form-group">
-          <h4 htmlFor="exampleFormControlSelect1">Category : {Catname}</h4>
+          <h4 htmlFor="exampleFormControlSelect1">Category :{Catname}</h4>
           <select className="form-control" id="exampleFormControlSelect1" name="Categoryid" onChange={handleChangeh}>
-            <option selected value={Catid} >{Head.name}</option>
+            <option selected value={Catid} >{Catname}</option>
             {cat.map((item, index) =>
               <option key={index} value={item._id}>{item.name}</option>
 
             )}
           </select>
-          <br/>
-          <button className="btn btn-secondary" onClick={(Question) => EditH()}><AiFillEdit /></button>
+          <br />
+          <button className="btn btn-secondary" onClick={() => EditH()}><AiFillEdit /></button>
         </div>
-        
+
       </div>
       {Data.map((item, index) =>
         <div className="card" >
@@ -266,7 +292,7 @@ function ExamChoices() {
               <textarea key={index} name="Question" className="form-control" onChange={handleChangeQ} rows="3">{item.Question}</textarea>
               <div className="form-group">
               </div>
-              <br/>
+              <br />
               <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1)}><AiOutlinePlus /></button>
               {item.Choices.map((num, numI) =>
                 <div className="form-group">

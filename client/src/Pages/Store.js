@@ -29,10 +29,11 @@ function Store() {
     })
   }
 
-  function EditBTN(id,catid) {
+  function EditBTN(id,catid,category) {
     const EXAM = {
       examid: id,
-      category:catid
+      catid:catid,
+      category:category
     }
     dispatch(checkin(EXAM))
     localStorage.setItem('examid', id)
@@ -61,7 +62,7 @@ function Store() {
                   <h5 form="exampleFormControlInput1" >Category : {item.CAT[0].name}</h5>
                 </div>
                 <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id)}>ดูข้อสอบ</button>
-                <button type="submit" className="btn btn-danger" onClick={(id) => EditBTN(item._id,item.Categoryid)}>แก้ไข</button>
+                <button type="submit" className="btn btn-danger" onClick={(id) => EditBTN(item._id,item.Categoryid,item.CAT[0].name)}>แก้ไข</button>
               </div>
             </div>
           )}
