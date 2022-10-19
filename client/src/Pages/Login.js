@@ -7,6 +7,7 @@ import Toast from "../Alert/Success";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css'
 import { useDispatch } from 'react-redux'
+import { red } from "@mui/material/colors";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function Login() {
     if (role === "admin") {
       navigate("/admin/home");
     } else {
-      navigate("/user/home");
+      navigate("/");
     }
   };
 
@@ -41,7 +42,8 @@ function Login() {
       const payload = {
         token: res.data.token,
         username: res.data.payload.user.username,
-        role: res.data.payload.user.role
+        role: res.data.payload.user.role,
+        email: res.data.payload.user.email
       }
       dispatch(login(payload))
       localStorage.setItem('token', res.data.token)

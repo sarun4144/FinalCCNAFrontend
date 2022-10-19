@@ -85,13 +85,13 @@ function ExamChoices() {
     console.log(index)
     Confirm.fire({
       title: 'ยืนยัน!!',
-      text: "คุณต้องการจะลบ User ใช่หรืไม่",
+      text: "คุณต้องการจะลบ คำถาม ใช่หรือไม่",
       icon: 'warning',
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: 'ลบ User สำเร็จ!',
-          text: 'User ได้ถูกลบแล้ว',
+          title: 'ลบ คำถาม สำเร็จ!',
+          text: 'คำถาม ได้ถูกลบแล้ว',
           icon: 'success'
         })
         examChoicesdelete(EXid, Num)

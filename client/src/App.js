@@ -20,7 +20,7 @@ import Content from './Component/Cotent'
 import Store from './Pages/Store';
 import Info from './Pages/Info';
 //userpage
-import Home from './Component/user/Home';
+import Profile from './Component/user/Profile';
 
 //adminpage
 import Adminhome from './Component/admin/Adminhome';
@@ -48,7 +48,8 @@ function App() {
       const user = {
         token: idtoken,
         username:res.data.username,
-        role:res.data.role
+        role:res.data.role,
+        email:res.data.email
     }
     dispatch(login(user))
       console.log('Current-User',res.data)
@@ -78,7 +79,7 @@ function App() {
       <Route path ="/store" element={<><Header/><Store /></>}/>
 
 
-    <Route path ="/user/home" element={<UserRoute><><Header/> <Home /></> </UserRoute>}/>
+    <Route path ="/user/profile" element={<UserRoute><><Header/> <Profile /></> </UserRoute>}/>
 
     <Route path ="/admin/home" element={<AdminRoute> <><Header/><Adminhome /></> </AdminRoute>}/>
     <Route path ="/admin/manageadmin" element={<AdminRoute> <><Header/><ManagAdmin /></> </AdminRoute>}/>

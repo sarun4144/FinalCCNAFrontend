@@ -76,6 +76,10 @@ function Header() {
                                 <Link to="/about">About Us</Link>
                             </li>
 
+                            <li className="menu-link" onClick={closeMobileMenu}>
+                                <Link to="/user/profile">Profile</Link> 
+                            </li>
+
                             <li className="menu-link" onClick={Logout} >
                                 <Link to="/">Logout</Link>
                             </li>
