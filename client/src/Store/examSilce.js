@@ -13,6 +13,7 @@ export const examSlice = createSlice({
     checkout:(state,action)=>{
       state.exam = action.payload
       localStorage.removeItem("examid")
+      localStorage.removeItem("catid")
   },
   },
   
