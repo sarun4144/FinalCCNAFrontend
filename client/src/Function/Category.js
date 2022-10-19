@@ -14,6 +14,12 @@ export const listCategory = async (authtoken) =>
       authtoken
     }
   });
+export const readCategory = async (authtoken,id) =>
+  await axios.get(process.env.REACT_APP_API + "/category/"+id,{
+    headers: {
+      authtoken
+    }
+  });
 export const removeCategory = async (authtoken, id) =>
   await axios.delete(process.env.REACT_APP_API + "/category/" + id,
     {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { currentexam, examchoicesadd, examChoiceschange, examChoicesdelete, examReset } from "../../Function/Exam"
+import { currentexam, examchoicesadd, examChoiceschange, examChoicesdelete, examReset ,} from "../../Function/Exam"
+import { listCategory } from "../../Function/Category";
 import Toast from "../../Alert/Success";
 import { AiFillDelete, AiFillEdit, AiOutlinePlus } from "react-icons/ai";
 import Confirm from "../../Alert/Confirm";
@@ -8,18 +9,23 @@ import Swal from 'sweetalert2'
 
 function ExamChoices() {
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
+  const [cat, setCat] = useState([]);
+  const [Head, setHead] = useState([]);
   const Data = Object.values(data);
   const [isDisabled, setIsDisabled] = useState(true);
-  const [value, setValue] = useState({
-  })
-  const [Head, setHead] = useState({
-  })
+  const [value, setValue] = useState({})
   const [value2, setValue2] = useState({
     Question: null
   })
+  const [value3, setValue3] = useState({
+
+  })
   const store = useSelector((state) => ({ ...state }))
   const EXid = store.examStore.exam.examid
+  const Catname = store.examStore.exam.category
+  const Catid = store.examStore.exam.catid
+ console.log(cat)
   useEffect(() => {
     loadData(EXid)
 
@@ -27,8 +33,13 @@ function ExamChoices() {
 
   function loadData(id) {
     currentexam(id).then((res) => {
-      setData(res.data.exdata)
-      setHead(res.data)
+      setData(res.data[0].exdata)
+      setHead(res.data[0])
+      listCategory().then((res) => {
+        setCat(res.data)
+      }).catch(err => {
+        console.log(err);
+      })
     }).catch(err => {
       console.log(err);
     })
@@ -120,9 +131,15 @@ function ExamChoices() {
       ...value, [e.target.name]: e.target.value,
     })
   };
+  const handleChangeh = (e) => {
+    setValue({
+      ...value, [e.target.name]: e.target.value,
+    })
+  };
 
 
   const Edit = async (Questions, Choices, index) => {
+
     const Values = {
       Question: "",
       Choices: [],
@@ -203,7 +220,13 @@ function ExamChoices() {
     }
     Edit(Questions3, Choice, index3)
   }
-
+  function EditH(Question,title,category){
+    const payload ={
+      Question:Head.name,
+      title: Head.title,
+      Categoryid: Catid
+    }
+  }
   return (
     <div className="container" >
       <div className="sticky-top" >
@@ -216,25 +239,42 @@ function ExamChoices() {
         <button type="submit" className="btn btn-primary" onClick={() => AddExam(Data.length + 1)}>Addexam</button>
       </div>
       <div className="card" >
+        <h4> QuestionName : {Head.name}</h4>
+        <textarea name="Question" className="form-control" onChange={handleChangeh} defaultValue={Head.name}></textarea>
+        <h4> Title : {Head.title}</h4>
+        <textarea name="Question" className="form-control" onChange={handleChangeh} defaultValue={Head.title}></textarea>
+        <div className="form-group">
+          <h4 htmlFor="exampleFormControlSelect1">Category : {Catname}</h4>
+          <select className="form-control" id="exampleFormControlSelect1" name="Categoryid" onChange={handleChangeh}>
+            <option selected value={Catid} >{Head.name}</option>
+            {cat.map((item, index) =>
+              <option key={index} value={item._id}>{item.name}</option>
 
+            )}
+          </select>
+          <br/>
+          <button className="btn btn-secondary" onClick={(Question) => EditH()}><AiFillEdit /></button>
+        </div>
+        
       </div>
       {Data.map((item, index) =>
         <div className="card" >
 
           <fieldset disabled={isDisabled}>
             <div className="form-group">
-              <label> QuestionNumber: {index + 1}</label>
-              <textarea name="Question" className="form-control" onChange={handleChangeQ} rows="1">{item.Question}</textarea>
+              <h5> QuestionNumber: {index + 1}</h5>
+              <textarea key={index} name="Question" className="form-control" onChange={handleChangeQ} rows="3">{item.Question}</textarea>
               <div className="form-group">
               </div>
+              <br/>
               <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1)}><AiOutlinePlus /></button>
               {item.Choices.map((num, numI) =>
                 <div className="form-group">
                   <table className="table">
                     <thead>
                       <tr>
-                        <label>{numI + 1}</label>
-                        <td> <textarea name={numI} className="form-control" rows="1" defaultValue={num} onChange={handleChangeC} ></textarea></td>
+                        <td> <label>{numI + 1}</label></td>
+                        <td> <textarea key={num} name={numI} className="form-control" rows="1" defaultValue={num} onChange={handleChangeC} ></textarea></td>
                         <td>
                           <button type="button" className="btn btn-danger" onClick={(Questions2) => selectDelete(item.Question, item.Choices, index + 1, numI)}> <AiFillDelete /> </button>
                         </td>

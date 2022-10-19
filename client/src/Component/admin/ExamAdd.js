@@ -10,7 +10,7 @@ function ExamAdd() {
   const [value, setValue] = useState({
     name: " ",
     title: " ",
-    Categoryid:"633dae85f16653366e8b1270"
+    Categoryid:" "
   })
   const [Data, setData] = useState([])
   useEffect(() => {

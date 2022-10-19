@@ -15,6 +15,7 @@ function Store() {
   const dispatch = useDispatch()
   const [exame, setData] = useState([]);
   const Token = user.userStore.user.token
+ 
   useEffect(() => {
     //code
     dispatch(checkout(null))
@@ -28,12 +29,14 @@ function Store() {
     })
   }
 
-  function EditBTN(id) {
+  function EditBTN(id,catid) {
     const EXAM = {
       examid: id,
+      category:catid
     }
     dispatch(checkin(EXAM))
     localStorage.setItem('examid', id)
+    localStorage.setItem('catid', catid)
     navigate("/admin/examchoices");
   }
   function SeeExam(id) {
@@ -54,8 +57,11 @@ function Store() {
                 <div className="form-group">
                   <h4 form="exampleFormControlInput1" >{item.title}</h4>
                 </div>
+                <div className="form-group">
+                  <h5 form="exampleFormControlInput1" >Category : {item.CAT[0].name}</h5>
+                </div>
                 <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id)}>ดูข้อสอบ</button>
-                <button type="submit" className="btn btn-danger" onClick={() => EditBTN(item._id)}>แก้ไข</button>
+                <button type="submit" className="btn btn-danger" onClick={(id) => EditBTN(item._id,item.Categoryid)}>แก้ไข</button>
               </div>
             </div>
           )}

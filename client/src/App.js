@@ -30,7 +30,7 @@ import CategoryAdd from './Component/admin/CategoryAdd';
 import ExamChoices from './Component/admin/ExamChoices';
 //function
 import {currentuser} from './Function/Auth'
-
+import { readCategory } from './Function/Category';
  
 //protectRoute
 import UserRoute from './Routes/UserRouter';
@@ -41,6 +41,7 @@ function App() {
   useEffect(()=>{
     const idtoken = localStorage.token
     const examid = localStorage.examid
+    const catid = localStorage.catid
   
   if(idtoken){
     currentuser(idtoken)
@@ -57,10 +58,17 @@ function App() {
     })
   }
   if(examid){ 
-    const EXAM = {
-     examid: examid,
-  }
-    dispatch(checkin(EXAM))
+    readCategory(idtoken,catid)
+    .then(res =>{
+      const EXAM = {
+        examid: examid,
+        category:res.data.name,
+        catid: catid
+     }
+       dispatch(checkin(EXAM))
+    }).catch(err =>{
+      console.log(err);
+    })
   }
   },[dispatch])
   
