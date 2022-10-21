@@ -27,7 +27,7 @@ function Header() {
                             <Link to="/">Pre-CCNA<IoMdPaper /></Link>
                         </div>
                         <div className="header-con">
-                            <ul className={click ? "menu active" : " menu"}>
+                            <ul className={click ? "menu active" : " menu"} >
                                 <li className= "menu-link"  onClick={closeMobileMenu}>
                                     <Link to="/admin/home">AdminMenu</Link>
                                 </li>

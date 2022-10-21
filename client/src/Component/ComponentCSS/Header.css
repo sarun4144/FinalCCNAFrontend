@@ -77,12 +77,14 @@
     }
 }
 
-@media screen and (max-width: 1160px) {
+@media (max-width: 1160px) {
     .mobile-menu {
         display: block;
         color: #fff;
         font-size: 2rem;
-        
+        background-color: transparent;
+        outline: transparent;
+        align-items: center;
     }
     .header {
         padding: 0 1em;
@@ -105,7 +107,7 @@
     .menu {
         width: 100%;
         height: auto;
-        display: flex;
+        display: none;
         position: absolute;
         flex-direction: column;
         top: 48px;
@@ -114,7 +116,7 @@
        padding-bottom: 10px;
        
     }
-    .menu.active {
+    .menu.active{
         background:#333;
         right: 0%;
         opacity: 1;
@@ -131,5 +133,8 @@
         height: 10vw;
         padding: 10px 0;
         
+    }
+    .header-con ul{
+        display: none;
     }
 }
