@@ -1,7 +1,11 @@
 
 .header {
     display: flex;
-    position: relative;
+    position: fixed;
+    height: 78px;
+    top: 0;
+    left: 0;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
     background-color: #333;

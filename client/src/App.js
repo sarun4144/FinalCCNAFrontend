@@ -79,25 +79,25 @@ function App() {
       <BrowserRouter>
       <ToastContainer/>
     <Routes>
-      <Route exact path="/" element={<><Header/><Banner/><Content/></>}/>
-      <Route path ="/Info" element={<><Header/><Info /></>}/>
-      <Route path ="/about" element={<><Header/><About /></>}/>
-      <Route path ="/login" element={<><Header/><Login /></>}/>
-      <Route path ="/register" element={<><Header/><Register /></>}/>
-      <Route path ="/store" element={<><Header/><Store /></>}/>
+      <Route exact path="/" element={<><Header/><main style={{marginTop: '78px'}}><Banner/><Content/></main></>}/>
+      <Route path ="/Info" element={<><Header/><main style={{marginTop: '78px'}}><Info /></main></>}/>
+      <Route path ="/about" element={<><Header/><main style={{marginTop: '78px'}}><About /></main></>}/>
+      <Route path ="/login" element={<><Header/><main style={{marginTop: '78px'}}><Login /></main></>}/>
+      <Route path ="/register" element={<><Header/><main style={{marginTop: '78px'}}><Register /></main></>}/>
+      <Route path ="/store" element={<><Header/><main style={{marginTop: '78px'}}><Store /></main></>}/>
 
 
-    <Route path ="/user/profile" element={<UserRoute><><Header/> <Profile /></> </UserRoute>}/>
+    <Route path ="/user/profile" element={<UserRoute><><Header/><main style={{marginTop: '78px'}}><Profile /></main> </> </UserRoute>}/>
 
-    <Route path ="/admin/home" element={<AdminRoute> <><Header/><Adminhome /></> </AdminRoute>}/>
-    <Route path ="/admin/manageadmin" element={<AdminRoute> <><Header/><ManagAdmin /></> </AdminRoute>}/>
-    <Route path ="/admin/examadd" element={<AdminRoute> <><Header/><ExamAdd /></> </AdminRoute>}/>
-    <Route path ="/admin/categoryadd" element={<AdminRoute> <><Header/><CategoryAdd /></> </AdminRoute>}/>
+    <Route path ="/admin/home" element={<AdminRoute> <><Header/><main style={{marginTop: '78px'}}><Adminhome /></main></> </AdminRoute>}/>
+    <Route path ="/admin/manageadmin" element={<AdminRoute> <><Header/><main style={{marginTop: '78px'}}><ManagAdmin /></main></> </AdminRoute>}/>
+    <Route path ="/admin/examadd" element={<AdminRoute> <><Header/><main style={{marginTop: '78px'}}><ExamAdd /></main></> </AdminRoute>}/>
+    <Route path ="/admin/categoryadd" element={<AdminRoute> <><Header/><main style={{marginTop: '78px'}}><CategoryAdd /></main></> </AdminRoute>}/>
     
-    <Route path ="/admin/examchoices" element={<AdminRoute> <><Header/><ExamChoices /></> </AdminRoute>}/>
+    <Route path ="/admin/examchoices" element={<AdminRoute> <><Header/><main style={{marginTop: '78px'}}><ExamChoices /></main></> </AdminRoute>}/>
     
     
-
+     
     </Routes>
     </BrowserRouter>
   </div>
