@@ -1,0 +1,5 @@
+.sticky-top {
+    position: fixed;
+    margin-top: 85px;
+    left: 5%;
+}
