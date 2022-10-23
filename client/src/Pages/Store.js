@@ -59,8 +59,6 @@ function Store() {
                   <div className="form-group">
                     <h4 form="exampleFormControlInput1" >{item.title}</h4>
                   </div>
-
-
                   <div className="form-group">
                     <h5 form="exampleFormControlInput1" >Category : {cat.name}</h5>
                   </div>
