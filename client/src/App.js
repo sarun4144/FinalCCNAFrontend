@@ -19,6 +19,7 @@ import Register from './Pages/Register';
 import Content from './Component/Cotent'
 import Store from './Pages/Store';
 import Info from './Pages/Info';
+import Footer from './Component/Footer';
 //userpage
 import Profile from './Component/user/Profile';
 
@@ -75,7 +76,8 @@ function App() {
   
   return (
   
-    <div>
+    <div className="landing-container">
+      <div className="landing-wrap">
       <BrowserRouter>
       <ToastContainer/>
       <Header/>
@@ -103,6 +105,8 @@ function App() {
     </Routes>
     </main>
     </BrowserRouter>
+    </div>
+    <Footer/>
   </div>
    
   );

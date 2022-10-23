@@ -1,5 +1,17 @@
 .sticky-top {
+    color: black;
     position: fixed;
-    margin-top: 85px;
-    left: 5%;
+    margin-top: 78px;
+    left: 0;
+    z-index: 2;
+    width: 100%; 
+    background-color: gray;
+    align-items: center;
+    opacity: 90%;
+    height: 70px;
 }
+
+.body {
+    margin-top: 160px;
+}
+

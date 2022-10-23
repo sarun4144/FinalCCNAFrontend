@@ -86,6 +86,7 @@
         background-color: transparent;
         outline: transparent;
         align-items: center;
+        z-index: 100;
     }
     .header {
         padding: 0 1em;

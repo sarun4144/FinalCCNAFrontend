@@ -257,6 +257,7 @@ function ExamChoices() {
   }
   return (
     <div className="container" >
+      <div className="top-body">
       <div className="sticky-top" >
         <div className="form-check">
           <input onChange={() => handleChange()} className="form-check-input" type="checkbox" />
@@ -266,6 +267,8 @@ function ExamChoices() {
         </div>
         <button type="submit" className="btn btn-primary" onClick={() => AddExam(Data.length + 1)}>Addexam</button>
       </div>
+      </div>
+      <div className="body">
       <div className="card" >
         <h4> QuestionName : {Head.name}</h4>
         <textarea name="QuestionName" className="form-control" onChange={handleChangeh} defaultValue={Head.name}>{Head.name}</textarea>
@@ -320,7 +323,7 @@ function ExamChoices() {
         </div>
 
       )}
-
+    </div>
     </div>
   )
 }
