@@ -5,7 +5,8 @@ import { listCategory } from "../../Function/Category";
 import Toast from "../../Alert/Success";
 import { AiFillDelete, AiFillEdit, AiOutlinePlus } from "react-icons/ai";
 import Confirm from "../../Alert/Confirm";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import './ExamChoices.css'
 
 import FileUpload from "./FileUpload";
 function ExamChoices() {

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { listexam } from "../Function/Exam"
 import { checkin } from "../Store/examSilce"
 import { checkout } from "../Store/examSilce";
+import './Store.css'
 //Notify
 
 //CSS
