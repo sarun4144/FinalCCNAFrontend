@@ -7,7 +7,6 @@ import Toast from "../Alert/Success";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css'
 import { useDispatch } from 'react-redux'
-import { red } from "@mui/material/colors";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -63,8 +62,6 @@ function Login() {
         })
       });
   }
-
-
 
   return (
     <div className="container">

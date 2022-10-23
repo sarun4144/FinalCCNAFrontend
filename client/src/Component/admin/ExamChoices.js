@@ -7,6 +7,7 @@ import { AiFillDelete, AiFillEdit, AiOutlinePlus } from "react-icons/ai";
 import Confirm from "../../Alert/Confirm";
 import Swal from 'sweetalert2'
 
+import FileUpload from "./FileUpload";
 function ExamChoices() {
   const [data, setData] = useState([]);
   const [cat, setCat] = useState([]);
@@ -293,7 +294,11 @@ function ExamChoices() {
               <div className="form-group">
               </div>
               <br />
-              <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1)}><AiOutlinePlus /></button>
+              <FileUpload/>
+              <br />
+          
+              <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1)}>  เพิ่มช้อย<AiOutlinePlus /></button>
+              
               {item.Choices.map((num, numI) =>
                 <div className="form-group">
                   <table className="table">
