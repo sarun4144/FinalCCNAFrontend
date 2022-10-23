@@ -7,12 +7,14 @@ import Toast from "../../Alert/Success";
 import 'bootstrap/dist/css/bootstrap.min.css';
 function ExamAdd() {
   const navigate = useNavigate();
+ 
+  const [Data, setData] = useState([]) 
   const [value, setValue] = useState({
     name: " ",
     title: " ",
     Categoryid:" "
   })
-  const [Data, setData] = useState([])
+ 
   useEffect(() => {
     loadData()
 
@@ -34,6 +36,9 @@ function ExamAdd() {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log("Value", value);
+    if(value.Categoryid == " "){
+      value.Categoryid = Data[0]._id
+    }
     examadd(value).then((res) => {
       Toast.fire({
         position: 'top-end',
@@ -75,6 +80,7 @@ function ExamAdd() {
             <label htmlFor="exampleFormControlSelect1">Category</label>
 
             <select className="form-control" id="exampleFormControlSelect1" name="Categoryid" onChange={handleChange}>
+              
               {Data.map((item, index) =>
                 <option key={index} value={item._id}>{item.name}</option>
 
