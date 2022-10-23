@@ -15,12 +15,12 @@ function Store() {
   const dispatch = useDispatch()
   const [exame, setData] = useState([]);
   const Token = user.userStore.user.token
- 
+
   useEffect(() => {
     //code
     dispatch(checkout(null))
     loadData(Token)
-  }, [Token,dispatch]);
+  }, [Token, dispatch]);
   const loadData = (authtoken) => {
     listexam(authtoken).then(res => {
       setData(res.data)
@@ -29,11 +29,11 @@ function Store() {
     })
   }
 
-  function EditBTN(id,catid,category) {
+  function EditBTN(id, catid, category) {
     const EXAM = {
       examid: id,
-      catid:catid,
-      category:category
+      catid: catid,
+      category: category
     }
     dispatch(checkin(EXAM))
     localStorage.setItem('examid', id)
@@ -51,19 +51,24 @@ function Store() {
 
           {exame.map((item) =>
             <div className='card'>
-              <div >
-                <div className="form-group">
-                  <h1 form="exampleFormControlInput1" >{item.name}</h1>
+              {item.CAT.map((cat) =>
+                <div >
+                  <div className="form-group">
+                    <h1 form="exampleFormControlInput1" >{item.name}</h1>
+                  </div>
+                  <div className="form-group">
+                    <h4 form="exampleFormControlInput1" >{item.title}</h4>
+                  </div>
+
+
+                  <div className="form-group">
+                    <h5 form="exampleFormControlInput1" >Category : {cat.name}</h5>
+                  </div>
+
+                  <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id)}>ดูข้อสอบ</button>
+                  <button type="submit" className="btn btn-danger" onClick={(id) => EditBTN(item._id, item.Categoryid, cat.name)}>แก้ไข</button>
                 </div>
-                <div className="form-group">
-                  <h4 form="exampleFormControlInput1" >{item.title}</h4>
-                </div>
-                <div className="form-group">
-                  <h5 form="exampleFormControlInput1" >Category : {item.CAT[0].name}</h5>
-                </div>
-                <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id)}>ดูข้อสอบ</button>
-                <button type="submit" className="btn btn-danger" onClick={(id) => EditBTN(item._id,item.Categoryid,item.CAT[0].name)}>แก้ไข</button>
-              </div>
+              )}
             </div>
           )}
         </div>
@@ -81,6 +86,11 @@ function Store() {
               <div className="form-group">
                 <h4 form="exampleFormControlInput1" >{item.title}</h4>
               </div>
+              {item.CAT.map((cat) =>
+                <div className="form-group">
+                  <h5 form="exampleFormControlInput1" >Category : {cat.name}</h5>
+                </div>
+              )}
               <button type="submit" className="btn btn-primary">ดูข้อสอบ</button>
             </form>
           </div>
@@ -99,6 +109,11 @@ function Store() {
             <div className="form-group">
               <h4 form="exampleFormControlInput1" >{item.title}</h4>
             </div>
+            {item.CAT.map((cat) =>
+              <div className="form-group">
+                <h5 form="exampleFormControlInput1" >Category : {cat.name}</h5>
+              </div>
+            )}
             <button type="submit" className="btn btn-primary">ดูข้อสอบ</button>
           </form>
         </div>
