@@ -28,8 +28,8 @@ function ExamChoices() {
 
   useEffect(() => {
     loadData(EXid)
-    
-  },[EXid])
+
+  }, [EXid])
 
   function loadData(id) {
     currentexam(id).then((res) => {
@@ -235,7 +235,7 @@ function ExamChoices() {
       if (value3.Categoryid) {
         payload.Categoryid = value3.Categoryid
       }
-      examHeadChange(EXid,payload)
+      examHeadChange(EXid, payload)
         .then(res => {
           Toast.fire({
             position: 'top-end',
@@ -244,7 +244,7 @@ function ExamChoices() {
           })
           localStorage.setItem('catid', value3.Categoryid)
           loadData(EXid)
-          
+
         }).catch(err => {
           console.log(err);
         })
@@ -294,11 +294,9 @@ function ExamChoices() {
               <div className="form-group">
               </div>
               <br />
-              <FileUpload/>
+              <FileUpload />
               <br />
-          
               <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1)}>  เพิ่มช้อย<AiOutlinePlus /></button>
-              
               {item.Choices.map((num, numI) =>
                 <div className="form-group">
                   <table className="table">
