@@ -7,9 +7,11 @@ import Toast from "../../Alert/Success";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AdminToolbar from "./AdminToolbar";
 import './Adminhome.css'
+import { useSelector } from "react-redux";
 function ExamAdd() {
   const navigate = useNavigate();
- 
+  const store = useSelector((state) => ({ ...state }))
+  
   const [Data, setData] = useState([]) 
   const [value, setValue] = useState({
     name: " ",
@@ -41,7 +43,7 @@ function ExamAdd() {
     if(value.Categoryid == " "){
       value.Categoryid = Data[0]._id
     }
-    examadd(value).then((res) => {
+    examadd(store.userStore.user.token,value).then((res) => {
       Toast.fire({
         position: 'top-end',
         icon: 'success',

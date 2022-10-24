@@ -1,10 +1,10 @@
 
 import axios from 'axios'
 
-export const examadd = async (value) =>
+export const examadd = async (authtoken,value) =>
   await axios.post(process.env.REACT_APP_API + "/examadd", value, {
-    headers: {
-      'Content-Type': 'application/json'
+    headers:{
+      authtoken
     }
   });
 
@@ -18,10 +18,8 @@ export const listexam = async (authtoken) =>
   export const currentexam = async (id) =>
   await axios.post(process.env.REACT_APP_API + "/current-exam/"+id,
   {
-    headers:{
-      id
-    }
 });
+
   export const examchoicesadd = async (id,Adddata) =>
   await axios.post(process.env.REACT_APP_API + "/examchoicesadd/"+id,Adddata,
   {
