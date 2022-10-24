@@ -1,0 +1,14 @@
+.navadmin-column{
+    background-color: #cee;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    text-decoration: none;
+    border-color: black;
+}
+
+.navadmin-item{
+    text-decoration: none;
+}

@@ -6,6 +6,8 @@ import Navbaradmin from './Navadmin';
 import { useSelector } from "react-redux";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import * as moment from 'moment';
+import AdminToolbar from "./AdminToolbar";
+import './Adminhome.css'
 //alert
 import Swal from 'sweetalert2'
 import Confirm from "../../Alert/Confirm";
@@ -115,7 +117,9 @@ function ManagAdmin() {
   }
   const roleData = ["admin", "user"];
   return (
-    <div className='container-fluid'>
+    <div className="adminwrap">
+      <AdminToolbar/>
+    <div className='admincontainer'>
       <div className='row'>
         <div className="col-md-2">
           <Navbaradmin />
@@ -195,6 +199,7 @@ function ManagAdmin() {
       </div>
       <div className='col-md-2'>
       </div>
+    </div>
     </div>
   )
 

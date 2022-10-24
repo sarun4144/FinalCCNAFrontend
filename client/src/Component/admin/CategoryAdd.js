@@ -8,6 +8,8 @@ import Confirm from "../../Alert/Confirm";
 import Toast from "../../Alert/Success";
 //CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AdminToolbar from "./AdminToolbar";
+import './Adminhome.css'
 
 function CategoryAdd() {
   const user = useSelector((state) => ({ ...state }))
@@ -88,8 +90,10 @@ function CategoryAdd() {
 
   }
   return (
-
-    <div className='container' >
+    <div className='adminwrap'>
+      <AdminToolbar/>
+    <div className='admincontainer' >
+      
       <h1 style={{ textAlign: "center" }}> Admin CategoryManagement Page </h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -115,7 +119,7 @@ function CategoryAdd() {
         )}
       </ul>
     </div>
-
+    </div>
 
   )
 }

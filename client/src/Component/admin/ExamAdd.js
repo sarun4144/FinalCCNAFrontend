@@ -5,6 +5,8 @@ import { listCategory } from "../../Function/Category";
 import Swal from 'sweetalert2'
 import Toast from "../../Alert/Success";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AdminToolbar from "./AdminToolbar";
+import './Adminhome.css'
 function ExamAdd() {
   const navigate = useNavigate();
  
@@ -62,7 +64,9 @@ function ExamAdd() {
 
   }
   return (
-    <div className='container'>
+    <div className='adminwrap'>
+      <AdminToolbar/>
+    <div className='admincontainer'>
       <div className='card'>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -92,6 +96,7 @@ function ExamAdd() {
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
       </div>
+    </div>
     </div>
   )
 }

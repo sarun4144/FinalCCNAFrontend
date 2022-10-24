@@ -16,7 +16,7 @@ const Footer = () => {
             <div className='col'>
                 <h4>Welcome to the Cumzone</h4>
                 <ul className='footer-list'>
-                    <li>Nice cock</li>
+                    <li>Amogus</li>
                     <li>LMAO</li>
                 </ul>
             </div>
