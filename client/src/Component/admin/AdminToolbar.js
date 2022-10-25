@@ -12,8 +12,9 @@ const AdminToolbar = () => {
   return (
     <>
     <div className='admin-toolbar'>
-      <Link to='#' className='menu-toolbar'>
-        <AiIcons.AiOutlineTool onClick={showToolbar}/>
+      <Link to='#' className='menu-toolbar' onClick={showToolbar} >
+        <AiIcons.AiOutlineTool />
+        
       </Link>
     </div>
     <nav className={toolbar ? 'tool-menu active' : 'tool-menu'}>
