@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { currentexam, examchoicesadd, examChoiceschange, examChoicesdelete, examReset, examHeadChange } from "../../Function/Exam"
 import { listCategory } from "../../Function/Category";
-import { Imageadd } from "../../Function/CloudDinary";
+import { Imageadd,Imageremove } from "../../Function/CloudDinary";
 import Toast from "../../Alert/Success";
 import { AiFillDelete, AiFillEdit, AiOutlinePlus } from "react-icons/ai";
 import Confirm from "../../Alert/Confirm";
 import Swal from 'sweetalert2';
 import './ExamChoices.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Badge from 'react-bootstrap/Badge';
 import FileUpload from "./FileUpload";
+import { BsXLg } from "react-icons/bs";
+import axios from "axios";
 function ExamChoices() {
   const [data, setData] = useState([]);
   const [cat, setCat] = useState([]);
@@ -282,6 +283,54 @@ function ExamChoices() {
       })
 
   }
+  function ImageRemove(Num,public_id) {
+    const images = Data[Num - 1].images
+    let i = 0
+    const payload = {
+      images: [],
+      Num: Num
+    }
+    while (i < images.length) {
+      if (images[i].public_id != public_id) {
+          payload.images.push(images[i])
+      }
+      i++
+    }
+    setLoad(true)
+    console.log(payload);
+    // const img = values.images
+    axios
+      .post(
+        process.env.REACT_APP_API + "/removeimages",
+        { public_id },
+        {
+          headers: {
+            authtoken: store.userStore.user.token,
+          },
+        }
+      )
+      .then((res) => {
+        Imageremove(payload,EXid)
+        .then(res => {
+          setLoad(false)
+          Toast.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: res.data
+          })
+          loadData(EXid)
+  
+        }).catch(err => {
+          console.log(err);
+        })
+
+      })
+      .catch((err) => {
+        //err
+        setLoad(false)
+        console.log(err);
+      });
+  }
   return (
     <div className="container" >
       <div className="top-body">
@@ -319,29 +368,29 @@ function ExamChoices() {
           <div className="card" >
 
             <fieldset disabled={isDisabled}>
+              <div className="text-center">
+                {item.images.map((mage) =>
+                  <span style={{ color: "red", cursor: "pointer", fontSize: 45 }} className="badge badge-danger" onClick={() => ImageRemove(index + 1, mage.public_id)}>
+                    <img src={mage.url} className="fluid" alt=" " />
+                    <BsXLg />
+                  </span>
+
+                )}
+              </div>
+              <FileUpload loading={loading} setLoad={setLoad} values={value4} setValue4={setValue4} />
+              {loading || item.images.length > 0
+                ? <button type="button" className="btn btn-primary" disabled onClick={() => ImageAdd(index + 1)}>Loading... </button>
+                : <button type="button" className="btn btn-primary" onClick={() => ImageAdd(index + 1)}>พิ่มรูปภาพ </button>
+              }
+
+              <br />
+              <br />
               <div className="form-group">
                 <h5> QuestionNumber: {index + 1}</h5>
                 <textarea key={index} name="Question" className="form-control" onChange={handleChangeQ} rows="3">{item.Question}</textarea>
                 <div className="form-group">
                 </div>
-                <br />
-                <div className="text-center">
-                  {item.images.map((mage) =>
 
-                    <img src={mage.url} className="fluid" alt="Responsive image">
-                     
-                    </img>
-
-                  )}
-                </div>
-                <br />
-                <FileUpload loading={loading} setLoad={setLoad} values={value4} setValue4={setValue4} />
-                {loading || item.images.length > 0
-                  ? <button type="button" className="btn btn-primary" disabled onClick={() => ImageAdd(index + 1)}>Loading... </button>
-                  : <button type="button" className="btn btn-primary" onClick={() => ImageAdd(index + 1)}>พิ่มรูปภาพ </button>
-                }
-
-                <br />
                 <br />
                 <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1)}>  เพิ่มช้อย<AiOutlinePlus /></button>
                 {item.Choices.map((num, numI) =>
@@ -360,14 +409,15 @@ function ExamChoices() {
                   </div>
                 )}
                 <button className="btn btn-secondary" onClick={(Question) => Edit(item.Question, item.Choices, index + 1)}><AiFillEdit /></button>
-                <button className="btn btn-danger" onClick={() => Delete(index + 1)}><AiFillDelete /> </button>
+                <button className="btn btn-danger" onClick={() => Delete(index + 1)}><AiFillDelete /></button>
               </div>
             </fieldset>
           </div>
 
-        )}
-      </div>
-    </div>
+        )
+        }
+      </div >
+    </div >
   )
 }
 
