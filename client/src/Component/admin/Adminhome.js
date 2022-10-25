@@ -28,10 +28,9 @@ function Adminhome() {
             <div className='col-md-2 mt-3 mb-5 mx-auto p-3 rounded'>
               <h2>Admin Profile</h2>
               <div className='adminprofile'>
-              <h2>Welcome - Administrator</h2>
-              <div>Adminname : {adminUsername}</div>
-              <div>Role : {role}</div>
-              <div>Email : {email}</div>
+              <li>Adminname : {adminUsername}</li>
+              <li>Role : {role}</li>
+              <li>Email : {email}</li>
               </div>
             </div>
         </div>
