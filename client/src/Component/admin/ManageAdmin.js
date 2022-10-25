@@ -121,9 +121,7 @@ function ManagAdmin() {
       <AdminToolbar/>
     <div className='admincontainer'>
       <div className='row'>
-        <div className="col-md-2">
-          <Navbaradmin />
-        </div>
+        
         <div className='col' >
           <h1>Admin Management Page</h1>
           <Table className="table">

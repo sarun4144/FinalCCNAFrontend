@@ -112,7 +112,7 @@ function CategoryAdd() {
         {category.map((item) =>
           <li className="list-group-item d-flex justify-content-between align-items-center">
             {item.name}
-            <button type="button" class="btn btn-primary" onClick={() => handleRemove(item._id)}>
+            <button type="button" class="btn btn-danger" onClick={() => handleRemove(item._id)}>
               <span class="badge badge-light">X</span>
             </button>
           </li>
