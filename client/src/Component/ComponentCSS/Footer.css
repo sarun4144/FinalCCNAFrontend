@@ -5,7 +5,10 @@
     position: relative;
     bottom: 0;
     width: 100%;    
+    font-family: 'Mitr',sans-serif;
 }
 .footer-col-sm{
     text-align: center;
+    font-family: 'Mitr',sans-serif;
 }
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');

@@ -1,19 +1,21 @@
 
 .banner-bg {
     height: 550px;
-    background: url("https://images.unsplash.com/photo-1547954575-855750c57bd3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80") no-repeat;
-    background-size: cover;
+    
+    background-size:cover;
     overflow: hidden;
+    background-position: center;
 }
 .banner-con {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content:center;
     height: 500px;
 }
 .banner-text {
     color: #fff;
     text-align: center;
+    font-family: 'Mitr',sans-serif;
 }
 .banner-btn {
     background: #fff;
@@ -38,3 +40,4 @@
         padding: 0 2rem;
     }
 }
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');
