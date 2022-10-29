@@ -8,7 +8,7 @@ const CatSearch = () => {
 
     const [category, setData] = useState([]);
     const Token = user.userStore.user.token
-    console.log("Data", category);
+    /*console.log("Data", category);*/
     useEffect(() => {
         //code
         loadData(Token)
