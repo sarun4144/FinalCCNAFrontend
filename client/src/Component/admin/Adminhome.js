@@ -2,6 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbaradmin from './Navadmin';
 import './Adminhome.css';
+import './Navadmin.css'
 import AdminToolbar from './AdminToolbar';
 import { useSelector } from 'react-redux';
 

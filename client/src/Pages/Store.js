@@ -5,6 +5,7 @@ import { listexam } from "../Function/Exam"
 import { checkin } from "../Store/examSilce"
 import { checkout } from "../Store/examSilce";
 import './Store.css'
+import CatSearch from "../Component/CatSearch";
 //Notify
 
 //CSS
@@ -48,8 +49,8 @@ function Store() {
   try {
     if (user.userStore.user.role === 'admin') {
       return (
-        <div className='container'>
-
+        <div className='store-container'>
+          <div className="cat-search-container"><CatSearch/></div>
           {exame.map((item) =>
             <div className='card'>
               {item.CAT.map((cat) =>
@@ -75,7 +76,7 @@ function Store() {
       )
     }
     return (
-      <div className='container'>
+      <div className='store-container'>
         {exame.map((item) =>
           <div className='card'>
             <form >
