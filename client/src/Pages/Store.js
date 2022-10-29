@@ -77,6 +77,7 @@ function Store() {
     }
     return (
       <div className='store-container'>
+        <div className="cat-search-container"><CatSearch/></div>
         {exame.map((item) =>
           <div className='card'>
             <form >
@@ -100,6 +101,7 @@ function Store() {
     )
   } catch (error) {
     <div className='container'>
+      <div className="cat-search-container"><CatSearch/></div>
       {exame.map((item) =>
         <div className='card'>
           <form >

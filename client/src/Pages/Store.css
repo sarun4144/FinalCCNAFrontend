@@ -1,6 +1,6 @@
 .card {
     z-index: 1;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .store-container {
@@ -15,7 +15,7 @@
 }
 
 .cat-search-container {
-    margin-left: 50px;
+    margin-left: 25px;
     margin-top: 10px;
     display: flex;
 }
