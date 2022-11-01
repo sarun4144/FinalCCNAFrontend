@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as AiIcons from "react-icons/ai";
 import { ToolbarData } from './ToolbarData';
@@ -13,8 +13,7 @@ const AdminToolbar = () => {
     <>
     <div className='admin-toolbar'>
       <Link to='#' className='menu-toolbar' onClick={showToolbar} >
-        <AiIcons.AiOutlineTool />
-        
+        <AiIcons.AiOutlineTool />        
       </Link>
     </div>
     <nav className={toolbar ? 'tool-menu active' : 'tool-menu'}>
