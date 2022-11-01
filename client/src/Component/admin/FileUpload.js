@@ -6,7 +6,6 @@ import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 function FileUpload({ values, setValues, loading, setLoad }) {
     const user = useSelector((state) => ({ ...state }));
-    console.log(values)
     const handleChangeFile = (e) => {
         const files = e.target.files;
         if (files) {

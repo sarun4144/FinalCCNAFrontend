@@ -17,9 +17,15 @@
 
 @keyframes Nav {
 
+<<<<<<< HEAD
     from {
         font-size: 0px;
     }
+=======
+    from{font-size: 0px;}
+    from{opacity: 0;}
+    from{background-color:#fff;}
+>>>>>>> b4b2d26b92e2bfc2917baf74e47cd561f4ea6c19
 
     from {
         opacity: 0;
@@ -45,7 +51,7 @@
     text-decoration: none;
     font-weight: bold;
     font-size: 3rem;
-    color: rgb(28, 121, 184);
+    color: white;
     transition: all 0.5s ease;
 
 }
@@ -73,29 +79,56 @@
     display: flex;
 
 }
+<<<<<<< HEAD
 
 .header-con ul {
     display: flex;
+=======
+.header-con ul{
+    display: inline-flex;
+>>>>>>> b4b2d26b92e2bfc2917baf74e47cd561f4ea6c19
     margin: 0;
     padding: 0;
 }
 
 .header-con li {
     list-style: none;
+    position: relative;
 }
+<<<<<<< HEAD
 
 .header-con li a {
     display: block;
+=======
+.header-con li a  {
+    display: inline-flex;
+>>>>>>> b4b2d26b92e2bfc2917baf74e47cd561f4ea6c19
     text-decoration: none;
     color: white;
     padding: 1.6rem;
     font-size: 1.3rem;
 
 }
+<<<<<<< HEAD
 
 .header-con li:hover {
     background-color: #555;
     transition: all 0.5s ease;
+=======
+.header-con li::after {
+    content: '';
+    height: 7px;
+    width: 0%;
+    background: blue;
+    position: absolute;
+    left: 0;
+    bottom: 15px;
+}
+.header-con li:hover::after {
+    width: 100%;
+    background-color: orangered;
+    transition: all 0.3s ease;
+>>>>>>> b4b2d26b92e2bfc2917baf74e47cd561f4ea6c19
 }
 
 @media (min-width: 1160px) {
@@ -173,3 +206,4 @@
         display: none;
     }
 }
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');

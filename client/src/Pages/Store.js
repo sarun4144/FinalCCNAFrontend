@@ -90,18 +90,24 @@ function Store() {
           </div>
           {filterExamList.map((item) =>
             <div className='card'>
+              <div >
+                <div className="form-group">
+                  <h1>{item.name}</h1>
+                </div>
+                <div className="form-group">
+                  <h4>{item.title}</h4>
+                </div>
+              </div>
               {item.CAT.map((cat) =>
-                <div >
+                <div>
                   <div className="form-group">
-                    <h1 form="exampleFormControlInput1" >{item.name}</h1>
+                    <h5>Category : {cat.name}</h5>
                   </div>
                   <div className="form-group">
-                    <h4 form="exampleFormControlInput1" >{item.title}</h4>
-                  </div>
-                  <div className="form-group">
-                    <h5 form="exampleFormControlInput1" >Category : {cat.name}</h5>
-                  </div>
+                    <h5>Creat at : {item.date}</h5>
+                  </div> 
                   <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id)}>ดูข้อสอบ</button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
                   <button type="submit" className="btn btn-danger" onClick={(id) => EditBTN(item._id, item.Categoryid, cat.name)}>แก้ไข</button>
                 </div>
               )}
@@ -132,14 +138,14 @@ function Store() {
           <div className='card'>
             <form >
               <div className="form-group">
-                <h1 form="exampleFormControlInput1" >{item.name}</h1>
+                <h1>{item.name}</h1>
               </div>
               <div className="form-group">
-                <h4 form="exampleFormControlInput1" >{item.title}</h4>
+                <h4>{item.title}</h4>
               </div>
               {item.CAT.map((cat) =>
                 <div className="form-group">
-                  <h5 form="exampleFormControlInput1" >Category : {cat.name}</h5>
+                  <h5>Category : {cat.name}</h5>
                 </div>
               )}
               <button type="submit" className="btn btn-primary">ดูข้อสอบ</button>
@@ -171,14 +177,14 @@ function Store() {
         <div className='card'>
           <form >
             <div className="form-group">
-              <h1 form="exampleFormControlInput1" >{item.name}</h1>
+              <h1>{item.name}</h1>
             </div>
             <div className="form-group">
-              <h4 form="exampleFormControlInput1" >{item.title}</h4>
+              <h4>{item.title}</h4>
             </div>
             {item.CAT.map((cat) =>
               <div className="form-group">
-                <h5 form="exampleFormControlInput1" >Category : {cat.name}</h5>
+                <h5>Category : {cat.name}</h5>
               </div>
             )}
             <button type="submit" className="btn btn-primary">ดูข้อสอบ</button>

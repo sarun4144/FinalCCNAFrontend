@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { currentexam, examchoicesadd, examChoiceschange, examChoicesdelete, examReset, examHeadChange } from "../../Function/Exam"
+import { currentexam, examchoicesadd, examChoiceschange, examChoicesdelete, examReset, examHeadChange, CorrectAnswer } from "../../Function/Exam"
 import { listCategory } from "../../Function/Category";
-import { Imageadd,Imageremove } from "../../Function/CloudDinary";
+import { Imageadd, Imageremove } from "../../Function/CloudDinary";
 import Toast from "../../Alert/Success";
 import { AiFillDelete, AiFillEdit, AiOutlinePlus } from "react-icons/ai";
 import Confirm from "../../Alert/Confirm";
@@ -12,8 +12,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import FileUpload from "./FileUpload";
 import { BsXLg } from "react-icons/bs";
 import axios from "axios";
+import { Button } from "bootstrap";
 function ExamChoices() {
   const [data, setData] = useState([]);
+
   const [cat, setCat] = useState([]);
   const [Head, setHead] = useState([]);
   const [loading, setLoad] = useState(false);
@@ -21,7 +23,7 @@ function ExamChoices() {
   const [isDisabled, setIsDisabled] = useState(true);
   const [value, setValue] = useState({})
   const [value2, setValue2] = useState({
-    Question: null
+    Question: null,
   })
   const [value3, setValue3] = useState({
 
@@ -146,7 +148,7 @@ function ExamChoices() {
   };
 
 
-  const Edit = async (Questions, Choices, index) => {
+  const Edit = (Questions, Choices, index, Images, Answerdetail,CorrectANS) => {
 
     const Values = {
       Question: "",
@@ -155,7 +157,9 @@ function ExamChoices() {
     const payload = {
       Question: "",
       images: [],
+      Answerdetail: "",
       Choices: [],
+      CorrectANS:CorrectANS,
       Num: index
     }
     //const result = Object.values(value);
@@ -168,6 +172,17 @@ function ExamChoices() {
     console.log("Values", Values)
     */
     try {
+      if(!CorrectANS){
+        payload.CorrectANS = []
+      }
+      if (!value2.Answerdetail) {
+        payload.Answerdetail = Answerdetail
+      } else {
+        payload.Answerdetail = value2.Answerdetail
+      }
+      if (Images.length > 0) {
+        payload.images = Images
+      }
       if (value2.Question == null) {
         payload.Question = Values.Question
         console.log("payload", payload)
@@ -204,13 +219,14 @@ function ExamChoices() {
 
   };
 
-  function selectAdd(Questions2, Choices2, index2) {
+  function selectAdd(Questions2, Choices2, index2, images, Answerdetail,CorrectANS) {
     let d = Choices2.length
     Choices2[d] = " "
     console.log(Choices2)
-    Edit(Questions2, Choices2, index2)
+    Edit(Questions2, Choices2, index2, images, Answerdetail,CorrectANS)
   }
-  function selectDelete(Questions3, Choices3, index3, numI) {
+
+  function selectDelete(Questions3, Choices3, index3, numI, Images, Answerdetail,CorrectANS) {
     let i = 0;
     var Choice = []
     try {
@@ -226,8 +242,9 @@ function ExamChoices() {
     } catch (err) {
 
     }
-    Edit(Questions3, Choice, index3)
+    Edit(Questions3, Choice, index3, Images, Answerdetail,CorrectANS)
   }
+
   function EditH() {
     const payload = {
       QuestionName: Head.name,
@@ -283,7 +300,7 @@ function ExamChoices() {
       })
 
   }
-  function ImageRemove(Num,public_id) {
+  function ImageRemove(Num, public_id) {
     const images = Data[Num - 1].images
     let i = 0
     const payload = {
@@ -291,8 +308,8 @@ function ExamChoices() {
       Num: Num
     }
     while (i < images.length) {
-      if (images[i].public_id != public_id) {
-          payload.images.push(images[i])
+      if (images[i].public_id !== public_id) {
+        payload.images.push(images[i])
       }
       i++
     }
@@ -310,19 +327,19 @@ function ExamChoices() {
         }
       )
       .then((res) => {
-        Imageremove(payload,EXid)
-        .then(res => {
-          setLoad(false)
-          Toast.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: res.data
+        Imageremove(payload, EXid)
+          .then(res => {
+            setLoad(false)
+            Toast.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: res.data
+            })
+            loadData(EXid)
+
+          }).catch(err => {
+            console.log(err);
           })
-          loadData(EXid)
-  
-        }).catch(err => {
-          console.log(err);
-        })
 
       })
       .catch((err) => {
@@ -331,6 +348,41 @@ function ExamChoices() {
         console.log(err);
       });
   }
+  const [checked, setChecked] = useState([]);
+  const handleCheck = (e) => {
+    var updatedList = [...checked];
+    if (e.target.checked) {
+      updatedList = [...checked, e.target.value];
+    } else {
+      updatedList.splice(checked.indexOf(e.target.value), 1);
+    }
+    setChecked(updatedList);
+  };
+
+  function correctAnswer(Num) {
+    console.log(checked)
+    console.log(Num)
+    const payload = {
+      CorrectANS: checked,
+      Num: Num
+    }
+    CorrectAnswer(EXid, payload)
+      .then(res => {
+        setChecked([])
+        Toast.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: res.data
+        })
+        loadData(EXid)
+        document.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = false);
+      }).catch(err => {
+        console.log(err);
+      })
+
+  }
+
+
   return (
     <div className="container" >
       <div className="top-body">
@@ -347,7 +399,7 @@ function ExamChoices() {
       <div className="body">
         <div className="card" >
           <h4> QuestionName : {Head.name}</h4>
-          <textarea name="QuestionName" className="form-control" onChange={handleChangeh} defaultValue={Head.name}>{Head.name}</textarea>
+          <textarea name="QuestionName" className="form-control" rows="3" onChange={handleChangeh} defaultValue={Head.name}>{Head.name}</textarea>
           <h4> Title : {Head.title}</h4>
           <textarea name="Title" className="form-control" onChange={handleChangeh} defaultValue={Head.title}></textarea>
           <div className="form-group">
@@ -366,7 +418,6 @@ function ExamChoices() {
         </div>
         {Data.map((item, index) =>
           <div className="card" >
-
             <fieldset disabled={isDisabled}>
               <div className="text-center">
                 {item.images.map((mage) =>
@@ -382,33 +433,57 @@ function ExamChoices() {
                 ? <button type="button" className="btn btn-primary" disabled onClick={() => ImageAdd(index + 1)}>Loading... </button>
                 : <button type="button" className="btn btn-primary" onClick={() => ImageAdd(index + 1)}>พิ่มรูปภาพ </button>
               }
-
               <br />
               <br />
               <div className="form-group">
                 <h5> QuestionNumber: {index + 1}</h5>
-                <textarea key={index} name="Question" className="form-control" onChange={handleChangeQ} rows="3">{item.Question}</textarea>
-                <div className="form-group">
-                </div>
-
+                <textarea key={index} name="Question" className="form-control" onChange={handleChangeQ} rows="5">{item.Question}</textarea>
                 <br />
-                <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1)}>  เพิ่มช้อย<AiOutlinePlus /></button>
+                <div>
+
+                  <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1, item.images, item.Answerdetail,item.CorrectANS)}>เพิ่มช้อย<AiOutlinePlus /></button>
+                  &nbsp;&nbsp;
+                  <button type="button" className="btn btn-primary" onClick={() => correctAnswer(index + 1)}>บันทึกข้อที่ถูกต้อง</button>
+                </div>
+                <div>
+                  <br />
+                  <h5>CorrectAnswer:
+                    <span> ข้อที่ :  </span>
+                    {item.CorrectANS.map((C, Cnum) =>
+                      Cnum < item.CorrectANS.length - 1
+
+                        ? <span>{parseInt(C) + 1},</span>
+                        : <span>{parseInt(C) + 1}</span>
+
+                    )}
+                  </h5>
+                </div>
                 {item.Choices.map((num, numI) =>
                   <div className="form-group">
+
                     <table className="table">
                       <thead>
                         <tr>
                           <td> <label>{numI + 1}</label></td>
                           <td> <textarea key={num} name={numI} className="form-control" rows="1" defaultValue={num} onChange={handleChangeC} ></textarea></td>
                           <td>
-                            <button type="button" className="btn btn-danger" onClick={(Questions2) => selectDelete(item.Question, item.Choices, index + 1, numI)}> <AiFillDelete /> </button>
+
+                            <input name={numI} className="form-check-input" type="checkbox" value={numI} onChange={handleCheck} />
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button" className="btn btn-danger" onClick={(Questions2) => selectDelete(item.Question, item.Choices, index + 1, numI, item.images, item.Answerdetail,item.CorrectANS)}> <AiFillDelete /> </button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                           </td>
+
                         </tr>
                       </thead>
                     </table>
                   </div>
                 )}
-                <button className="btn btn-secondary" onClick={(Question) => Edit(item.Question, item.Choices, index + 1)}><AiFillEdit /></button>
+                <h5> Answer detail</h5>
+                <textarea key={index} name="Answerdetail" className="form-control" rows="5"  onChange={handleChangeQ}>{item.Answerdetail}</textarea>
+                <br />
+                <button className="btn btn-secondary" onClick={(Question) => Edit(item.Question, item.Choices, index + 1, item.images, item.Answerdetail,item.CorrectANS)}><AiFillEdit /></button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="btn btn-danger" onClick={() => Delete(index + 1)}><AiFillDelete /></button>
               </div>
             </fieldset>
