@@ -1,0 +1,94 @@
+.Search-bar {
+    left: 0;
+    display: flex;
+    box-sizing: border-box;
+    position: relative;
+    height: 45px;
+    min-width: 150px;
+    width: 100%;
+    margin: 0 30px;
+}
+
+.SearchIcon {
+    height: 45px;
+    margin-left: 90%;
+    z-index: 1000;  
+    margin-top: 10px;
+}
+
+.Search-bar input {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0 15px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+}
+
+.searchResult {
+    position: absolute;
+    margin-top: 5px;
+    width: 300px;
+    height: 200px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.searchResult::-webkit-scrollbar {
+    display: none;
+}
+
+.searchResult .resultItem {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+.resultItem p {
+    margin-left: 10px;
+}
+
+.resultItem {
+    text-decoration: none;
+}
+
+a1:hover {
+    background-color: lightgrey;
+}
+
+.resultItem :hover {
+    background-color: lightgrey;
+}
+
+.clearBtn :hover {
+    cursor: pointer;
+}
+
+@media (max-width: 500px) {
+    .Search-bar {
+        left: 0;
+        display: flex;
+        box-sizing: border-box;
+        position: relative;
+        height: 45px;
+        min-width: 90px;
+        width: 100%;
+        margin: 0 30px;
+        margin-left: 1px;
+    }
+
+    .SearchIcon {
+        height: 45px;
+        margin-left: 80%;
+        z-index: 1000;  
+        margin-top: 10px;
+    }
+}

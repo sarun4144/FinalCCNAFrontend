@@ -18,6 +18,8 @@
     background: none;
     text-decoration: none;
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .tool-menu {

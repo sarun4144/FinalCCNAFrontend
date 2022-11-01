@@ -60,9 +60,9 @@ function Store() {
   const [catText, setDropDownText] = useState("Select Category");
 
   const filterExamList = exame.filter((exam) => {
-    if(select === ""){
+    if (select === "") {
       return exam;
-    }else{
+    } else {
       return exam.Categoryid === select;
     }
   })
@@ -115,7 +115,7 @@ function Store() {
         <div className="cat-search-container">
           <Dropdown>
             <Dropdown.Toggle variant="primary" id="dropdown-cat">
-            {catText}
+              {catText}
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
@@ -154,7 +154,7 @@ function Store() {
       <div className="cat-search-container">
         <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-cat">
-          {catText}
+            {catText}
           </Dropdown.Toggle>
 
           <Dropdown.Menu>

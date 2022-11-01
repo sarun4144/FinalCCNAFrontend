@@ -5,6 +5,9 @@ import './ComponentCSS/Header.css'
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../Store/userSilce';
+import SearchBar from './SearchBar';
+import './ComponentCSS/SearchBar.css';
+
 function Header() {
 
     const navigate = useNavigate();
@@ -25,6 +28,9 @@ function Header() {
                     <nav className="header">    
                         <div className="logo-container">
                             <Link to="/">Pre-CCNA<IoMdPaper /></Link>
+                        </div>
+                        <div className="search-container">
+                            <SearchBar/>
                         </div>
                         <div className="header-con">
                             <ul className={click ? "menu active" : " menu"} >
