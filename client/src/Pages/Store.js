@@ -7,6 +7,8 @@ import { checkin } from "../Store/examSilce";
 import { checkout } from "../Store/examSilce";
 import './Store.css';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Swal from 'sweetalert2'
+
 //Notify
 
 //CSS
@@ -18,6 +20,7 @@ function Store() {
   const dispatch = useDispatch()
   const [exame, setData] = useState([]);
   const Token = user.userStore.user.token
+  const role = user.userStore.user.role
   const [category, setCat] = useState([]);
   const [select, setSelect] = useState("");
 
@@ -53,16 +56,41 @@ function Store() {
     navigate("/admin/examchoices");
   }
 
-  function SeeExam(id) {
-    navigate("/admin/home");
+  function SeeExam(id, catid, category) {
+    if (role) {
+      if (role === "admin") {
+        navigate("/admin/home")
+      } else {
+        const EXAM = {
+          examid: id,
+          catid: catid,
+          category: category
+        }
+        dispatch(checkin(EXAM))
+        localStorage.setItem('examid', id)
+        localStorage.setItem('catid', catid)
+        navigate("/user/extest")
+      }
+    } else {
+      Swal.fire({
+        position: 'top',
+        title: 'Error!',
+        text: "กรุณา Login",
+        icon: 'error',
+        iconColor: 'Red',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง'
+      })
+      navigate("/login")
+    }
   }
 
   const [catText, setDropDownText] = useState("Select Category");
 
   const filterExamList = exame.filter((exam) => {
-    if(select === ""){
+    if (select === "") {
       return exam;
-    }else{
+    } else {
       return exam.Categoryid === select;
     }
   })
@@ -105,9 +133,7 @@ function Store() {
                   </div>
                   <div className="form-group">
                     <h5>Creat at : {item.date}</h5>
-                  </div> 
-                  <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id)}>ดูข้อสอบ</button>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
                   <button type="submit" className="btn btn-danger" onClick={(id) => EditBTN(item._id, item.Categoryid, cat.name)}>แก้ไข</button>
                 </div>
               )}
@@ -121,7 +147,7 @@ function Store() {
         <div className="cat-search-container">
           <Dropdown>
             <Dropdown.Toggle variant="primary" id="dropdown-cat">
-            {catText}
+              {catText}
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
@@ -144,11 +170,13 @@ function Store() {
                 <h4>{item.title}</h4>
               </div>
               {item.CAT.map((cat) =>
-                <div className="form-group">
-                  <h5>Category : {cat.name}</h5>
+                <div>
+                  <div className="form-group">
+                    <h5>Category : {cat.name}</h5>
+                  </div>
+                  <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id, item.Categoryid, cat.name)}>ดูข้อสอบ</button>
                 </div>
               )}
-              <button type="submit" className="btn btn-primary">ดูข้อสอบ</button>
             </form>
           </div>
         )}
@@ -160,7 +188,7 @@ function Store() {
       <div className="cat-search-container">
         <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-cat">
-          {catText}
+            {catText}
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
@@ -187,7 +215,7 @@ function Store() {
                 <h5>Category : {cat.name}</h5>
               </div>
             )}
-            <button type="submit" className="btn btn-primary">ดูข้อสอบ</button>
+            <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id)}>ดูข้อสอบ</button>
           </form>
         </div>
       )}

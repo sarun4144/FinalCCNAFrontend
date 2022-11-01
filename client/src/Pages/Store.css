@@ -1,17 +1,18 @@
 .card {
     z-index: 1;
     margin-bottom: 20px;
+    
 }
 
 .store-container {
     margin-left: 25px;
     margin-right: 25px;
-    border-style: solid;
-    border-width: 3px;
-    border-color: black;
     border-radius: 5px;
     margin-top: 100px;
     margin-bottom: 50px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
 }
 
 .cat-search-container {

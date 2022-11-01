@@ -1,12 +1,23 @@
 import React from 'react'
 import "./ComponentCSS/Banner.css"
-import { Link} from "react-router-dom"
+import { Link ,useNavigate} from "react-router-dom"
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../Store/userSilce';
 let bannerData = {
     title: "Welcome to Pre-CCNA Exam Website",
     desc: "สวัสดีครับ ยินดีต้อนรับสู่เว็นไซต์รวบรวมและทดลองทำข้องสอบ CCNA กรุณา Login เพื่อทำข้อสอบ"
 }
 
+
 function Banner() {
+    const dispatch = useDispatch();
+    const user = useSelector((state) => ({ ...state }))
+    const Token = user.userStore.user.token
+    const navigate = useNavigate();
+    const Logout = () => {
+        dispatch(logout([]))
+        navigate('/')
+    }
     return (
         <div className="banner-bg">
             <div className="container">
@@ -16,7 +27,11 @@ function Banner() {
                         <p>
                             {bannerData.desc}
                         </p>
-                        <Link to="/login" className="banner-btn">Login</Link>
+                        {Token 
+                        ? <Link to="/login" className="banner-btn" onClick={Logout}>Logout</Link>
+                        : <Link to="/login" className="banner-btn">Login</Link>
+                        }
+                       
                     </div>
                 </div>
             </div>

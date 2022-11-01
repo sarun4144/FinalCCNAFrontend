@@ -15,7 +15,7 @@ function Header() {
     const closeMobileMenu = () => setClick(false);
 
     const Logout = () => {
-        dispatch(logout(null))
+        dispatch(logout([]))
         navigate('/')
     }
     try {

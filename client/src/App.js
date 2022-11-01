@@ -22,7 +22,7 @@ import Info from './Pages/Info';
 import Footer from './Component/Footer';
 //userpage
 import Profile from './Component/user/Profile';
-
+import ExampleTest from './Component/user/ExampleTest';
 //adminpage
 import Adminhome from './Component/admin/Adminhome';
 import ManagAdmin from './Component/admin/ManageAdmin';
@@ -92,6 +92,8 @@ function App() {
 
 
     <Route path ="/user/profile" element={<UserRoute><><Profile /></> </UserRoute>}/>
+
+    <Route path ="/user/extest" element={<UserRoute><><ExampleTest /></> </UserRoute>}/>
 
     <Route path ="/admin/home" element={<AdminRoute> <><Adminhome /></> </AdminRoute>}/>
     <Route path ="/admin/manageadmin" element={<AdminRoute> <><ManagAdmin /></> </AdminRoute>}/>
