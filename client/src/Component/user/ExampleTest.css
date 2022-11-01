@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: 'Mitr',sans-serif;
 }
 
 body {
@@ -41,7 +42,7 @@ body {
 .Exrole_name {
     text-align: center;
     color: #000000;
-    font-weight: 500;
+    font-weight: 300;
     letter-spacing: 2px;
     font-size: 30px;
     white-space: nowrap;
@@ -51,6 +52,7 @@ body {
 
 .Extext {
     text-align: start;
+    font-weight: 350;
     margin-top: 5px;
     letter-spacing: 0px;
     color: #000000;

@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');
 .container{
     background: linear-gradient(90deg, rgba(148,176,255,1) 0%, rgba(255,168,168,1) 50%, rgba(255,178,134,1) 100%);
 }
@@ -6,6 +6,7 @@
     display: flex;
     justify-content: space-between;
     background: linear-gradient(90deg, rgba(148,176,255,1) 0%, rgba(255,168,168,1) 50%, rgba(255,178,134,1) 100%);
+    font-family: 'Mitr',sans-serif;
 }
 .content-con:first-child, .content-con:last-child {
     padding: 5rem 0;
@@ -14,12 +15,12 @@
 .content-l img {
     width: 100%;
     border-radius: 10px;
-    font-family: 'Mitr',sans-serif;
+   
 }
 .content-r {
     padding: 2rem;
     text-align: left;
-    font-family: 'Mitr',sans-serif;
+    
 }
 
 @media screen and (max-width: 480px) {
@@ -30,4 +31,3 @@
         order: 1;
     }
 }
-@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');
