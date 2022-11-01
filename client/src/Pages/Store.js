@@ -103,7 +103,9 @@ function Store() {
                   <div className="form-group">
                     <h5>Category : {cat.name}</h5>
                   </div>
-                  
+                  <div className="form-group">
+                    <h5>Creat at : {item.date}</h5>
+                  </div> 
                   <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id)}>ดูข้อสอบ</button>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <button type="submit" className="btn btn-danger" onClick={(id) => EditBTN(item._id, item.Categoryid, cat.name)}>แก้ไข</button>
