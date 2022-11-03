@@ -1,7 +1,15 @@
-.card {
+.store-card {
     z-index: 1;
-    margin-bottom: 20px;
-    
+    justify-content: center;
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: 50px;
+    margin-right: 50px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .store-container {

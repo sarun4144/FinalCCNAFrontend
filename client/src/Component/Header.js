@@ -72,6 +72,9 @@ function Header() {
                     <div className="logo-container">
                         <Link to="/">Pre-CCNA<IoMdPaper /></Link>
                     </div>
+                    <div className="search-container">
+                            <SearchBar/>
+                        </div>
                     <div className="header-con">
                         <ul className={click ? "menu active" : " menu"}>
                             <li className="menu-link" onClick={closeMobileMenu}>
@@ -111,6 +114,9 @@ function Header() {
                     <div className="logo-container">
                         <Link to="/">Pre-CCNA<IoMdPaper /></Link>
                     </div>
+                    <div className="search-container">
+                            <SearchBar/>
+                        </div>
                     <div className="header-con">
                         <ul className={click ? "menu active" : " menu"}>
                             <li className="menu-link" onClick={closeMobileMenu}>

@@ -1,21 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import './Profile.css'
+import * as AiIcons from "react-icons/ai";
+import Swal from 'sweetalert2'
 
 function Profile() {
   const user = useSelector((state) => ({ ...state }))
   const username = user.userStore.user.username
   const role = user.userStore.user.role
   const email = user.userStore.user.email
+  const [data, setData] = useState([]);
+  
   //console.log(username)
   //console.log(role)
   //console.log(email)
+
+  
+
+  const ShowEditUsername = async (id) => {
+    const { value: username } = await Swal.fire({
+      title: 'แก้ไข',
+      input: 'text',
+      inputLabel: 'ใส่ Username',
+      inputPlaceholder: 'ใส่ Username ใหม่',
+      confirmButtonText: 'ยืนยัน',
+      confirmButtonColor: 'green',
+    })
+  }
+ 
   return (
-    <div className="mt-3 mb-5 mx-auto p-3 rounded"
-        style={{width:'400px', background:'#cee'}}>
-    <h1>User - Profile</h1>
-    <div>Username : {username}</div>
-    <div>Role : {role}</div>
-    <div>Email : {email}</div>
+    <div className="profile-container">
+      <div className="profile-card">
+        <div className="profile-card-header">
+          <h1>User - Profile</h1>
+        </div>
+        <div className="profile-card-content">
+        <div>Username : {username} <AiIcons.AiFillEdit id="EditUsernameBtn" onClick={ShowEditUsername}/></div>
+        <div>Role : {role}</div>
+        <div>Email : {email}</div>
+        </div>
+      </div>
     </div>
   )
 }
