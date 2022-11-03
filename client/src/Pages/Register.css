@@ -2,10 +2,11 @@
     background-color: rgb(255, 255, 255);
     border-style: solid;
     margin-top: 50px;
-    border-width: 3px;
-    border-color: black;
     border-radius: 10px;
     padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
 }
 .submitre{
     margin-left: 20%;

@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Mitr',sans-serif;
+}
+
+body {
+    background: #6f85f1;
+}
+
+
+.Excards_wrap {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.Excard_item {
+    padding: 15px 25px;
+    width: 60%;
+    border-radius: 20px;
+    
+}
+
+.Excard_inner {
+    background: #ecebeb;
+    border-radius: 5px;
+    padding: 35px 20px;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+
+
+.Exrole_name {
+    text-align: center;
+    color: #000000;
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-size: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Extext {
+    text-align: start;
+    font-weight: 300;
+    margin-top: 5px;
+    letter-spacing: 0px;
+    color: #000000;
+    font-size: 20px;
+
+}
+
+.Extext ul {
+    text-align: start;
+    margin-top: 5px;
+    letter-spacing: 0px;
+    color: #000000;
+    font-size: 18px;
+}
+
+.Exbutton1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+    padding: 12px 24px;
+    text-align: center;
+    font-size: 16px;
+    margin: 6px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.Exbutton1:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+.Exbutton2 {
+    background-color: white;
+    color: black;
+    border: 2px solid #da0b0b;
+    padding: 12px 24px;
+    text-align: center;
+    font-size: 16px;
+    margin: 6px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.Exbutton2:hover {
+    background-color: #da0b0b;
+    color: white;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .Exrole_name  {
+       font-size: 20px;
+    }
+    .Extext {
+       font-size: 16px;
+    }
+    .Extext ul{
+       font-size: 14px;
+    }
+    .Exbutton1,.Exbutton2{
+       font-size: 15px;
+    }
+    
+}
+@media screen and (max-width: 768px){
+    .Exrole_name  {
+        font-size: 18px;
+     }
+     .Extext {
+        font-size: 13px;
+     }
+     .Extext ul{
+        font-size: 12px;
+     }
+     .Exbutton1,.Exbutton2{
+        font-size: 11px;
+     }
+}

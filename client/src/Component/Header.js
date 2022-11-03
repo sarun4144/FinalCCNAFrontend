@@ -5,6 +5,7 @@ import './ComponentCSS/Header.css'
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../Store/userSilce';
+import { checkout } from "../Store/examSilce";
 import SearchBar from './SearchBar';
 import './ComponentCSS/SearchBar.css';
 
@@ -18,7 +19,8 @@ function Header() {
     const closeMobileMenu = () => setClick(false);
 
     const Logout = () => {
-        dispatch(logout(null))
+        dispatch(logout([]))
+        dispatch(checkout([]))
         navigate('/')
     }
     try {
