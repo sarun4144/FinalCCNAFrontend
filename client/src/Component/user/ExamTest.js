@@ -9,21 +9,27 @@ function ExamTest() {
   const Exid = exam.examStore.exam.examid
   const [data,setData] = useState([])
   const Data = Object.values(data);
+  const [counter, setCounter] = React.useState(60);
   useEffect(() => {
     //code
     loadData(Exid)
   }, [Exid]);
+
+  useEffect(() => {
+    //code
+    loadData(Exid)
+    counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+  }, [counter]);
+
   function loadData(authtoken){
     currentexam(authtoken).then((res =>{
-      setData(res.data[0])
+      setData(res.data[0].exdata)
 
     }))
   }
-  console.log(data.exdata)
-  console.log(Data)
   if (Type == "Easy") {
     return (
-      <div>Easy</div>
+      <div>Countdown: {counter}</div>
     )
   } else {
     return (

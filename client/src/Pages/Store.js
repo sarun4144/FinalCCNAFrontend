@@ -117,7 +117,7 @@ function Store() {
             {console.log(exame)}
           </div>
           {filterExamList.map((item) =>
-            <div className='Storecard'>
+            <div className='card'>
               <div >
                 <div className="form-group">
                   <h1>{item.name}</h1>
