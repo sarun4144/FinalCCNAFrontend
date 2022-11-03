@@ -5,9 +5,7 @@
     background: linear-gradient(90deg, rgba(148,176,255,1) 0%, rgba(255,168,168,1) 50%, rgba(255,178,134,1) 100%);
 
 }
-.container{
-  background-color: #333;
-}
+
 .content-con {
     display: flex;
     justify-content: center;

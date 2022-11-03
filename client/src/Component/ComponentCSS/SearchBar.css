@@ -7,6 +7,7 @@
     min-width: 150px;
     width: 100%;
     margin: 0 30px;
+    z-index: 1000;
 }
 
 .SearchIcon {
@@ -14,6 +15,7 @@
     margin-left: 90%;
     z-index: 1000;  
     margin-top: 10px;
+    z-index: 1000;
 }
 
 .Search-bar input {
@@ -27,6 +29,7 @@
     font-size: 16px;
     font-weight: 400;
     color: #333;
+    z-index: 1000;
 }
 
 .searchResult {
@@ -38,6 +41,7 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     overflow: hidden;
     overflow-y: auto;
+    z-index: 1000;
 }
 
 .searchResult::-webkit-scrollbar {
@@ -50,14 +54,17 @@
     display: flex;
     align-items: center;
     color: black;
+    z-index: 1000;
 }
 
 .resultItem p {
     margin-left: 10px;
+    z-index: 1000;
 }
 
 .resultItem {
     text-decoration: none;
+    z-index: 1000;
 }
 
 a1:hover {
@@ -83,6 +90,7 @@ a1:hover {
         width: 100%;
         margin: 0 30px;
         margin-left: 1px;
+        z-index: 1000;
     }
 
     .SearchIcon {
@@ -90,5 +98,6 @@ a1:hover {
         margin-left: 80%;
         z-index: 1000;  
         margin-top: 10px;
+        z-index: 1000;
     }
 }

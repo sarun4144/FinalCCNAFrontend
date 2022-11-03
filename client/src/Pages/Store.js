@@ -117,7 +117,7 @@ function Store() {
             {console.log(exame)}
           </div>
           {filterExamList.map((item) =>
-            <div className='Storecard'>
+            <div className='store-card'>
               <div >
                 <div className="form-group">
                   <h1>{item.name}</h1>
@@ -161,7 +161,7 @@ function Store() {
           {console.log(catText)}
         </div>
         {filterExamList.map((item) =>
-          <div className='card'>
+          <div className='store-card'>
             <form >
               <div className="form-group">
                 <h1>{item.name}</h1>
@@ -184,7 +184,7 @@ function Store() {
 
     )
   } catch (error) {
-    <div className='container'>
+    <div className='store-container'>
       <div className="cat-search-container">
         <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-cat">
@@ -202,7 +202,7 @@ function Store() {
 
       </div>
       {filterExamList.map((item) =>
-        <div className='card'>
+        <div className='store-card'>
           <form >
             <div className="form-group">
               <h1>{item.name}</h1>
