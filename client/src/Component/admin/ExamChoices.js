@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import FileUpload from "./FileUpload";
 import { BsXLg } from "react-icons/bs";
 import axios from "axios";
-import { Button } from "bootstrap";
+
 function ExamChoices() {
   const [data, setData] = useState([]);
 

@@ -14,6 +14,7 @@ export const examSlice = createSlice({
       state.exam = action.payload
       localStorage.removeItem("examid")
       localStorage.removeItem("catid")
+      localStorage.removeItem("TypeTest")
   },
   },
   

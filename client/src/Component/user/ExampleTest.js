@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom"
+import {useNavigate } from "react-router-dom"
 import "./ExampleTest.css"
 import { currentexam } from "../../Function/Exam"
 import { useSelector } from "react-redux";
 import { BiTimer } from "react-icons/bi";
+import Confirm from "../../Alert/Confirm";
 import Swal from 'sweetalert2'
 
 function ExampleTest() {
@@ -15,6 +16,7 @@ function ExampleTest() {
 
   useEffect(() => {
     //code
+    localStorage.removeItem("TypeTest")
     loadData(Token)
   }, [Token]);
 
@@ -23,6 +25,41 @@ function ExampleTest() {
       setData(res.data)
     }).catch(err => {
       console.log(err.response.data)
+    })
+  }
+
+  function Easy (){
+    Confirm.fire({
+      title: 'ยืนยัน!!',
+      text: "คุณต้องการจะทำข้อสอบ Easy ใช่หรือไม่",
+      icon: 'question',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'ดำเนินการสำเร็จ',
+          text: 'ไปที่หน้าทำข้อสอบ',
+          icon: 'success'
+        })
+        localStorage.setItem('TypeTest', "Easy")
+        navigate("/user/examtest")
+      }
+    })
+  }
+  function Hard (){
+    Confirm.fire({
+      title: 'ยืนยัน!!',
+      text: "คุณต้องการจะทำข้อสอบ Hard ใช่หรือไม่",
+      icon: 'question',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'ดำเนินการสำเร็จ',
+          text: 'ไปที่หน้าทำข้อสอบ',
+          icon: 'success'
+        })
+        localStorage.setItem('TypeTest', "Hard")
+        navigate("/user/examtest")
+      }
     })
   }
   return (
@@ -52,11 +89,11 @@ function ExampleTest() {
             เลือกความยาก
             <br />
             <div >
-              <button className="Exbutton1">ง่าย</button>
+              <button className="Exbutton1" onClick={Easy}>ง่าย</button>
               ระดับความยาก Easy ระดับนี่จะไม่มีการจับเวลาสามารถทำได้เรื่อยๆ
             </div>
             <div >
-              <button className="Exbutton2">ยาก</button>
+              <button className="Exbutton2" onClick={Hard}>ยาก</button>
               ระดับความยาก Hard ระดับนี่จะมีการจับเวลา 1 ชม. หากทำไม่ทันก่อนหมดเวลาจะถือว่าข้อสอบชุดนี้ได้ 0 คะแนน
             </div>
           </div>

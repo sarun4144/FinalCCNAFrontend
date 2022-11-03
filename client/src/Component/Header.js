@@ -5,6 +5,7 @@ import './ComponentCSS/Header.css'
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../Store/userSilce';
+import { checkout } from "../Store/examSilce";
 import SearchBar from './SearchBar';
 import './ComponentCSS/SearchBar.css';
 
@@ -19,6 +20,7 @@ function Header() {
 
     const Logout = () => {
         dispatch(logout([]))
+        dispatch(checkout([]))
         navigate('/')
     }
     try {

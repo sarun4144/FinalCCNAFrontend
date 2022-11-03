@@ -3,6 +3,7 @@ import "./ComponentCSS/Banner.css"
 import { Link ,useNavigate} from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../Store/userSilce';
+import { checkout } from "../Store/examSilce";
 let bannerData = {
     title: "Welcome to Pre-CCNA Exam Website",
     desc: "สวัสดีครับ ยินดีต้อนรับสู่เว็นไซต์รวบรวมและทดลองทำข้องสอบ CCNA กรุณา Login เพื่อทำข้อสอบ"
@@ -16,6 +17,7 @@ function Banner() {
     const navigate = useNavigate();
     const Logout = () => {
         dispatch(logout([]))
+        dispatch(checkout([]))
         navigate('/')
     }
     return (
