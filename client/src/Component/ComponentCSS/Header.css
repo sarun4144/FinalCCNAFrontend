@@ -17,15 +17,9 @@
 
 @keyframes Nav {
 
-<<<<<<< HEAD
-    from {
-        font-size: 0px;
-    }
-=======
     from{font-size: 0px;}
     from{opacity: 0;}
     from{background-color:#fff;}
->>>>>>> b4b2d26b92e2bfc2917baf74e47cd561f4ea6c19
 
     from {
         opacity: 0;
@@ -79,14 +73,8 @@
     display: flex;
 
 }
-<<<<<<< HEAD
-
-.header-con ul {
-    display: flex;
-=======
 .header-con ul{
     display: inline-flex;
->>>>>>> b4b2d26b92e2bfc2917baf74e47cd561f4ea6c19
     margin: 0;
     padding: 0;
 }
@@ -95,26 +83,14 @@
     list-style: none;
     position: relative;
 }
-<<<<<<< HEAD
-
-.header-con li a {
-    display: block;
-=======
 .header-con li a  {
     display: inline-flex;
->>>>>>> b4b2d26b92e2bfc2917baf74e47cd561f4ea6c19
     text-decoration: none;
     color: white;
     padding: 1.6rem;
     font-size: 1.3rem;
 
 }
-<<<<<<< HEAD
-
-.header-con li:hover {
-    background-color: #555;
-    transition: all 0.5s ease;
-=======
 .header-con li::after {
     content: '';
     height: 7px;
@@ -128,7 +104,6 @@
     width: 100%;
     background-color: orangered;
     transition: all 0.3s ease;
->>>>>>> b4b2d26b92e2bfc2917baf74e47cd561f4ea6c19
 }
 
 @media (min-width: 1160px) {
