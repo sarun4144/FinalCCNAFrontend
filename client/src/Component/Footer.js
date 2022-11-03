@@ -5,6 +5,7 @@ const Footer = () => {
   return (
     <div className='main-footer'>
       <div className='container'>
+        <div className='container-footer'>
         <div className='row'>
             <div className='col'>
                 <h4>Despacito</h4>
@@ -26,6 +27,7 @@ const Footer = () => {
             <p className='footer-col-sm'>
                 &copy;{new Date().getFullYear()} | All right reserved to LSK | Term Of Service | 100% Illegal
             </p>
+        </div>
         </div>
       </div>
     </div>

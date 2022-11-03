@@ -20,7 +20,8 @@ function Banner() {
     }
     return (
         <div className="banner-bg">
-            <div className="container">
+            <div className='container'>
+            <div className="container-banner">
                 <div className="banner-con">
                     <div className="banner-text">
                         <h1>{bannerData.title}</h1>
@@ -34,6 +35,7 @@ function Banner() {
                        
                     </div>
                 </div>
+            </div>
             </div>
         </div>
       
