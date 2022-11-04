@@ -58,7 +58,7 @@ function Register() {
         <div className="container">
             <div className="row" >
                 <div className="col-md-6 offset-md-3" >
-                    <div className="card">
+                    <div className="regis-card">
                         <div className="row">
                             <div class="col-1"></div>
                             <div className="col-10" style={{ backgroundColor: 'lightblue' }} >
