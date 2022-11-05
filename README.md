@@ -40,6 +40,9 @@
 
 ### Resize image
     npm i react-image-file-resizer
+
+### React Countdown
+    npm i react-countdown
 # T---------------------------------------------------------------T
 
 
