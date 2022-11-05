@@ -69,7 +69,7 @@ function ExamAdd() {
     <div className='adminwrap'>
       <AdminToolbar/>
     <div className='admincontainer'>
-      <div className='card'>
+      <div className='examadd-card'>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="exampleFormControlInput1">ชื่อข้อสอบ</label>
