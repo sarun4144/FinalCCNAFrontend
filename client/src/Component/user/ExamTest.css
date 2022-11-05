@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Mitr', sans-serif;
+}
+
+body {
+    background: #6f85f1;
+}
+
+.ExamTcards_wrap {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ExamTcard_item {
+    padding: 15px 25px;
+    width: 60%;
+    border-radius: 20px;
+
+}
+
+.ExamTcard_inner {
+    background: #ecebeb;
+    border-radius: 5px;
+    padding: 35px 20px;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.ExamTrole_name {
+    text-align: center;
+    color: #000000;
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-size: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ExamTQuestion {
+    text-align: start;
+    font-weight: 300;
+    margin-top: 5px;
+    letter-spacing: 0px;
+    color: #000000;
+    font-size: 20px;
+
+}
+
+.ExamTtext {
+    text-align: start;
+    font-weight: 300;
+    margin-top: 5px;
+    letter-spacing: 0px;
+    color: #000000;
+    font-size: 20px;
+
+}
+
+.ExamTChoicepanel {
+    padding: 5px;
+    border: none;
+    
+}
+
+.ExamTButton1 {
+    padding: 0px;
+    border: none;
+    display: flex;
+    padding: 1px;
+
+}
+.ExamTButton1:hover {
+    background-color: lightblue;
+    border-radius: 8px;
+}
+.ExamTtextarea{
+    padding: 2px;
+    width: 100%;
+    display: flex;
+}
+.ExamTnumpanel{
+    padding: 5px;
+    width: 2.9rem;
+    border: solid;
+    border-radius: 50%;
+    border-width: 2px;
+    color: gray;
+}
+.ExamTtextpanel{
+    padding: 5px;
+    padding-left: 2rem;
+    color: #000000;
+}

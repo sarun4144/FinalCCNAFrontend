@@ -17,7 +17,6 @@ const SearchBar = () => {
 
     useEffect(() => {
         //code
-        dispatch(checkout(null))
         loadData(Token)
     }, [Token, dispatch]);
 
