@@ -4,38 +4,57 @@ import { useSelector } from "react-redux";
 import { currentexam } from "../../Function/Exam";
 
 function ExamTest() {
-  const Type = localStorage.getItem("TypeTest")
-  const exam = useSelector((state) => ({ ...state }))
-  const Exid = exam.examStore.exam.examid
-  const [data,setData] = useState([])
+  const Type = localStorage.getItem("TypeTest");
+  const exam = useSelector((state) => ({ ...state }));
+  const Exid = exam.examStore.exam.examid;
+  const [data, setData] = useState([]);
   const Data = Object.values(data);
-  const [counter, setCounter] = React.useState(60);
+  const [counter, setCounter] = useState(2);
+  const [min, setMin] = useState(0);
   useEffect(() => {
     //code
-    loadData(Exid)
+    loadData(Exid);
   }, [Exid]);
 
   useEffect(() => {
     //code
-    loadData(Exid)
-    counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+    counter >= 0 && setTimeout(() => countdown(), 1000);
   }, [counter]);
 
-  function loadData(authtoken){
-    currentexam(authtoken).then((res =>{
-      setData(res.data[0].exdata)
-
-    }))
+  function loadData(authtoken) {
+    currentexam(authtoken).then((res) => {
+      setData(res.data[0].exdata);
+    });
   }
+
+  function countdown() {
+    if (counter == 0 && min !== 0 ) {
+      setMin(min - 1);
+      setCounter(59);
+    }else{
+      setCounter(counter-1);
+    } 
+  }
+
   if (Type == "Easy") {
     return (
-      <div>Countdown: {counter}</div>
+      <div>
+        EZ
+      </div>
     )
-  } else {
-    return (
-      <div>Hard</div>
-    )
+  } else {  
+      if(counter < 0){
+        return (
+        <div>Time OUT</div>
+        )
+      }else{
+        return (
+          <div>
+            Time = 0:{min}:{counter}
+          </div>
+        )
+      }
   }
 }
 
-export default ExamTest
+export default ExamTest;
