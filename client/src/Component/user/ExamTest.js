@@ -11,6 +11,7 @@ function ExamTest() {
   const Exid = exam.examStore.exam.examid;
   const [data, setData] = useState([]);
   const Data = Object.values(data);
+  
   const [counter, setCounter] = useState(59);
   const [min, setMin] = useState(59);
 
@@ -18,55 +19,9 @@ function ExamTest() {
    const [showResults, setShowResults] = useState(false);
    const [currentQuestion, setCurrentQuestion] = useState(0);
    const [score, setScore] = useState(0);
-
-   const questions = [
-    {
-      text: "What is the capital of America?",
-      options: [
-        { id: 0, text: "New York City", isCorrect: false },
-        { id: 1, text: "Boston", isCorrect: false },
-        { id: 2, text: "Santa Fe", isCorrect: false },
-        { id: 3, text: "Washington DC", isCorrect: true },
-      ],
-    },
-    {
-      text: "What year was the Constitution of America written?",
-      options: [
-        { id: 0, text: "1787", isCorrect: true },
-        { id: 1, text: "1776", isCorrect: false },
-        { id: 2, text: "1774", isCorrect: false },
-        { id: 3, text: "1826", isCorrect: false },
-      ],
-    },
-    {
-      text: "Who was the second president of the US?",
-      options: [
-        { id: 0, text: "John Adams", isCorrect: true },
-        { id: 1, text: "Paul Revere", isCorrect: false },
-        { id: 2, text: "Thomas Jefferson", isCorrect: false },
-        { id: 3, text: "Benjamin Franklin", isCorrect: false },
-      ],
-    },
-    {
-      text: "What is the largest state in the US?",
-      options: [
-        { id: 0, text: "California", isCorrect: false },
-        { id: 1, text: "Alaska", isCorrect: true },
-        { id: 2, text: "Texas", isCorrect: false },
-        { id: 3, text: "Montana", isCorrect: false },
-      ],
-    },
-    {
-      text: "Which of the following countries DO NOT border the US?",
-      options: [
-        { id: 0, text: "Canada", isCorrect: false },
-        { id: 1, text: "Russia", isCorrect: true },
-        { id: 2, text: "Cuba", isCorrect: true },
-        { id: 3, text: "Mexico", isCorrect: false },
-      ],
-    },
-  ];
-
+  
+   const Data2 = Data.slice(currentQuestion,currentQuestion+1)
+ 
    const restartGame = () => {
     setScore(0);
     setCurrentQuestion(0);
@@ -78,7 +33,6 @@ function ExamTest() {
     if (isCorrect) {
       setScore(score + 1);
     }
-
     if (currentQuestion + 1 < Data.length) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
@@ -111,36 +65,35 @@ function ExamTest() {
       setCounter(counter - 1);
     }
   }
-
+function gonext(){
+  if (currentQuestion + 1 < Data.length) {
+    setCurrentQuestion(currentQuestion + 1);
+  } else {
+    setCurrentQuestion(0);
+  }
+}
   if (Type == "Easy") {
     return (
       <div className="ExamTcards_wrap">
         <div className="ExamTcard_item">
           <div className="ExamTcard_inner">
-          Question: {currentQuestion + 1} out of {Data.length}
-          <br/>
-          <h3 className="question-text">{Data[currentQuestion].Question}</h3>
-          <br/>
-          <ul>
-            {Data[currentQuestion].Choices.map((option,index) => {
-              return (
-                <li
-                  key={index}
-                  onClick={() => optionClicked(option.isCorrect)}
-                >
-                  {option}
-                </li>
-              );
-            })}
-          </ul>
-            {/* <div className="ExamTrole_name">
+            <div className="ExamTrole_name">
               <BiTimer /> 00:{min}:{counter}
             </div>
-            {Data.map((item, index) => (
+            {/* <div className="ExamTQuestion">
+                  <span style={{ fontWeight: "500" }}>Question: {currentQuestion + 1}</span>
+                  <br />
+                  {Data2.map((item , idex) =>
+                    <span>{item.Question}</span>
+                  )}
+                  <br/>
+                  <button onClick={gonext}>GO</button>
+                </div> */}
+            {Data2.map((item, index) => (
               <div>
                 <img src={item.images.url} />
                 <div className="ExamTQuestion">
-                  <span style={{ fontWeight: "500" }}>Question: {index + 1}</span>
+                  <span style={{ fontWeight: "500" }}>Question: {currentQuestion + 1}</span>
                   <br />
                   <span>{item.Question}</span>
                 </div>
@@ -154,7 +107,7 @@ function ExamTest() {
                             {idex + 1}
                        </div>
                           <div className="ExamTtextpanel">
-                            {item}
+                            {item.text}
                           </div>
                         </div>
                       </button>
@@ -167,7 +120,8 @@ function ExamTest() {
                   </div>
                 </div>
               </div>
-            ))} */}
+            ))}
+            <button onClick={gonext}>GO</button>
           </div>
         </div>
       </div>
