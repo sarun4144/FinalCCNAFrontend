@@ -82,13 +82,15 @@ body {
 
 }
 .ExamTButton1:hover {
-    background-color: lightblue;
+    background-color:rgb(246, 248, 248);
     border-radius: 8px;
+    opacity: 0.2;
 }
 .ExamTtextarea{
     padding: 2px;
     width: 100%;
     display: flex;
+   
 }
 .ExamTnumpanel{
     padding: 5px;

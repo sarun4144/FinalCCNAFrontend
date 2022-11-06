@@ -138,7 +138,7 @@ function ExamChoices() {
   };
   const handleChangeC = (e) => {
     setValue({
-      ...value, [e.target.name]: e.target.value,
+      ...value, [e.target.name]: { text: e.target.value, isCorrect: false },
     })
   };
   const handleChangeh = (e) => {
@@ -148,7 +148,7 @@ function ExamChoices() {
   };
 
 
-  const Edit = (Questions, Choices, index, Images, Answerdetail,CorrectANS) => {
+  const Edit = (Questions, Choices, index, Images, Answerdetail, CorrectANS) => {
 
     const Values = {
       Question: "",
@@ -159,7 +159,7 @@ function ExamChoices() {
       images: [],
       Answerdetail: "",
       Choices: [],
-      CorrectANS:CorrectANS,
+      CorrectANS: CorrectANS,
       Num: index
     }
     //const result = Object.values(value);
@@ -171,8 +171,12 @@ function ExamChoices() {
     console.log("result", result)
     console.log("Values", Values)
     */
+    console.log("valueC", Values.Choices)
+    console.log("payload", payload.Choices)
+    console.log("value", value)
+
     try {
-      if(!CorrectANS){
+      if (!CorrectANS) {
         payload.CorrectANS = []
       }
       if (!value2.Answerdetail) {
@@ -193,12 +197,16 @@ function ExamChoices() {
       let i = 0
       while (i < Values.Choices.length) {
         if (value[i] !== " " && value[i] !== undefined) {
+          value[i].isCorrect = Values.Choices[i].isCorrect
           payload.Choices[i] = value[i]
+          console.log(value[i])
         } else {
           payload.Choices[i] = Values.Choices[i]
+          console.log("F")
         }
         i++
       }
+      console.log(payload)
       if (i = Values.Choices) {
         examChoiceschange(EXid, payload)
           .then(res => {
@@ -219,14 +227,14 @@ function ExamChoices() {
 
   };
 
-  function selectAdd(Questions2, Choices2, index2, images, Answerdetail,CorrectANS) {
+  function selectAdd(Questions2, Choices2, index2, images, Answerdetail, CorrectANS) {
     let d = Choices2.length
-    Choices2[d] = " "
+    Choices2[d] = { text: " ", isCorrect: false }
     console.log(Choices2)
-    Edit(Questions2, Choices2, index2, images, Answerdetail,CorrectANS)
+    Edit(Questions2, Choices2, index2, images, Answerdetail, CorrectANS)
   }
 
-  function selectDelete(Questions3, Choices3, index3, numI, Images, Answerdetail,CorrectANS) {
+  function selectDelete(Questions3, Choices3, index3, numI, Images, Answerdetail, CorrectANS) {
     let i = 0;
     var Choice = []
     try {
@@ -242,7 +250,7 @@ function ExamChoices() {
     } catch (err) {
 
     }
-    Edit(Questions3, Choice, index3, Images, Answerdetail,CorrectANS)
+    Edit(Questions3, Choice, index3, Images, Answerdetail, CorrectANS)
   }
 
   function EditH() {
@@ -359,10 +367,28 @@ function ExamChoices() {
     setChecked(updatedList);
   };
 
-  function correctAnswer(Num) {
-    console.log(checked)
+  function correctAnswer(Num, Choices) {
+    const TrueChoice = checked.sort()
+    
+    console.log(TrueChoice)
     console.log(Num)
+    let i = 0
+    let d = 0
+    while (i < Choices.length) {
+      Choices[i].isCorrect = false
+      while (d < checked.length) {
+        if(checked[d] == i){
+          Choices[i].isCorrect = true
+        }
+        d++
+      }
+      i++
+      d = 0
+    }
+    console.log(Choices)
+
     const payload = {
+      Choices: Choices,
       CorrectANS: checked,
       Num: Num
     }
@@ -441,9 +467,9 @@ function ExamChoices() {
                 <br />
                 <div>
 
-                  <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1, item.images, item.Answerdetail,item.CorrectANS)}>เพิ่มช้อย<AiOutlinePlus /></button>
+                  <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1, item.images, item.Answerdetail, item.CorrectANS)}>เพิ่มช้อย<AiOutlinePlus /></button>
                   &nbsp;&nbsp;
-                  <button type="button" className="btn btn-primary" onClick={() => correctAnswer(index + 1)}>บันทึกข้อที่ถูกต้อง</button>
+                  <button type="button" className="btn btn-primary" onClick={() => correctAnswer(index + 1, item.Choices)}>บันทึกข้อที่ถูกต้อง</button>
                 </div>
                 <div>
                   <br />
@@ -465,24 +491,30 @@ function ExamChoices() {
                       <thead>
                         <tr>
                           <td> <label>{numI + 1}</label></td>
-                          <td> <textarea key={num} name={numI} className="form-control" rows="1" defaultValue={num} onChange={handleChangeC} ></textarea></td>
-                          <td>
+                          <td> <textarea name={numI} className="form-control" rows="1" defaultValue={num.text} onChange={handleChangeC} ></textarea></td>
 
+                          <td>
                             <input name={numI} className="form-check-input" type="checkbox" value={numI} onChange={handleCheck} />
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button type="button" className="btn btn-danger" onClick={(Questions2) => selectDelete(item.Question, item.Choices, index + 1, numI, item.images, item.Answerdetail,item.CorrectANS)}> <AiFillDelete /> </button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                          </td>
+                            <button type="button" className="btn btn-danger" onClick={(Questions2) => selectDelete(item.Question, item.Choices, index + 1, numI, item.images, item.Answerdetail, item.CorrectANS)}> <AiFillDelete /> </button>
 
+                          </td>
+                          <td>
+                            {
+                              num.isCorrect
+                                ? <div style={{ backgroundColor: "green" }}>true</div>
+                                : <div style={{ backgroundColor: "red" }}>false</div>
+                            }
+                          </td>
                         </tr>
                       </thead>
                     </table>
                   </div>
                 )}
                 <h5> Answer detail</h5>
-                <textarea key={index} name="Answerdetail" className="form-control" rows="5"  onChange={handleChangeQ}>{item.Answerdetail}</textarea>
+                <textarea key={index} name="Answerdetail" className="form-control" rows="5" onChange={handleChangeQ}>{item.Answerdetail}</textarea>
                 <br />
-                <button className="btn btn-secondary" onClick={(Question) => Edit(item.Question, item.Choices, index + 1, item.images, item.Answerdetail,item.CorrectANS)}><AiFillEdit /></button>
+                <button className="btn btn-secondary" onClick={(Question) => Edit(item.Question, item.Choices, index + 1, item.images, item.Answerdetail, item.CorrectANS)}><AiFillEdit /></button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="btn btn-danger" onClick={() => Delete(index + 1)}><AiFillDelete /></button>
               </div>
