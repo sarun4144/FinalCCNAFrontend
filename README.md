@@ -44,6 +44,8 @@
 ### React Countdown
     npm i react-countdown
 
+### React ChartJS
+    npm install --save chart.js react-chartjs-2
     
 # T---------------------------------------------------------------T
 
