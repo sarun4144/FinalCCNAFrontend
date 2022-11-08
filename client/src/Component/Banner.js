@@ -4,6 +4,8 @@ import { Link ,useNavigate} from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../Store/userSilce';
 import { checkout } from "../Store/examSilce";
+import bannerBG from './bannerbg.jpg';
+
 let bannerData = {
     title: "Welcome to Pre-CCNA Exam Website",
     desc: "สวัสดีครับ ยินดีต้อนรับสู่เว็นไซต์รวบรวมและทดลองทำข้องสอบ CCNA กรุณา Login เพื่อทำข้อสอบ"
@@ -22,8 +24,11 @@ function Banner() {
     }
     return (
         <div className="banner-bg">
+            <div className='banner-img'>
             <div className='container'>
+            
             <div className="container-banner">
+                
                 <div className="banner-con">
                     <div className="banner-text">
                         <h1>{bannerData.title}</h1>
@@ -37,6 +42,7 @@ function Banner() {
                        
                     </div>
                 </div>
+            </div>
             </div>
             </div>
         </div>

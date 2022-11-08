@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BiTimer } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { currentexam } from "../../Function/Exam";
-import Dropdown from 'react-bootstrap/Dropdown';
+
 import "./ExamTest.css";
 
 function ExamTest() {
@@ -11,7 +11,7 @@ function ExamTest() {
   const Exid = exam.examStore.exam.examid;
   const [data, setData] = useState([]);
   const Data = Object.values(data);
-  
+
   const [counter, setCounter] = useState(59);
   const [min, setMin] = useState(59);
 
@@ -26,6 +26,14 @@ function ExamTest() {
   const [Selector ,setSelector] = useState(0)
 
    const restartGame = () => {
+  //Question 
+  const [showResults, setShowResults] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
+
+  const Data2 = Data.slice(currentQuestion, currentQuestion + 1)
+
+  const restartGame = () => {
     setScore(0);
     setCurrentQuestion(0);
     setShowResults(false);
@@ -51,7 +59,7 @@ function ExamTest() {
 
   useEffect(() => {
     //code
-    
+
     loadData(Exid);
   }, [Exid]);
 
@@ -74,15 +82,22 @@ function ExamTest() {
       setCounter(counter - 1);
     }
   }
-function gonext(){
-  if (currentQuestion + 1 < Data.length) {
-    setCurrentQuestion(currentQuestion + 1);
-  } else {
-    setCurrentQuestion(0);
+  function gonext() {
+    if (currentQuestion + 1 < Data.length) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      setShowResults(true);
+    }
   }
-}
+  
   if (Type == "Easy") {
+    
     return (
+      <>
+      {
+        showResults
+        ? (<button onClick={restartGame}>restartGame</button>)
+        :
       <div className="ExamTcards_wrap">
         <div className="ExamTcard_item">
           <div className="ExamTcard_inner">
@@ -90,6 +105,16 @@ function gonext(){
               Easy
             </div>
 
+            
+            {/* <div className="ExamTQuestion">
+                  <span style={{ fontWeight: "500" }}>Question: {currentQuestion + 1}</span>
+                  <br />
+                  {Data2.map((item , idex) =>
+                    <span>{item.Question}</span>
+                  )}
+                  <br/>
+                  <button onClick={gonext}>GO</button>
+                </div> */}
             {Data2.map((item, index) => (
               <div>
                 <img src={item.images.url} />
@@ -106,7 +131,7 @@ function gonext(){
                         <div className="ExamTtextarea">
                           <div className="ExamTnumpanel">
                             {idex + 1}
-                       </div>
+                          </div>
                           <div className="ExamTtextpanel">
                             {item.text}
                           </div>
@@ -114,8 +139,8 @@ function gonext(){
                       </button>
                     )}
                   </div>
-                  <br/>
-                 
+                  <br />
+
                   <div>
                     {item.Answerdetail}
                   </div>
@@ -126,7 +151,9 @@ function gonext(){
           </div>
         </div>
       </div>
-    );
+  }
+      </>        
+    )
   } else {
     if (counter < 0) {
       return <div>Time OUT</div>;
@@ -139,5 +166,5 @@ function gonext(){
     }
   }
 }
-
+}
 export default ExamTest;

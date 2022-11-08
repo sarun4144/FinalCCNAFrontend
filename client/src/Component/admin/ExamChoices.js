@@ -369,7 +369,7 @@ function ExamChoices() {
 
   function correctAnswer(Num, Choices) {
     const TrueChoice = checked.sort()
-    
+
     console.log(TrueChoice)
     console.log(Num)
     let i = 0
@@ -377,7 +377,7 @@ function ExamChoices() {
     while (i < Choices.length) {
       Choices[i].isCorrect = false
       while (d < checked.length) {
-        if(checked[d] == i){
+        if (checked[d] == i) {
           Choices[i].isCorrect = true
         }
         d++
@@ -423,7 +423,7 @@ function ExamChoices() {
         </div>
       </div>
       <div className="body">
-        <div className="card" >
+        <div className="examchoices-card" >
           <h4> QuestionName : {Head.name}</h4>
           <textarea name="QuestionName" className="form-control" rows="3" onChange={handleChangeh} defaultValue={Head.name}>{Head.name}</textarea>
           <h4> Title : {Head.title}</h4>
@@ -443,7 +443,7 @@ function ExamChoices() {
 
         </div>
         {Data.map((item, index) =>
-          <div className="card" >
+          <div className="examchoices-card" >
             <fieldset disabled={isDisabled}>
               <div className="text-center">
                 {item.images.map((mage) =>
