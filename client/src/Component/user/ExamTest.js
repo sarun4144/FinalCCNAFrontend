@@ -21,23 +21,32 @@ function ExamTest() {
    const [score, setScore] = useState(0);
   
    const Data2 = Data.slice(currentQuestion,currentQuestion+1)
- 
+
+  //Selector
+  const [Selector ,setSelector] = useState(0)
+
    const restartGame = () => {
     setScore(0);
     setCurrentQuestion(0);
     setShowResults(false);
   }
+  function selectCount (isCorrect){
+    setSelector(Selector + 1)
+    optionClicked(isCorrect)
+
+  }
 
   const optionClicked = (isCorrect) => {
     // Increment the score
-    if (isCorrect) {
-      setScore(score + 1);
-    }
-    if (currentQuestion + 1 < Data.length) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      setShowResults(true);
-    }
+    // if (isCorrect) {
+    //   setScore(score + 1);
+    // }
+    // if (currentQuestion + 1 < Data.length) {
+    //   setCurrentQuestion(currentQuestion + 1);
+    // } else {
+    //   setShowResults(true);
+    // }
+    console.log("S",isCorrect)
   }
 
   useEffect(() => {
@@ -78,17 +87,9 @@ function gonext(){
         <div className="ExamTcard_item">
           <div className="ExamTcard_inner">
             <div className="ExamTrole_name">
-              <BiTimer /> 00:{min}:{counter}
+              Easy
             </div>
-            {/* <div className="ExamTQuestion">
-                  <span style={{ fontWeight: "500" }}>Question: {currentQuestion + 1}</span>
-                  <br />
-                  {Data2.map((item , idex) =>
-                    <span>{item.Question}</span>
-                  )}
-                  <br/>
-                  <button onClick={gonext}>GO</button>
-                </div> */}
+
             {Data2.map((item, index) => (
               <div>
                 <img src={item.images.url} />
@@ -101,7 +102,7 @@ function gonext(){
                 <div className="ExamTtext">
                   <div className="ExamTChoicepanel">
                     {item.Choices.map((item, idex) =>
-                      <button className="ExamTButton1">
+                      <button className="ExamTButton1" onClick={() => selectCount(item.isCorrect)} >
                         <div className="ExamTtextarea">
                           <div className="ExamTnumpanel">
                             {idex + 1}
