@@ -1,15 +1,21 @@
 
 .container-banner
 {
-    background-color: #FCD9DD;
+    background-color: #ffffff10;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
 }
 .banner-bg {
     height: 550px;
     background-size:cover;
     overflow: hidden;
     background-position: center;
-    background: linear-gradient(90deg, rgba(148,176,255,1) 0%, rgba(255,168,168,1) 50%, rgba(255,178,134,1) 100%);
-
+    background: white;
+    
 }
 .banner-con {
     display: flex;
@@ -19,8 +25,15 @@
 }
 .banner-text {
     color: #333;
+    text-shadow: 1px 1px 1px black;
     text-align: center;
     font-family: 'Mitr',sans-serif; font-style: normal; font-weight: 400;
+    background: linear-gradient(90deg, #3378FF, #9442FE);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    border-radius: 10px;
+    padding: 25px;
 }
 .banner-btn {
     background: #fff;
@@ -38,6 +51,14 @@
     border: 2px solid #fff;
     background: transparent;
     color: #fff;
+}
+
+.banner-img {
+    outline: 2px solid black;
+    padding: 30px;
+    background-image: url(../bannerbg.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 480px) {
