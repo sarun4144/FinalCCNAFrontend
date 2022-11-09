@@ -101,6 +101,22 @@ body {
     color: white;
 }
 
+.sameCat-card {
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+    min-height: 300px;
+}
+
+.sameCat-card-header {
+    background-color: #333;
+    color: white;
+    padding-left: 16px;
+    border-radius: 3px;
+}
 
 @media screen and (max-width: 1024px) {
     .Exrole_name  {
