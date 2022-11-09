@@ -146,7 +146,7 @@ function ExampleTest() {
           </div>
         </div>
         <div className="sameCat-card">
-          <div className="sameCat-card-header">ข้อสอบใน {Catname}</div>
+          <div className="sameCat-card-header">ชุดข้อสอบใน {Catname}</div>
           <div className="sameCat-container">
             {filterExamList.map((item) =>
               <div className='store-card'>
