@@ -47,6 +47,10 @@ function ExamTest() {
       setBlock(true)
     }
   }, [Selector, ANSCount])
+
+  useEffect(() => {
+    console.log('Score', score) 
+  }, [score])
   
   useEffect(() => {
     setANSCount(5)
@@ -76,18 +80,9 @@ function ExamTest() {
     let i = 0
     while (i < isCorrect.length) {
       if (isCorrect[i].isCorrect == false) {
-
         i = -1
         break
-      } else {
-        console.log("SSS", isCorrect[i].isCorrect)
       }
-      // if (currentQuestion + 1 < Data.length) {
-      //   setCurrentQuestion(currentQuestion + 1);
-      // } else {
-      //   setShowResults(true);
-      // }
-
       i++
     }
     if (i == isCorrect.length && i != -1) {
@@ -96,12 +91,15 @@ function ExamTest() {
       if (currentQuestion + 1 < Data.length) {
         setCurrentQuestion(currentQuestion + 1);
 
+      }else {
+        setShowResults(true);
       }
     } else {
       console.log("false")
       if (currentQuestion + 1 < Data.length) {
         setCurrentQuestion(currentQuestion + 1);
-
+      }else {
+        setShowResults(true);
       }
     }
   }
