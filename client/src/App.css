@@ -8,5 +8,5 @@
 .landing-wrap{
   flex: 1;
   background-color: white;
-  z-index: 2000;
+  z-index: 1000;
 }
