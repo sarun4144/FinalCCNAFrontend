@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
-import {useNavigate } from "react-router-dom"
-import "./ExampleTest.css"
-import { currentexam } from "../../Function/Exam"
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import "./ExampleTest.css";
+import { currentexam } from "../../Function/Exam";
+import { useSelector, useDispatch } from "react-redux";
 import { BiTimer } from "react-icons/bi";
 import Confirm from "../../Alert/Confirm";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { checkin } from "../../Store/examSilce";
+import { listexam } from "../../Function/Exam";
 
 function ExampleTest() {
+  const user = useSelector((state) => ({ ...state }))
   const navigate = useNavigate();
   const exam = useSelector((state) => ({ ...state }))
   const Token = exam.examStore.exam.examid
   const Catname = exam.examStore.exam.category
+  const CatID = exam.examStore.exam.catid
   const [exame, setData] = useState([]);
+  const [allExam, setAllExam] = useState([]);
+  const role = user.userStore.user.role
+  const dispatch = useDispatch()
 
   useEffect(() => {
     //code
@@ -26,9 +33,14 @@ function ExampleTest() {
     }).catch(err => {
       console.log(err.response.data)
     })
+    listexam(authtoken).then(res => {
+      setAllExam(res.data)
+    }).catch(err => {
+      console.log(err.response.data)
+    })
   }
 
-  function Easy (){
+  function Easy() {
     Confirm.fire({
       title: 'ยืนยัน!!',
       text: "คุณต้องการจะทำข้อสอบ Easy ใช่หรือไม่",
@@ -45,7 +57,7 @@ function ExampleTest() {
       }
     })
   }
-  function Hard (){
+  function Hard() {
     Confirm.fire({
       title: 'ยืนยัน!!',
       text: "คุณต้องการจะทำข้อสอบ Hard ใช่หรือไม่",
@@ -62,6 +74,41 @@ function ExampleTest() {
       }
     })
   }
+  { console.log(exame) }
+  const filterExamList = allExam.filter((samecatExam) => {
+    { console.log(samecatExam) }
+    /*{console.log(exame._id)}*/
+    return samecatExam.Categoryid === CatID && samecatExam._id != CatID;
+  })
+  function SeeExam(id, catid, category) {
+    if (role) {
+      if (role === "admin") {
+        navigate("/admin/home")
+      } else {
+        const EXAM = {
+          examid: id,
+          catid: catid,
+          category: category
+        }
+        dispatch(checkin(EXAM))
+        localStorage.setItem('examid', id)
+        localStorage.setItem('catid', catid)
+        navigate("/user/extest")
+      }
+    } else {
+      Swal.fire({
+        position: 'top',
+        title: 'Error!',
+        text: "กรุณา Login",
+        icon: 'error',
+        iconColor: 'Red',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง'
+      })
+      navigate("/login")
+    }
+  }
+
   return (
     <div className="Excards_wrap">
       <div className="Excard_item">
@@ -96,6 +143,31 @@ function ExampleTest() {
               <button className="Exbutton2" onClick={Hard}>ยาก</button>
               ระดับความยาก Hard ระดับนี่จะมีการจับเวลา 1 ชม. หากทำไม่ทันก่อนหมดเวลาจะถือว่าข้อสอบชุดนี้ได้ 0 คะแนน
             </div>
+          </div>
+        </div>
+        <div className="sameCat-card">
+          <div className="sameCat-card-header">ชุดข้อสอบใน {Catname}</div>
+          <div className="sameCat-container">
+            {filterExamList.map((item) =>
+              <div className='store-card'>
+                <form >
+                  <div className="form-group">
+                    <h1>{item.name}</h1>
+                  </div>
+                  <div className="form-group">
+                    <h4>{item.title}</h4>
+                  </div>
+                  {item.CAT.map((cat) =>
+                    <div>
+                      <div className="form-group">
+                        <h5>Category : {cat.name}</h5>
+                      </div>
+                      <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id, item.Categoryid, cat.name)}>ดูข้อสอบ</button>
+                    </div>
+                  )}
+                </form>
+              </div>
+            )}
           </div>
         </div>
       </div>

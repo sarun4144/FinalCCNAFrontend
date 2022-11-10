@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { listexam } from "../Function/Exam";
 import { checkout } from "../Store/examSilce";
 import * as AiIcons from "react-icons/ai";
+import { checkin } from "../Store/examSilce";
+import Swal from 'sweetalert2'
 
 const SearchBar = () => {
     const user = useSelector((state) => ({ ...state }))
@@ -14,6 +16,8 @@ const SearchBar = () => {
     const Token = user.userStore.user.token
     const [wordEntered, setWordEntered] = useState("");
     const [filteredData, setFilteredData] = useState([]);
+    const [searchCAT, setSearchCAT] = useState([]);
+    const role = user.userStore.user.role
 
     useEffect(() => {
         //code
@@ -47,6 +51,51 @@ const SearchBar = () => {
         setWordEntered("");
     };
 
+    function startNavigate(id, catid) {
+        const destination = exam.filter((item) => {
+            return item._id === id;
+        })
+        {
+            destination.map((startSearch) => {
+                startSearch.CAT.map((cat) =>
+                    setSearchCAT(cat.name)
+                )
+            }
+            )
+        }
+        console.log(searchCAT)
+        SeeExam(id, catid, searchCAT)
+    }
+
+    function SeeExam(id, catid, category) {
+        if (role) {
+            if (role === "admin") {
+                navigate("/admin/home")
+            } else {
+                const EXAM = {
+                    examid: id,
+                    catid: catid,
+                    category: category
+                }
+                dispatch(checkin(EXAM))
+                localStorage.setItem('examid', id)
+                localStorage.setItem('catid', catid)
+                navigate("/user/extest")
+            }
+        } else {
+            Swal.fire({
+                position: 'top',
+                title: 'Error!',
+                text: "กรุณา Login",
+                icon: 'error',
+                iconColor: 'Red',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'ตกลง'
+            })
+            navigate("/login")
+        }
+    }
+
 
     return (
         <div className='Search'>
@@ -64,8 +113,9 @@ const SearchBar = () => {
                 filteredData.length != 0 && (
                     <div className='searchResult'>
                         {filteredData.slice(0, 15).map((item) => {
+                            { console.log(item) }
                             return (
-                                <a1 className='resultItem' href='' target="blank">
+                                <a1 className='resultItem' href='' target="blank" onClick={() => startNavigate(item._id, item.Categoryid)}>
                                     <p>{item.name} : {item.title}</p>
                                 </a1>
                             )

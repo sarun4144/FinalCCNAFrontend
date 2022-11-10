@@ -94,7 +94,7 @@ function Store() {
       return exam.Categoryid === select;
     }
   })
-
+  
   try {
     if (user.userStore.user.role === 'admin') {
       return (
