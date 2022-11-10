@@ -49,9 +49,9 @@ function ExamTest() {
   }, [Selector, ANSCount])
 
   useEffect(() => {
-    console.log('Score', score) 
+    console.log('Score', score)
   }, [score])
-  
+
   useEffect(() => {
     setANSCount(5)
     setBlock(false)
@@ -68,7 +68,7 @@ function ExamTest() {
   //easyFunction
   function EasyselectCount(isCorrect, CorrectANS, index) {
     setselectValue({
-      ...selectValue, [index]: { isCorrect: isCorrect, index: index }
+      ...selectValue, [`${99 - index}`]: { isCorrect: isCorrect, index: index }
     })
     setANSCount(CorrectANS.length)
     setSelector(Selector + 1)
@@ -76,31 +76,39 @@ function ExamTest() {
   }
   const optionClicked = (isCorrect) => {
     // Increment the score
-    console.log(selectValueS)
-    let i = 0
-    while (i < isCorrect.length) {
-      if (isCorrect[i].isCorrect == false) {
-        i = -1
-        break
+    if (Selector == selectValueS.length) {
+      let i = 0
+      while (i < isCorrect) {
+        if (isCorrect[i].isCorrect == false) {
+          i = -1
+          break
+        }
+        i++
       }
-      i++
-    }
-    if (i == isCorrect.length && i != -1) {
-      setScore(score + 1)
-      console.log("true")
-      if (currentQuestion + 1 < Data.length) {
-        setCurrentQuestion(currentQuestion + 1);
+      if (i == isCorrect.length && i != -1) {
+        setScore(score + 1)
+        console.log("true")
+        if (currentQuestion + 1 < Data.length) {
+          setCurrentQuestion(currentQuestion + 1);
 
-      }else {
-        setShowResults(true);
+        } else {
+          setShowResults(true);
+        }
+      } else {
+        console.log("false")
+        if (currentQuestion + 1 < Data.length) {
+          setCurrentQuestion(currentQuestion + 1);
+        } else {
+          setShowResults(true);
+        }
       }
-    } else {
-      console.log("false")
-      if (currentQuestion + 1 < Data.length) {
-        setCurrentQuestion(currentQuestion + 1);
-      }else {
-        setShowResults(true);
-      }
+    }else{
+      console.log("falseNA")
+        if (currentQuestion + 1 < Data.length) {
+          setCurrentQuestion(currentQuestion + 1);
+        } else {
+          setShowResults(true);
+        }
     }
   }
 
@@ -134,7 +142,7 @@ function ExamTest() {
             ? (
               <div>
                 <span>Your Score is {score}</span>
-                <br/>
+                <br />
                 <button onClick={restartGame}>restartGame</button>
               </div>
             )
@@ -198,7 +206,7 @@ function ExamTest() {
                       </div>
                     </div>
                   ))}
-                  <button onClick={gonext}>GO</button>
+
                 </div>
               </div>
             </div>
