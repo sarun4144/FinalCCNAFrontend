@@ -13,7 +13,7 @@
     animation-name: Nav;
     animation-duration: 2s;
     z-index: 1000;
-    
+    background: linear-gradient(180deg, #333 0%, rgb(0, 0, 0) 100%);
 }
 
 @keyframes Nav {
@@ -45,9 +45,9 @@
 .logo-container a:hover {
     text-decoration: none;
     font-weight: bold;
-    font-size: 3rem;
+    /*font-size: 3rem;*/
     color: white;
-    transition: all 0.5s ease;
+    /*transition: all 0.5s ease;*/
 
 }
 

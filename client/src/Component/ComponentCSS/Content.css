@@ -1,36 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;1,100;1,200&display=swap');
-.mainBackground
-{
-    background: white;
 
+.mainBackground {
+    background: linear-gradient(0deg,transparent 0%,#23242a);
 }
 
-.content-container{
+.content-container {
     margin-left: 25px;
     margin-right: 25px;
-    background-color: #333;
-    margin-bottom: 30px;
+    /*background-color: #ffffff10;*/
 }
 
 .content-con {
     display: flex;
     justify-content: center;
-    background-color:white;
-    font-family: 'Mitr', sans-serif;   font-weight: 300;  font-size: x-large;
+    background-color: transparent;
+    font-family: 'Mitr', sans-serif;
+    font-weight: 300;
+    font-size: x-large;
     margin-left: 5px;
     margin-right: 5px;
-    margin-bottom: 5px;
 }
-.content-con:first-child, .content-con:last-child {
+
+.content-con:first-child,
+.content-con:last-child {
     padding: 4rem;
 
 }
+
 .content-l img {
     width: 100%;
     border-radius: 10px;
-   
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
 }
+
 .content-r {
     padding: 2rem;
     text-align: left;
@@ -38,11 +43,14 @@
     overflow: hidden;
     overflow-y: auto;
     border-radius: 3px;
+    background-color: white;
 }
+
 @media screen and (max-width: 480px) {
     .content-con {
         flex-direction: column;
     }
+
     .content-con:nth-child(2) .content-r {
         order: 1;
     }
