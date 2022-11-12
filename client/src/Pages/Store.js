@@ -99,6 +99,7 @@ function Store() {
     if (user.userStore.user.role === 'admin') {
       return (
         <div className='store-container'>
+          <div className="store-header">คลังชุดข้อสอบ</div>
           <div className="cat-search-container">
             <Dropdown>
               <Dropdown.Toggle variant="primary" id="dropdown-cat">
@@ -144,6 +145,7 @@ function Store() {
     }
     return (
       <div className='store-container'>
+        <div className="store-header">คลังชุดข้อสอบ</div>
         <div className="cat-search-container">
           <Dropdown>
             <Dropdown.Toggle variant="primary" id="dropdown-cat">
@@ -185,6 +187,7 @@ function Store() {
     )
   } catch (error) {
     <div className='store-container'>
+      <div className="store-header">คลังชุดข้อสอบ</div>
       <div className="cat-search-container">
         <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-cat">
