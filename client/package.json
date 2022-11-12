@@ -33,7 +33,7 @@
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "styled-components": "^5.3.5",
-    "sweetalert2": "^11.4.29",
+    "sweetalert2": "^11.6.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

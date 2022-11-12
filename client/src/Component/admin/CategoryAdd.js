@@ -69,7 +69,7 @@ function CategoryAdd() {
   const handleRemove = (id) => {
     Confirm.fire({
       title: 'ยืนยัน!!',
-      text: "คุณต้องการจะลบ Category ใช่หรืไม่",
+      text: "คุณต้องการจะลบ Category ใช่หรือไม่",
       icon: 'warning',
     }).then((result) => {
       if (result.isConfirmed) {
@@ -89,6 +89,7 @@ function CategoryAdd() {
     })
 
   }
+  
   return (
     <div className='adminwrap'>
       <AdminToolbar/>
