@@ -14,8 +14,6 @@
     background-size:cover;
     overflow: hidden;
     background-position: center;
-    background: white;
-    
 }
 .banner-con {
     display: flex;
@@ -56,7 +54,7 @@
 .banner-img {
     outline: 2px solid black;
     padding: 30px;
-    background-image: url(../bannerbg.jpg);
+    background-image: linear-gradient(180deg,transparent 55%,#23242a),url(../bannerbg.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }

@@ -1,0 +1,22 @@
+.about-container{
+    z-index: 1;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: 50px;
+    margin-right: 50px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+    margin-top: 90px;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.about-container-header {
+    background-color: #333;
+    color: white;
+    padding-left: 16px;
+    border-radius: 3px;
+    font-size: 2em;
+}
