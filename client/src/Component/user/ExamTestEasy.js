@@ -3,9 +3,9 @@ import { BiTimer } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { currentexam } from "../../Function/Exam";
 
-import "./ExamTest.css";
+import "./ExamTestEasy.css";
 
-function ExamTest() {
+function ExamTestEasy() {
   const Type = localStorage.getItem("TypeTest");
   const exam = useSelector((state) => ({ ...state }));
   const Exid = exam.examStore.exam.examid;
@@ -29,9 +29,11 @@ function ExamTest() {
   const [selectValue, setselectValue] = useState({})
   const selectValueS = Object.values(selectValue)
 
+  //Answer
+  const [Answerdetail, setAnswerdetail] = useState(false);
+
   useEffect(() => {
     //code
-
     loadData(Exid);
   }, [Exid]);
 
@@ -67,6 +69,7 @@ function ExamTest() {
 
   //easyFunction
   function EasyselectCount(isCorrect, CorrectANS, index) {
+    document.getElementById(index).className = "ExamTeasyButton1selected"
     setselectValue({
       ...selectValue, [`${99 - index}`]: { isCorrect: isCorrect, index: index }
     })
@@ -78,40 +81,46 @@ function ExamTest() {
     // Increment the score
     if (Selector == selectValueS.length) {
       let i = 0
-      while (i < isCorrect) {
+      let d = 0
+      while (i < isCorrect.length) {
         if (isCorrect[i].isCorrect == false) {
-          i = -1
-          break
+          document.getElementById(isCorrect[i].index).className = "ExamTeasyButton1false "
+          d = -1
+
+        } else {
+          d += 1
+          document.getElementById(isCorrect[i].index).className = "ExamTeasyButton1true"
         }
         i++
       }
-      if (i == isCorrect.length && i != -1) {
-        setScore(score + 1)
+      if (i == isCorrect.length && d != -1) {
+        setAnswerdetail(true)
         console.log("true")
         if (currentQuestion + 1 < Data.length) {
-          setCurrentQuestion(currentQuestion + 1);
-
+          // setCurrentQuestion(currentQuestion + 1);
+          setScore(score + 1)
         } else {
           setShowResults(true);
         }
       } else {
         console.log("false")
         if (currentQuestion + 1 < Data.length) {
-          setCurrentQuestion(currentQuestion + 1);
+          // setCurrentQuestion(currentQuestion + 1);
+
         } else {
           setShowResults(true);
         }
       }
-    }else{
+    } else {
       console.log("falseNA")
-        if (currentQuestion + 1 < Data.length) {
-          setCurrentQuestion(currentQuestion + 1);
-        } else {
-          setShowResults(true);
-        }
+      if (currentQuestion + 1 < Data.length) {
+        // setCurrentQuestion(currentQuestion + 1);
+        document.getElementById(isCorrect[0].index).className = "ExamTeasyButton1false "
+      } else {
+        setShowResults(true);
+      }
     }
   }
-
   const restartGame = () => {
     setScore(0);
     setCurrentQuestion(0);
@@ -125,16 +134,21 @@ function ExamTest() {
       setCounter(counter - 1);
     }
   }
-  function gonext() {
-    if (currentQuestion + 1 < Data.length) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      setShowResults(true);
+
+  function gonext(Choices) {
+    for (var index = 0; index < Choices.length; index++) {
+      document.getElementById(index + 1).className = "ExamTeasyButton1"
+    }
+    if (index == Choices.length) {
+      if (currentQuestion + 1 < Data.length) {
+        setAnswerdetail(false)
+        setCurrentQuestion(currentQuestion + 1);
+      } else {
+        setShowResults(true);
+      }
     }
   }
-
   if (Type == "Easy") {
-
     return (
       <>
         {
@@ -147,48 +161,47 @@ function ExamTest() {
               </div>
             )
             :
-            <div className="ExamTcards_wrap">
-              <div className="ExamTcard_item">
-                <div className="ExamTcard_inner">
-                  <div className="ExamTrole_name">
+            <div className="ExamTeasycards_wrap">
+              <div className="ExamTeasycard_item">
+                <div className="ExamTeasycard_inner">
+                  <div className="ExamTeasyrole_name">
                     Easy
                   </div>
                   {Data2.map((item, index) => (
                     <div>
                       <img src={item.images.url} />
-                      <div className="ExamTQuestion">
+                      <div className="ExamTeasyQuestion">
                         <span style={{ fontWeight: "500" }}>Question: {currentQuestion + 1}</span>
                         <br />
                         <span>{item.Question}</span>
                         <br />
-                        <br />
                         <span>{`${Selector}/${item.CorrectANS.length} is Selected `}</span>
                       </div>
                       <br />
-                      <div className="ExamTtext">
-                        <div className="ExamTChoicepanel">
+                      <div className="ExamTeasytext">
+                        <div className="ExamTeasyChoicepanel">
                           {item.Choices.map((item2, idex) =>
                             <>
                               {Block
                                 ? (
-                                  <button id={idex + 1} name={idex + 1} className="ExamTButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)} disabled  >
-                                    <div className="ExamTtextarea">
-                                      <div className="ExamTnumpanel">
+                                  <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)} disabled  >
+                                    <div className="ExamTeasytextarea">
+                                      <div className="ExamTeasynumpanel">
                                         {idex + 1}
                                       </div>
-                                      <div className="ExamTtextpanel">
+                                      <div className="ExamTeasytextpanel">
                                         {item2.text}
                                       </div>
                                     </div>
                                   </button>
                                 )
                                 : (
-                                  <button id={idex + 1} name={idex + 1} className="ExamTButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)}  >
-                                    <div className="ExamTtextarea">
-                                      <div className="ExamTnumpanel">
+                                  <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)}  >
+                                    <div className="ExamTeasytextarea">
+                                      <div className="ExamTeasynumpanel">
                                         {idex + 1}
                                       </div>
-                                      <div className="ExamTtextpanel">
+                                      <div className="ExamTeasytextpanel">
                                         {item2.text}
                                       </div>
                                     </div>
@@ -199,14 +212,22 @@ function ExamTest() {
                           )}
                         </div>
                         <br />
+                        {
+                          Answerdetail
+                            ? (<div>
+                              {item.Answerdetail}
 
-                        <div>
-                          {item.Answerdetail}
-                        </div>
+                            </div>)
+
+                            : (<div>
+
+                            </div>)
+                        }
                       </div>
+                      <br />
+                      <button className="ExamTeasyGobutton1" onClick={() => gonext(item.Choices)}>GONEXT</button>
                     </div>
                   ))}
-
                 </div>
               </div>
             </div>
@@ -226,4 +247,4 @@ function ExamTest() {
   }
 
 }
-export default ExamTest;
+export default ExamTestEasy;
