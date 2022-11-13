@@ -103,7 +103,7 @@
 }
 .header-con li:hover::after {
     width: 100%;
-    background-color: orangered;
+    background-color: white;
     transition: all 0.3s ease;
 }
 

@@ -11,23 +11,24 @@ body {
     background: #6f85f1;
 }
 
-.ExamTcards_wrap {
+.ExamTeasycards_wrap {
     background-color: #ffffff;
     padding: 20px;
     width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    white-space: pre-wrap;
 }
 
-.ExamTcard_item {
+.ExamTeasycard_item {
     padding: 15px 25px;
     width: 60%;
     border-radius: 20px;
 
 }
 
-.ExamTcard_inner {
+.ExamTeasycard_inner {
     background: #ecebeb;
     border-radius: 5px;
     padding: 35px 20px;
@@ -37,7 +38,7 @@ body {
     overflow-y: auto;
 }
 
-.ExamTrole_name {
+.ExamTeasyrole_name {
     text-align: center;
     color: #000000;
     font-weight: 300;
@@ -48,7 +49,7 @@ body {
     text-overflow: ellipsis;
 }
 
-.ExamTQuestion {
+.ExamTeasyQuestion {
     text-align: start;
     font-weight: 300;
     margin-top: 5px;
@@ -58,7 +59,7 @@ body {
 
 }
 
-.ExamTtext {
+.ExamTeasytext {
     text-align: start;
     font-weight: 300;
     margin-top: 5px;
@@ -68,60 +69,85 @@ body {
 
 }
 
-.ExamTChoicepanel {
+.ExamTeasyChoicepanel {
     padding: 5px;
-    border: none;
+   
     
 }
 
-.ExamTButton1 {
+.ExamTeasyButton1 {
     padding: 0px;
     border: none;
     display: flex;
     padding: 1px;
-
+    margin-bottom: 20px;
 }
-.ExamTButton1:hover {
+.ExamTeasyButton1:hover {
     background-color:rgb(246, 248, 248);
     border-radius: 8px;
     opacity: 0.2;
+  
 }
-.ExamTButton1true {
+.ExamTeasyButton1true{
     background-color:rgb(113, 212, 113);
     border-radius: 8px;
     padding: 0px;
-    border: none;
+    border-style: none;
     display: flex;
     padding: 1px;
+    margin-bottom: 20px;
 }
-.ExamTButton1false {
+.ExamTeasyButton1false {
     background-color:rgb(206, 106, 106);
     border-radius: 8px;
     padding: 0px;
-    border: none;
+    border-style: none;
     display: flex;
     padding: 1px;
+    margin-bottom: 20px;
+}
+.ExamTeasyButton1selected {
+    border-radius: 8px;
+    border-style: solid;
+    border-color: rgb(28, 29, 29);
+    border-width:2px;
+    padding: 1px;
+    display: flex;
+    margin-bottom: 20px;
 }
 
-.ExamTCheckbox{
-  
+.ExamTeasyGobutton1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+    padding: 12px 24px;
+    text-align: center;
+    font-size: 16px;
+    margin: 6px;
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
 
-.ExamTtextarea{
+.ExamTeasyGobutton1:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.ExamTeasytextarea{
     padding: 2px;
     width: 100%;
     display: flex;
    
 }
-.ExamTnumpanel{
+.ExamTeasynumpanel{
     padding: 5px;
     width: 2.9rem;
-    border: solid;
+    border-style: solid;
     border-radius: 50%;
     border-width: 2px;
     color: gray;
 }
-.ExamTtextpanel{
+.ExamTeasytextpanel{
     padding: 5px;
     padding-left: 2rem;
     color: #000000;

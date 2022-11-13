@@ -1,9 +1,12 @@
 import React from "react";
-import { Link} from "react-router-dom"
+import { Link} from "react-router-dom";
+import './About.css';
+
 function About() {
   return (
-    <div className="card">
-       <Link to="/" > THIS IS THE About PAGE</Link>
+    <div className="about-container">
+       <div className="about-container-header">พวกเราเป็นใคร?</div>
+       <center><Link to="/" > กลับสู่หน้าหลัก</Link></center>
     </div>
  
   )

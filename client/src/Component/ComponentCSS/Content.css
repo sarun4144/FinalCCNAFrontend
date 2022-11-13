@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;1,100;1,200&display=swap');
 
 .mainBackground {
-    background: linear-gradient(0deg,transparent 0%,#23242a);
+    background: #23242a;
 }
 
 .content-container {

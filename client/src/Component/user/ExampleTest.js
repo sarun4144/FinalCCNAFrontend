@@ -23,6 +23,9 @@ function ExampleTest() {
 
   useEffect(() => {
     //code
+    localStorage.setItem("score",0)
+    localStorage.setItem("currentQuestion",0)
+    localStorage.setItem('result',0);
     localStorage.removeItem("TypeTest")
     loadData(Token)
   }, [Token]);
@@ -53,7 +56,7 @@ function ExampleTest() {
           icon: 'success'
         })
         localStorage.setItem('TypeTest', "Easy")
-        navigate("/user/examtest")
+        navigate("/user/examtesteasy")
       }
     })
   }
@@ -70,7 +73,7 @@ function ExampleTest() {
           icon: 'success'
         })
         localStorage.setItem('TypeTest', "Hard")
-        navigate("/user/examtest")
+        navigate("/user/examtesthard")
       }
     })
   }
@@ -93,7 +96,7 @@ function ExampleTest() {
         dispatch(checkin(EXAM))
         localStorage.setItem('examid', id)
         localStorage.setItem('catid', catid)
-        navigate("/user/extest")
+        navigate("/user/examtesteasy")
       }
     } else {
       Swal.fire({
