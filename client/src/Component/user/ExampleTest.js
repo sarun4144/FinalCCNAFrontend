@@ -23,6 +23,9 @@ function ExampleTest() {
 
   useEffect(() => {
     //code
+    localStorage.setItem("score",0)
+    localStorage.setItem("currentQuestion",0)
+    localStorage.setItem('result',0);
     localStorage.removeItem("TypeTest")
     loadData(Token)
   }, [Token]);
@@ -70,7 +73,7 @@ function ExampleTest() {
           icon: 'success'
         })
         localStorage.setItem('TypeTest', "Hard")
-        navigate("/user/examtesteasy")
+        navigate("/user/examtesthard")
       }
     })
   }

@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Mitr', sans-serif;
+}
+
+body {
+    background: #6f85f1;
+}
+
+.ExamTeasycards_wrap {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    white-space: pre-wrap;
+}
+
+.ExamTeasycard_item {
+    padding: 15px 25px;
+    width: 60%;
+    border-radius: 20px;
+
+}
+
+.ExamTeasycard_inner {
+    background: #ecebeb;
+    border-radius: 5px;
+    padding: 35px 20px;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.ExamTeasyrole_name {
+    text-align: center;
+    color: #000000;
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-size: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ExamTeasyQuestion {
+    text-align: start;
+    font-weight: 300;
+    margin-top: 5px;
+    letter-spacing: 0px;
+    color: #000000;
+    font-size: 20px;
+
+}
+
+.ExamTeasytext {
+    text-align: start;
+    font-weight: 300;
+    margin-top: 5px;
+    letter-spacing: 0px;
+    color: #000000;
+    font-size: 20px;
+
+}
+
+.ExamTeasyChoicepanel {
+    padding: 5px;
+   
+    
+}
+
+.ExamTeasyButton1 {
+    padding: 0px;
+    border: none;
+    display: flex;
+    padding: 1px;
+    margin-bottom: 20px;
+}
+.ExamTeasyButton1:hover {
+    background-color:rgb(246, 248, 248);
+    border-radius: 8px;
+    opacity: 0.2;
+  
+}
+.ExamTeasyButton1true{
+    background-color:rgb(113, 212, 113);
+    border-radius: 8px;
+    padding: 0px;
+    border-style: none;
+    display: flex;
+    padding: 1px;
+    margin-bottom: 20px;
+}
+.ExamTeasyButton1false {
+    background-color:rgb(206, 106, 106);
+    border-radius: 8px;
+    padding: 0px;
+    border-style: none;
+    display: flex;
+    padding: 1px;
+    margin-bottom: 20px;
+}
+.ExamTeasyButton1selected {
+    border-radius: 8px;
+    border-style: solid;
+    border-color: rgb(28, 29, 29);
+    border-width:2px;
+    padding: 1px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.ExamTeasyGobutton1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+    padding: 12px 24px;
+    text-align: center;
+    font-size: 16px;
+    margin: 6px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.ExamTeasyGobutton1:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.ExamTeasytextarea{
+    padding: 2px;
+    width: 100%;
+    display: flex;
+   
+}
+.ExamTeasynumpanel{
+    padding: 5px;
+    width: 2.9rem;
+    border-style: solid;
+    border-radius: 50%;
+    border-width: 2px;
+    color: gray;
+}
+.ExamTeasytextpanel{
+    padding: 5px;
+    padding-left: 2rem;
+    color: #000000;
+}

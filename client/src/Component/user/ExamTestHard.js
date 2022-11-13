@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { currentexam } from "../../Function/Exam";
 import { useCookies } from 'react-cookie';
-import "./ExamTestHard.css";
+import "./ExamTestEasy.css";
 
 
 
@@ -187,15 +187,19 @@ function ExamTestEasy() {
     }
   }
 
-  
-    return (
-      <>
+ 
+    if (counter < 0) {
+      return <div>Time OUT</div>;
+    } else {
+      return (
+        <div   className="ExamTeasytext">
+          Time = 0:{min}:{counter}
+          <>
         {
           showResults
             ? (
 
               <div style={{ textAlign: "center" }}>
-
                 <br />
                 <span className="ExamTeasytext"> Your Score is {score} </span>
                 <br />
@@ -286,8 +290,9 @@ function ExamTestEasy() {
               <div className="ExamTeasycard_item">
                 <div className="ExamTeasycard_inner">
                   <div className="ExamTeasyrole_name">
-                    Easy
+                    Hard
                   </div>
+                  <br/>
                   {Data2.map((item, index) => (
                     <div>
                       {item.images.map((pic, Ipic) =>
@@ -355,7 +360,11 @@ function ExamTestEasy() {
             </div>
         }
       </>
-    )
- 
-}
+        </div>
+        
+      );
+    }
+  }
+
+
 export default ExamTestEasy;

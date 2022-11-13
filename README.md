@@ -46,7 +46,9 @@
 
 ### React ChartJS
     npm install --save chart.js react-chartjs-2
-    
+
+###  react-cookie  
+    npm install react-cookie
 # T---------------------------------------------------------------T
 
 

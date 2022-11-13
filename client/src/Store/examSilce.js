@@ -15,6 +15,9 @@ export const examSlice = createSlice({
       localStorage.removeItem("examid")
       localStorage.removeItem("catid")
       localStorage.removeItem("TypeTest")
+      localStorage.removeItem("currentQuestion")
+      localStorage.removeItem("score")
+      localStorage.removeItem("showresult")
     },
   },
 
