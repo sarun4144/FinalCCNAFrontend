@@ -11,7 +11,7 @@ body {
     background: #6f85f1;
 }
 
-.ExamTeasycards_wrap {
+.ExamThardcards_wrap {
     background-color: #ffffff;
     padding: 20px;
     width: 100%;
@@ -21,14 +21,14 @@ body {
     white-space: pre-wrap;
 }
 
-.ExamTeasycard_item {
+.ExamThardcard_item {
     padding: 15px 25px;
     width: 60%;
     border-radius: 20px;
 
 }
 
-.ExamTeasycard_inner {
+.ExamThardcard_inner {
     background: #ecebeb;
     border-radius: 5px;
     padding: 35px 20px;
@@ -38,7 +38,7 @@ body {
     overflow-y: auto;
 }
 
-.ExamTeasyrole_name {
+.ExamThardrole_name {
     text-align: center;
     color: #000000;
     font-weight: 300;
@@ -49,7 +49,7 @@ body {
     text-overflow: ellipsis;
 }
 
-.ExamTeasyQuestion {
+.ExamThardQuestion {
     text-align: start;
     font-weight: 300;
     margin-top: 5px;
@@ -59,7 +59,7 @@ body {
 
 }
 
-.ExamTeasytext {
+.ExamThardtext {
     text-align: start;
     font-weight: 300;
     margin-top: 5px;
@@ -69,26 +69,26 @@ body {
 
 }
 
-.ExamTeasyChoicepanel {
+.ExamThardChoicepanel {
     padding: 5px;
    
     
 }
 
-.ExamTeasyButton1 {
+.ExamThardButton1 {
     padding: 0px;
     border: none;
     display: flex;
     padding: 1px;
     margin-bottom: 20px;
 }
-.ExamTeasyButton1:hover {
+.ExamThardButton1:hover {
     background-color:rgb(246, 248, 248);
     border-radius: 8px;
     opacity: 0.2;
   
 }
-.ExamTeasyButton1true{
+.ExamThardButton1true{
     background-color:rgb(113, 212, 113);
     border-radius: 8px;
     padding: 0px;
@@ -97,7 +97,7 @@ body {
     padding: 1px;
     margin-bottom: 20px;
 }
-.ExamTeasyButton1false {
+.ExamThardButton1false {
     background-color:rgb(206, 106, 106);
     border-radius: 8px;
     padding: 0px;
@@ -106,7 +106,7 @@ body {
     padding: 1px;
     margin-bottom: 20px;
 }
-.ExamTeasyButton1selected {
+.ExamThardButton1selected {
     border-radius: 8px;
     border-style: solid;
     border-color: rgb(28, 29, 29);
@@ -116,7 +116,7 @@ body {
     margin-bottom: 20px;
 }
 
-.ExamTeasyGobutton1 {
+.ExamThardGobutton1 {
     background-color: white;
     color: black;
     border: 2px solid #4CAF50;
@@ -128,18 +128,18 @@ body {
     cursor: pointer;
 }
 
-.ExamTeasyGobutton1:hover {
+.ExamThardGobutton1:hover {
     background-color: #4CAF50;
     color: white;
 }
 
-.ExamTeasytextarea{
+.ExamThardtextarea{
     padding: 2px;
     width: 100%;
     display: flex;
    
 }
-.ExamTeasynumpanel{
+.ExamThardnumpanel{
     padding: 5px;
     width: 2.9rem;
     border-style: solid;
@@ -147,7 +147,7 @@ body {
     border-width: 2px;
     color: gray;
 }
-.ExamTeasytextpanel{
+.ExamThardtextpanel{
     padding: 5px;
     padding-left: 2rem;
     color: #000000;

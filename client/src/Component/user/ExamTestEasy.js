@@ -33,7 +33,7 @@ function ExamTestEasy() {
 
   //Answer
   const [Answerdetail, setAnswerdetail] = useState(false);
-
+  const [ANSiscorrect, setANSiscorrect] = useState(false);
   //cookie
   const [cookies, setCookie] = useCookies(['Result']);
 
@@ -73,7 +73,7 @@ function ExamTestEasy() {
   }, [score])
 
   useEffect(() => {
-
+    setANSiscorrect(false)
     setANSCount(5)
     setBlock(false)
     setSelector(0)
@@ -82,7 +82,7 @@ function ExamTestEasy() {
 
   useEffect(() => {
     if (Block) {
-      localStorage.setItem('result', JSON.stringify(Record));
+      localStorage.setItem('result',JSON.stringify(Record));
     }
     console.log(Record)
 
@@ -127,10 +127,11 @@ function ExamTestEasy() {
         if (currentQuestion < Data.length) {
           localStorage.setItem("score", score + 1)
           setScore(preve => preve + 1)
+          setANSiscorrect(true)
         }
       } else {
         console.log("false")
-
+        setANSiscorrect(false)
       }
     } else {
       console.log("falseNA")
@@ -148,6 +149,7 @@ function ExamTestEasy() {
     localStorage.setItem("showresult", false)
     setRecord(false);
     localStorage.setItem("result", 0)
+    setANSiscorrect(false)
   }
   function countdown() {
     if (counter == 0 && min !== 0) {
@@ -166,7 +168,8 @@ function ExamTestEasy() {
         Choices: Choices,
         CorrectANS: CorrectANS,
         Answerdetail: Answerdetail,
-        selectValueS: selectValueS
+        selectValueS: selectValueS,
+        ANSiscorrect:ANSiscorrect
       }
     })
 
