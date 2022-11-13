@@ -53,7 +53,7 @@ function ExampleTest() {
           icon: 'success'
         })
         localStorage.setItem('TypeTest', "Easy")
-        navigate("/user/examtest")
+        navigate("/user/examtesteasy")
       }
     })
   }
@@ -70,7 +70,7 @@ function ExampleTest() {
           icon: 'success'
         })
         localStorage.setItem('TypeTest', "Hard")
-        navigate("/user/examtest")
+        navigate("/user/examtesteasy")
       }
     })
   }
@@ -93,7 +93,7 @@ function ExampleTest() {
         dispatch(checkin(EXAM))
         localStorage.setItem('examid', id)
         localStorage.setItem('catid', catid)
-        navigate("/user/extest")
+        navigate("/user/examtesteasy")
       }
     } else {
       Swal.fire({
