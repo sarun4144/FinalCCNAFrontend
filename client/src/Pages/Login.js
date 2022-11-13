@@ -71,7 +71,7 @@ function Login() {
           <div className="login-card">
             <div className="row">
               <div className="col-1 "></div>
-              <div className="col-10" style={{ backgroundColor: 'lightblue' }}>
+              <div className="login-header">
                 {loading
                   ? <h1 className="title">เข้าสู่ระบบ</h1>
                   : <h1 className="title">เข้าสู่ระบบผิดพลาด</h1>

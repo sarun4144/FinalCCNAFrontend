@@ -61,7 +61,7 @@ function Register() {
                     <div className="regis-card">
                         <div className="row">
                             <div class="col-1"></div>
-                            <div className="col-10" style={{ backgroundColor: 'lightblue' }} >
+                            <div className="regis-header">
                                 <h1 className="title">ลงทะเบียน</h1>
                             </div>
                             <div class="col-1"></div>
