@@ -8,9 +8,5 @@
 .landing-wrap{
   flex: 1;
   background-color: white;
-<<<<<<< HEAD
-  z-index: 0;
-=======
   z-index: 1000;
->>>>>>> 572139b9c24f5f7e9019c037337ad4674e8b32d6
 }
