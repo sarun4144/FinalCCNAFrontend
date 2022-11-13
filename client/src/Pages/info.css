@@ -9,7 +9,7 @@
     overflow: hidden;
     overflow-y: auto;
     margin-top: 90px;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
     background-color: white;
 }
 
@@ -39,6 +39,7 @@
     box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
     transition: all 250ms;
     overflow: hidden;
+    margin-right: 5px;
 }
 
 .info-cat-selector::before {

@@ -16,13 +16,23 @@
 .store-container {
     margin-left: 25px;
     margin-right: 25px;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-top: 100px;
     margin-bottom: 50px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     padding-bottom: 10px;
     padding-top: 10px;
     background-color: white;
+}
+
+.store-header {
+    background-color: #333;
+    color: white;
+    padding-left: 16px;
+    border-radius: 3px;
+    font-size: 2em;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .cat-search-container {

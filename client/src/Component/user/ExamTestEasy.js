@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { currentexam } from "../../Function/Exam";
 import { useCookies } from 'react-cookie';
-import "./ExamTestHard.css";
+import "./ExamTestEasy.css";
 
 
 
@@ -33,7 +33,7 @@ function ExamTestEasy() {
 
   //Answer
   const [Answerdetail, setAnswerdetail] = useState(false);
-
+  const [ANSiscorrect, setANSiscorrect] = useState(false);
   //cookie
   const [cookies, setCookie] = useCookies(['Result']);
 
@@ -73,7 +73,7 @@ function ExamTestEasy() {
   }, [score])
 
   useEffect(() => {
-
+    setANSiscorrect(false)
     setANSCount(5)
     setBlock(false)
     setSelector(0)
@@ -82,7 +82,7 @@ function ExamTestEasy() {
 
   useEffect(() => {
     if (Block) {
-      localStorage.setItem('result', JSON.stringify(Record));
+      localStorage.setItem('result',JSON.stringify(Record));
     }
     console.log(Record)
 
@@ -104,6 +104,7 @@ function ExamTestEasy() {
     setSelector(preve => preve + 1)
 
   }
+
   const optionClicked = (isCorrect) => {
     // Increment the score
     if (Selector == selectValueS.length) {
@@ -127,10 +128,11 @@ function ExamTestEasy() {
         if (currentQuestion < Data.length) {
           localStorage.setItem("score", score + 1)
           setScore(preve => preve + 1)
+          setANSiscorrect(true)
         }
       } else {
         console.log("false")
-
+        setANSiscorrect(false)
       }
     } else {
       console.log("falseNA")
@@ -139,6 +141,7 @@ function ExamTestEasy() {
       }
     }
   }
+
   const restartGame = () => {
     setScore(preve => 0);
     localStorage.setItem("score", 0)
@@ -148,7 +151,9 @@ function ExamTestEasy() {
     localStorage.setItem("showresult", false)
     setRecord(false);
     localStorage.setItem("result", 0)
+    setANSiscorrect(false)
   }
+
   function countdown() {
     if (counter == 0 && min !== 0) {
       setMin(min - 1);
@@ -166,7 +171,8 @@ function ExamTestEasy() {
         Choices: Choices,
         CorrectANS: CorrectANS,
         Answerdetail: Answerdetail,
-        selectValueS: selectValueS
+        selectValueS: selectValueS,
+        ANSiscorrect:ANSiscorrect
       }
     })
 
@@ -187,36 +193,44 @@ function ExamTestEasy() {
     }
   }
 
-  
-    return (
-      <>
-        {
-          showResults
-            ? (
 
-              <div style={{ textAlign: "center" }}>
+  return (
+    <>
+      {
+        showResults
+          ? (
 
-                <br />
-                <span className="ExamTeasytext"> Your Score is {score} </span>
-                <br />
-                <div>
-                  {RecordArray.map((item, index) =>
-                    <div>
-                      {item.images.map((pic, Ipic) =>
+            <div className="result-card" style={{ textAlign: "center" }}>
+
+              <br />
+              <span className="ExamTeasytext"><center><h1> Your Score is {score} / {RecordArray.length} </h1></center></span>
+              <br />
+              <div >
+                {RecordArray.map((item, index) =>
+                  <div className="result-Question">
+
+                    <div className="ExamTeasyQuestion">
+                      {item.selectValueS[0].isCorrect && item.selectValueS.length == item.CorrectANS.length ? (
+                        <div className="result-q-True"><h2>Question: {index + 1}</h2></div>
+                      ) : (
+                        <div className="result-q-false"><h2>Question: {index + 1}</h2></div>
+                      )
+                      }
+                      <br />
+                      <center>{item.images.map((pic, Ipic) =>
                         <img src={pic.url} />
-                      )}
-                      <div className="ExamTeasyQuestion">
-                        <span style={{ fontWeight: "500" }}>Question: {index + 1}</span>
-                        <br />
-                        <span>{item.Question}</span>
-                        <br />
-                        <span>{`${item.selectValueS.length}/${item.CorrectANS.length} is Selected `}</span>
-                      </div>
+                      )}</center>
                       <br />
+                      <span>{item.Question}</span>
                       <br />
-                      <div className="ExamTeasytext">
-                        <div className="ExamTeasyChoicepanel">
-                          <div className="ExamTeasytextarea">
+                      <span>{`${item.selectValueS.length}/${item.CorrectANS.length} is Selected `}</span>
+                    </div>
+                    <br />
+                    <br />
+                    <div className="ExamTeasytext">
+                      <div className="ExamTeasyChoicepanel">
+                        {item.selectValueS[0].isCorrect && item.selectValueS.length == item.CorrectANS.length ? (
+                          <div className="result-q-True">
                             <span>ข้อที่คุณตอบคือข้อที่</span> &nbsp;
                             {item.selectValueS.map((choose, iChoose) =>
                               iChoose < item.selectValueS.length - 1
@@ -224,138 +238,149 @@ function ExamTestEasy() {
                                 : <span>{choose.index}</span>
                             )}
                           </div>
-                          <br />
-                          {item.Choices.map((item2, idex) =>
-                            <>
-                              {item2.isCorrect
-                                ? (
-                                  <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1true" disabled  >
-                                    <div className="ExamTeasytextarea">
-                                      <div className="ExamTeasynumpanel">
-                                        {idex + 1}
-                                      </div>
-                                      <div className="ExamTeasytextpanel">
-                                        {item2.text}
-                                      </div>
-                                    </div>
-                                  </button>
-
-                                )
-                                : (
-                                  <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1" disabled  >
-                                    <div className="ExamTeasytextarea">
-                                      <div className="ExamTeasynumpanel">
-                                        {idex + 1}
-                                      </div>
-                                      <div className="ExamTeasytextpanel">
-                                        {item2.text}
-                                      </div>
-                                    </div>
-                                  </button>
-                                )
-                              }
-
-
-                            </>
-                          )}
-
-                        </div>
-                        {
-                          true
-                            ? (<div>
-                              {item.Answerdetail}
-
-                            </div>)
-
-                            : (<div>
-
-                            </div>)
+                        ) : (
+                          <div className="result-q-false">
+                            <span>ข้อที่คุณตอบคือข้อที่</span> &nbsp;
+                            {item.selectValueS.map((choose, iChoose) =>
+                              iChoose < item.selectValueS.length - 1
+                                ? <span>{choose.index},</span>
+                                : <span>{choose.index}</span>
+                            )}
+                          </div>
+                        )
                         }
                         <br />
+                        {item.Choices.map((item2, idex) =>
+                          <>
+                            {item2.isCorrect
+                              ? (
+                                <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1true" disabled  >
+                                  <div className="ExamTeasytextarea">
+                                    <div className="ExamTeasynumpanel">
+                                      {idex + 1}
+                                    </div>
+                                    <div className="ExamTeasytextpanel">
+                                      {item2.text}
+                                    </div>
+                                  </div>
+                                </button>
+
+                              )
+                              : (
+                                <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1false" disabled  >
+                                  <div className="ExamTeasytextarea">
+                                    <div className="ExamTeasynumpanel">
+                                      {idex + 1}
+                                    </div>
+                                    <div className="ExamTeasytextpanel">
+                                      {item2.text}
+                                    </div>
+                                  </div>
+                                </button>
+                              )
+                            }
+
+
+                          </>
+                        )}
+
                       </div>
+                      {
+                        true
+                          ? (<div className="result-detail">
+                            {item.Answerdetail}
+
+                          </div>)
+
+                          : (<div>
+
+                          </div>)
+                      }
+                      <br />
                     </div>
-
-                  )}
-                  <button className="ExamTeasyGobutton1" onClick={restartGame}>restartGame</button>
-                </div>
-              </div>
-
-            )
-            :
-            <div className="ExamTeasycards_wrap">
-              <div className="ExamTeasycard_item">
-                <div className="ExamTeasycard_inner">
-                  <div className="ExamTeasyrole_name">
-                    Easy
                   </div>
-                  {Data2.map((item, index) => (
-                    <div>
-                      {item.images.map((pic, Ipic) =>
-                        <img src={pic.url} />
-                      )}
-                      <div className="ExamTeasyQuestion">
-                        <span style={{ fontWeight: "500" }}>Question: {currentQuestion + 1}</span>
-                        <br />
-                        <span>{item.Question}</span>
-                        <br />
-                        <span>{`${Selector}/${item.CorrectANS.length} is Selected `}</span>
+
+                )}
+              </div>
+              <button className="ExamTeasyGobutton1" onClick={restartGame}>restartGame</button>
+            </div>
+
+          )
+          :
+          <div className="ExamTeasycards_wrap">
+            <div className="ExamTeasycard_item">
+              <div className="ExamTeasycard_inner">
+                <div className="ExamTeasyrole_name">
+                  Easy
+                </div>
+                {Data2.map((item, index) => (
+                  <div>
+                    {item.images.map((pic, Ipic) =>
+                      <img src={pic.url} />
+                    )}
+                    <div className="ExamTeasyQuestion">
+                      <span style={{ fontWeight: "500" }}>Question: {currentQuestion + 1}</span>
+                      <br />
+                      <span>{item.Question}</span>
+                      <br />
+                      <span>{`${Selector}/${item.CorrectANS.length} is Selected `}</span>
+                    </div>
+                    <br />
+                    <div className="ExamTeasytext">
+                      <div className="ExamTeasyChoicepanel">
+                        {item.Choices.map((item2, idex) =>
+                          <>
+                            {Block
+                              ? (
+                                <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)} disabled  >
+                                  <div className="ExamTeasytextarea">
+                                    <div className="ExamTeasynumpanel">
+                                      {idex + 1}
+                                    </div>
+                                    <div className="ExamTeasytextpanel">
+                                      {item2.text}
+                                    </div>
+                                  </div>
+                                </button>
+                              )
+                              : (
+                                <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)}  >
+                                  <div className="ExamTeasytextarea">
+                                    <div className="ExamTeasynumpanel">
+                                      {idex + 1}
+                                    </div>
+                                    <div className="ExamTeasytextpanel">
+                                      {item2.text}
+                                    </div>
+                                  </div>
+                                </button>
+                              )
+                            }
+                          </>
+                        )}
                       </div>
                       <br />
-                      <div className="ExamTeasytext">
-                        <div className="ExamTeasyChoicepanel">
-                          {item.Choices.map((item2, idex) =>
-                            <>
-                              {Block
-                                ? (
-                                  <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)} disabled  >
-                                    <div className="ExamTeasytextarea">
-                                      <div className="ExamTeasynumpanel">
-                                        {idex + 1}
-                                      </div>
-                                      <div className="ExamTeasytextpanel">
-                                        {item2.text}
-                                      </div>
-                                    </div>
-                                  </button>
-                                )
-                                : (
-                                  <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)}  >
-                                    <div className="ExamTeasytextarea">
-                                      <div className="ExamTeasynumpanel">
-                                        {idex + 1}
-                                      </div>
-                                      <div className="ExamTeasytextpanel">
-                                        {item2.text}
-                                      </div>
-                                    </div>
-                                  </button>
-                                )
-                              }
-                            </>
-                          )}
-                        </div>
-                        <br />
-                        {
-                          Answerdetail
-                            ? (<div>
-                              {item.Answerdetail}
+                      {
+                        Answerdetail
+                          ? (<div>
+                            {item.Answerdetail}
 
-                            </div>)
+                          </div>)
 
-                            : (<div>
+                          : (<div>
 
-                            </div>)
-                        }
-                      </div>
-                      <button className="ExamTeasyGobutton1" onClick={() => gonext(item.Choices, item.Question, item.CorrectANS, item.Answerdetail, item.images)}>GONEXT</button>
+                          </div>)
+                      }
                     </div>
-                  ))}
-                </div>
+                    <button className="ExamTeasyGobutton1" onClick={() => gonext(item.Choices, item.Question, item.CorrectANS, item.Answerdetail, item.images)}>GONEXT</button>
+                  </div>
+                ))}
               </div>
             </div>
-        }
-      </>
-    )
- 
+          </div>
+      }
+    </>
+  )
+
 }
 export default ExamTestEasy;
