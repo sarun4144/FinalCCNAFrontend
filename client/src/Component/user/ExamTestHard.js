@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { currentexam } from "../../Function/Exam";
+import { currentexam, HardRecord } from "../../Function/Exam";
 import { useCookies } from 'react-cookie';
 import "./ExamTestHard.css";
+
+import { Hardlog } from "../../Function/Person"
 
 
 function ExamTestEasy() {
     const exam = useSelector((state) => ({ ...state }));
     const Exid = exam.examStore.exam.examid
+    const UserID = exam.userStore.user.ObjectID
     const [data, setData] = useState([]);
     const Data = Object.values(data);
+
+    const [log, setlog] = useState([]);
+    const Log = Object.values(log);
+
 
     const [counter, setCounter] = useState(59);
     const [min, setMin] = useState(59);
@@ -39,7 +46,7 @@ function ExamTestEasy() {
     //cookie
     const [cookies, setCookie] = useCookies(['Result']);
 
-
+//  console.log(Log.length)
     useEffect(() => {
         //code
         if (localStorage.showresult == "true") {
@@ -53,8 +60,8 @@ function ExamTestEasy() {
     useEffect(() => {
         //code
         loadData(Exid);
-
-    }, [Exid]);
+        HardlogS(UserID)
+    }, [Exid,UserID]);
 
 
     useEffect(() => {
@@ -111,6 +118,11 @@ function ExamTestEasy() {
             setData(res.data[0].exdata);
         });
     }
+    function HardlogS(authtoken) {
+        Hardlog(authtoken).then((res) => {
+          setlog(res.data);
+        });
+      }
 
     //easyFunction
     function EasyselectCount(isCorrect, CorrectANS, index) {
@@ -166,14 +178,30 @@ function ExamTestEasy() {
         }
     }
     const restartGame = () => {
-        setScore(preve => 0);
-        localStorage.setItem("score", 0)
-        setCurrentQuestion(preve => 0);
-        localStorage.setItem("currentQuestion", 0)
-        setShowResults(false);
-        localStorage.setItem("showresult", false)
-        setRecord(false);
-        localStorage.setItem("result", 0)
+        const payload = {
+            Hard: RecordArray,
+            UserID: UserID,
+            Type: localStorage.TypeTest,
+            Num: Log.length + 1,
+            Time: `${min2}:${counter2}`,
+            Date: Date(),
+            ExamObjectid:Exid
+          }
+          HardRecord(Exid, payload)
+            .then(res => {
+              setScore(preve => 0);
+              localStorage.setItem("score", 0)
+              setCurrentQuestion(preve => 0);
+              localStorage.setItem("currentQuestion", 0)
+              setShowResults(false);
+              localStorage.setItem("showresult", false)
+              setRecord(false);
+              localStorage.setItem("result", 0)
+              setANSiscorrect(false)
+              setAnswerdetail(false)
+            }).catch(err => {
+              console.log(err);
+            })
     }
     function countdown() {
         
@@ -231,8 +259,6 @@ function ExamTestEasy() {
             }
         }
     }
-
-
     if (counter < 0) {
         return <div>Time OUT</div>;
     } else {
