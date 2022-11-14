@@ -55,6 +55,7 @@ export const listexam = async (authtoken) =>
       payload
     }
 });
+
   export const CorrectAnswer = async (id,payload) =>
   await axios.post(process.env.REACT_APP_API + "/CorrectAnswer/"+id,payload,
   {
@@ -62,3 +63,8 @@ export const listexam = async (authtoken) =>
       id
     }
 });
+  export const EasyRecord = async (id,payload) =>
+  await axios.post(process.env.REACT_APP_API + "/CorrectAnswer/"+id,payload,
+  {
+    
+  });
