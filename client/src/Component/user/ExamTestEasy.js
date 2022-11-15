@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
-
 import { useSelector } from "react-redux";
-import { currentexam } from "../../Function/Exam";
+import { currentexam, EasyRecord } from "../../Function/Exam";
 import { useCookies } from 'react-cookie';
 import "./ExamTestEasy.css";
 
-
+import { Easylog } from "../../Function/Person"
 
 function ExamTestEasy() {
   const exam = useSelector((state) => ({ ...state }));
   const Exid = exam.examStore.exam.examid
+  const UserID = exam.userStore.user.ObjectID
   const [data, setData] = useState([]);
   const Data = Object.values(data);
+
+  const [log, setlog] = useState([]);
+  const Log = Object.values(log);
 
   const [counter, setCounter] = useState(59);
   const [min, setMin] = useState(59);
@@ -37,7 +40,7 @@ function ExamTestEasy() {
   //cookie
   const [cookies, setCookie] = useCookies(['Result']);
 
-
+  // console.log(Log.length)
   useEffect(() => {
     //code
     if (localStorage.showresult == "true") {
@@ -51,8 +54,8 @@ function ExamTestEasy() {
   useEffect(() => {
     //code
     loadData(Exid);
-
-  }, [Exid]);
+    EasylogS(UserID);
+  }, [Exid, UserID]);
 
 
   useEffect(() => {
@@ -82,7 +85,7 @@ function ExamTestEasy() {
 
   useEffect(() => {
     if (Block) {
-      localStorage.setItem('result',JSON.stringify(Record));
+      localStorage.setItem('result', JSON.stringify(Record));
     }
     console.log(Record)
 
@@ -91,6 +94,11 @@ function ExamTestEasy() {
   function loadData(authtoken) {
     currentexam(authtoken).then((res) => {
       setData(res.data[0].exdata);
+    });
+  }
+  function EasylogS(authtoken) {
+    Easylog(authtoken).then((res) => {
+      setlog(res.data);
     });
   }
 
@@ -125,11 +133,8 @@ function ExamTestEasy() {
       if (i == isCorrect.length && d == isCorrect.length) {
         setAnswerdetail(true)
         console.log("true")
-        if (currentQuestion < Data.length) {
-          localStorage.setItem("score", score + 1)
-          setScore(preve => preve + 1)
-          setANSiscorrect(true)
-        }
+        setANSiscorrect(true)
+
       } else {
         console.log("false")
         setANSiscorrect(false)
@@ -143,15 +148,30 @@ function ExamTestEasy() {
   }
 
   const restartGame = () => {
-    setScore(preve => 0);
-    localStorage.setItem("score", 0)
-    setCurrentQuestion(preve => 0);
-    localStorage.setItem("currentQuestion", 0)
-    setShowResults(false);
-    localStorage.setItem("showresult", false)
-    setRecord(false);
-    localStorage.setItem("result", 0)
-    setANSiscorrect(false)
+    const payload = {
+      Easy: RecordArray,
+      UserID: UserID,
+      Type: localStorage.TypeTest,
+      Num: Log.length + 1,
+      Date: Date(),
+      ExamObjectid: Exid
+    }
+    EasyRecord(Exid, payload)
+      .then(res => {
+        setScore(preve => 0);
+        localStorage.setItem("score", 0)
+        setCurrentQuestion(preve => 0);
+        localStorage.setItem("currentQuestion", 0)
+        setShowResults(false);
+        localStorage.setItem("showresult", false)
+        setRecord(false);
+        localStorage.setItem("result", 0)
+        setANSiscorrect(false)
+        setAnswerdetail(false)
+      }).catch(err => {
+        console.log(err);
+      })
+
   }
 
   function countdown() {
@@ -172,23 +192,33 @@ function ExamTestEasy() {
         CorrectANS: CorrectANS,
         Answerdetail: Answerdetail,
         selectValueS: selectValueS,
-        ANSiscorrect:ANSiscorrect
+        ANSiscorrect: ANSiscorrect
       }
     })
-
+    setBlock(true)
     for (var index = 0; index < Choices.length; index++) {
       document.getElementById(index + 1).className = "ExamTeasyButton1"
     }
     if (index == Choices.length) {
       if (currentQuestion + 1 < Data.length) {
+        if (ANSiscorrect) {
+          localStorage.setItem("score", score + 1)
+          setScore(preve => preve + 1)
+        }
         setAnswerdetail(false)
         localStorage.setItem("currentQuestion", currentQuestion + 1)
         setCurrentQuestion(preve => preve + 1);
       } else {
+        if (ANSiscorrect) {
+          localStorage.setItem("score", score + 1)
+          setScore(preve => preve + 1)
+        }
         localStorage.setItem("currentQuestion", currentQuestion + 1)
         setCurrentQuestion(preve => preve + 1);
         localStorage.setItem("showresult", true)
         setShowResults(true);
+
+
       }
     }
   }
@@ -209,7 +239,7 @@ function ExamTestEasy() {
                   <div className="result-Question">
 
                     <div className="ExamTeasyQuestion">
-                      {item.selectValueS[0].isCorrect && item.selectValueS.length == item.CorrectANS.length ? (
+                      {item.ANSiscorrect && item.selectValueS.length == item.CorrectANS.length ? (
                         <div className="result-q-True"><h2>Question: {index + 1}</h2></div>
                       ) : (
                         <div className="result-q-false"><h2>Question: {index + 1}</h2></div>
@@ -228,7 +258,7 @@ function ExamTestEasy() {
                     <br />
                     <div className="ExamTeasytext">
                       <div className="ExamTeasyChoicepanel">
-                        {item.selectValueS[0].isCorrect && item.selectValueS.length == item.CorrectANS.length ? (
+                        {item.ANSiscorrect && item.selectValueS.length == item.CorrectANS.length ? (
                           <div className="result-q-True">
                             <span>ข้อที่คุณตอบคือข้อที่</span> &nbsp;
                             {item.selectValueS.map((choose, iChoose) =>

@@ -54,7 +54,8 @@ function App() {
             token: idtoken,
             username: res.data.username,
             role: res.data.role,
-            email: res.data.email
+            email: res.data.email,
+            ObjectID: res.data._id
           }
           dispatch(login(user))
           console.log('Current-User', res.data)

@@ -42,7 +42,8 @@ function Login() {
         token: res.data.token,
         username: res.data.payload.user.username,
         role: res.data.payload.user.role,
-        email: res.data.payload.user.email
+        email: res.data.payload.user.email,
+        ObjectID:res.data.payload.user._id
       }
       dispatch(login(payload))
       localStorage.setItem('token', res.data.token)
