@@ -7,6 +7,13 @@ export const listUser = async (authtoken) =>
         authtoken
       }
     });
+export const reads = async (authtoken) =>
+  await axios.post(process.env.REACT_APP_API + "/reads",
+    {
+      headers: {
+        authtoken
+      }
+    });
 export const removeUser = async (authtoken, id) =>
   await axios.delete(process.env.REACT_APP_API + "/person/" + id,
     {
@@ -30,6 +37,23 @@ export const changeRole = async (authtoken, value) =>
     });
 export const changePassword = async (authtoken, id, value) =>
   await axios.put(process.env.REACT_APP_API + "/person/" + id, value,
+    {
+      headers: {
+        authtoken
+      }
+    });
+export const Easylog = async (id) =>
+  await axios.post(process.env.REACT_APP_API + "/Easylog/" + id,
+    {
+
+    });
+export const Hardlog = async (id) =>
+  await axios.post(process.env.REACT_APP_API + "/Hardlog/" + id,
+    {
+
+    });
+export const ChangeName = async (authtoken, id, value) =>
+  await axios.put(process.env.REACT_APP_API + "/ChangeName/" + id, value,
     {
       headers: {
         authtoken
