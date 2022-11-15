@@ -8,17 +8,18 @@ const Footer = () => {
         <div className='container-footer'>
         <div className='row'>
             <div className='col'>
-                <h4>Despacito</h4>
+                <h4>จัดทำโดย</h4>
                 <ul className='footer-list'>
-                    <li>69-6969-6969</li>
-                    <li>Wakaliwood Uganda</li>
+                    <li>นาย สรัญ พ่วงกระแสร์</li>
+                    <li>นาย ฌัชพล ไผ่กอ</li>
+                    <li>นาย ธนพนธ์ ศรีตองอ่อน</li>
                 </ul>
             </div>
             <div className='col'>
-                <h4>Welcome to the Cumzone</h4>
+                <h4>เว็บไซต์นี้เป็นส่วนหนึ่งของปริญญานิพนธ์</h4>
                 <ul className='footer-list'>
-                    <li>Amogus</li>
-                    <li>LMAO</li>
+                    <li></li>
+                    <li></li>
                 </ul>
             </div>
         </div>
