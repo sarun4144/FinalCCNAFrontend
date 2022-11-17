@@ -1,15 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Mitr', sans-serif;
-}
 
-body {
-    background: #6f85f1;
-}
 
 .ExamTeasycards_wrap {
     background-color: #ffffff;
@@ -71,8 +62,8 @@ body {
 
 .ExamTeasyChoicepanel {
     padding: 5px;
-   
-    
+
+
 }
 
 .ExamTeasyButton1 {
@@ -82,14 +73,16 @@ body {
     padding: 1px;
     margin-bottom: 20px;
 }
+
 .ExamTeasyButton1:hover {
-    background-color:rgb(246, 248, 248);
+    background-color: rgb(246, 248, 248);
     border-radius: 8px;
     opacity: 0.2;
-  
+
 }
-.ExamTeasyButton1true{
-    background-color:rgb(113, 212, 113);
+
+.ExamTeasyButton1true {
+    background-color: rgb(113, 212, 113);
     border-radius: 8px;
     padding: 0px;
     border-style: none;
@@ -97,8 +90,9 @@ body {
     padding: 1px;
     margin-bottom: 20px;
 }
+
 .ExamTeasyButton1false {
-    background-color:rgb(206, 106, 106);
+    background-color: rgb(206, 106, 106);
     border-radius: 8px;
     padding: 0px;
     border-style: none;
@@ -106,11 +100,12 @@ body {
     padding: 1px;
     margin-bottom: 20px;
 }
+
 .ExamTeasyButton1selected {
     border-radius: 8px;
     border-style: solid;
     border-color: rgb(28, 29, 29);
-    border-width:2px;
+    border-width: 2px;
     padding: 1px;
     display: flex;
     margin-bottom: 20px;
@@ -133,13 +128,14 @@ body {
     color: white;
 }
 
-.ExamTeasytextarea{
+.ExamTeasytextarea {
     padding: 2px;
     width: 100%;
     display: flex;
-   
+
 }
-.ExamTeasynumpanel{
+
+.ExamTeasynumpanel {
     padding: 5px;
     width: 2.9rem;
     border-style: solid;
@@ -147,7 +143,8 @@ body {
     border-width: 2px;
     color: gray;
 }
-.ExamTeasytextpanel{
+
+.ExamTeasytextpanel {
     padding: 5px;
     padding-left: 2rem;
     color: #000000;
@@ -199,4 +196,26 @@ body {
 
 .result-q-false {
     background-color: rgb(206, 106, 106);
+}
+
+@media screen and (max-width: 1160px) {
+    .ExamTeasycards_wrap {
+        padding: 5px;
+    }
+
+    .ExamTeasycard_item {
+        padding: 5px;
+        width: 100%;
+    }
+
+    .result-card {
+        padding: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .result-Question{
+        padding: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }

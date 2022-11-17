@@ -48,7 +48,7 @@
         margin-left: 20%;
     }
     .card {
-        margin-top: 25px;
+        margin-top: 15px;
     }
 }
 @media screen and (max-width: 490px) {
@@ -61,7 +61,7 @@
         margin: 0 auto;
         padding: .5rem 0.5rem;
     }
-    .card {
-        margin-top: 25px;
+    .regis-card {
+        margin-top: 15px;
     }
 }

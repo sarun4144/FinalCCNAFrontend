@@ -4,10 +4,13 @@
     margin-left: 25px;
     margin-right: 25px;
     margin-top: 50px;
+    margin-bottom: 25px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     overflow: hidden;
     overflow-y: auto;
 }
+
+
 .login-header {
     background-color: #333;
     color: white;
@@ -38,6 +41,7 @@
 .title{
     text-align: center;
 }
+
 @media screen and (max-width: 767px) and (min-width: 490px){
     .title{
         padding-top: 10px;
@@ -46,8 +50,8 @@
     .submit{
         margin: 0 auto;
     }
-    .card {
-        margin-top: 25px;
+    .login-card {
+        margin-top: 15px;
     }
 }
 @media screen and (max-width: 490px) {
@@ -58,7 +62,7 @@
     .submit{
         margin: 0 auto;
     }
-    .card {
-        margin-top: 25px;
+    .login-card {
+        margin-top: 15px;
     }
 }

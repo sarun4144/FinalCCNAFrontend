@@ -1,15 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Mitr',sans-serif;
-}
-
-body {
-    background: #6f85f1;
-}
-
 
 .Excards_wrap {
     background-color: #ffffff;
@@ -131,7 +120,13 @@ body {
     .Exbutton1,.Exbutton2{
        font-size: 15px;
     }
-    
+    .Excards_wrap{
+        padding: 5px;
+    }
+    .Excard_item{
+        width: 100%;
+        padding: 5px;
+    }
 }
 @media screen and (max-width: 768px){
     .Exrole_name  {

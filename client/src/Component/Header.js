@@ -29,7 +29,7 @@ function Header() {
                 return (
                     <nav className="header">    
                         <div className="logo-container">
-                            <Link to="/">Pre-CCNA<IoMdPaper /></Link>
+                            <Link to="/">Pre-CCNA</Link>
                         </div>
                         <div className="search-container">
                             <SearchBar/>
@@ -70,7 +70,7 @@ function Header() {
             return (
                 <nav className="header">
                     <div className="logo-container">
-                        <Link to="/">Pre-CCNA<IoMdPaper /></Link>
+                        <Link to="/">Pre-CCNA</Link>
                     </div>
                     <div className="search-container">
                             <SearchBar/>
@@ -112,7 +112,7 @@ function Header() {
             return (
                 <nav className="header">
                     <div className="logo-container">
-                        <Link to="/">Pre-CCNA<IoMdPaper /></Link>
+                        <Link to="/">Pre-CCNA</Link>
                     </div>
                     <div className="search-container">
                             <SearchBar/>

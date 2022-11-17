@@ -3,10 +3,7 @@ import { useSelector } from "react-redux";
 import { currentexam, HardRecord } from "../../Function/Exam";
 import { useCookies } from 'react-cookie';
 import "./ExamTestHard.css";
-<<<<<<< HEAD
 import "./ExamTestEasy.css";
-=======
->>>>>>> 735b4732d00df5192405dc34ecd85b5d2f115a0c
 
 import { Hardlog } from "../../Function/Person"
 
@@ -272,12 +269,8 @@ function ExamTestEasy() {
                     {
                         showResults
                             ? (
-<<<<<<< HEAD
 
                                 <div className="result-card" style={{ textAlign: "center" }}>
-=======
-                                <div style={{ textAlign: "center" }}>
->>>>>>> 735b4732d00df5192405dc34ecd85b5d2f115a0c
                                     <br />
                                     <span className="ExamThardtext"> Your Score is {score} </span>
                                     <br />

@@ -40,3 +40,14 @@
     margin-top: 10px;
     display: flex;
 }
+
+@media screen and (max-width: 1160px) {
+    .store-container {
+        margin-right: 4px;
+        margin-left: 4px;
+    }
+    .store-card {
+        margin-right: 6px;
+        margin-left: 6px;
+    }
+}

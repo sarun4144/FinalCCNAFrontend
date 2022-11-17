@@ -1,6 +1,6 @@
 import React from 'react'
 import "./ComponentCSS/Banner.css"
-import { Link ,useNavigate} from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../Store/userSilce';
 import { checkout } from "../Store/examSilce";
@@ -25,30 +25,30 @@ function Banner() {
     return (
         <div className="banner-bg">
             <div className='banner-img'>
-            <div className='container'>
-            
-            <div className="container-banner">
                 
-                <div className="banner-con">
-                    <div className="banner-text">
-                        <h1>{bannerData.title}</h1>
-                        <p>
-                            {bannerData.desc}
-                        </p>
-                        {Token 
-                        ? <Link to="/login" className="banner-btn" onClick={Logout}>Logout</Link>
-                        : <Link to="/login" className="banner-btn">Login</Link>
-                        }
-                       
+
+                    <div className="container-banner">
+
+                        <div className="banner-con">
+                            <div className="banner-text">
+                                <h1>{bannerData.title}</h1>
+                                <p>
+                                    {bannerData.desc}
+                                </p>
+                                {Token
+                                    ? <Link to="/login" className="banner-btn" onClick={Logout}>Logout</Link>
+                                    : <Link to="/login" className="banner-btn">Login</Link>
+                                }
+
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            </div>
+                
             </div>
         </div>
-      
-  
-         
+
+
+
     )
 }
 
