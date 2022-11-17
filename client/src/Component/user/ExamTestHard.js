@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { currentexam, HardRecord } from "../../Function/Exam";
 import { useCookies } from 'react-cookie';
 import "./ExamTestHard.css";
+import "./ExamTestEasy.css";
 
 import { Hardlog } from "../../Function/Person"
 
@@ -268,7 +269,8 @@ function ExamTestEasy() {
                     {
                         showResults
                             ? (
-                                <div style={{ textAlign: "center" }}>
+
+                                <div className="result-card" style={{ textAlign: "center" }}>
                                     <br />
                                     <span className="ExamThardtext"> Your Score is {score} </span>
                                     <br />
@@ -276,12 +278,19 @@ function ExamTestEasy() {
                                     <br />
                                     <div>
                                         {RecordArray.map((item, index) =>
-                                            <div>
-                                                {item.images.map((pic, Ipic) =>
-                                                    <img src={pic.url} />
-                                                )}
+                                            <div className="result-Question">
+
                                                 <div className="ExamThardQuestion">
-                                                    <span style={{ fontWeight: "500" }}>Question: {index + 1}</span>
+                                                    {item.ANSiscorrect && item.selectValueS.length == item.CorrectANS.length ? (
+                                                        <div className="result-q-True"><h2>Question: {index + 1}</h2></div>
+                                                    ) : (
+                                                        <div className="result-q-false"><h2>Question: {index + 1}</h2></div>
+                                                    )
+                                                    }
+                                                    <br />
+                                                    {item.images.map((pic, Ipic) =>
+                                                        <img src={pic.url} />
+                                                    )}
                                                     <br />
                                                     <span>{item.Question}</span>
                                                     <br />
@@ -291,14 +300,26 @@ function ExamTestEasy() {
                                                 <br />
                                                 <div className="ExamThardtext">
                                                     <div className="ExamThardChoicepanel">
-                                                        <div className="ExamThardtextarea">
-                                                            <span>ข้อที่คุณตอบคือข้อที่</span> &nbsp;
-                                                            {item.selectValueS.map((choose, iChoose) =>
-                                                                iChoose < item.selectValueS.length - 1
-                                                                    ? <span>{choose.index},</span>
-                                                                    : <span>{choose.index}</span>
-                                                            )}
-                                                        </div>
+                                                        {item.ANSiscorrect && item.selectValueS.length == item.CorrectANS.length ? (
+                                                            <div className="result-q-True">
+                                                                <span>ข้อที่คุณตอบคือข้อที่</span> &nbsp;
+                                                                {item.selectValueS.map((choose, iChoose) =>
+                                                                    iChoose < item.selectValueS.length - 1
+                                                                        ? <span>{choose.index},</span>
+                                                                        : <span>{choose.index}</span>
+                                                                )}
+                                                            </div>
+                                                        ) : (
+                                                            <div className="result-q-false">
+                                                                <span>ข้อที่คุณตอบคือข้อที่</span> &nbsp;
+                                                                {item.selectValueS.map((choose, iChoose) =>
+                                                                    iChoose < item.selectValueS.length - 1
+                                                                        ? <span>{choose.index},</span>
+                                                                        : <span>{choose.index}</span>
+                                                                )}
+                                                            </div>
+                                                        )
+                                                        }
                                                         <br />
                                                         {item.Choices.map((item2, idex) =>
                                                             <>
@@ -317,7 +338,7 @@ function ExamTestEasy() {
 
                                                                     )
                                                                     : (
-                                                                        <button id={idex + 1} className="ExamThardButton1" disabled  >
+                                                                        <button id={idex + 1} className="ExamThardButton1false" disabled  >
                                                                             <div className="ExamThardtextarea">
                                                                                 <div className="ExamThardnumpanel">
                                                                                     {idex + 1}

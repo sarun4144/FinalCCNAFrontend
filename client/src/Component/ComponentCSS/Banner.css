@@ -8,6 +8,8 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     overflow: hidden;
     overflow-y: auto;
+    margin-left: 150px;
+    margin-right: 150px;
 }
 .banner-bg {
     height: 550px;
@@ -59,9 +61,23 @@
     background-repeat: no-repeat;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 1160px) {
     .banner-text {
         padding: 0 2rem;
     }
+
+    .container-banner {
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+
+    .banner-img {
+        padding: 15px;
+    }
+
+    .banner-bg{
+        height: 100%;
+    }
+
 }
 

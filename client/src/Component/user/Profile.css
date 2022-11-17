@@ -33,3 +33,16 @@
 .EditUsernameBtn :hover {
     cursor: pointer;
 }
+
+@media screen and (max-width: 1160px) {
+    .profile-container{
+        padding: 5px;
+        margin-top: 5px;
+    }
+
+    .profile-card{
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-top: 5px;
+    }
+}

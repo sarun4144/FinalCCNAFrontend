@@ -229,7 +229,6 @@ function ExamTestEasy() {
       {
         showResults
           ? (
-
             <div className="result-card" style={{ textAlign: "center" }}>
 
               <br />

@@ -132,10 +132,6 @@
         font-size: 1.5rem;
     }
 
-    .logo-container a:hover {
-        font-size: 2rem;
-        color: rgb(28, 121, 184);
-    }
 
     .header-con li a {
         display: block;
@@ -155,7 +151,6 @@
         right: 0%;
         opacity: 0;
         padding-bottom: 10px;
-
     }
 
     .menu.active {
@@ -167,6 +162,7 @@
         align-content: center;
         transition: 0.5s ease;
         display: flex;
+        margin-top: 34px;
     }
 
     .menu-link {
@@ -175,7 +171,6 @@
         justify-content: center;
         height: 10vw;
         padding: 10px 0;
-
     }
 
     .header-con ul {

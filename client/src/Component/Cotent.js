@@ -13,8 +13,7 @@ function Content() {
                     <div className="content-r">
                         <h3>ทดสอบ Font ไทย</h3>
                         <p>
-                            ไก่จิกเด็กตายคาที่ ไอไก่หล่อเท่ แต่ยังไม่เท่ากู ละทิ้งความเป็นมนุษย์ หวนคืนสู่พวก ORKz ไอเหี้ยแม่งพิมพ์นิดเดียวไม่ได้ ภาพแม่งเบียดมาเฉยเลย ไม่ได้ละสงสัยต้องไปแก้อะไรซักหน่อย ไม่งั้นหน้าเว็บเอ๋ออีก
-                            เฮ้ย ยังอ่านอยู่อีกอ่อวะ สุดยอดเลยที่มึงตั้งใจอ่านข้อความโง่ๆที่กูไว้ทดสอบนี่ แจ๋วว่ะๆ ดีจัง ดีจัง สุดยอดจัง สู้ๆไอแม็ก เพื่อองจักรพรรดิ
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quaerat minima sapiente labore consectetur nam assumenda excepturi, doloribus placeat perspiciatis neque vero a, natus aperiam ullam ipsam. Quis, sequi facere?
                         </p>
                     </div>
                 </section>
