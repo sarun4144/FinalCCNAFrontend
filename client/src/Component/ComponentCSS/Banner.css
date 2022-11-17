@@ -67,8 +67,16 @@
     }
 
     .container-banner {
-        margin-left: 5px;
-        margin-right: 5px;
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+
+    .banner-img {
+        padding: 15px;
+    }
+
+    .banner-bg{
+        height: 100%;
     }
 
 }

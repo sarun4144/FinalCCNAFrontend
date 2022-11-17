@@ -281,7 +281,7 @@ function ExamTestEasy() {
                                             <div className="result-Question">
 
                                                 <div className="ExamThardQuestion">
-                                                    {item.selectValueS[0].isCorrect && item.selectValueS.length == item.CorrectANS.length ? (
+                                                    {item.ANSiscorrect && item.selectValueS.length == item.CorrectANS.length ? (
                                                         <div className="result-q-True"><h2>Question: {index + 1}</h2></div>
                                                     ) : (
                                                         <div className="result-q-false"><h2>Question: {index + 1}</h2></div>
@@ -300,7 +300,7 @@ function ExamTestEasy() {
                                                 <br />
                                                 <div className="ExamThardtext">
                                                     <div className="ExamThardChoicepanel">
-                                                        {item.selectValueS[0].isCorrect && item.selectValueS.length == item.CorrectANS.length ? (
+                                                        {item.ANSiscorrect && item.selectValueS.length == item.CorrectANS.length ? (
                                                             <div className="result-q-True">
                                                                 <span>ข้อที่คุณตอบคือข้อที่</span> &nbsp;
                                                                 {item.selectValueS.map((choose, iChoose) =>

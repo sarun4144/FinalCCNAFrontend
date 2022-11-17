@@ -151,7 +151,10 @@
 }
 
 .result-card {
+    align-items: center;
+    
     justify-content: center;
+    flex-wrap: wrap;
     border-radius: 10px;
     padding: 15px;
     margin-top: 110px;
