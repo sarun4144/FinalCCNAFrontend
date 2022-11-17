@@ -7,8 +7,8 @@ export const listUser = async (authtoken) =>
         authtoken
       }
     });
-export const reads = async (authtoken) =>
-  await axios.post(process.env.REACT_APP_API + "/reads",
+export const reads = async (authtoken,id) =>
+  await axios.get(process.env.REACT_APP_API + "/reads/"+id,
     {
       headers: {
         authtoken

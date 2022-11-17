@@ -6,24 +6,30 @@ import Swal from 'sweetalert2'
 import LineChart from "./LineChart";
 import RadarChart from "./RadarChart";
 
-import {ChangeName ,reads} from "../../Function/Person"
+import {ChangeName,reads} from "../../Function/Person"
 
 function Profile() {
   const user = useSelector((state) => ({ ...state }))
   const Userid = user.userStore.user.ObjectID
   const Token = user.userStore.user.token
-  const username = user.userStore.user.username
-  const role = user.userStore.user.role
-  const email = user.userStore.user.email
   const [data, setData] = useState([]);
-  const [values, setvalues] = useState([]);
 
   //console.log(username)
   //console.log(role)
   //console.log(email)
+  console.log(data)
+  useEffect(() =>{
+    loadData(Token,Userid)
+  },[Userid]) 
+
+  function loadData(authtoken,id) {
+    reads(authtoken,id).then((res) => {
+        setData(res.data);
+    });
+}
 
   const ShowEditUsername = async (id) => {
-    const { value: username } = await Swal.fire({
+    const { value: Newusername } = await Swal.fire({
       title: 'แก้ไข',
       input: 'text',
       inputLabel: 'ใส่ Username',
@@ -31,18 +37,22 @@ function Profile() {
       confirmButtonText: 'ยืนยัน',
       confirmButtonColor: 'green',
     })
-    if(username) {
+    if(Newusername) {
       console.log("True")
-      setvalues({ ...values, id: id, username: username });
-      ChangeName(user.userStore.user.token,values.id, {values})
+      ChangeName(user.userStore.user.token,id,{Newusername})
         .then(res => {
           Swal.fire({
-            title: 'แก้ไข Password สำเร็จ',
+            title: 'แก้ไข Username สำเร็จ',
             confirmButtonText: 'ยืนยัน',
             confirmButtonColor: 'green',
           })
-          window.location.reload();
+          loadData(Token,Userid)
         }).catch(err => {
+          Swal.fire({
+            title: err.response.data,
+            confirmButtonText: 'ยกเลิก',
+            confirmButtonColor: 'red',
+          })
           console.log(err.response)
         })
     }
@@ -55,9 +65,9 @@ function Profile() {
           <h1>User - Profile</h1>
         </div>
         <div className="profile-card-content">
-          <div>Username : {username} <AiIcons.AiFillEdit id="EditUsernameBtn" onClick={()=>ShowEditUsername(Userid)} /></div>
-          <div>Role : {role}</div>
-          <div>Email : {email}</div>
+          <div>Username : {data.username} <AiIcons.AiFillEdit id="EditUsernameBtn" onClick={()=>ShowEditUsername(Userid)} /></div>
+          <div>Role : {data.role}</div>
+          <div>Email : {data.email}</div>
         </div>
       </div>
       <div className="row">
