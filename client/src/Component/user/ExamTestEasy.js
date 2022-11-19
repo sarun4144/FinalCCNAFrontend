@@ -96,6 +96,7 @@ function ExamTestEasy() {
       setData(res.data[0].exdata);
     });
   }
+
   function EasylogS(authtoken) {
     Easylog(authtoken).then((res) => {
       setlog(res.data);

@@ -118,10 +118,10 @@ const SearchBar = () => {
             {
                 filteredData.length !== 0 && (
                     <div className='searchResult'>
-                        {filteredData.slice(0, 15).map((item) => {
+                        {filteredData.slice(0, 15).map((item, index) => {
                             { console.log(item) }
                             return (
-                                <a1 className='resultItem' href='' target="blank" onClick={() => startNavigate(item._id, item.Categoryid)}>
+                                <a1 key={index} className='resultItem' href='' target="blank" onClick={() => startNavigate(item._id, item.Categoryid)}>
                                     <p>{item.name} : {item.title}</p>
                                 </a1>
                             )

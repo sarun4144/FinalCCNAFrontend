@@ -113,7 +113,7 @@
     }
 }
 
-@media (max-width: 1160px) {
+@media (max-width: 1280px) {
     .mobile-menu {
         display: block;
         color: #fff;

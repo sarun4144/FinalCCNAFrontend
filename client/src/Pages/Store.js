@@ -94,7 +94,7 @@ function Store() {
       return exam.Categoryid === select;
     }
   })
-  
+
   try {
     if (user.userStore.user.role === 'admin') {
       return (
@@ -107,7 +107,7 @@ function Store() {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                {category.map((item ,catindex) =>
+                {category.map((item, catindex) =>
                   <Dropdown.Item key={catindex} as="button" onClick={(id) => { setSelect(item._id); setDropDownText(item.name) }}>{item.name}</Dropdown.Item>
                 )}
                 <Dropdown.Item as="button" onClick={(id) => { setSelect(""); setDropDownText("ALL") }}>ALL</Dropdown.Item>
@@ -127,7 +127,7 @@ function Store() {
                   <h4>{item.title}</h4>
                 </div>
               </div>
-              {item.CAT.map((cat ,index) =>
+              {item.CAT.map((cat, index) =>
                 <div key={index}>
                   <div className="form-group">
                     <h5>Category : {cat.name}</h5>
@@ -214,11 +214,13 @@ function Store() {
               <h4>{item.title}</h4>
             </div>
             {item.CAT.map((cat, index) =>
-              <div key={index} className="form-group">
-                <h5>Category : {cat.name}</h5>
+              <div key={index}>
+                <div className="form-group">
+                  <h5>Category : {cat.name}</h5>
+                </div>
+                <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id, item.Categoryid, cat.name)}>ดูข้อสอบ</button>
               </div>
             )}
-            <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id)}>ดูข้อสอบ</button>
           </form>
         </div>
       )}
