@@ -18,11 +18,16 @@ const SearchBar = () => {
     const [filteredData, setFilteredData] = useState([]);
     const [searchCAT, setSearchCAT] = useState([]);
     const role = user.userStore.user.role
+    const [track, setTrack] = useState(false);
 
     useEffect(() => {
         //code
         loadData(Token)
     }, [Token, dispatch]);
+
+    useEffect(() => {
+        setTrack(false)
+    }, [track]);
 
     const loadData = (authtoken) => {
         listexam(authtoken).then(res => {
@@ -63,6 +68,7 @@ const SearchBar = () => {
             }
             )
         }
+        setTrack(true)
         console.log(searchCAT)
         SeeExam(id, catid, searchCAT)
     }
@@ -110,7 +116,7 @@ const SearchBar = () => {
                 </div>
             </div>
             {
-                filteredData.length != 0 && (
+                filteredData.length !== 0 && (
                     <div className='searchResult'>
                         {filteredData.slice(0, 15).map((item) => {
                             { console.log(item) }

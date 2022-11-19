@@ -33,8 +33,8 @@ function Info() {
       <button className="info-cat-selector" onClick={() => setCatDisplay('Automation and Programmability')}>Automation and Programmability</button>
       <div className="info-cat-display">
         <h5>เนื้อหาของ {catDisplay} ประกอบไปด้วย :</h5>
-        {FilterSelector.map((item) =>
-          <li>
+        {FilterSelector.map((item, i) =>
+          <li key={i}>
             {item.display}
           </li>)}
       </div>

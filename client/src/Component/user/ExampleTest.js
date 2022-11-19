@@ -81,8 +81,9 @@ function ExampleTest() {
   const filterExamList = allExam.filter((samecatExam) => {
     { console.log(samecatExam) }
     /*{console.log(exame._id)}*/
-    return samecatExam.Categoryid === CatID && samecatExam._id != CatID;
+    return samecatExam.Categoryid === CatID && samecatExam._id !== CatID;
   })
+
   function SeeExam(id, catid, category) {
     if (role) {
       if (role === "admin") {
@@ -96,7 +97,7 @@ function ExampleTest() {
         dispatch(checkin(EXAM))
         localStorage.setItem('examid', id)
         localStorage.setItem('catid', catid)
-        navigate("/user/examtesteasy")
+        navigate("/user/extest")
       }
     } else {
       Swal.fire({
@@ -151,8 +152,8 @@ function ExampleTest() {
         <div className="sameCat-card">
           <div className="sameCat-card-header">ชุดข้อสอบใน {Catname}</div>
           <div className="sameCat-container">
-            {filterExamList.map((item) =>
-              <div className='store-card'>
+            {filterExamList.map((item, i) =>
+              <div key={i} className='store-card'>
                 <form >
                   <div className="form-group">
                     <h1>{item.name}</h1>
@@ -160,8 +161,8 @@ function ExampleTest() {
                   <div className="form-group">
                     <h4>{item.title}</h4>
                   </div>
-                  {item.CAT.map((cat) =>
-                    <div>
+                  {item.CAT.map((cat, catindex) =>
+                    <div key={catindex}>
                       <div className="form-group">
                         <h5>Category : {cat.name}</h5>
                       </div>

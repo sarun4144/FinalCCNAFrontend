@@ -236,7 +236,7 @@ function ExamTestEasy() {
               <br />
               <div >
                 {RecordArray.map((item, index) =>
-                  <div className="result-Question">
+                  <div key={index} className="result-Question">
 
                     <div className="ExamTeasyQuestion">
                       {item.ANSiscorrect && item.selectValueS.length == item.CorrectANS.length ? (
@@ -247,7 +247,7 @@ function ExamTestEasy() {
                       }
                       <br />
                       <center>{item.images.map((pic, Ipic) =>
-                        <img src={pic.url} />
+                        <img key={Ipic} src={pic.url} />
                       )}</center>
                       <br />
                       <span>{item.Question}</span>
@@ -263,8 +263,8 @@ function ExamTestEasy() {
                             <span>ข้อที่คุณตอบคือข้อที่</span> &nbsp;
                             {item.selectValueS.map((choose, iChoose) =>
                               iChoose < item.selectValueS.length - 1
-                                ? <span>{choose.index},</span>
-                                : <span>{choose.index}</span>
+                                ? <span key={iChoose}>{choose.index},</span>
+                                : <span key={iChoose}>{choose.index}</span>
                             )}
                           </div>
                         ) : (
@@ -272,8 +272,8 @@ function ExamTestEasy() {
                             <span>ข้อที่คุณตอบคือข้อที่</span> &nbsp;
                             {item.selectValueS.map((choose, iChoose) =>
                               iChoose < item.selectValueS.length - 1
-                                ? <span>{choose.index},</span>
-                                : <span>{choose.index}</span>
+                                ? <span key={iChoose}>{choose.index},</span>
+                                : <span key={iChoose}>{choose.index}</span>
                             )}
                           </div>
                         )
@@ -283,7 +283,7 @@ function ExamTestEasy() {
                           <>
                             {item2.isCorrect
                               ? (
-                                <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1true" disabled  >
+                                <button key={idex} id={idex + 1} name={idex + 1} className="ExamTeasyButton1true" disabled  >
                                   <div className="ExamTeasytextarea">
                                     <div className="ExamTeasynumpanel">
                                       {idex + 1}
@@ -296,7 +296,7 @@ function ExamTestEasy() {
 
                               )
                               : (
-                                <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1false" disabled  >
+                                <button key={idex} id={idex + 1} name={idex + 1} className="ExamTeasyButton1false" disabled  >
                                   <div className="ExamTeasytextarea">
                                     <div className="ExamTeasynumpanel">
                                       {idex + 1}
@@ -343,9 +343,9 @@ function ExamTestEasy() {
                   Easy
                 </div>
                 {Data2.map((item, index) => (
-                  <div>
+                  <div key={index}>
                     {item.images.map((pic, Ipic) =>
-                      <img src={pic.url} />
+                      <img key={Ipic} src={pic.url} />
                     )}
                     <div className="ExamTeasyQuestion">
                       <span style={{ fontWeight: "500" }}>Question: {currentQuestion + 1}</span>
@@ -361,7 +361,7 @@ function ExamTestEasy() {
                           <>
                             {Block
                               ? (
-                                <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)} disabled  >
+                                <button key={idex} id={idex + 1} name={idex + 1} className="ExamTeasyButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)} disabled  >
                                   <div className="ExamTeasytextarea">
                                     <div className="ExamTeasynumpanel">
                                       {idex + 1}
@@ -373,7 +373,7 @@ function ExamTestEasy() {
                                 </button>
                               )
                               : (
-                                <button id={idex + 1} name={idex + 1} className="ExamTeasyButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)}  >
+                                <button key={idex} id={idex + 1} name={idex + 1} className="ExamTeasyButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)}  >
                                   <div className="ExamTeasytextarea">
                                     <div className="ExamTeasynumpanel">
                                       {idex + 1}

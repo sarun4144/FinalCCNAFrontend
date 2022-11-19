@@ -138,7 +138,7 @@ function ManagAdmin() {
             </thead>
             <tbody>
               {data.map((item, index) =>
-                <tr>
+                <tr key={index}>
                   <th >{item.email}</th>
                   <td>{item.username}</td>
                   <td>
