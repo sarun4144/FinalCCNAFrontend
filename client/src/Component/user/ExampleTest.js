@@ -144,7 +144,7 @@ function ExampleTest() {
                   <li>หมวดหมู่: {categoryName}</li>
                 </ul>
               )}
-              <center onClick={() => navigate("/user/example")}><button>ดูตัวอย่าง</button></center>
+              <center ><button className="btn btn-primary" onClick={() => navigate("/user/example")}>ดูตัวอย่าง</button></center>
             </div>
             เลือกความยาก
             <br />

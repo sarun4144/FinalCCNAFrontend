@@ -80,21 +80,28 @@ const Example = () => {
         setCurrentQuestion(preve => preve + 1);
     }
 
+    function goback() {
+        setBlock(true)
+        localStorage.setItem("currentQuestion", currentQuestion - 1)
+        setCurrentQuestion(preve => preve - 1);
+    }
+
 
     return (
         <div className='example-container'>
+            <center><h1>{exame.name}</h1></center>
             <div className='example-card'>
                 {Data2.map((item, index) => (
                     <div key={index}>
-                        {item.images.map((pic, Ipic) =>
-                            <img key={Ipic} src={pic.url} />
-                        )}
                         <div className="ExamTeasyQuestion">
                             <span style={{ fontWeight: "500" }}>Question: {currentQuestion + 1}</span>
                             <br />
                             <span>{item.Question}</span>
                             <br />
                         </div>
+                        <center>{item.images.map((pic, Ipic) =>
+                            <img key={Ipic} src={pic.url} />
+                        )}</center>
                         <br />
                         <div className="ExamTeasytext">
                             <div className="ExamTeasyChoicepanel">
@@ -104,8 +111,10 @@ const Example = () => {
                                             ? (
                                                 <button key={idex} id={idex + 1} name={idex + 1} className="ExamTeasyButton1" disabled  >
                                                     <div className="ExamTeasytextarea">
-                                                        <div className="ExamTeasynumpanel">
-                                                            {idex + 1}
+                                                        <div>
+                                                            <div className="ExamTeasynumpanel">
+                                                                {idex + 1}
+                                                            </div>
                                                         </div>
                                                         <div className="ExamTeasytextpanel">
                                                             {item2.text}
@@ -116,8 +125,10 @@ const Example = () => {
                                             : (
                                                 <button key={idex} id={idex + 1} name={idex + 1} className="ExamTeasyButton1" >
                                                     <div className="ExamTeasytextarea">
-                                                        <div className="ExamTeasynumpanel">
-                                                            {idex + 1}
+                                                        <div>
+                                                            <div className="ExamTeasynumpanel">
+                                                                {idex + 1}
+                                                            </div>
                                                         </div>
                                                         <div className="ExamTeasytextpanel">
                                                             {item2.text}
@@ -131,14 +142,23 @@ const Example = () => {
                             </div>
                             <br />
                         </div>
-                        <button className="ExamTeasyGobutton1" onClick={() => gonext(item.Choices, item.Question, item.images)}>GONEXT</button>
+                        <center>
+                            {currentQuestion === 0 ? <div></div> :
+                                <button className='btn btn-secondary' onClick={() => goback()}>PREVIOUS</button>
+                            }
+                            &nbsp;
+                            {currentQuestion === Data.length - 1 ? <div></div> :
+                                <button className="btn btn-primary" onClick={() => gonext()}>NEXT</button>
+                            }
+
+                        </center>
                     </div>
                 ))}
 
             </div>
             {category.map((cat, ic) =>
                 <div key={ic}>
-                    <center><button onClick={() => SeeExam(exame._id, exame.Categoryid, cat.name)}>กลับหน้าเดิม</button></center>
+                    <center><button className="btn btn-primary" onClick={() => SeeExam(exame._id, exame.Categoryid, cat.name)}>กลับหน้าเดิม</button></center>
                 </div>
             )}
         </div>

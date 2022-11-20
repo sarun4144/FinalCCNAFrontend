@@ -13,6 +13,7 @@ function ExamTestEasy() {
     const Exid = exam.examStore.exam.examid
     const UserID = exam.userStore.user.ObjectID
     const [data, setData] = useState([]);
+    const [exame, setExam] = useState([]);
     const Data = Object.values(data);
 
     const [log, setlog] = useState([]);
@@ -117,6 +118,7 @@ function ExamTestEasy() {
     function loadData(authtoken) {
         currentexam(authtoken).then((res) => {
             setData(res.data[0].exdata);
+            setExam(res.data[0])
         });
     }
     function HardlogS(authtoken) {
@@ -287,9 +289,10 @@ function ExamTestEasy() {
                                                     )
                                                     }
                                                     <br />
-                                                    {item.images.map((pic, Ipic) =>
-                                                        <img key={Ipic} src={pic.url} />
-                                                    )}
+                                                    <center>
+                                                        {item.images.map((pic, Ipic) =>
+                                                            <img key={Ipic} src={pic.url} />
+                                                        )}</center>
                                                     <br />
                                                     <span>{item.Question}</span>
                                                     <br />
@@ -326,8 +329,10 @@ function ExamTestEasy() {
                                                                     ? (
                                                                         <button key={idex} id={idex + 1} className="ExamThardButton1true" disabled  >
                                                                             <div className="ExamThardtextarea">
-                                                                                <div className="ExamThardnumpanel">
-                                                                                    {idex + 1}
+                                                                                <div>
+                                                                                    <div className="ExamThardnumpanel">
+                                                                                        {idex + 1}
+                                                                                    </div>
                                                                                 </div>
                                                                                 <div className="ExamThardtextpanel">
                                                                                     {item2.text}
@@ -337,16 +342,35 @@ function ExamTestEasy() {
 
                                                                     )
                                                                     : (
-                                                                        <button key={idex} id={idex + 1} className="ExamThardButton1false" disabled  >
-                                                                            <div className="ExamThardtextarea">
-                                                                                <div className="ExamThardnumpanel">
-                                                                                    {idex + 1}
-                                                                                </div>
-                                                                                <div className="ExamThardtextpanel">
-                                                                                    {item2.text}
-                                                                                </div>
-                                                                            </div>
-                                                                        </button>
+                                                                        <>
+                                                                            {item.ANSiscorrect ?
+                                                                                <button key={idex} id={idex + 1} name={idex + 1} className="ExamTeasyButton1" disabled  >
+                                                                                    <div className="ExamTeasytextarea">
+                                                                                        <div>
+                                                                                            <div className="ExamTeasynumpanel">
+                                                                                                {idex + 1}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div className="ExamTeasytextpanel">
+                                                                                            {item2.text}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </button>
+                                                                                :
+                                                                                <button key={idex} id={idex + 1} name={idex + 1} className="ExamTeasyButton1false" disabled  >
+                                                                                    <div className="ExamTeasytextarea">
+                                                                                        <div>
+                                                                                            <div className="ExamTeasynumpanel">
+                                                                                                {idex + 1}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div className="ExamTeasytextpanel">
+                                                                                            {item2.text}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </button>
+                                                                            }
+                                                                        </>
                                                                     )
                                                                 }
 
@@ -382,23 +406,28 @@ function ExamTestEasy() {
                                     <div className="ExamThardcard_item">
                                         <div className="ExamThardcard_inner">
                                             <div className="ExamThardrole_name">
-                                                Hard
+                                                <h1>{exame.name} &nbsp;
+                                                    Hard</h1>
                                                 Time = 0:{min}:{counter}
                                             </div>
                                             <br />
                                             {Data2.map((item, index) => (
                                                 <div key={index}>
-                                                    {item.images.map((pic, Ipic) =>
-                                                        <img key={Ipic} src={pic.url} />
-                                                    )}
+
                                                     <div className="ExamThardQuestion">
                                                         <span style={{ fontWeight: "500" }}>Question: {currentQuestion + 1}</span>
                                                         <br />
                                                         <span>{item.Question}</span>
                                                         <br />
-                                                        <span>{`${Selector}/${item.CorrectANS.length} is Selected `}</span>
+
                                                     </div>
+                                                    <center>
+                                                        {item.images.map((pic, Ipic) =>
+                                                            <img key={Ipic} src={pic.url} />
+                                                        )}
+                                                    </center>
                                                     <br />
+                                                    <span>{`${Selector}/${item.CorrectANS.length} is Selected `}</span>
                                                     <div className="ExamThardtext">
                                                         <div className="ExamThardChoicepanel">
                                                             {item.Choices.map((item2, idex) =>
@@ -407,8 +436,10 @@ function ExamTestEasy() {
                                                                         ? (
                                                                             <button key={idex} id={idex + 1} className="ExamTeasyButton1" disabled  >
                                                                                 <div className="ExamThardtextarea">
-                                                                                    <div className="ExamThardnumpanel">
-                                                                                        {idex + 1}
+                                                                                    <div>
+                                                                                        <div className="ExamThardnumpanel">
+                                                                                            {idex + 1}
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div className="ExamThardtextpanel">
                                                                                         {item2.text}
@@ -419,8 +450,10 @@ function ExamTestEasy() {
                                                                         : (
                                                                             <button key={idex} id={idex + 1} className="ExamThardButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)}  >
                                                                                 <div className="ExamThardtextarea">
-                                                                                    <div className="ExamThardnumpanel">
-                                                                                        {idex + 1}
+                                                                                    <div>
+                                                                                        <div className="ExamThardnumpanel">
+                                                                                            {idex + 1}
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div className="ExamThardtextpanel">
                                                                                         {item2.text}
@@ -445,7 +478,9 @@ function ExamTestEasy() {
                                                                 </div>)
                                                         }
                                                     </div>
-                                                    <button className="ExamThardGobutton1" onClick={() => gonext(item.Choices, item.Question, item.CorrectANS, item.Answerdetail, item.images)}>GONEXT</button>
+                                                    <center>
+                                                        <button className="ExamThardGobutton1" onClick={() => gonext(item.Choices, item.Question, item.CorrectANS, item.Answerdetail, item.images)}>GONEXT</button>
+                                                    </center>
                                                 </div>
                                             ))}
                                         </div>
