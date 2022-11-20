@@ -120,10 +120,13 @@ const SearchBar = () => {
                     <div className='searchResult'>
                         {filteredData.slice(0, 15).map((item, index) => {
                             { console.log(item) }
-                            return (
-                                <a1 key={index} className='resultItem' href='' target="blank" onClick={() => startNavigate(item._id, item.Categoryid)}>
+                            return (<>
+                                {item.CAT.map((cat) => 
+                                <a1 key={index} className='resultItem' href='' target="blank" onClick={() => SeeExam(item._id, item.Categoryid, cat.name)}>
                                     <p>{item.name} : {item.title}</p>
                                 </a1>
+                                )}
+                            </>
                             )
                         })}
 
