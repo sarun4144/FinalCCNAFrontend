@@ -36,8 +36,10 @@ function Banner() {
                                     {bannerData.desc}
                                 </p>
                                 {Token
-                                    ? <Link to="/login" className="banner-btn" onClick={Logout}>Logout</Link>
-                                    : <Link to="/login" className="banner-btn">Login</Link>
+                                    ? <><Link to="/store" className="banner-btn">Exam List</Link><br/>
+                                    <Link to="/" className="banner-btn-out" onClick={Logout}>Logout</Link></>
+                                    : <><Link to="/login" className="banner-btn">Login</Link>
+                                    &nbsp;<Link to="/register" className="banner-btn-reg">Register</Link></>
                                 }
 
                             </div>
