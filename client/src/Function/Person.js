@@ -52,6 +52,11 @@ export const Hardlog = async (id) =>
     {
 
     });
+export const HardlogS = async (id,value) =>
+  await axios.post(process.env.REACT_APP_API + "/HardlogS/" + id,value,
+    {
+
+    });
 export const ChangeName = async (authtoken, id, value) =>
   await axios.put(process.env.REACT_APP_API + "/ChangeName/" + id, value,
     {

@@ -27,6 +27,7 @@ import ExampleTest from './Component/user/ExampleTest';
 import Example from './Component/user/Example';
 import ExamTestEasy from './Component/user/ExamTestEasy';
 import ExamTestHard from './Component/user/ExamTestHard';
+import ResultHard from './Component/user/ResultHard';
 //adminpage
 import Adminhome from './Component/admin/Adminhome';
 import ManagAdmin from './Component/admin/ManageAdmin';
@@ -101,6 +102,7 @@ function App() {
 
 
               <Route path="/user/profile" element={<UserRoute><><Profile /></> </UserRoute>} />
+              <Route path="/user/ResultHard" element={<UserRoute><><ResultHard /></> </UserRoute>} />
 
               <Route path="/user/extest" element={<UserRoute><><ExampleTest /></> </UserRoute>} />
               <Route path="/user/example" element={<UserRoute><><Example /></></UserRoute>} />

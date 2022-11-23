@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { currentexam, HardRecord } from "../../Function/Exam";
+import { currentexam, HardRecord ,CountStamp} from "../../Function/Exam";
 import { useCookies } from 'react-cookie';
 import "./ExamTestHard.css";
 import "./ExamTestEasy.css";
@@ -12,9 +12,13 @@ function ExamTestEasy() {
     const exam = useSelector((state) => ({ ...state }));
     const Exid = exam.examStore.exam.examid
     const UserID = exam.userStore.user.ObjectID
+    const Catname = exam.examStore.exam.category
+
     const [data, setData] = useState([]);
     const [exame, setExam] = useState([]);
+    const [docount, setdocount] = useState([]);
     const Data = Object.values(data);
+    
 
     const [log, setlog] = useState([]);
     const Log = Object.values(log);
@@ -48,7 +52,7 @@ function ExamTestEasy() {
     //cookie
     const [cookies, setCookie] = useCookies(['Result']);
 
-    //  console.log(Log.length)
+    
     useEffect(() => {
         //code
         if (localStorage.showresult === "true") {
@@ -63,6 +67,7 @@ function ExamTestEasy() {
         //code
         loadData(Exid);
         HardlogS(UserID)
+      
     }, [Exid, UserID]);
 
 
@@ -119,6 +124,7 @@ function ExamTestEasy() {
         currentexam(authtoken).then((res) => {
             setData(res.data[0].exdata);
             setExam(res.data[0])
+            setdocount(res.data[0].Docount)
         });
     }
     function HardlogS(authtoken) {
@@ -188,7 +194,31 @@ function ExamTestEasy() {
             Num: Log.length + 1,
             Time: `${min2}:${counter2}`,
             Date: Date(),
-            ExamObjectid: Exid
+            ExamObjectid: Exid,
+            Examname:exame.name,
+            Title: exame.title,
+            Category: Catname,
+            Score:score
+        }
+        const payload2 = {
+           Docount:parseInt(docount) + 1
+        }
+        const payload3 = {
+           Docount:1
+        }
+        if(docount == undefined){
+            CountStamp(Exid,payload3).then(res => {
+                console.log(res.data)
+           }).catch(err => {
+            console.log(err);
+           })
+        }else{
+            console.log("SSSSSSSSSSSSSSSSSSSSSSSSS")
+            CountStamp(Exid,payload2).then(res => {
+                console.log(res.data)
+           }).catch(err => {
+            console.log(err);
+           })
         }
         HardRecord(Exid, payload)
             .then(res => {
@@ -205,6 +235,8 @@ function ExamTestEasy() {
             }).catch(err => {
                 console.log(err);
             })
+
+           
     }
     function countdown() {
 
@@ -235,6 +267,7 @@ function ExamTestEasy() {
                 ANSiscorrect: ANSiscorrect
             }
         })
+        
         setBlock(true)
         for (var index = 0; index < Choices.length; index++) {
             document.getElementById(index + 1).className = "ExamThardButton1"

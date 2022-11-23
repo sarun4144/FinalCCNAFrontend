@@ -5,8 +5,9 @@ import * as AiIcons from "react-icons/ai";
 import Swal from 'sweetalert2'
 import LineChart from "./LineChart";
 import RadarChart from "./RadarChart";
-
-import { ChangeName, reads ,Hardlog,Easylog} from "../../Function/Person"
+import Table from 'react-bootstrap/Table';
+import { ChangeName, reads, Hardlog, Easylog } from "../../Function/Person"
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const user = useSelector((state) => ({ ...state }))
@@ -14,16 +15,31 @@ function Profile() {
   const Token = user.userStore.user.token
   const [data, setData] = useState([]);
   const [dataExamHard, setDataExamHard] = useState([]);
+  const [dataExamEasy, setDataExamEasy] = useState([]);
 
+  const [show, setShow] = useState(false);
+
+  const navigate = useNavigate();
+  const DataHard = Object.values(dataExamHard);
+  const DataEasy = Object.values(dataExamEasy);
   //console.log(username)
   //console.log(role)
-  //console.log(email)
-  console.log(dataExamHard)
+  // console.log(email)
+  console.log("Hard", dataExamHard)
+  console.log("Easy", dataExamEasy)
+  const openInNewTab = url => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+  useEffect(() => {
+    localStorage.removeItem("Index")
+  }, [])
   useEffect(() => {
     loadData(Token, Userid)
   }, [Userid])
+
   useEffect(() => {
     loadExamData(Userid)
+    loadExamDataE(Userid)
   }, [Userid])
 
   function loadData(authtoken, id) {
@@ -34,6 +50,11 @@ function Profile() {
   function loadExamData(id) {
     Hardlog(id).then((res) => {
       setDataExamHard(res.data);
+    });
+  }
+  function loadExamDataE(id) {
+    Easylog(id).then((res) => {
+      setDataExamEasy(res.data);
     });
   }
 
@@ -67,6 +88,11 @@ function Profile() {
     }
   }
 
+  function Seresult(index) {
+    localStorage.setItem("Index",index)
+    navigate("/user/ResultHard");
+  }
+ 
   return (
     <div className="profile-container">
       <div className="profile-card">
@@ -100,20 +126,75 @@ function Profile() {
       <div className="profile-card">
         <div className="profile-card-header"><h1>History</h1></div>
         <div className="row">
-          <div className="col-md-6" style={{textAlign:"center"}}>
-          <h2>Easy</h2>
-          <div className="profile-card-content">
+          <div className="col-md-6" style={{ textAlign: "center" }}>
+            <h2>Easy</h2>
+            <div className="profile-card-content">
+              <Table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ExamName</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {DataEasy.map((item, index) =>
+                    <tr key={index}>
+                      <td >
+                        <div className="SeeexamEasy" >
+                          {item.Examname}
+                        </div>
+                      </td>
+                      <td>{item.Title}</td>
+                      <td>{item.Category}</td>
+                      <td>{item.Date.substring(0, 24)}</td>
+                      <td>{item.Score}</td>
+                    </tr>
 
+                  )}
+
+                </tbody>
+              </Table>
+            </div>
           </div>
-          </div>
-          <div className="col-md-6" style={{textAlign:"center"}}>
-          <h2>Hard</h2>
-          <div className="profile-card-content">
-            
-          </div>
+          <div className="col-md-6" style={{ textAlign: "center" }}>
+            <h2>Hard</h2>
+            <div className="profile-card-content">
+              <Table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ExamName</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Time use</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {DataHard.map((item, index) =>
+                    <tr key={index}>
+                      <td >
+                        <div className="SeeexamHard" onClick={() => Seresult(index+1)}>
+                          {item.Examname}
+                        </div>
+                      </td>
+                      <td>{item.Title}</td>
+                      <td>{item.Category}</td>
+                      <td>{item.Time}</td>
+                      <td>{item.Date.substring(0, 24)}</td>
+                      <td>{item.Score}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </Table>
+            </div>
           </div>
         </div>
       </div>
+      
     </div>
   )
 }
