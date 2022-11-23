@@ -1,0 +1,44 @@
+.example-container {
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 100px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 50px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+.example-card {
+    justify-content: center;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+@media screen and (max-width: 1160px) {
+    .example-container {
+        margin-top: 85px;
+        margin-left: 5px;
+        margin-right: 5px;
+        padding: 0px;
+    }
+
+    .example-card {
+        padding: 10px;
+        margin-top: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+}

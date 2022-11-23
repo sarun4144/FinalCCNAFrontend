@@ -13,17 +13,12 @@ function Info() {
 
   return (
     <div className="info-container">
-      <div className="info-container-header">อะไรคือ CCNA?</div>
-      <div className="info-text"> &nbsp; &nbsp; ใบรับรอง CCNA ของ Cisco ที่เป็นบริษัทผลิตและจัดจำหน่ายอุปกรณ์ฮาร์ดแวร์ ซอฟต์แวร์ ที่
-        เกี่ยวข้องกับระบบเครือข่ายชั้นนำของนานาชาติ
-        โดยใบรับรอง CCNA หรือ Cisco Certified Network Associate คือใบรับรองระดับเบื้องต้น
-        เกี่ยวการสายอาชีพ IT ที่ถูกออกโดย Cisco ซึ่งใบรับรอง CCNA จะเป็นใบรับรองความรู้ความสามารถที่
-        จำเป็นต่องานที่เกี่ยวข้องกับระบบเครือข่ายซึ่งจำเป็นสำหรับตำแหน่งงานในด้าน IT ซึ่งการเข้าทำข้อสอบ
-        เพื่อรับใบรับรอง CCNA นั้นเป็นภาษาอังกฤษและการสอบในแต่ละครั้งจะมีค่าใช้จ่ายที่สูงอีกทั้งยังมีความ
-        ยากในระดับหนึ่ง ผู้เข้าสอบจึงควรเตรียมความพร้อมก่อนสอบให้เรียบร้อย
+      <div className="info-container-header">What is CCNA?</div>
+      <div className="info-text"> &nbsp; &nbsp; The CCNA—which stands for Cisco Certified Network Associate—is an entry-level information technology (IT)
+        certification issued by networking hardware company Cisco. The CCNA is designed to validate your knowledge on fundamental networking concepts often requested in networking roles in IT positions.
       </div>
-      <div className="info-text">&nbsp; &nbsp; โดยที่ในข้อสอบสำหรับใบรับรอง CCNA จะประกอบไปด้วยเนื้อหาต่างๆเกี่ยวกับระบบ Network
-        ซึ่งสามารถจำแนกออกเป็นประเภทต่างๆ และประกอบไปด้วยเนื้อหาดังนี้
+      <div className="info-text">&nbsp; &nbsp; To earn your CCNA certification, you must pass the 200-301 CCNA exam.
+        This 120-minute exam tests your knowledge of :
       </div>
       <button className="info-cat-selector" onClick={() => setCatDisplay('Network Fundamentals')}>Network Fundamentals</button>
       <button className="info-cat-selector" onClick={() => setCatDisplay('Network Access')}>Network Access</button>
@@ -32,13 +27,13 @@ function Info() {
       <button className="info-cat-selector" onClick={() => setCatDisplay('Security Fundamentals')}>Security Fundamentals</button>
       <button className="info-cat-selector" onClick={() => setCatDisplay('Automation and Programmability')}>Automation and Programmability</button>
       <div className="info-cat-display">
-        <h5>เนื้อหาของ {catDisplay} ประกอบไปด้วย :</h5>
-        {FilterSelector.map((item) =>
-          <li>
+        <h5>This topics of {catDisplay} likely to be included in the CCNA exam : </h5>
+        {FilterSelector.map((item, i) =>
+          <li key={i}>
             {item.display}
           </li>)}
       </div>
-      <center><Link to="/" > กลับสู่หน้าหลัก</Link></center>
+      <center><Link to="/" > Back to Home page</Link></center>
     </div>
 
   )

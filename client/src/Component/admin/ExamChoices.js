@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { currentexam, examchoicesadd, examChoiceschange, examChoicesdelete, examReset, examHeadChange, CorrectAnswer } from "../../Function/Exam"
 import { listCategory } from "../../Function/Category";
 import { Imageadd, Imageremove } from "../../Function/CloudDinary";
+
 import Toast from "../../Alert/Success";
 import { AiFillDelete, AiFillEdit, AiOutlinePlus } from "react-icons/ai";
 import Confirm from "../../Alert/Confirm";
@@ -41,6 +42,7 @@ function ExamChoices() {
 
   }, [EXid])
 
+
   function loadData(id) {
     currentexam(id).then((res) => {
       setData(res.data[0].exdata)
@@ -54,6 +56,7 @@ function ExamChoices() {
       console.log(err);
     })
   }
+
   function AddExam(num) {
     const Num = {
       Num: num
@@ -416,7 +419,7 @@ function ExamChoices() {
           <div className="form-check">
             <input onChange={() => handleChange()} className="form-check-input" type="checkbox" />
             <label className="form-check-label" >
-              แก้ไขข้อสอบ
+              Edit mode
             </label>
           </div>
           <button type="submit" className="btn btn-primary" onClick={() => AddExam(Data.length + 1)}>Addexam</button>
@@ -429,11 +432,11 @@ function ExamChoices() {
           <h4> Title : {Head.title}</h4>
           <textarea name="Title" className="form-control" onChange={handleChangeh} defaultValue={Head.title}></textarea>
           <div className="form-group">
-            <h4 htmlFor="exampleFormControlSelect1">Category :{Catname}</h4>
-            <select className="form-control" id="exampleFormControlSelect1" name="Categoryid" onChange={handleChangeh}>
-              <option selected value={Catid} >{Catname}</option>
-              {cat.map((item, index) =>
-                <option key={index} value={item._id}>{item.name}</option>
+            <h4 htmlFor="exampleFormControlSelect1">Category : {Catname}</h4>
+            <select defaultValue={Catid} className="form-control" id="exampleFormControlSelect1" name="Categoryid" onChange={handleChangeh}>
+              <option value={Catid} >{Catname}</option>
+              {cat.map((item, indexcat) =>
+                <option key={indexcat} value={item._id}>{item.name}</option>
 
               )}
             </select>
@@ -443,11 +446,11 @@ function ExamChoices() {
 
         </div>
         {Data.map((item, index) =>
-          <div className="examchoices-card" >
+          <div key={index} className="examchoices-card" >
             <fieldset disabled={isDisabled}>
               <div className="text-center">
-                {item.images.map((mage) =>
-                  <span style={{ color: "red", cursor: "pointer", fontSize: 45 }} className="badge badge-danger" onClick={() => ImageRemove(index + 1, mage.public_id)}>
+                {item.images.map((mage, mageindex) =>
+                  <span key={mageindex} style={{ color: "red", cursor: "pointer", fontSize: 45 }} className="badge badge-danger" onClick={() => ImageRemove(index + 1, mage.public_id)}>
                     <img src={mage.url} className="fluid" alt=" " />
                     <BsXLg />
                   </span>
@@ -457,35 +460,35 @@ function ExamChoices() {
               <FileUpload loading={loading} setLoad={setLoad} values={value4} setValue4={setValue4} />
               {loading || item.images.length > 0
                 ? <button type="button" className="btn btn-primary" disabled onClick={() => ImageAdd(index + 1)}>Loading... </button>
-                : <button type="button" className="btn btn-primary" onClick={() => ImageAdd(index + 1)}>พิ่มรูปภาพ </button>
+                : <button type="button" className="btn btn-primary" onClick={() => ImageAdd(index + 1)}>Add Image </button>
               }
               <br />
               <br />
               <div className="form-group">
                 <h5> QuestionNumber: {index + 1}</h5>
-                <textarea key={index} name="Question" className="form-control" onChange={handleChangeQ} rows="5">{item.Question}</textarea>
+                <textarea name="Question" className="form-control" onChange={handleChangeQ} rows="5" defaultValue={item.Question}></textarea>
                 <br />
                 <div>
 
-                  <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1, item.images, item.Answerdetail, item.CorrectANS)}>เพิ่มช้อย<AiOutlinePlus /></button>
+                  <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1, item.images, item.Answerdetail, item.CorrectANS)}>Add answer <AiOutlinePlus /></button>
                   &nbsp;&nbsp;
-                  <button type="button" className="btn btn-primary" onClick={() => correctAnswer(index + 1, item.Choices)}>บันทึกข้อที่ถูกต้อง</button>
+                  <button type="button" className="btn btn-primary" onClick={() => correctAnswer(index + 1, item.Choices)}>Save Correct answer</button>
                 </div>
                 <div>
                   <br />
-                  <h5>CorrectAnswer:
-                    <span> ข้อที่ :  </span>
+                  <h5>Correct Answer :
+                    <span> answer :  </span>
                     {item.CorrectANS.map((C, Cnum) =>
                       Cnum < item.CorrectANS.length - 1
-
-                        ? <span>{parseInt(C) + 1},</span>
-                        : <span>{parseInt(C) + 1}</span>
-
+                      
+                        ? <span key={Cnum}>{parseInt(C) + 1},</span>
+                        : <span key={Cnum}>{parseInt(C) + 1}</span>
+                      
                     )}
                   </h5>
                 </div>
                 {item.Choices.map((num, numI) =>
-                  <div className="form-group">
+                  <div key={numI} className="form-group">
 
                     <table className="table">
                       <thead>
@@ -512,7 +515,7 @@ function ExamChoices() {
                   </div>
                 )}
                 <h5> Answer detail</h5>
-                <textarea key={index} name="Answerdetail" className="form-control" rows="5" onChange={handleChangeQ}>{item.Answerdetail}</textarea>
+                <textarea name="Answerdetail" className="form-control" rows="5" defaultValue={item.Answerdetail} onChange={handleChangeQ}></textarea>
                 <br />
                 <button className="btn btn-secondary" onClick={(Question) => Edit(item.Question, item.Choices, index + 1, item.images, item.Answerdetail, item.CorrectANS)}><AiFillEdit /></button>
                 &nbsp;&nbsp;&nbsp;&nbsp;

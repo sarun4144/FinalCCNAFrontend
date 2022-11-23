@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { currentexam, HardRecord } from "../../Function/Exam";
+import { currentexam, HardRecord ,CountStamp} from "../../Function/Exam";
 import { useCookies } from 'react-cookie';
 import "./ExamTestHard.css";
+import "./ExamTestEasy.css";
 
 import { Hardlog } from "../../Function/Person"
 
@@ -11,8 +12,13 @@ function ExamTestEasy() {
     const exam = useSelector((state) => ({ ...state }));
     const Exid = exam.examStore.exam.examid
     const UserID = exam.userStore.user.ObjectID
+    const Catname = exam.examStore.exam.category
+
     const [data, setData] = useState([]);
+    const [exame, setExam] = useState([]);
+    const [docount, setdocount] = useState([]);
     const Data = Object.values(data);
+    
 
     const [log, setlog] = useState([]);
     const Log = Object.values(log);
@@ -49,7 +55,7 @@ function ExamTestEasy() {
  console.log(Log.length)
     useEffect(() => {
         //code
-        if (localStorage.showresult == "true") {
+        if (localStorage.showresult === "true") {
             setShowResults(true)
         }
         setRecord(JSON.parse(localStorage.result))
@@ -61,13 +67,14 @@ function ExamTestEasy() {
         //code
         loadData(Exid);
         HardlogS(UserID)
-    }, [Exid,UserID]);
+      
+    }, [Exid, UserID]);
 
 
     useEffect(() => {
         //code
         if (!showResults) {
-        counter >= 0 && setTimeout(() => countdown(), 1000);
+            counter >= 0 && setTimeout(() => countdown(), 1000);
         }
     }, [counter]);
 
@@ -116,13 +123,15 @@ function ExamTestEasy() {
     function loadData(authtoken) {
         currentexam(authtoken).then((res) => {
             setData(res.data[0].exdata);
+            setExam(res.data[0])
+            setdocount(res.data[0].Docount)
         });
     }
     function HardlogS(authtoken) {
         Hardlog(authtoken).then((res) => {
-          setlog(res.data);
+            setlog(res.data);
         });
-      }
+    }
 
     //easyFunction
     function EasyselectCount(isCorrect, CorrectANS, index) {
@@ -149,11 +158,11 @@ function ExamTestEasy() {
     }
     const optionClicked = (isCorrect) => {
         // Increment the score
-        if (Selector == selectValueS.length) {
+        if (Selector === selectValueS.length) {
             let i = 0
             let d = 0
             while (i < isCorrect.length) {
-                if (isCorrect[i].isCorrect == false) {
+                if (isCorrect[i].isCorrect === false) {
                     d = -1
                     console.log("False ", d)
                 } else {
@@ -162,7 +171,7 @@ function ExamTestEasy() {
                 }
                 i++
             }
-            if (i == isCorrect.length && d == isCorrect.length) {
+            if (i === isCorrect.length && d === isCorrect.length) {
                 console.log("true")
                 setANSiscorrect(true)
 
@@ -185,39 +194,65 @@ function ExamTestEasy() {
             Num: Log.length + 1,
             Time: `${min2}:${counter2}`,
             Date: Date(),
-            ExamObjectid:Exid
-          }
-          HardRecord(Exid, payload)
+            ExamObjectid: Exid,
+            Examname:exame.name,
+            Title: exame.title,
+            Category: Catname,
+            Score:score
+        }
+        const payload2 = {
+           Docount:parseInt(docount) + 1
+        }
+        const payload3 = {
+           Docount:1
+        }
+        if(docount == undefined){
+            CountStamp(Exid,payload3).then(res => {
+                console.log(res.data)
+           }).catch(err => {
+            console.log(err);
+           })
+        }else{
+            console.log("SSSSSSSSSSSSSSSSSSSSSSSSS")
+            CountStamp(Exid,payload2).then(res => {
+                console.log(res.data)
+           }).catch(err => {
+            console.log(err);
+           })
+        }
+        HardRecord(Exid, payload)
             .then(res => {
-              setScore(preve => 0);
-              localStorage.setItem("score", 0)
-              setCurrentQuestion(preve => 0);
-              localStorage.setItem("currentQuestion", 0)
-              setShowResults(false);
-              localStorage.setItem("showresult", false)
-              setRecord(false);
-              localStorage.setItem("result", 0)
-              setANSiscorrect(false)
-              setAnswerdetail(false)
+                setScore(preve => 0);
+                localStorage.setItem("score", 0)
+                setCurrentQuestion(preve => 0);
+                localStorage.setItem("currentQuestion", 0)
+                setShowResults(false);
+                localStorage.setItem("showresult", false)
+                setRecord(false);
+                localStorage.setItem("result", 0)
+                setANSiscorrect(false)
+                setAnswerdetail(false)
             }).catch(err => {
-              console.log(err);
+                console.log(err);
             })
+
+           
     }
     function countdown() {
-        
-            if (counter == 0 && min !== 0) {
-                setMin(min - 1);
-                setCounter(59);
-            } else {
-                setCounter(counter - 1);
-            }
-            if (counter2 > 59) {
-                setMin2(min2 + 1);
-                setCounter2(0);
-            } else {
-                setCounter2(counter + 1);
-            }
-        
+
+        if (counter === 0 && min !== 0) {
+            setMin(min - 1);
+            setCounter(59);
+        } else {
+            setCounter(counter - 1);
+        }
+        if (counter2 > 59) {
+            setMin2(min2 + 1);
+            setCounter2(0);
+        } else {
+            setCounter2(counter + 1);
+        }
+
     }
 
     function gonext(Choices, Question, CorrectANS, Answerdetail, images) {
@@ -232,13 +267,14 @@ function ExamTestEasy() {
                 ANSiscorrect: ANSiscorrect
             }
         })
+        
         setBlock(true)
         for (var index = 0; index < Choices.length; index++) {
             document.getElementById(index + 1).className = "ExamThardButton1"
             document.getElementById(index + 1).disabled = false
         }
 
-        if (index == Choices.length) {
+        if (index === Choices.length) {
             if (currentQuestion + 1 < Data.length) {
                 if (ANSiscorrect) {
                     localStorage.setItem("score", score + 1)
@@ -268,7 +304,8 @@ function ExamTestEasy() {
                     {
                         showResults
                             ? (
-                                <div style={{ textAlign: "center" }}>
+
+                                <div className="result-card" style={{ textAlign: "center" }}>
                                     <br />
                                     <span className="ExamThardtext"> Your Score is {score} </span>
                                     <br />
@@ -276,12 +313,19 @@ function ExamTestEasy() {
                                     <br />
                                     <div>
                                         {RecordArray.map((item, index) =>
-                                            <div>
-                                                {item.images.map((pic, Ipic) =>
-                                                    <img src={pic.url} />
-                                                )}
+                                            <div key={index} className="result-Question">
                                                 <div className="ExamThardQuestion">
-                                                    <span style={{ fontWeight: "500" }}>Question: {index + 1}</span>
+                                                    {item.ANSiscorrect && item.selectValueS.length === item.CorrectANS.length ? (
+                                                        <div className="result-q-True"><h2>Question: {index + 1}</h2></div>
+                                                    ) : (
+                                                        <div className="result-q-false"><h2>Question: {index + 1}</h2></div>
+                                                    )
+                                                    }
+                                                    <br />
+                                                    <center>
+                                                        {item.images.map((pic, Ipic) =>
+                                                            <img key={Ipic} src={pic.url} />
+                                                        )}</center>
                                                     <br />
                                                     <span>{item.Question}</span>
                                                     <br />
@@ -291,23 +335,37 @@ function ExamTestEasy() {
                                                 <br />
                                                 <div className="ExamThardtext">
                                                     <div className="ExamThardChoicepanel">
-                                                        <div className="ExamThardtextarea">
-                                                            <span>ข้อที่คุณตอบคือข้อที่</span> &nbsp;
-                                                            {item.selectValueS.map((choose, iChoose) =>
-                                                                iChoose < item.selectValueS.length - 1
-                                                                    ? <span>{choose.index},</span>
-                                                                    : <span>{choose.index}</span>
-                                                            )}
-                                                        </div>
+                                                        {item.ANSiscorrect && item.selectValueS.length === item.CorrectANS.length ? (
+                                                            <div className="result-q-True">
+                                                                <span>ข้อที่คุณตอบคือข้อที่</span> &nbsp;
+                                                                {item.selectValueS.map((choose, iChoose) =>
+                                                                    iChoose < item.selectValueS.length - 1
+                                                                        ? <span key={iChoose}>{choose.index},</span>
+                                                                        : <span key={iChoose}>{choose.index}</span>
+                                                                )}
+                                                            </div>
+                                                        ) : (
+                                                            <div className="result-q-false">
+                                                                <span>ข้อที่คุณตอบคือข้อที่</span> &nbsp;
+                                                                {item.selectValueS.map((choose, iChoose) =>
+                                                                    iChoose < item.selectValueS.length - 1
+                                                                        ? <span key={iChoose}>{choose.index},</span>
+                                                                        : <span key={iChoose}>{choose.index}</span>
+                                                                )}
+                                                            </div>
+                                                        )
+                                                        }
                                                         <br />
                                                         {item.Choices.map((item2, idex) =>
                                                             <>
                                                                 {item2.isCorrect
                                                                     ? (
-                                                                        <button id={idex + 1} className="ExamThardButton1true" disabled  >
+                                                                        <button key={idex} id={idex + 1} className="ExamThardButton1true" disabled  >
                                                                             <div className="ExamThardtextarea">
-                                                                                <div className="ExamThardnumpanel">
-                                                                                    {idex + 1}
+                                                                                <div>
+                                                                                    <div className="ExamThardnumpanel">
+                                                                                        {idex + 1}
+                                                                                    </div>
                                                                                 </div>
                                                                                 <div className="ExamThardtextpanel">
                                                                                     {item2.text}
@@ -317,16 +375,35 @@ function ExamTestEasy() {
 
                                                                     )
                                                                     : (
-                                                                        <button id={idex + 1} className="ExamThardButton1" disabled  >
-                                                                            <div className="ExamThardtextarea">
-                                                                                <div className="ExamThardnumpanel">
-                                                                                    {idex + 1}
-                                                                                </div>
-                                                                                <div className="ExamThardtextpanel">
-                                                                                    {item2.text}
-                                                                                </div>
-                                                                            </div>
-                                                                        </button>
+                                                                        <>
+                                                                            {item.ANSiscorrect ?
+                                                                                <button key={idex} id={idex + 1} name={idex + 1} className="ExamTeasyButton1" disabled  >
+                                                                                    <div className="ExamTeasytextarea">
+                                                                                        <div>
+                                                                                            <div className="ExamTeasynumpanel">
+                                                                                                {idex + 1}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div className="ExamTeasytextpanel">
+                                                                                            {item2.text}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </button>
+                                                                                :
+                                                                                <button key={idex} id={idex + 1} name={idex + 1} className="ExamTeasyButton1false" disabled  >
+                                                                                    <div className="ExamTeasytextarea">
+                                                                                        <div>
+                                                                                            <div className="ExamTeasynumpanel">
+                                                                                                {idex + 1}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div className="ExamTeasytextpanel">
+                                                                                            {item2.text}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </button>
+                                                                            }
+                                                                        </>
                                                                     )
                                                                 }
 
@@ -362,33 +439,40 @@ function ExamTestEasy() {
                                     <div className="ExamThardcard_item">
                                         <div className="ExamThardcard_inner">
                                             <div className="ExamThardrole_name">
-                                                Hard
+                                                <h1>{exame.name} &nbsp;
+                                                    Hard</h1>
                                                 Time = 0:{min}:{counter}
                                             </div>
                                             <br />
                                             {Data2.map((item, index) => (
-                                                <div>
-                                                    {item.images.map((pic, Ipic) =>
-                                                        <img src={pic.url} />
-                                                    )}
+                                                <div key={index}>
+
                                                     <div className="ExamThardQuestion">
                                                         <span style={{ fontWeight: "500" }}>Question: {currentQuestion + 1}</span>
                                                         <br />
                                                         <span>{item.Question}</span>
                                                         <br />
-                                                        <span>{`${Selector}/${item.CorrectANS.length} is Selected `}</span>
+
                                                     </div>
+                                                    <center>
+                                                        {item.images.map((pic, Ipic) =>
+                                                            <img key={Ipic} src={pic.url} />
+                                                        )}
+                                                    </center>
                                                     <br />
+                                                    <span>{`${Selector}/${item.CorrectANS.length} is Selected `}</span>
                                                     <div className="ExamThardtext">
                                                         <div className="ExamThardChoicepanel">
                                                             {item.Choices.map((item2, idex) =>
                                                                 <>
                                                                     {Block
                                                                         ? (
-                                                                            <button id={idex + 1} className="ExamTeasyButton1" disabled  >
+                                                                            <button key={idex} id={idex + 1} className="ExamTeasyButton1" disabled  >
                                                                                 <div className="ExamThardtextarea">
-                                                                                    <div className="ExamThardnumpanel">
-                                                                                        {idex + 1}
+                                                                                    <div>
+                                                                                        <div className="ExamThardnumpanel">
+                                                                                            {idex + 1}
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div className="ExamThardtextpanel">
                                                                                         {item2.text}
@@ -397,10 +481,12 @@ function ExamTestEasy() {
                                                                             </button>
                                                                         )
                                                                         : (
-                                                                            <button id={idex + 1} className="ExamThardButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)}  >
+                                                                            <button key={idex} id={idex + 1} className="ExamThardButton1" onClick={() => EasyselectCount(item2.isCorrect, item.CorrectANS, idex + 1)}  >
                                                                                 <div className="ExamThardtextarea">
-                                                                                    <div className="ExamThardnumpanel">
-                                                                                        {idex + 1}
+                                                                                    <div>
+                                                                                        <div className="ExamThardnumpanel">
+                                                                                            {idex + 1}
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div className="ExamThardtextpanel">
                                                                                         {item2.text}
@@ -425,7 +511,9 @@ function ExamTestEasy() {
                                                                 </div>)
                                                         }
                                                     </div>
-                                                    <button className="ExamThardGobutton1" onClick={() => gonext(item.Choices, item.Question, item.CorrectANS, item.Answerdetail, item.images)}>GONEXT</button>
+                                                    <center>
+                                                        <button className="ExamThardGobutton1" onClick={() => gonext(item.Choices, item.Question, item.CorrectANS, item.Answerdetail, item.images)}>GONEXT</button>
+                                                    </center>
                                                 </div>
                                             ))}
                                         </div>

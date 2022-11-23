@@ -73,3 +73,8 @@ export const listexam = async (authtoken) =>
   {
     
   });
+  export const CountStamp = async (id,payload) =>
+  await axios.post(process.env.REACT_APP_API + "/CountStamp/"+id,payload,
+  {
+    
+  });

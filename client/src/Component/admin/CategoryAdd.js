@@ -110,10 +110,10 @@ function CategoryAdd() {
       <hr />
       <h1 style={{ textAlign: "center" }}> Category List </h1>
       <ul className="list-group">
-        {category.map((item) =>
-          <li className="list-group-item d-flex justify-content-between align-items-center">
+        {category.map((item, index) =>
+          <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
             {item.name}
-            <button type="button" class="btn btn-danger" onClick={() => handleRemove(item._id)}>
+            <button type="button" className="btn btn-danger" onClick={() => handleRemove(item._id)}>
             <span className="badge badge-light">X</span>
             </button>
           </li>

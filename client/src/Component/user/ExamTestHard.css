@@ -1,15 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Mitr', sans-serif;
-}
-
-body {
-    background: #6f85f1;
-}
 
 .ExamThardcards_wrap {
     background-color: #ffffff;
@@ -151,4 +141,25 @@ body {
     padding: 5px;
     padding-left: 2rem;
     color: #000000;
+}
+
+@media screen and (max-width: 1400px) {
+    .ExamThardcards_wrap{
+        padding: 15px;
+    }
+    .ExamThardcard_item {
+        padding: 5px;
+        width: 85%;       
+    
+    }
+}
+
+@media screen and (max-width: 1160px) {
+    .ExamThardcards_wrap {
+        padding: 5px;
+    }
+
+    .ExamThardcard_item {
+        width: 100%;
+    }
 }

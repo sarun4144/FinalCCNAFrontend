@@ -5,25 +5,61 @@ import * as AiIcons from "react-icons/ai";
 import Swal from 'sweetalert2'
 import LineChart from "./LineChart";
 import RadarChart from "./RadarChart";
-
-import {ChangeName ,reads} from "../../Function/Person"
+import Table from 'react-bootstrap/Table';
+import { ChangeName, reads, Hardlog, Easylog } from "../../Function/Person"
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const user = useSelector((state) => ({ ...state }))
   const Userid = user.userStore.user.ObjectID
   const Token = user.userStore.user.token
-  const username = user.userStore.user.username
-  const role = user.userStore.user.role
-  const email = user.userStore.user.email
   const [data, setData] = useState([]);
-  const [values, setvalues] = useState([]);
+  const [dataExamHard, setDataExamHard] = useState([]);
+  const [dataExamEasy, setDataExamEasy] = useState([]);
 
+  const [show, setShow] = useState(false);
+
+  const navigate = useNavigate();
+  const DataHard = Object.values(dataExamHard);
+  const DataEasy = Object.values(dataExamEasy);
   //console.log(username)
   //console.log(role)
-  //console.log(email)
+  // console.log(email)
+  console.log("Hard", dataExamHard)
+  console.log("Easy", dataExamEasy)
+  const openInNewTab = url => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+  useEffect(() => {
+    localStorage.removeItem("Index")
+  }, [])
+  useEffect(() => {
+    loadData(Token, Userid)
+  }, [Userid])
+
+  useEffect(() => {
+    loadExamData(Userid)
+    loadExamDataE(Userid)
+  }, [Userid])
+
+  function loadData(authtoken, id) {
+    reads(authtoken, id).then((res) => {
+      setData(res.data);
+    });
+  }
+  function loadExamData(id) {
+    Hardlog(id).then((res) => {
+      setDataExamHard(res.data);
+    });
+  }
+  function loadExamDataE(id) {
+    Easylog(id).then((res) => {
+      setDataExamEasy(res.data);
+    });
+  }
 
   const ShowEditUsername = async (id) => {
-    const { value: username } = await Swal.fire({
+    const { value: Newusername } = await Swal.fire({
       title: 'แก้ไข',
       input: 'text',
       inputLabel: 'ใส่ Username',
@@ -31,23 +67,36 @@ function Profile() {
       confirmButtonText: 'ยืนยัน',
       confirmButtonColor: 'green',
     })
-    if(username) {
+    if (Newusername) {
       console.log("True")
-      setvalues({ ...values, id: id, username: username });
-      ChangeName(user.userStore.user.token,values.id, {values})
+      ChangeName(user.userStore.user.token, id, { Newusername })
         .then(res => {
           Swal.fire({
-            title: 'แก้ไข Password สำเร็จ',
+            title: 'แก้ไข Username สำเร็จ',
             confirmButtonText: 'ยืนยัน',
             confirmButtonColor: 'green',
           })
-          window.location.reload();
+          loadData(Token, Userid)
         }).catch(err => {
+          Swal.fire({
+            title: err.response.data,
+            confirmButtonText: 'ยกเลิก',
+            confirmButtonColor: 'red',
+          })
           console.log(err.response)
         })
     }
   }
 
+  function Seresult(index) {
+    localStorage.setItem("Index",index)
+    navigate("/user/ResultHard");
+  }
+  function SeresultEasy(index) {
+    localStorage.setItem("Index",index)
+    navigate("/user/ResultEasy");
+  }
+ 
   return (
     <div className="profile-container">
       <div className="profile-card">
@@ -55,9 +104,9 @@ function Profile() {
           <h1>User - Profile</h1>
         </div>
         <div className="profile-card-content">
-          <div>Username : {username} <AiIcons.AiFillEdit id="EditUsernameBtn" onClick={()=>ShowEditUsername(Userid)} /></div>
-          <div>Role : {role}</div>
-          <div>Email : {email}</div>
+          <div>Username : {data.username} <AiIcons.AiFillEdit id="EditUsernameBtn" onClick={() => ShowEditUsername(Userid)} /></div>
+          <div>Role : {data.role}</div>
+          <div>Email : {data.email}</div>
         </div>
       </div>
       <div className="row">
@@ -78,6 +127,78 @@ function Profile() {
           </div>
         </div>
       </div>
+      <div className="profile-card">
+        <div className="profile-card-header"><h1>History</h1></div>
+        <div className="row">
+          <div className="col-md-6" style={{ textAlign: "center" }}>
+            <h2>Easy</h2>
+            <div className="profile-card-content">
+              <Table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ExamName</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {DataEasy.map((item, index) =>
+                    <tr key={index}>
+                      <td >
+                        <div className="SeeexamEasy" onClick={()=>SeresultEasy(index+1)}>
+                          {item.Examname}
+                        </div>
+                      </td>
+                      <td>{item.Title}</td>
+                      <td>{item.Category}</td>
+                      <td>{item.Date.substring(0, 24)}</td>
+                      <td>{item.Score}</td>
+                    </tr>
+
+                  )}
+
+                </tbody>
+              </Table>
+            </div>
+          </div>
+          <div className="col-md-6" style={{ textAlign: "center" }}>
+            <h2>Hard</h2>
+            <div className="profile-card-content">
+              <Table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ExamName</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Time use</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {DataHard.map((item, index) =>
+                    <tr key={index}>
+                      <td >
+                        <div className="SeeexamHard" onClick={() => Seresult(index+1)}>
+                          {item.Examname}
+                        </div>
+                      </td>
+                      <td>{item.Title}</td>
+                      <td>{item.Category}</td>
+                      <td>{item.Time}</td>
+                      <td>{item.Date.substring(0, 24)}</td>
+                      <td>{item.Score}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </Table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     </div>
   )
 }

@@ -68,3 +68,11 @@
 .info-cat-display {
     padding: 15px;
 }
+
+@media screen and (max-width: 1160px) {
+    .info-container {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    
+}

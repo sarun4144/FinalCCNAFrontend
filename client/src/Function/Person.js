@@ -7,8 +7,8 @@ export const listUser = async (authtoken) =>
         authtoken
       }
     });
-export const reads = async (authtoken) =>
-  await axios.post(process.env.REACT_APP_API + "/reads",
+export const reads = async (authtoken,id) =>
+  await axios.get(process.env.REACT_APP_API + "/reads/"+id,
     {
       headers: {
         authtoken
@@ -49,6 +49,16 @@ export const Easylog = async (id) =>
     });
 export const Hardlog = async (id) =>
   await axios.post(process.env.REACT_APP_API + "/Hardlog/" + id,
+    {
+
+    });
+export const HardlogS = async (id,value) =>
+  await axios.post(process.env.REACT_APP_API + "/HardlogS/" + id,value,
+    {
+
+    });
+export const EastlogS = async (id,value) =>
+  await axios.post(process.env.REACT_APP_API + "/EastlogS/" + id,value,
     {
 
     });
