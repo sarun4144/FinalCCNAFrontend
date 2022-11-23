@@ -92,6 +92,10 @@ function Profile() {
     localStorage.setItem("Index",index)
     navigate("/user/ResultHard");
   }
+  function SeresultEasy(index) {
+    localStorage.setItem("Index",index)
+    navigate("/user/ResultEasy");
+  }
  
   return (
     <div className="profile-container">
@@ -143,7 +147,7 @@ function Profile() {
                   {DataEasy.map((item, index) =>
                     <tr key={index}>
                       <td >
-                        <div className="SeeexamEasy" >
+                        <div className="SeeexamEasy" onClick={()=>SeresultEasy(index+1)}>
                           {item.Examname}
                         </div>
                       </td>
