@@ -74,8 +74,8 @@ function Login() {
               <div className="col-1 "></div>
               <div className="login-header">
                 {loading
-                  ? <h1 className="title">เข้าสู่ระบบ</h1>
-                  : <h1 className="title">เข้าสู่ระบบผิดพลาด</h1>
+                  ? <h1 className="title">Login</h1>
+                  : <h1 className="title">Login Failed</h1>
                 }
 
               </div>
@@ -89,7 +89,7 @@ function Login() {
               <br />
               <div className="form-group">
                 <label >Password:</label>
-                <input className="form-control" type="password" name="password" placeholder="รหัสผ่าน" onChange={handleChange} required />
+                <input className="form-control" type="password" name="password" placeholder="Password" onChange={handleChange} required />
               </div>
               <br />
 

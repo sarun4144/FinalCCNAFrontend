@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { currentexam, EasyRecord,CountStamp } from "../../Function/Exam";
 import { useCookies } from 'react-cookie';
 import "./ExamTestEasy.css";
+import Swal from 'sweetalert2'
 
 import { Easylog } from "../../Function/Person"
 
@@ -254,6 +255,17 @@ function ExamTestEasy() {
     }
   }
 
+  const ShowReportQuestion = async(name, question) => {
+    const { } = await Swal.fire({
+      title: name + " ข้อที่ " + question,
+      input: 'text', 
+      inputLabel: 'รายงานปัญหา',
+      inputPlaceholder: 'ปัญหาหรือข้อผิดพลาดที่พบ',
+      confirmButtonText: 'ยืนยัน',
+      confirmButtonColor: 'orange',
+    })
+  }
+
 
   return (
     <>
@@ -401,6 +413,7 @@ function ExamTestEasy() {
                       <br />
                       <span>{item.Question}</span>
                       <br />
+                      <div onClick={() => ShowReportQuestion(exame.name ,currentQuestion + 1)}>รายงานปัญหา</div>
                     </div>
                     <center>
                       {item.images.map((pic, Ipic) =>

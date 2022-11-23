@@ -89,7 +89,7 @@ function FileUpload({ values, setValues, loading, setLoad }) {
                 ))}
 
             <div className="form-group" >
-                <label>เลือกรูปภาพ...
+                <label>Choose Image...
                     <input className="form-control" type="file" name="image" accept='image/*' multiple onChange={handleChangeFile} />
                 </label>
             </div>

@@ -416,7 +416,7 @@ function ExamChoices() {
           <div className="form-check">
             <input onChange={() => handleChange()} className="form-check-input" type="checkbox" />
             <label className="form-check-label" >
-              แก้ไขข้อสอบ
+              Edit mode
             </label>
           </div>
           <button type="submit" className="btn btn-primary" onClick={() => AddExam(Data.length + 1)}>Addexam</button>
@@ -457,7 +457,7 @@ function ExamChoices() {
               <FileUpload loading={loading} setLoad={setLoad} values={value4} setValue4={setValue4} />
               {loading || item.images.length > 0
                 ? <button type="button" className="btn btn-primary" disabled onClick={() => ImageAdd(index + 1)}>Loading... </button>
-                : <button type="button" className="btn btn-primary" onClick={() => ImageAdd(index + 1)}>พิ่มรูปภาพ </button>
+                : <button type="button" className="btn btn-primary" onClick={() => ImageAdd(index + 1)}>Add Image </button>
               }
               <br />
               <br />
@@ -467,14 +467,14 @@ function ExamChoices() {
                 <br />
                 <div>
 
-                  <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1, item.images, item.Answerdetail, item.CorrectANS)}>เพิ่มช้อย<AiOutlinePlus /></button>
+                  <button type="button" className="btn btn-primary" onClick={(Questions2) => selectAdd(item.Question, item.Choices, index + 1, item.images, item.Answerdetail, item.CorrectANS)}>Add answer <AiOutlinePlus /></button>
                   &nbsp;&nbsp;
-                  <button type="button" className="btn btn-primary" onClick={() => correctAnswer(index + 1, item.Choices)}>บันทึกข้อที่ถูกต้อง</button>
+                  <button type="button" className="btn btn-primary" onClick={() => correctAnswer(index + 1, item.Choices)}>Save Correct answer</button>
                 </div>
                 <div>
                   <br />
-                  <h5>CorrectAnswer:
-                    <span> ข้อที่ :  </span>
+                  <h5>Correct Answer :
+                    <span> answer :  </span>
                     {item.CorrectANS.map((C, Cnum) =>
                       Cnum < item.CorrectANS.length - 1
                       
