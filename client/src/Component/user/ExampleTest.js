@@ -15,20 +15,28 @@ function ExampleTest() {
   const exam = useSelector((state) => ({ ...state }))
   const Token = exam.examStore.exam.examid
   const Catname = exam.examStore.exam.category
+  const [categoryName, setCategoryName] = useState('')
   const CatID = exam.examStore.exam.catid
   const [exame, setData] = useState([]);
   const [allExam, setAllExam] = useState([]);
   const role = user.userStore.user.role
   const dispatch = useDispatch()
+  const [track, setTrack] = useState(false);
 
   useEffect(() => {
     //code
-    localStorage.setItem("score",0)
-    localStorage.setItem("currentQuestion",0)
-    localStorage.setItem('result',0);
+    localStorage.setItem("score", 0)
+    localStorage.setItem("currentQuestion", 0)
+    localStorage.setItem('result', 0);
     localStorage.removeItem("TypeTest")
     loadData(Token)
-  }, [Token]);
+    setTrack(false)
+  }, [Token, track]);
+
+  useEffect(() => {
+    setCategoryName(Catname)
+    setTrack(false)
+  }, [Catname, track])
 
   const loadData = (authtoken) => {
     currentexam(authtoken).then(res => {
@@ -81,8 +89,9 @@ function ExampleTest() {
   const filterExamList = allExam.filter((samecatExam) => {
     { console.log(samecatExam) }
     /*{console.log(exame._id)}*/
-    return samecatExam.Categoryid === CatID && samecatExam._id != CatID;
+    return samecatExam.Categoryid === CatID && samecatExam._id !== CatID;
   })
+
   function SeeExam(id, catid, category) {
     if (role) {
       if (role === "admin") {
@@ -96,7 +105,7 @@ function ExampleTest() {
         dispatch(checkin(EXAM))
         localStorage.setItem('examid', id)
         localStorage.setItem('catid', catid)
-        navigate("/user/examtesteasy")
+        navigate("/user/extest")
       }
     } else {
       Swal.fire({
@@ -122,7 +131,7 @@ function ExampleTest() {
           <div className="Extext">
             นี่คือการทดลองทำข้อสอบ โดยหากคุณสามารถทำได้เสร็จภายใน 5 นาที แสดงว่าาคุณมีความพร้อมที่จะไปสอบจริงในระดับนีงแล้ว
             <ul>
-              <li>ในข้อนี่้จะมีคำถามทั้งหมด 60 คำถาม</li>
+              <li>ในข้อนี่้จะมีคำถามทั้งหมด 50 คำถาม</li>
               <li>ในแต่ละข้ออาจจะมีตัวเลือกที่ถูกต้องมากว่า 1 ข้อ</li>
               <li>แบบทดสอบนี้มีความใกล้เคียงกับแบบทดสอบจริง</li>
             </ul>
@@ -132,15 +141,16 @@ function ExampleTest() {
                 <ul key={idex}>
                   <li>ชื่อ: {item.name}</li>
                   <li>เนื้อหา: {item.title}</li>
-                  <li>หมวดหมู่: {Catname}</li>
+                  <li>หมวดหมู่: {categoryName}</li>
                 </ul>
               )}
+              <center ><button className="btn btn-primary" onClick={() => navigate("/user/example")}>ดูตัวอย่าง</button></center>
             </div>
             เลือกความยาก
             <br />
             <div >
               <button className="Exbutton1" onClick={Easy}>ง่าย</button>
-              ระดับความยาก Easy ระดับนี่จะไม่มีการจับเวลาสามารถทำได้เรื่อยๆ
+              ระดับความยาก Easy ระดับนี่จะไม่มีการจับเวลาพร้อมกับตรวจคำตอบและเฉลยทันที
             </div>
             <div >
               <button className="Exbutton2" onClick={Hard}>ยาก</button>
@@ -151,8 +161,8 @@ function ExampleTest() {
         <div className="sameCat-card">
           <div className="sameCat-card-header">ชุดข้อสอบใน {Catname}</div>
           <div className="sameCat-container">
-            {filterExamList.map((item) =>
-              <div className='store-card'>
+            {filterExamList.map((item, i) =>
+              <div key={i} className='store-card'>
                 <form >
                   <div className="form-group">
                     <h1>{item.name}</h1>
@@ -160,8 +170,8 @@ function ExampleTest() {
                   <div className="form-group">
                     <h4>{item.title}</h4>
                   </div>
-                  {item.CAT.map((cat) =>
-                    <div>
+                  {item.CAT.map((cat, catindex) =>
+                    <div key={catindex}>
                       <div className="form-group">
                         <h5>Category : {cat.name}</h5>
                       </div>

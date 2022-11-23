@@ -45,9 +45,6 @@ function Header() {
                                 <li className="menu-link" onClick={closeMobileMenu}>
                                     <Link to="/info">อะไรคือ CCNA?</Link>
                                 </li>
-                                <li className="menu-link" onClick={closeMobileMenu}>
-                                    <Link to="/about">About Us</Link>
-                                </li>
 
                                 <li className="menu-link" onClick={Logout} >
                                     <Link to="/">Logout</Link>
@@ -82,9 +79,6 @@ function Header() {
                             </li>
                             <li className="menu-link" onClick={closeMobileMenu}>
                                 <Link to="/info">อะไรคือ CCNA?</Link>
-                            </li>
-                            <li className="menu-link" onClick={closeMobileMenu}>
-                                <Link to="/about">About Us</Link>
                             </li>
 
                             <li className="menu-link" onClick={closeMobileMenu}>
@@ -125,9 +119,6 @@ function Header() {
                             <li className="menu-link" onClick={closeMobileMenu}>
                                 <Link to="/info">อะไรคือ CCNA?</Link>
                             </li>
-                            <li className="menu-link" onClick={closeMobileMenu}>
-                                <Link to="/about">About Us</Link>
-                            </li>
 
                             <li className="menu-link" onClick={closeMobileMenu}>
                                 <Link to="/register">Register</Link>
@@ -164,9 +155,6 @@ function Header() {
                         </li>
                         <li className="menu-link" onClick={closeMobileMenu}>
                             <Link to="/info">อะไรคือ CCNA?</Link>
-                        </li>
-                        <li className="menu-link" onClick={closeMobileMenu}>
-                            <Link to="/about">About Us</Link>
                         </li>
 
                         <li className="menu-link" onClick={closeMobileMenu}>

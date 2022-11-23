@@ -143,13 +143,23 @@
     color: #000000;
 }
 
-@media screen and (max-width: 1160px) {
+@media screen and (max-width: 1400px) {
     .ExamThardcards_wrap{
-        padding: 5px;
+        padding: 15px;
     }
     .ExamThardcard_item {
         padding: 5px;
-        width: 100%;       
+        width: 85%;       
     
+    }
+}
+
+@media screen and (max-width: 1160px) {
+    .ExamThardcards_wrap {
+        padding: 5px;
+    }
+
+    .ExamThardcard_item {
+        width: 100%;
     }
 }

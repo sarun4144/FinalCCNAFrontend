@@ -107,13 +107,14 @@
     transition: all 0.3s ease;
 }
 
+
 @media (min-width: 1160px) {
     .mobile-menu {
         display: none;
     }
 }
 
-@media (max-width: 1160px) {
+@media (max-width: 1280px) {
     .mobile-menu {
         display: block;
         color: #fff;

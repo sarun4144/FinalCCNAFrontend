@@ -94,7 +94,7 @@ function Store() {
       return exam.Categoryid === select;
     }
   })
-  
+
   try {
     if (user.userStore.user.role === 'admin') {
       return (
@@ -107,8 +107,8 @@ function Store() {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                {category.map((item) =>
-                  <Dropdown.Item as="button" onClick={(id) => { setSelect(item._id); setDropDownText(item.name) }}>{item.name}</Dropdown.Item>
+                {category.map((item, catindex) =>
+                  <Dropdown.Item key={catindex} as="button" onClick={(id) => { setSelect(item._id); setDropDownText(item.name) }}>{item.name}</Dropdown.Item>
                 )}
                 <Dropdown.Item as="button" onClick={(id) => { setSelect(""); setDropDownText("ALL") }}>ALL</Dropdown.Item>
               </Dropdown.Menu>
@@ -117,8 +117,8 @@ function Store() {
             {console.log(catText)}
             {console.log(exame)}
           </div>
-          {filterExamList.map((item) =>
-            <div className='store-card'>
+          {filterExamList.map((item, i) =>
+            <div key={i} className='store-card'>
               <div >
                 <div className="form-group">
                   <h1>{item.name}</h1>
@@ -127,8 +127,8 @@ function Store() {
                   <h4>{item.title}</h4>
                 </div>
               </div>
-              {item.CAT.map((cat) =>
-                <div>
+              {item.CAT.map((cat, index) =>
+                <div key={index}>
                   <div className="form-group">
                     <h5>Category : {cat.name}</h5>
                   </div>
@@ -153,8 +153,8 @@ function Store() {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              {category.map((item) =>
-                <Dropdown.Item as="button" onClick={(id) => { setSelect(item._id); setDropDownText(item.name) }}>{item.name}</Dropdown.Item>
+              {category.map((item, catindex) =>
+                <Dropdown.Item key={catindex} as="button" onClick={(id) => { setSelect(item._id); setDropDownText(item.name) }}>{item.name}</Dropdown.Item>
               )}
               <Dropdown.Item as="button" onClick={(id) => { setSelect(""); setDropDownText("ALL") }}>ALL</Dropdown.Item>
             </Dropdown.Menu>
@@ -162,8 +162,8 @@ function Store() {
           {console.log(select)}
           {console.log(catText)}
         </div>
-        {filterExamList.map((item) =>
-          <div className='store-card'>
+        {filterExamList.map((item, i) =>
+          <div key={i} className='store-card'>
             <form >
               <div className="form-group">
                 <h1>{item.name}</h1>
@@ -171,8 +171,8 @@ function Store() {
               <div className="form-group">
                 <h4>{item.title}</h4>
               </div>
-              {item.CAT.map((cat) =>
-                <div>
+              {item.CAT.map((cat, index) =>
+                <div key={index}>
                   <div className="form-group">
                     <h5>Category : {cat.name}</h5>
                   </div>
@@ -195,8 +195,8 @@ function Store() {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            {category.map((item) =>
-              <Dropdown.Item as="button" onClick={(id) => { setSelect(item._id); setDropDownText(item.name) }}>{item.name}</Dropdown.Item>
+            {category.map((item, catindex) =>
+              <Dropdown.Item key={catindex} as="button" onClick={(id) => { setSelect(item._id); setDropDownText(item.name) }}>{item.name}</Dropdown.Item>
             )}
             <Dropdown.Item as="button" onClick={(id) => { setSelect(""); setDropDownText("ALL") }}>ALL</Dropdown.Item>
           </Dropdown.Menu>
@@ -204,8 +204,8 @@ function Store() {
         </Dropdown>
 
       </div>
-      {filterExamList.map((item) =>
-        <div className='store-card'>
+      {filterExamList.map((item, i) =>
+        <div key={i} className='store-card'>
           <form >
             <div className="form-group">
               <h1>{item.name}</h1>
@@ -213,12 +213,14 @@ function Store() {
             <div className="form-group">
               <h4>{item.title}</h4>
             </div>
-            {item.CAT.map((cat) =>
-              <div className="form-group">
-                <h5>Category : {cat.name}</h5>
+            {item.CAT.map((cat, index) =>
+              <div key={index}>
+                <div className="form-group">
+                  <h5>Category : {cat.name}</h5>
+                </div>
+                <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id, item.Categoryid, cat.name)}>ดูข้อสอบ</button>
               </div>
             )}
-            <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id)}>ดูข้อสอบ</button>
           </form>
         </div>
       )}

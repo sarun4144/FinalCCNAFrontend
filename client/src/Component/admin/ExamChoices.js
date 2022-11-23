@@ -429,11 +429,11 @@ function ExamChoices() {
           <h4> Title : {Head.title}</h4>
           <textarea name="Title" className="form-control" onChange={handleChangeh} defaultValue={Head.title}></textarea>
           <div className="form-group">
-            <h4 htmlFor="exampleFormControlSelect1">Category :{Catname}</h4>
-            <select className="form-control" id="exampleFormControlSelect1" name="Categoryid" onChange={handleChangeh}>
-              <option selected value={Catid} >{Catname}</option>
-              {cat.map((item, index) =>
-                <option key={index} value={item._id}>{item.name}</option>
+            <h4 htmlFor="exampleFormControlSelect1">Category : {Catname}</h4>
+            <select defaultValue={Catid} className="form-control" id="exampleFormControlSelect1" name="Categoryid" onChange={handleChangeh}>
+              <option value={Catid} >{Catname}</option>
+              {cat.map((item, indexcat) =>
+                <option key={indexcat} value={item._id}>{item.name}</option>
 
               )}
             </select>
@@ -443,11 +443,11 @@ function ExamChoices() {
 
         </div>
         {Data.map((item, index) =>
-          <div className="examchoices-card" >
+          <div key={index} className="examchoices-card" >
             <fieldset disabled={isDisabled}>
               <div className="text-center">
-                {item.images.map((mage) =>
-                  <span style={{ color: "red", cursor: "pointer", fontSize: 45 }} className="badge badge-danger" onClick={() => ImageRemove(index + 1, mage.public_id)}>
+                {item.images.map((mage, mageindex) =>
+                  <span key={mageindex} style={{ color: "red", cursor: "pointer", fontSize: 45 }} className="badge badge-danger" onClick={() => ImageRemove(index + 1, mage.public_id)}>
                     <img src={mage.url} className="fluid" alt=" " />
                     <BsXLg />
                   </span>
@@ -463,7 +463,7 @@ function ExamChoices() {
               <br />
               <div className="form-group">
                 <h5> QuestionNumber: {index + 1}</h5>
-                <textarea key={index} name="Question" className="form-control" onChange={handleChangeQ} rows="5">{item.Question}</textarea>
+                <textarea name="Question" className="form-control" onChange={handleChangeQ} rows="5" defaultValue={item.Question}></textarea>
                 <br />
                 <div>
 
@@ -477,15 +477,15 @@ function ExamChoices() {
                     <span> ข้อที่ :  </span>
                     {item.CorrectANS.map((C, Cnum) =>
                       Cnum < item.CorrectANS.length - 1
-
-                        ? <span>{parseInt(C) + 1},</span>
-                        : <span>{parseInt(C) + 1}</span>
-
+                      
+                        ? <span key={Cnum}>{parseInt(C) + 1},</span>
+                        : <span key={Cnum}>{parseInt(C) + 1}</span>
+                      
                     )}
                   </h5>
                 </div>
                 {item.Choices.map((num, numI) =>
-                  <div className="form-group">
+                  <div key={numI} className="form-group">
 
                     <table className="table">
                       <thead>
@@ -512,7 +512,7 @@ function ExamChoices() {
                   </div>
                 )}
                 <h5> Answer detail</h5>
-                <textarea key={index} name="Answerdetail" className="form-control" rows="5" onChange={handleChangeQ}>{item.Answerdetail}</textarea>
+                <textarea name="Answerdetail" className="form-control" rows="5" defaultValue={item.Answerdetail} onChange={handleChangeQ}></textarea>
                 <br />
                 <button className="btn btn-secondary" onClick={(Question) => Edit(item.Question, item.Choices, index + 1, item.images, item.Answerdetail, item.CorrectANS)}><AiFillEdit /></button>
                 &nbsp;&nbsp;&nbsp;&nbsp;

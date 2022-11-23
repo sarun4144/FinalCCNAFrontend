@@ -141,7 +141,7 @@
     border-style: solid;
     border-radius: 50%;
     border-width: 2px;
-    color: gray;
+    color: black;
 }
 
 .ExamTeasytextpanel {
@@ -152,7 +152,7 @@
 
 .result-card {
     align-items: center;
-    
+
     justify-content: center;
     flex-wrap: wrap;
     border-radius: 10px;
@@ -201,24 +201,39 @@
     background-color: rgb(206, 106, 106);
 }
 
-@media screen and (max-width: 1160px) {
+@media screen and (max-width: 1400px) {
     .ExamTeasycards_wrap {
-        padding: 5px;
+        padding: 15px;
+
     }
 
     .ExamTeasycard_item {
         padding: 5px;
-        width: 100%;
+        width: 85%;
+
     }
 
     .result-card {
         padding: 5px;
         margin-left: 10px;
         margin-right: 10px;
+        
     }
-    .result-Question{
+
+    .result-Question {
         padding: 5px;
         margin-left: 10px;
         margin-right: 10px;
+        
+    }
+}
+
+@media screen and (max-width: 1160px) {
+    .ExamTeasycards_wrap {
+        padding: 5px;
+    }
+
+    .ExamTeasycard_item {
+        width: 100%;
     }
 }

@@ -69,6 +69,7 @@
 
 a1:hover {
     background-color: lightgrey;
+    cursor: pointer;
 }
 
 .resultItem :hover {
