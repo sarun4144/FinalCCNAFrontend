@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { currentexam, EasyRecord,CountStamp } from "../../Function/Exam";
+import { Rerecord ,Rerecordlist} from "../../Function/Reportlog";
 import { useCookies } from 'react-cookie';
 import "./ExamTestEasy.css";
 import Swal from 'sweetalert2'
@@ -11,6 +12,7 @@ function ExamTestEasy() {
   const exam = useSelector((state) => ({ ...state }));
   const Exid = exam.examStore.exam.examid
   const UserID = exam.userStore.user.ObjectID
+  const Username = exam.userStore.user.username
   const Catname = exam.examStore.exam.category
 
   const [data, setData] = useState([]);
@@ -19,7 +21,9 @@ function ExamTestEasy() {
   const Data = Object.values(data);
 
   const [log, setlog] = useState([]);
+  const [log2, setlog2] = useState([]);
   const Log = Object.values(log);
+  const Bog = Object.values(log2);
 
   const [counter, setCounter] = useState(59);
   const [min, setMin] = useState(59);
@@ -45,7 +49,7 @@ function ExamTestEasy() {
   //cookie
   const [cookies, setCookie] = useCookies(['Result']);
 
-  // console.log(Log.length)
+  // console.log(Bog.length)
   useEffect(() => {
     //code
     if (localStorage.showresult == "true") {
@@ -60,6 +64,7 @@ function ExamTestEasy() {
     //code
     loadData(Exid);
     EasylogS(UserID);
+    recordlist(Exid)
   }, [Exid, UserID]);
 
 
@@ -109,7 +114,11 @@ function ExamTestEasy() {
       setlog(res.data);
     });
   }
-
+  function recordlist(authtoken) {
+    Rerecordlist(authtoken).then((res) => {
+      setlog2(res.data);
+    });
+  }
   //easyFunction
   function EasyselectCount(isCorrect, CorrectANS, index) {
     document.getElementById(index).className = "ExamTeasyButton1selected"
@@ -181,7 +190,6 @@ function ExamTestEasy() {
         console.log(err);
       })
     } else {
-      console.log("SSSSSSSSSSSSSSSSSSSSSSSSS")
       CountStamp(Exid, payload2).then(res => {
         console.log(res.data)
       }).catch(err => {
@@ -256,14 +264,36 @@ function ExamTestEasy() {
   }
 
   const ShowReportQuestion = async(name, question) => {
-    const { } = await Swal.fire({
+    const {value: text } = await Swal.fire({
       title: name + " ข้อที่ " + question,
-      input: 'text', 
+      input: 'textarea', 
       inputLabel: 'รายงานปัญหา',
       inputPlaceholder: 'ปัญหาหรือข้อผิดพลาดที่พบ',
       confirmButtonText: 'ยืนยัน',
       confirmButtonColor: 'orange',
     })
+    if(text) {
+      const Reload={
+        mark:Bog.length,
+        Num:question,
+        Name:name,
+        Text:text,
+        Username:Username
+      }
+      Rerecord(Exid,Reload)
+        .then(res => {
+          Swal.fire({
+            title: 'รายงานปัญหาสำเร็จ',
+            confirmButtonText: 'ยืนยัน',
+            confirmButtonColor: 'green',
+          })
+          loadData(Exid);
+          EasylogS(UserID);
+          recordlist(Exid)
+        }).catch(err => {
+          console.log(err)
+        })
+    }
   }
 
 

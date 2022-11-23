@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { examadd } from '../../Function/Exam'
 import { listCategory } from "../../Function/Category";
+import { Reportadd } from "../../Function/Reportlog";
 import Swal from 'sweetalert2'
 import Toast from "../../Alert/Success";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -49,7 +50,14 @@ function ExamAdd() {
         icon: 'success',
         title: 'เพิ่มข้อสอบสำเร็จ'
       })
-     navigate("/store")
+      const Reportload ={
+        Name : res.data.Name
+      }
+      Reportadd(res.data.Id,Reportload).then((res) => {
+        
+        
+      //  navigate("/store")
+      })
     })
       .catch((err) => {
         Swal.fire({

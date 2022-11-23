@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { currentexam, examchoicesadd, examChoiceschange, examChoicesdelete, examReset, examHeadChange, CorrectAnswer } from "../../Function/Exam"
 import { listCategory } from "../../Function/Category";
 import { Imageadd, Imageremove } from "../../Function/CloudDinary";
+
 import Toast from "../../Alert/Success";
 import { AiFillDelete, AiFillEdit, AiOutlinePlus } from "react-icons/ai";
 import Confirm from "../../Alert/Confirm";
@@ -41,6 +42,7 @@ function ExamChoices() {
 
   }, [EXid])
 
+
   function loadData(id) {
     currentexam(id).then((res) => {
       setData(res.data[0].exdata)
@@ -54,6 +56,7 @@ function ExamChoices() {
       console.log(err);
     })
   }
+
   function AddExam(num) {
     const Num = {
       Num: num
