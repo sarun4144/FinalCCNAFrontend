@@ -19,16 +19,16 @@ function Adminhome() {
       
         <div className='row'>
           <center><h1> Admin Home</h1></center>
-            <div className='col-md-2 mt-3 mb-5 mx-auto p-3 rounded'>
-              <h2>Admin Tool</h2>
+            <div className='col-md-3'>
                  <Navbaradmin/>
             </div>
-            <div className='col-md-8'>
+            <div className='col-md-6'>
                 
             </div>
-            <div className='col-md-2 mt-3 mb-5 mx-auto p-3 rounded'>
-              <h2>Admin Profile</h2>
+            <div className='col-md-3'>
+              
               <div className='adminprofile'>
+              <div className='admin-card-header'><h2>Admin Profile</h2> </div> 
               <li>Adminname : {adminUsername}</li>
               <li>Role : {role}</li>
               <li>Email : {email}</li>

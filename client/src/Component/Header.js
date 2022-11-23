@@ -40,10 +40,10 @@ function Header() {
                                     <Link to="/admin/home">AdminMenu</Link>
                                 </li>
                                 <li className="menu-link" onClick={closeMobileMenu}>
-                                    <Link to="/store">คลังข้อสอบ</Link>
+                                    <Link to="/store">Exam List</Link>
                                 </li>
                                 <li className="menu-link" onClick={closeMobileMenu}>
-                                    <Link to="/info">อะไรคือ CCNA?</Link>
+                                    <Link to="/info">What is CCNA?</Link>
                                 </li>
 
                                 <li className="menu-link" onClick={Logout} >
@@ -75,10 +75,10 @@ function Header() {
                     <div className="header-con">
                         <ul className={click ? "menu active" : " menu"}>
                             <li className="menu-link" onClick={closeMobileMenu}>
-                                <Link to="/store">คลังข้อสอบ</Link>
+                                <Link to="/store">Exam List</Link>
                             </li>
                             <li className="menu-link" onClick={closeMobileMenu}>
-                                <Link to="/info">อะไรคือ CCNA?</Link>
+                                <Link to="/info">What is CCNA?</Link>
                             </li>
 
                             <li className="menu-link" onClick={closeMobileMenu}>
@@ -114,10 +114,10 @@ function Header() {
                     <div className="header-con">
                         <ul className={click ? "menu active" : " menu"}>
                             <li className="menu-link" onClick={closeMobileMenu}>
-                                <Link to="/store">คลังข้อสอบ</Link>
+                                <Link to="/store">Exam List</Link>
                             </li>
                             <li className="menu-link" onClick={closeMobileMenu}>
-                                <Link to="/info">อะไรคือ CCNA?</Link>
+                                <Link to="/info">What is CCNA?</Link>
                             </li>
 
                             <li className="menu-link" onClick={closeMobileMenu}>
@@ -151,10 +151,10 @@ function Header() {
                 <div className="header-con">
                     <ul className={click ? "menu active" : " menu"}>
                         <li className="menu-link" onClick={closeMobileMenu}>
-                            <Link to="/store">คลังข้อสอบ</Link>
+                            <Link to="/store">Exam List</Link>
                         </li>
                         <li className="menu-link" onClick={closeMobileMenu}>
-                            <Link to="/info">อะไรคือ CCNA?</Link>
+                            <Link to="/info">What is CCNA?</Link>
                         </li>
 
                         <li className="menu-link" onClick={closeMobileMenu}>

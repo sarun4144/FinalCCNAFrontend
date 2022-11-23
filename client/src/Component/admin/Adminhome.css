@@ -2,19 +2,29 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 25px;
+  margin-right: 25px;
   margin-bottom: 50px;
+  margin-top: 80px;
 }
 
 .adminprofile {
-  background-color: #cee;
+  background-color: white;
   height: 500px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
   border-radius: 10px;
   padding: 10px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.admin-card-header{
+  background-color: #333;
+  color: white;
+  padding-left: 16px;
+  border-radius: 3px;
 }
 
 .examadd-card {

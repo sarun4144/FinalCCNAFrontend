@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import LineChart from "./LineChart";
 import RadarChart from "./RadarChart";
 
-import { ChangeName, reads ,Hardlog,Easylog} from "../../Function/Person"
+import { ChangeName, reads, Hardlog, Easylog } from "../../Function/Person"
 
 function Profile() {
   const user = useSelector((state) => ({ ...state }))
@@ -100,17 +100,17 @@ function Profile() {
       <div className="profile-card">
         <div className="profile-card-header"><h1>History</h1></div>
         <div className="row">
-          <div className="col-md-6" style={{textAlign:"center"}}>
-          <h2>Easy</h2>
-          <div className="profile-card-content">
+          <div className="col-md-6" style={{ textAlign: "center" }}>
+            <h2>Easy</h2>
+            <div className="profile-card-content">
 
+            </div>
           </div>
-          </div>
-          <div className="col-md-6" style={{textAlign:"center"}}>
-          <h2>Hard</h2>
-          <div className="profile-card-content">
-            
-          </div>
+          <div className="col-md-6" style={{ textAlign: "center" }}>
+            <h2>Hard</h2>
+            <div className="profile-card-content">
+
+            </div>
           </div>
         </div>
       </div>

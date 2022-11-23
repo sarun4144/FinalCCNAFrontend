@@ -99,7 +99,7 @@ function Store() {
     if (user.userStore.user.role === 'admin') {
       return (
         <div className='store-container'>
-          <div className="store-header">คลังชุดข้อสอบ</div>
+          <div className="store-header">Exam List</div>
           <div className="cat-search-container">
             <Dropdown>
               <Dropdown.Toggle variant="primary" id="dropdown-cat">
@@ -135,7 +135,7 @@ function Store() {
                   <div className="form-group">
                     <h5>Creat at : {item.date}</h5>
                   </div>
-                  <button type="submit" className="btn btn-danger" onClick={(id) => EditBTN(item._id, item.Categoryid, cat.name)}>แก้ไข</button>
+                  <button type="submit" className="btn btn-danger" onClick={(id) => EditBTN(item._id, item.Categoryid, cat.name)}>Edit</button>
                 </div>
               )}
             </div>
@@ -145,7 +145,7 @@ function Store() {
     }
     return (
       <div className='store-container'>
-        <div className="store-header">คลังชุดข้อสอบ</div>
+        <div className="store-header">Exam List</div>
         <div className="cat-search-container">
           <Dropdown>
             <Dropdown.Toggle variant="primary" id="dropdown-cat">
@@ -176,7 +176,7 @@ function Store() {
                   <div className="form-group">
                     <h5>Category : {cat.name}</h5>
                   </div>
-                  <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id, item.Categoryid, cat.name)}>ดูข้อสอบ</button>
+                  <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id, item.Categoryid, cat.name)}>Enter</button>
                 </div>
               )}
             </form>
@@ -187,7 +187,7 @@ function Store() {
     )
   } catch (error) {
     <div className='store-container'>
-      <div className="store-header">คลังชุดข้อสอบ</div>
+      <div className="store-header">Exam List</div>
       <div className="cat-search-container">
         <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-cat">
@@ -218,7 +218,7 @@ function Store() {
                 <div className="form-group">
                   <h5>Category : {cat.name}</h5>
                 </div>
-                <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id, item.Categoryid, cat.name)}>ดูข้อสอบ</button>
+                <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id, item.Categoryid, cat.name)}>Enter</button>
               </div>
             )}
           </form>

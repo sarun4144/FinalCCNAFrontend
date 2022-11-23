@@ -62,35 +62,35 @@ function Register() {
                         <div className="row">
                             <div class="col-1"></div>
                             <div className="regis-header">
-                                <h1 className="title">ลงทะเบียน</h1>
+                                <h1 className="title">Register</h1>
                             </div>
                             <div class="col-1"></div>
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="form-group" >
                                 <label>Username: </label>
-                                <input className="form-control" type="text" name="username" autoFocus placeholder="ชื่อผู้ใช้" onChange={handleChange} />
+                                <input className="form-control" type="text" name="username" autoFocus placeholder="Username" onChange={handleChange} />
                             </div>
                             <br />
                             <div className="form-group">
                                 <label >Password:</label>
-                                <input className="form-control" type="password" name="password" placeholder="รหัสผ่านมากกว่า 6 ตัวขึ้นไป" onChange={handleChange} required />
+                                <input className="form-control" type="password" name="password" placeholder="Password with at least 6 characters" onChange={handleChange} required />
                             </div>
                             <br />
                             <div className="form-group">
                                 <label >Confirm-Password:</label>
-                                <input className="form-control" type="password" name="conpassword" placeholder="ยืนยันรหัสผ่าน" onChange={handleChange} required />
+                                <input className="form-control" type="password" name="conpassword" placeholder="Confirm Password" onChange={handleChange} required />
                             </div>
                             <br />
                             <div className="form-group">
                                 <label >Email : </label>
-                                <input className="form-control" type="email" name="email" placeholder="อีเมลล์" onChange={handleChange} />
+                                <input className="form-control" type="email" name="email" placeholder="Email" onChange={handleChange} />
                             </div>
 
                             <br />
                             <div className="row">
                                 <div className="col-4" ></div>
-                                <div className="col-4" > <button className="submitre">ลงทะเบียน</button> </div>
+                                <div className="col-4" > <button className="submitre">Register</button> </div>
                                 <div className="col-4"></div>
 
                             </div>

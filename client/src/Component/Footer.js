@@ -8,7 +8,7 @@ const Footer = () => {
         <div className='container-footer'>
         <div className='row'>
             <div className='col'>
-                <h4>จัดทำโดย</h4>
+                <h4>Develope By</h4>
                 <ul className='footer-list'>
                     <li>นาย สรัญ พ่วงกระแสร์</li>
                     <li>นาย ฌัชพล ไผ่กอ</li>
@@ -26,7 +26,7 @@ const Footer = () => {
         <hr/>
         <div className='row'>
             <p className='footer-col-sm'>
-                &copy;{new Date().getFullYear()} | All right reserved to LSK | Term Of Service | 100% Illegal
+                &copy;{new Date().getFullYear()} | All right reserved to Cisco | Term Of Service | 100% Illegal
             </p>
         </div>
         </div>
