@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { HardlogS } from "../../Function/Person"
+import { Link, useNavigate } from "react-router-dom";
+
+
 function ResultHard() {
     const user = useSelector((state) => ({ ...state }))
+    const navigate = useNavigate();
     const Userid = user.userStore.user.ObjectID
     const [dataExamHard, setDataExamHard] = useState([]);
     const [score, setScore] = useState([]);
     const [time, setTime] = useState([]);
     const [examName, setExamName] = useState([]);
+    const [date, setDate] = useState("");
 
 
     const DataHard = Object.values(dataExamHard);
@@ -27,6 +32,7 @@ function ResultHard() {
             setScore(res.data.Score);
             setTime(res.data.Time);
             setExamName(res.data.Examname);
+            setDate(res.data.Date);
         });
     }
 
@@ -35,7 +41,9 @@ function ResultHard() {
     return (
         <div className="ExamThardtext">
             <div className="result-card" style={{ textAlign: "center" }}>
-                <h1>{examName}</h1>
+                <h1>{examName} Hard</h1>
+                <h2>{date.substring(0, 15)}</h2>
+                <hr />
                 <span className="ExamThardtext"> Your Score is {score} </span>
                 <br />
                 <span className="ExamThardtext"> ใช้เวลาไปทั้งหมด = {time} </span>
@@ -158,6 +166,7 @@ function ResultHard() {
 
                     )}
                 </div>
+               <button onClick={() => navigate("/user/profile")}  className="btn btn-primary">back to Profile</button> 
             </div>
         </div>
     )
