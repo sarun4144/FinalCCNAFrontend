@@ -24,6 +24,7 @@ function Store() {
   const [category, setCat] = useState([]);
   const [select, setSelect] = useState("");
 
+ 
   useEffect(() => {
     //code
     dispatch(checkout(null))

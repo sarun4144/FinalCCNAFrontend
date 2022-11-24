@@ -129,37 +129,37 @@ function ExampleTest() {
             <BiTimer /> 01 : 00 : 00
           </div>
           <div className="Extext">
-            นี่คือการทดลองทำข้อสอบ โดยหากคุณสามารถทำได้เสร็จภายใน 5 นาที แสดงว่าาคุณมีความพร้อมที่จะไปสอบจริงในระดับนีงแล้ว
+            This is the simulator test
             <ul>
-              <li>ในข้อนี่้จะมีคำถามทั้งหมด 50 คำถาม</li>
-              <li>ในแต่ละข้ออาจจะมีตัวเลือกที่ถูกต้องมากว่า 1 ข้อ</li>
-              <li>แบบทดสอบนี้มีความใกล้เคียงกับแบบทดสอบจริง</li>
+              <li>This Exam contain 50 question</li>
+              <li>Some question may have more than 1 correct answer</li>
+              <li>As close as it gets to the actual test.</li>
             </ul>
             <div>
-              ข้อสอบที่คุณเลือกคือ
+              The Exam you choose is
               {exame.map((item, idex) =>
                 <ul key={idex}>
-                  <li>ชื่อ: {item.name}</li>
-                  <li>เนื้อหา: {item.title}</li>
-                  <li>หมวดหมู่: {categoryName}</li>
+                  <li>Name : {item.name}</li>
+                  <li>Title : {item.title}</li>
+                  <li>Category : {categoryName}</li>
                 </ul>
               )}
-              <center ><button className="btn btn-primary" onClick={() => navigate("/user/example")}>ดูตัวอย่าง</button></center>
+              <center ><button className="btn btn-primary" onClick={() => navigate("/user/example")}>See Example</button></center>
             </div>
-            เลือกความยาก
+            Choose the difficulties
             <br />
             <div >
-              <button className="Exbutton1" onClick={Easy}>ง่าย</button>
-              ระดับความยาก Easy ระดับนี่จะไม่มีการจับเวลาพร้อมกับตรวจคำตอบและเฉลยทันที
+              <button className="Exbutton1" onClick={Easy}>Easy</button>
+              Instant feedback, no time limit
             </div>
             <div >
-              <button className="Exbutton2" onClick={Hard}>ยาก</button>
-              ระดับความยาก Hard ระดับนี่จะมีการจับเวลา 1 ชม. หากทำไม่ทันก่อนหมดเวลาจะถือว่าข้อสอบชุดนี้ได้ 0 คะแนน
+              <button className="Exbutton2" onClick={Hard}>Hard</button>
+              Show answer at the end, time limit with 1 hour
             </div>
           </div>
         </div>
         <div className="sameCat-card">
-          <div className="sameCat-card-header">ชุดข้อสอบใน {Catname}</div>
+          <div className="sameCat-card-header">Exam in {Catname}</div>
           <div className="sameCat-container">
             {filterExamList.map((item, i) =>
               <div key={i} className='store-card'>
@@ -175,7 +175,7 @@ function ExampleTest() {
                       <div className="form-group">
                         <h5>Category : {cat.name}</h5>
                       </div>
-                      <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id, item.Categoryid, cat.name)}>ดูข้อสอบ</button>
+                      <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id, item.Categoryid, cat.name)}>Enter</button>
                     </div>
                   )}
                 </form>

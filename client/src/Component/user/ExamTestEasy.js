@@ -49,7 +49,7 @@ function ExamTestEasy() {
   //cookie
   const [cookies, setCookie] = useCookies(['Result']);
 
-  // console.log(Bog.length)
+  // console.log(log2.length)
   useEffect(() => {
     //code
     if (localStorage.showresult == "true") {
@@ -273,14 +273,14 @@ function ExamTestEasy() {
       confirmButtonColor: 'orange',
     })
     if(text) {
-      const Reload={
-        mark:Bog.length,
-        Num:question,
+    const Reload={
+        Number:question,
         Name:name,
+        Username:Username,
         Text:text,
-        Username:Username
       }
-      Rerecord(Exid,Reload)
+      Bog.push(Reload)
+      Rerecord(Exid,Bog)
         .then(res => {
           Swal.fire({
             title: 'รายงานปัญหาสำเร็จ',

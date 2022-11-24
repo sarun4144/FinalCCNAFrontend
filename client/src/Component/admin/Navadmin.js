@@ -25,6 +25,10 @@ const Navbaradmin = () => {
           {/* <a href=""></a> */}
           <Link to="/admin/categoryadd"> Edit Category</Link>
         </li>
+        <li className="navadmin-item">
+          {/* <a href=""></a> */}
+          <Link to="/admin/Report"> Report</Link>
+        </li>
         
       </ul>
     </div>
