@@ -35,6 +35,7 @@ import ManagAdmin from './Component/admin/ManageAdmin';
 import ExamAdd from './Component/admin/ExamAdd';
 import CategoryAdd from './Component/admin/CategoryAdd';
 import ExamChoices from './Component/admin/ExamChoices';
+import Report from './Component/admin/Report';
 //function
 import { currentuser } from './Function/Auth'
 import { readCategory } from './Function/Category';
@@ -115,6 +116,7 @@ function App() {
               <Route path="/admin/manageadmin" element={<AdminRoute> <><ManagAdmin /></> </AdminRoute>} />
               <Route path="/admin/examadd" element={<AdminRoute> <><ExamAdd /></> </AdminRoute>} />
               <Route path="/admin/categoryadd" element={<AdminRoute> <><CategoryAdd /></> </AdminRoute>} />
+              <Route path="/admin/Report" element={<AdminRoute> <><Report /></> </AdminRoute>} />
 
               <Route path="/admin/examchoices" element={<AdminRoute> <><ExamChoices /></> </AdminRoute>} />
 

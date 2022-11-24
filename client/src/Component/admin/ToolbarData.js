@@ -21,5 +21,10 @@ export const ToolbarData = [
         path: '/admin/categoryadd',
         cName: 'tool-text'
     },
+    {
+        title: 'Report',
+        path: '/admin/Report',
+        cName: 'tool-text'
+    },
 ]
 

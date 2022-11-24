@@ -17,3 +17,8 @@ export const Rerecordlist = async (id) =>
     {
 
     });
+export const Repotlist = async () =>
+  await axios.get(process.env.REACT_APP_API + "/Repotlist" ,
+    {
+
+    });
