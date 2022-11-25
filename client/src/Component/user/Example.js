@@ -158,7 +158,7 @@ const Example = () => {
             </div>
             {category.map((cat, ic) =>
                 <div key={ic}>
-                    <center><button className="btn btn-primary" onClick={() => SeeExam(exame._id, exame.Categoryid, cat.name)}>กลับหน้าเดิม</button></center>
+                    <center><button className="btn btn-primary" onClick={() => SeeExam(exame._id, exame.Categoryid, cat.name)}>Back to Exam page</button></center>
                 </div>
             )}
         </div>
