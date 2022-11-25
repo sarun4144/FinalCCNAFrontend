@@ -43,22 +43,34 @@ const LineChart = () => {
     const DataName = Object.values(dataExamEasy);
     console.log(DataName)
     /*console.log(DataName)*/
-    const [scoreData, setScoreData] = useState({
-        labels: DataName.map((data) => data.Examname),
-        datasets: [
-            {
-                label: "Score",
-                data: DataName.map((data) => data.Score),
-                backgroundColor: "cyan",
-                borderColor: "black",
-                borderWidth: 2,
-            }
-        ]
-    })
-
+    // const [scoreData, setScoreData] = useState({
+        
+    //     labels: FakeData.map((data) => data.Category),
+    //     datasets: [
+    //         {
+    //             label: "Score",
+    //             data: FakeData.map((data) => data.Score),
+    //             backgroundColor: "cyan",
+    //             borderColor: "black",
+    //             borderWidth: 2,
+    //         }
+    //     ]
+    // })
+    const labels = DataName.map((data)=> data.Examname);
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'My First Dataset',
+        data: DataName.map((data) => data.Score),
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1,
+        borderWidth: 2,
+      }]
+    };
     return (
         <div>
-            <Line data={scoreData}></Line>
+            <Line data={data}></Line>
         </div>
     )
 }
