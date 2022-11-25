@@ -73,13 +73,14 @@ function Report() {
                   <th scope="col">Username</th>
                   <th scope="col">Text</th>
                 </tr>
-              </thead>
-              <tbody>
-
+              </thead>  
+             
+              <tbody >
+                
                   {filterExamList.map((item, idex) => (
                     <>
                       {item.Log.map((item2, idex2) =>
-                        <tr className="Report-table">
+                        <tr className="Report-table ">
                           <td>{item2.Number}</td>
                           <td>{item2.Name}</td>
                           <td>{item2.Username}</td>
@@ -88,8 +89,9 @@ function Report() {
                       )}
                     </>
                   ))}
-               
-              </tbody>
+              
+              </tbody> 
+             
             </table>
           </div>
         </div>

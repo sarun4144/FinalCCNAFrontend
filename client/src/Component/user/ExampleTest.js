@@ -57,6 +57,7 @@ function ExampleTest() {
       text: "คุณต้องการจะทำข้อสอบ Easy ใช่หรือไม่",
       icon: 'question',
     }).then((result) => {
+       if (role) {
       if (result.isConfirmed) {
         Swal.fire({
           title: 'ดำเนินการสำเร็จ',
@@ -66,6 +67,18 @@ function ExampleTest() {
         localStorage.setItem('TypeTest', "Easy")
         navigate("/user/examtesteasy")
       }
+       } else {
+      Swal.fire({
+        position: 'top',
+        title: 'Error!',
+        text: "กรุณา Login",
+        icon: 'error',
+        iconColor: 'Red',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง'
+      })
+      navigate("/login")
+    }
     })
   }
   function Hard() {
@@ -74,6 +87,7 @@ function ExampleTest() {
       text: "คุณต้องการจะทำข้อสอบ Hard ใช่หรือไม่",
       icon: 'question',
     }).then((result) => {
+      if (role) {
       if (result.isConfirmed) {
         Swal.fire({
           title: 'ดำเนินการสำเร็จ',
@@ -83,6 +97,18 @@ function ExampleTest() {
         localStorage.setItem('TypeTest', "Hard")
         navigate("/user/examtesthard")
       }
+    } else {
+      Swal.fire({
+        position: 'top',
+        title: 'Error!',
+        text: "กรุณา Login",
+        icon: 'error',
+        iconColor: 'Red',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง'
+      })
+      navigate("/login")
+    }
     })
   }
   { console.log(exame) }

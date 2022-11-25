@@ -78,3 +78,8 @@ export const listexam = async (authtoken) =>
   {
     
   });
+  export const removeExam = async (id) =>
+  await axios.delete(process.env.REACT_APP_API + "/removeExam/"+id,
+  {
+    
+  });

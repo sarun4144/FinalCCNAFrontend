@@ -73,17 +73,20 @@ function CategoryAdd() {
       icon: 'warning',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: 'ลบ Category สำเร็จ!',
-          text: 'Category ได้ถูกลบแล้ว',
-          icon: 'success'
-        })
-        console.log(user.userStore.user.token, id)
-        removeCategory(user.userStore.user.token, id).then((res) => {
+        removeCategory(Token, id).then((res) => {
           console.log("Delete", res);
-          loadData(user.userStore.user.token);
+          Swal.fire({
+            title: 'ลบ Category สำเร็จ!',
+            text:res.data,
+            icon: 'success'
+          })
+          loadData(Token)
         }).catch((err) => {
-          console.log(err.response);
+          Swal.fire({
+            title: 'Error',
+            text: err.response.data,
+            icon: 'error'
+          })
         });
       }
     })

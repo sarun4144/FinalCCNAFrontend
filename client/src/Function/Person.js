@@ -69,3 +69,8 @@ export const ChangeName = async (authtoken, id, value) =>
         authtoken
       }
     });
+    export const Catrecord = async (value) =>
+  await axios.post(process.env.REACT_APP_API + "/Catrecord" ,value,
+    {
+
+    });

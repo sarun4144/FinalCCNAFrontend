@@ -13,6 +13,7 @@ function ExamTestEasy() {
     const Exid = exam.examStore.exam.examid
     const UserID = exam.userStore.user.ObjectID
     const Catname = exam.examStore.exam.category
+    const role = exam.userStore.user.role
 
     const [data, setData] = useState([]);
     const [exame, setExam] = useState([]);
@@ -25,7 +26,7 @@ function ExamTestEasy() {
 
 
     const [counter, setCounter] = useState(59);
-    const [min, setMin] = useState(59);
+    const [min, setMin] = useState(89);
 
     const [counter2, setCounter2] = useState(0);
     const [min2, setMin2] = useState(0);
@@ -76,6 +77,7 @@ function ExamTestEasy() {
         if (!showResults) {
             counter >= 0 && setTimeout(() => countdown(), 1000);
         }
+
     }, [counter]);
 
     useEffect(() => {
@@ -147,6 +149,7 @@ function ExamTestEasy() {
             } else {
                 document.getElementById(selectValueS[0].index).className = "ExamThardButton1"
                 document.getElementById(selectValueS[0].index).disabled = false
+                document.getElementById(index).disabled = true
                 delete selectValue[`Num${selectValueS[0].index}`];
                 setselectValue({
                     ...selectValue, [`Num${index}`]: { isCorrect: isCorrect, index: index }
@@ -250,7 +253,7 @@ function ExamTestEasy() {
             setMin2(min2 + 1);
             setCounter2(0);
         } else {
-            setCounter2(counter + 1);
+            setCounter2(counter2 + 1);
         }
 
     }

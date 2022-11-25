@@ -30,6 +30,9 @@
 .Report-item {
     text-decoration: none;
     padding: 50px;
+    position: relative;
+    height: 400px;
+    overflow: auto;
 }
 
 .Report-header {
