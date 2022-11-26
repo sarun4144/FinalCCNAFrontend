@@ -60,8 +60,8 @@ const LineChart = () => {
     const data = {
       labels: labels,
       datasets: [{
-        label: 'My First Dataset',
-        data: DataName.map((data) => data.Score),
+        label: 'Score',
+        data: DataName.slice(DataName.length-5, DataName.length).map((data) => data.Score),
         fill: false,
         borderColor: 'rgb(75, 192, 192)',
         tension: 0.1,
