@@ -6,7 +6,7 @@ function Content() {
     const [data, setData] = useState([]);
     const [log, setLog] = useState([]);
 
-    console.log(log)
+    console.log(data)
     useEffect(() => {
         //code
         loadData();
@@ -38,10 +38,10 @@ function Content() {
                         </div>
                         <div className="content-Text">
                             <p>
-                                {log.name}
+                                {data.name}
                             </p>
                             <p>
-                                {log.title}
+                                {data.title}
                             </p>
                             </div>
                         </div>
@@ -54,10 +54,10 @@ function Content() {
                         </div>
                         <div className="content-Text">
                             <p>
-                                {data.name}
+                                {log.name}
                             </p>
                             <p>
-                                {data.title}
+                                {log.title}
                             </p>
                             </div>
                         </div>
