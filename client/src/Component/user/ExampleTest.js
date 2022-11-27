@@ -152,7 +152,7 @@ function ExampleTest() {
       <div className="Excard_item">
         <div className="Excard_inner">
           <div className="Exrole_name">
-            <BiTimer /> 01 : 00 : 00
+            <BiTimer /> 01 : 30 : 00
           </div>
           <div className="Extext">
             This is the simulator test

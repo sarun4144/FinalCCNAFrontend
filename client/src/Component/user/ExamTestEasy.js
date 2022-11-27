@@ -5,8 +5,9 @@ import { Rerecord ,Rerecordlist} from "../../Function/Reportlog";
 import { useCookies } from 'react-cookie';
 import "./ExamTestEasy.css";
 import Swal from 'sweetalert2'
-
+import Confirm from "../../Alert/Confirm";
 import { Easylog } from "../../Function/Person"
+import { useNavigate } from "react-router-dom";
 
 function ExamTestEasy() {
   const exam = useSelector((state) => ({ ...state }));
@@ -14,6 +15,7 @@ function ExamTestEasy() {
   const UserID = exam.userStore.user.ObjectID
   const Username = exam.userStore.user.username
   const Catname = exam.examStore.exam.category
+  const navigate = useNavigate();
 
   const [data, setData] = useState([]);
   const [exame, setExam] = useState([]);
@@ -198,16 +200,42 @@ function ExamTestEasy() {
     }
     EasyRecord(Exid, payload)
       .then(res => {
-        setScore(preve => 0);
-        localStorage.setItem("score", 0)
-        setCurrentQuestion(preve => 0);
-        localStorage.setItem("currentQuestion", 0)
-        setShowResults(false);
-        localStorage.setItem("showresult", false)
-        setRecord(false);
-        localStorage.setItem("result", 0)
-        setANSiscorrect(false)
-        setAnswerdetail(false)
+        Confirm.fire({
+          title: 'ยืนยัน!!',
+          text: res.data,
+          icon: 'sucess',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: 'Do it again',
+              text: 'Enjoy',
+              icon: 'success'
+            })
+            setScore(preve => 0);
+            localStorage.setItem("score", 0)
+            setCurrentQuestion(preve => 0);
+            localStorage.setItem("currentQuestion", 0)
+            setShowResults(false);
+            localStorage.setItem("showresult", false)
+            setRecord(false);
+            localStorage.setItem("result", 0)
+            setANSiscorrect(false)
+            setAnswerdetail(false)
+          }else{
+            setScore(preve => 0);
+            localStorage.setItem("score", 0)
+            setCurrentQuestion(preve => 0);
+            localStorage.setItem("currentQuestion", 0)
+            setShowResults(false);
+            localStorage.setItem("showresult", false)
+            setRecord(false);
+            localStorage.setItem("result", 0)
+            setANSiscorrect(false)
+            setAnswerdetail(false)
+            navigate("/user/extest")
+          }
+        })
+        
       }).catch(err => {
         console.log(err);
       })
@@ -425,7 +453,7 @@ function ExamTestEasy() {
 
                 )}
               </div>
-              <button className="ExamTeasyGobutton1" onClick={restartGame}>restartGame</button>
+              <button className="ExamTeasyGobutton1" onClick={restartGame}>Submit to Record</button>
             </div>
 
           )
