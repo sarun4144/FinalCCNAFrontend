@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { currentexam, EasyRecord,CountStamp } from "../../Function/Exam";
-import { Rerecord ,Rerecordlist} from "../../Function/Reportlog";
+import { currentexam, EasyRecord, CountStamp } from "../../Function/Exam";
+import { Rerecord, Rerecordlist } from "../../Function/Reportlog";
 import { useCookies } from 'react-cookie';
 import "./ExamTestEasy.css";
 import Swal from 'sweetalert2'
@@ -263,24 +263,24 @@ function ExamTestEasy() {
     }
   }
 
-  const ShowReportQuestion = async(name, question) => {
-    const {value: text } = await Swal.fire({
+  const ShowReportQuestion = async (name, question) => {
+    const { value: text } = await Swal.fire({
       title: name + " ข้อที่ " + question,
-      input: 'textarea', 
+      input: 'textarea',
       inputLabel: 'รายงานปัญหา',
       inputPlaceholder: 'ปัญหาหรือข้อผิดพลาดที่พบ',
       confirmButtonText: 'ยืนยัน',
       confirmButtonColor: 'orange',
     })
-    if(text) {
-    const Reload={
-        Number:question,
-        Name:name,
-        Username:Username,
-        Text:text,
+    if (text) {
+      const Reload = {
+        Number: question,
+        Name: name,
+        Username: Username,
+        Text: text,
       }
       Bog.push(Reload)
-      Rerecord(Exid,Bog)
+      Rerecord(Exid, Bog)
         .then(res => {
           Swal.fire({
             title: 'รายงานปัญหาสำเร็จ',
@@ -443,7 +443,7 @@ function ExamTestEasy() {
                       <br />
                       <span>{item.Question}</span>
                       <br />
-                      <div onClick={() => ShowReportQuestion(exame.name ,currentQuestion + 1)}>รายงานปัญหา</div>
+                      <div onClick={() => ShowReportQuestion(exame.name, currentQuestion + 1)}>รายงานปัญหา</div>
                     </div>
                     <center>
                       {item.images.map((pic, Ipic) =>

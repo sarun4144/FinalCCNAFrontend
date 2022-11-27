@@ -4,14 +4,14 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { FakeData } from './FakeData';
 import { listCategory } from '../../Function/Category';
 import { useSelector } from "react-redux";
-import { Easylog } from "../../Function/Person"
+import { Hardlog } from "../../Function/Person"
 
-const RadarChart = () => {
+const RadarChartHard = () => {
     const user = useSelector((state) => ({ ...state }))
     const Userid = user.userStore.user.ObjectID
     const Token = user.userStore.user.token
 
-    const [dataExamEasy, setDataExamEasy] = useState([]);
+    const [dataExamHard, setDataExamHard] = useState([]);
     const [category, setCat] = useState([]);
     const [dataArray, setDataArray] = useState([]);
     const [track, setTrack] = useState(false);
@@ -27,15 +27,15 @@ const RadarChart = () => {
     useEffect(() => {
         loadExamData(Userid)
         setTrack(false)
-    }, [Userid,track])
+    }, [Userid, track])
 
     useEffect(() => {
         setTrack(false)
     }, [track])
 
     function loadExamData(id) {
-        Easylog(id).then((res) => {
-            setDataExamEasy(res.data);
+        Hardlog(id).then((res) => {
+            setDataExamHard(res.data);
         });
         listCategory(id).then(res => {
             /*console.log(res.data)*/
@@ -45,17 +45,17 @@ const RadarChart = () => {
         })
     }
 
-    const DataName = Object.values(dataExamEasy);
+    const DataName = Object.values(dataExamHard);
 
     function setScore() {
         /*setDataArray(category.map((data) => data.name));*/
         DataName.map((data) => {
-            if(data.Category === "Network Fundimental"){ setCat1Score(preve => preve + data.Score)}
-            if(data.Category === "Network Access"){ setCat2Score(preve => preve + data.Score)}
-            if(data.Category === "IP Connectivity"){ setCat3Score(preve => preve + data.Score)}
-            if(data.Category === "IP Services"){ setCat4Score(preve => preve + data.Score)}
-            if(data.Category === "Security Fundamentals"){ setCat5Score(preve => preve + data.Score)}
-            if(data.Category === "Automaton and Programmability"){ setCat6Score(preve => preve + data.Score)}
+            if (data.Category === "Network Fundimental") { setCat1Score(preve => preve + data.Score) }
+            if (data.Category === "Network Access") { setCat2Score(preve => preve + data.Score) }
+            if (data.Category === "IP Connectivity") { setCat3Score(preve => preve + data.Score) }
+            if (data.Category === "IP Services") { setCat4Score(preve => preve + data.Score) }
+            if (data.Category === "Security Fundamentals") { setCat5Score(preve => preve + data.Score) }
+            if (data.Category === "Automaton and Programmability") { setCat6Score(preve => preve + data.Score) }
         }
         )
         console.log(DataName)
@@ -101,4 +101,4 @@ const RadarChart = () => {
     )
 }
 
-export default RadarChart
+export default RadarChartHard
