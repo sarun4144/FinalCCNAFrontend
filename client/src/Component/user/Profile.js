@@ -30,8 +30,6 @@ function Profile() {
   //console.log(username)
   //console.log(role)
   // console.log(email)
-  console.log("Hard", dataExamHard)
-  console.log("Easy", dataExamEasy)
   const openInNewTab = url => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };

@@ -48,7 +48,7 @@ const LineChartHard = () => {
                 "rgba(75,192,192,0.45)"
             ],
             borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1,
+            tension: 0,
             borderWidth: 2,
         }]
     };
@@ -64,7 +64,7 @@ const LineChartHard = () => {
                 "rgba(75,192,192,0.45)"
             ],
             borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1,
+            tension: 0,
             borderWidth: 2,
         }]
     };

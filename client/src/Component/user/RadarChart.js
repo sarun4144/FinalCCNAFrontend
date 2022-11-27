@@ -58,8 +58,6 @@ const RadarChart = () => {
             if(data.Category === "Automaton and Programmability"){ setCat6Score(preve => preve + data.Score)}
         }
         )
-        console.log(DataName)
-        console.log(cat1Score)
         setTrack(true);
     }
 
