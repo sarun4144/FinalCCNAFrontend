@@ -13,7 +13,7 @@ const RadarChart = () => {
                 backgroundColor: [
                     "rgba(75,192,192,0.45)"
                 ],
-                borderColor: "black",
+                borderColor: "skyblue",
                 borderWidth: 2,
             }
         ],
