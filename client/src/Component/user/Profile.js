@@ -4,6 +4,7 @@ import './Profile.css'
 import * as AiIcons from "react-icons/ai";
 import Swal from 'sweetalert2'
 import LineChart from "./LineChart";
+import LineChartHard from "./LineChartHard";
 import RadarChart from "./RadarChart";
 import Table from 'react-bootstrap/Table';
 import { ChangeName, reads, Hardlog, Easylog } from "../../Function/Person"
@@ -16,6 +17,8 @@ function Profile() {
   const [data, setData] = useState([]);
   const [dataExamHard, setDataExamHard] = useState([]);
   const [dataExamEasy, setDataExamEasy] = useState([]);
+
+  const [showLine, setShowLine] = useState("easy")
 
   const [show, setShow] = useState(false);
 
@@ -113,8 +116,10 @@ function Profile() {
         <div className="col-md-6">
           <div className="profile-card">
             <div className="profile-card-header"><h1>Statistics - Line Chart</h1></div>
+            <button className="btn btn-success" onClick={() => setShowLine("easy")}>EASY</button>&nbsp;
+            <button className="btn btn-warning" onClick={() => setShowLine("hard")}>HARD</button>
             <div className="profile-card-content">
-              <LineChart></LineChart>
+             <>{ showLine === "easy" ? <LineChart></LineChart> : <LineChartHard></LineChartHard>}</>
             </div>
           </div>
         </div>
