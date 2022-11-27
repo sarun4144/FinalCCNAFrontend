@@ -82,7 +82,7 @@ const RadarChartHard = () => {
         labels: category.map((data) => data.name),
         datasets: [{
             label: 'Score',
-            data: [cat1Score, cat2Score, cat3Score, cat4Score, cat5Score, cat5Score, cat6Score],
+            data: [cat1Score, cat2Score, cat3Score, cat4Score, cat5Score, cat6Score],
             fill: true,
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgb(255, 99, 132)',
