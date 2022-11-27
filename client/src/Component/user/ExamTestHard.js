@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { currentexam, HardRecord ,CountStamp} from "../../Function/Exam";
+import { currentexam, HardRecord, CountStamp } from "../../Function/Exam";
 import { useCookies } from 'react-cookie';
 import "./ExamTestHard.css";
 import "./ExamTestEasy.css";
-
+import Swal from 'sweetalert2'
+import Confirm from "../../Alert/Confirm";
 import { Hardlog } from "../../Function/Person"
-
+import { useNavigate } from "react-router-dom";
 
 function ExamTestEasy() {
     const exam = useSelector((state) => ({ ...state }));
@@ -14,12 +15,13 @@ function ExamTestEasy() {
     const UserID = exam.userStore.user.ObjectID
     const Catname = exam.examStore.exam.category
     const role = exam.userStore.user.role
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const [exame, setExam] = useState([]);
     const [docount, setdocount] = useState([]);
     const Data = Object.values(data);
-    
+
 
     const [log, setlog] = useState([]);
     const Log = Object.values(log);
@@ -53,7 +55,7 @@ function ExamTestEasy() {
     //cookie
     const [cookies, setCookie] = useCookies(['Result']);
 
-    
+
     useEffect(() => {
         //code
         if (localStorage.showresult === "true") {
@@ -68,7 +70,7 @@ function ExamTestEasy() {
         //code
         loadData(Exid);
         HardlogS(UserID)
-      
+
     }, [Exid, UserID]);
 
 
@@ -198,48 +200,73 @@ function ExamTestEasy() {
             Time: `${min2}:${counter2}`,
             Date: Date(),
             ExamObjectid: Exid,
-            Examname:exame.name,
+            Examname: exame.name,
             Title: exame.title,
             Category: Catname,
-            Score:score
+            Score: score
         }
         const payload2 = {
-           Docount:parseInt(docount) + 1
+            Docount: parseInt(docount) + 1
         }
         const payload3 = {
-           Docount:1
+            Docount: 1
         }
-        if(docount == undefined){
-            CountStamp(Exid,payload3).then(res => {
+        if (docount == undefined) {
+            CountStamp(Exid, payload3).then(res => {
                 console.log(res.data)
-           }).catch(err => {
-            console.log(err);
-           })
-        }else{
+            }).catch(err => {
+                console.log(err);
+            })
+        } else {
             console.log("SSSSSSSSSSSSSSSSSSSSSSSSS")
-            CountStamp(Exid,payload2).then(res => {
+            CountStamp(Exid, payload2).then(res => {
                 console.log(res.data)
-           }).catch(err => {
-            console.log(err);
-           })
+            }).catch(err => {
+                console.log(err);
+            })
         }
         HardRecord(Exid, payload)
             .then(res => {
-                setScore(preve => 0);
-                localStorage.setItem("score", 0)
-                setCurrentQuestion(preve => 0);
-                localStorage.setItem("currentQuestion", 0)
-                setShowResults(false);
-                localStorage.setItem("showresult", false)
-                setRecord(false);
-                localStorage.setItem("result", 0)
-                setANSiscorrect(false)
-                setAnswerdetail(false)
+                Confirm.fire({
+                    title: 'ยืนยัน!!',
+                    text: res.data,
+                    icon: 'sucess',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Do it again',
+                            text: 'Enjoy',
+                            icon: 'success'
+                        })
+                        setScore(preve => 0);
+                        localStorage.setItem("score", 0)
+                        setCurrentQuestion(preve => 0);
+                        localStorage.setItem("currentQuestion", 0)
+                        setShowResults(false);
+                        localStorage.setItem("showresult", false)
+                        setRecord(false);
+                        localStorage.setItem("result", 0)
+                        setANSiscorrect(false)
+                        setAnswerdetail(false)
+                    } else {
+                        setScore(preve => 0);
+                        localStorage.setItem("score", 0)
+                        setCurrentQuestion(preve => 0);
+                        localStorage.setItem("currentQuestion", 0)
+                        setShowResults(false);
+                        localStorage.setItem("showresult", false)
+                        setRecord(false);
+                        localStorage.setItem("result", 0)
+                        setANSiscorrect(false)
+                        setAnswerdetail(false)
+                        navigate("/user/extest")
+                    }
+                })
             }).catch(err => {
                 console.log(err);
             })
 
-           
+
     }
     function countdown() {
 
@@ -270,7 +297,7 @@ function ExamTestEasy() {
                 ANSiscorrect: ANSiscorrect
             }
         })
-        
+
         setBlock(true)
         for (var index = 0; index < Choices.length; index++) {
             document.getElementById(index + 1).className = "ExamThardButton1"
@@ -431,7 +458,7 @@ function ExamTestEasy() {
                                             </div>
 
                                         )}
-                                        <button className="ExamTeasyGobutton1" onClick={restartGame}>restartGame</button>
+                                        <button className="ExamTeasyGobutton1" onClick={restartGame}>Submit to Record</button>
                                     </div>
                                 </div>
                             )
@@ -444,7 +471,7 @@ function ExamTestEasy() {
                                             <div className="ExamThardrole_name">
                                                 <h1>{exame.name} &nbsp;
                                                     Hard</h1>
-                                                Time = 0:{min}:{counter}
+                                                Time = {min}:{counter}
                                             </div>
                                             <br />
                                             {Data2.map((item, index) => (
