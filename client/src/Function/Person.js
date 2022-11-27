@@ -57,8 +57,8 @@ export const HardlogS = async (id,value) =>
     {
 
     });
-export const EastlogS = async (id,value) =>
-  await axios.post(process.env.REACT_APP_API + "/EastlogS/" + id,value,
+export const EasylogS = async (id,value) =>
+  await axios.post(process.env.REACT_APP_API + "/EasylogS/" + id,value,
     {
 
     });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { EastlogS } from "../../Function/Person"
+import { EasylogS } from "../../Function/Person"
 
 
 function ResultEasy() {
@@ -26,7 +26,7 @@ function ResultEasy() {
         const payload = {
             Index: localStorage.Index
         }
-        EastlogS(id, payload).then((res) => {
+        EasylogS(id, payload).then((res) => {
             setDataExamEasy(res.data.Exam);
             setScore(res.data.Score);
             setExamName(res.data.Examname);

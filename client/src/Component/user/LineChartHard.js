@@ -53,12 +53,12 @@ const LineChartHard = () => {
         }]
     };
 
-    const labelsS = DataName.slice(DataName.length - 5, DataName.length).map((data) => data.Examname);
+    const labelsS = DataName.map((data) => data.Examname);
     const dataHardS = {
         labels: labelsS,
         datasets: [{
             label: 'Score',
-            data: DataName.slice(DataName.length - 5, DataName.length).map((data) => data.Score),
+            data: DataName.map((data) => data.Score),
             fill: true,
             backgroundColor: [
                 "rgba(75,192,192,0.45)"

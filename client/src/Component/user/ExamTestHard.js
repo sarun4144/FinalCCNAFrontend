@@ -55,7 +55,6 @@ function ExamTestEasy() {
     //cookie
     const [cookies, setCookie] = useCookies(['Result']);
 
-
     useEffect(() => {
         //code
         if (localStorage.showresult === "true") {

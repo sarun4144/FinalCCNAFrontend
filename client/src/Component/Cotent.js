@@ -1,32 +1,67 @@
-import { style } from '@mui/system';
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import "./ComponentCSS/Content.css"
+import { listexamSort,listexamSortDate } from "../Function/Exam"
+import {reads } from "../Function/Person"
 function Content() {
+    const [data, setData] = useState([]);
+    const [log, setLog] = useState([]);
+
+    console.log(log)
+    useEffect(() => {
+        //code
+        loadData();
+        // reads()
+
+    }, []);
+
+    const loadData = () => {
+        listexamSort().then(res => {
+            setData(res.data[0])
+        }).catch(err => {
+            console.log(err.response.data)
+        })
+        listexamSortDate().then(res =>{
+            setLog(res.data[0])
+        }).catch(err => {
+            console.log(err.response.data)
+        })
+
+    }
 
     return (
         <div className='mainBackground'>
             <div className='content-container'>
                 <section className="content-con">
-                    <div className="content-l">
-                        <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=2550&q=80" alt="" />
-                    </div>
                     <div className="content-r">
-                        <h3>ทดสอบ Font ไทย</h3>
-                        <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quaerat minima sapiente labore consectetur nam assumenda excepturi, doloribus placeat perspiciatis neque vero a, natus aperiam ullam ipsam. Quis, sequi facere?
-                        </p>
-                    </div>
+                        <div className="content-Head">
+                        <span>The Most Popular Exam </span> 
+                        </div>
+                        <div className="content-Text">
+                            <p>
+                                {log.name}
+                            </p>
+                            <p>
+                                {log.title}
+                            </p>
+                            </div>
+                        </div>
+                   
                 </section>
                 <section className="content-con">
                     <div className="content-r">
-                        <h2>Some title</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quaerat minima sapiente labore consectetur nam assumenda excepturi, doloribus placeat perspiciatis neque vero a, natus aperiam ullam ipsam. Quis, sequi facere?
-                        </p>
-                    </div>
-                    <div className="content-l">
-                        <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=2550&q=80" alt="" />
-                    </div>
+                    <div className="content-Head">
+                        <span>The Newest Exam !! </span> 
+                        </div>
+                        <div className="content-Text">
+                            <p>
+                                {data.name}
+                            </p>
+                            <p>
+                                {data.title}
+                            </p>
+                            </div>
+                        </div>
+                   
                 </section>
             </div>
         </div>

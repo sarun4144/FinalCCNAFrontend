@@ -14,6 +14,18 @@ export const listexam = async (authtoken) =>
       authtoken
     }
   });
+export const listexamSort = async (authtoken) =>
+  await axios.get(process.env.REACT_APP_API + "/listexamSort", {
+    headers: {
+      authtoken
+    }
+  });
+export const listexamSortDate = async (authtoken) =>
+  await axios.get(process.env.REACT_APP_API + "/listexamSortDate", {
+    headers: {
+      authtoken
+    }
+  });
 
   export const currentexam = async (id) =>
   await axios.post(process.env.REACT_APP_API + "/current-exam/"+id,
