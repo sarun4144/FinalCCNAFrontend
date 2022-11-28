@@ -7,7 +7,7 @@
 
 .landing-wrap{
   flex: 1;
-  background-color: white;
+  background: #dbdbdb;
   z-index: 1000;
 }
 

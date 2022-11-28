@@ -148,7 +148,7 @@ function Store() {
             <div key={i} className='store-card'>
               <div >
                 <div className="form-group">
-                  <h1>{item.name}</h1>
+                  <div className="store-card-header"><h1>{item.name}</h1></div>
                 </div>
                 <div className="form-group">
                   <h4>{item.title}</h4>
@@ -194,7 +194,7 @@ function Store() {
           <div key={i} className='store-card'>
             <form >
               <div className="form-group">
-                <h1>{item.name}</h1>
+              <div className="store-card-header"><h1>{item.name}</h1></div>
               </div>
               <div className="form-group">
                 <h4>{item.title}</h4>
@@ -236,7 +236,7 @@ function Store() {
         <div key={i} className='store-card'>
           <form >
             <div className="form-group">
-              <h1>{item.name}</h1>
+            <div className="store-card-header"><h1>{item.name}</h1></div>
             </div>
             <div className="form-group">
               <h4>{item.title}</h4>
