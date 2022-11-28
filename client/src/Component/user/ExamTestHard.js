@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { currentexam, HardRecord, CountStamp } from "../../Function/Exam";
+import { Rerecord, Rerecordlist } from "../../Function/Reportlog";
 import { useCookies } from 'react-cookie';
 import "./ExamTestHard.css";
 import "./ExamTestEasy.css";
@@ -8,11 +9,13 @@ import Swal from 'sweetalert2'
 import Confirm from "../../Alert/Confirm";
 import { Hardlog } from "../../Function/Person"
 import { useNavigate } from "react-router-dom";
+import { Easylog } from "../../Function/Person"
 
 function ExamTestEasy() {
     const exam = useSelector((state) => ({ ...state }));
     const Exid = exam.examStore.exam.examid
     const UserID = exam.userStore.user.ObjectID
+    const Username = exam.userStore.user.username
     const Catname = exam.examStore.exam.category
     const role = exam.userStore.user.role
     const navigate = useNavigate();
@@ -24,7 +27,9 @@ function ExamTestEasy() {
 
 
     const [log, setlog] = useState([]);
+    const [log2, setlog2] = useState([]);
     const Log = Object.values(log);
+    const Bog = Object.values(log2);
 
 
     const [counter, setCounter] = useState(59);
@@ -135,6 +140,8 @@ function ExamTestEasy() {
             setlog(res.data);
         });
     }
+
+
 
     //easyFunction
     function EasyselectCount(isCorrect, CorrectANS, index) {
@@ -324,6 +331,47 @@ function ExamTestEasy() {
             }
         }
     }
+
+    function recordlist(authtoken) {
+        Rerecordlist(authtoken).then((res) => {
+            setlog2(res.data);
+        });
+    }
+
+    const ShowReportQuestion = async (name, question) => {
+        const { value: text } = await Swal.fire({
+            title: name + " ข้อที่ " + question,
+            input: 'textarea',
+            inputLabel: 'รายงานปัญหา',
+            inputPlaceholder: 'ปัญหาหรือข้อผิดพลาดที่พบ',
+            confirmButtonText: 'ยืนยัน',
+            confirmButtonColor: 'orange',
+        })
+        if (text) {
+            const Reload = {
+                Number: question,
+                Name: name,
+                Username: Username,
+                Text: text,
+            }
+            Bog.push(Reload)
+            Rerecord(Exid, Bog)
+                .then(res => {
+                    Swal.fire({
+                        title: 'รายงานปัญหาสำเร็จ',
+                        confirmButtonText: 'ยืนยัน',
+                        confirmButtonColor: 'green',
+                    })
+                    loadData(Exid);
+                    HardlogS(UserID);
+                    recordlist(Exid)
+                }).catch(err => {
+                    console.log(err)
+                })
+        }
+    }
+
+
     if (counter < 0) {
         return <div>Time OUT</div>;
     } else {
@@ -481,7 +529,7 @@ function ExamTestEasy() {
                                                         <br />
                                                         <span>{item.Question}</span>
                                                         <br />
-
+                                                        <button className="btn btn-warning" onClick={() => ShowReportQuestion(exame.name, currentQuestion + 1)}>รายงานปัญหา</button>
                                                     </div>
                                                     <center>
                                                         {item.images.map((pic, Ipic) =>

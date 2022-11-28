@@ -221,7 +221,7 @@ function ExamTestEasy() {
             localStorage.setItem("result", 0)
             setANSiscorrect(false)
             setAnswerdetail(false)
-          }else{
+          } else {
             setScore(preve => 0);
             localStorage.setItem("score", 0)
             setCurrentQuestion(preve => 0);
@@ -235,7 +235,7 @@ function ExamTestEasy() {
             navigate("/user/extest")
           }
         })
-        
+
       }).catch(err => {
         console.log(err);
       })
@@ -471,7 +471,7 @@ function ExamTestEasy() {
                       <br />
                       <span>{item.Question}</span>
                       <br />
-                      <div onClick={() => ShowReportQuestion(exame.name, currentQuestion + 1)}>รายงานปัญหา</div>
+                      <button className="btn btn-warning" onClick={() => ShowReportQuestion(exame.name, currentQuestion + 1)}>รายงานปัญหา</button>
                     </div>
                     <center>
                       {item.images.map((pic, Ipic) =>
