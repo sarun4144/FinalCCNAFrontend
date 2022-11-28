@@ -11,6 +11,7 @@
     overflow: hidden;
     overflow-y: auto;
     border-radius: 10px;
+    background-color: white;
 }
 
 .example-card {
@@ -24,6 +25,7 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     overflow: hidden;
     overflow-y: auto;
+    background-color: white;
 }
 
 @media screen and (max-width: 1160px) {

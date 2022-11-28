@@ -57,28 +57,28 @@ function ExampleTest() {
       text: "คุณต้องการจะทำข้อสอบ Easy ใช่หรือไม่",
       icon: 'question',
     }).then((result) => {
-       if (role) {
-      if (result.isConfirmed) {
+      if (role) {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: 'ดำเนินการสำเร็จ',
+            text: 'ไปที่หน้าทำข้อสอบ',
+            icon: 'success'
+          })
+          localStorage.setItem('TypeTest', "Easy")
+          navigate("/user/examtesteasy")
+        }
+      } else {
         Swal.fire({
-          title: 'ดำเนินการสำเร็จ',
-          text: 'ไปที่หน้าทำข้อสอบ',
-          icon: 'success'
+          position: 'top',
+          title: 'Error!',
+          text: "กรุณา Login",
+          icon: 'error',
+          iconColor: 'Red',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'ตกลง'
         })
-        localStorage.setItem('TypeTest', "Easy")
-        navigate("/user/examtesteasy")
+        navigate("/login")
       }
-       } else {
-      Swal.fire({
-        position: 'top',
-        title: 'Error!',
-        text: "กรุณา Login",
-        icon: 'error',
-        iconColor: 'Red',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'ตกลง'
-      })
-      navigate("/login")
-    }
     })
   }
   function Hard() {
@@ -88,30 +88,30 @@ function ExampleTest() {
       icon: 'question',
     }).then((result) => {
       if (role) {
-      if (result.isConfirmed) {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: 'ดำเนินการสำเร็จ',
+            text: 'ไปที่หน้าทำข้อสอบ',
+            icon: 'success'
+          })
+          localStorage.setItem('TypeTest', "Hard")
+          navigate("/user/examtesthard")
+        }
+      } else {
         Swal.fire({
-          title: 'ดำเนินการสำเร็จ',
-          text: 'ไปที่หน้าทำข้อสอบ',
-          icon: 'success'
+          position: 'top',
+          title: 'Error!',
+          text: "กรุณา Login",
+          icon: 'error',
+          iconColor: 'Red',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'ตกลง'
         })
-        localStorage.setItem('TypeTest', "Hard")
-        navigate("/user/examtesthard")
+        navigate("/login")
       }
-    } else {
-      Swal.fire({
-        position: 'top',
-        title: 'Error!',
-        text: "กรุณา Login",
-        icon: 'error',
-        iconColor: 'Red',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'ตกลง'
-      })
-      navigate("/login")
-    }
     })
   }
-  { console.log(exame) }
+
   const filterExamList = allExam.filter((samecatExam) => {
     { console.log(samecatExam) }
     /*{console.log(exame._id)}*/
@@ -146,7 +146,7 @@ function ExampleTest() {
       navigate("/login")
     }
   }
-
+  console.log(Token)
   return (
     <div className="Excards_wrap">
       <div className="Excard_item">
@@ -188,24 +188,30 @@ function ExampleTest() {
           <div className="sameCat-card-header">Exam in {Catname}</div>
           <div className="sameCat-container">
             {filterExamList.map((item, i) =>
-              <div key={i} className='store-card'>
-                <form >
-                  <div className="form-group">
-                    <h1>{item.name}</h1>
-                  </div>
-                  <div className="form-group">
-                    <h4>{item.title}</h4>
-                  </div>
-                  {item.CAT.map((cat, catindex) =>
-                    <div key={catindex}>
+              <>
+                {
+                  item._id !== Token ? (<div key={i} className='store-card'>
+                    <form >
                       <div className="form-group">
-                        <h5>Category : {cat.name}</h5>
+                        <h1>{item.name}</h1>
                       </div>
-                      <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id, item.Categoryid, cat.name)}>Enter</button>
-                    </div>
-                  )}
-                </form>
-              </div>
+                      <div className="form-group">
+                        <h4>{item.title}</h4>
+                      </div>
+                      {item.CAT.map((cat, catindex) =>
+                        <div key={catindex}>
+                          <div className="form-group">
+                            <h5>Category : {cat.name}</h5>
+                          </div>
+                          <button type="submit" className="btn btn-primary" onClick={() => SeeExam(item._id, item.Categoryid, cat.name)}>Enter</button>
+                        </div>
+                      )}
+                    </form>
+                  </div>)
+                    :
+                    (<div></div>)
+                }
+              </>
             )}
           </div>
         </div>

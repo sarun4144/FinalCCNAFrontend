@@ -3,7 +3,7 @@
 
 
 .ExamTeasycards_wrap {
-    background-color: #ffffff;
+    
     padding: 20px;
     width: 100%;
     display: flex;
@@ -20,7 +20,7 @@
 }
 
 .ExamTeasycard_inner {
-    background: #ecebeb;
+    background: white;
     border-radius: 5px;
     padding: 35px 20px;
     width: 100%;
@@ -152,7 +152,7 @@
 
 .result-card {
     align-items: center;
-
+    background-color: white;
     justify-content: center;
     flex-wrap: wrap;
     border-radius: 10px;

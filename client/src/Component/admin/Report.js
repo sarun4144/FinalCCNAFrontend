@@ -36,9 +36,11 @@ function Report() {
   return (
     <div>
       <div className="Report_wrap">
-        <div className="Report-columnHead">
-          <div className="cat-dropdown-container">
-            <Dropdown>
+        <div className="Report-column">
+          <div className="Report-header">
+            <h2>Report</h2>
+          </div>
+          <Dropdown>
               <Dropdown.Toggle variant="primary" id="dropdown-cat">
                 {catText}
               </Dropdown.Toggle>
@@ -54,16 +56,9 @@ function Report() {
                     {item.ExName}
                   </Dropdown.Item>
                 ))}
+                <Dropdown.Item as="button" onClick={(id) => { setSelect(""); setDropDownText("ALL") }}>ALL</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-          </div>
-        </div>
-      </div>
-      <div className="Report_wrap">
-        <div className="Report-column">
-          <div className="Report-header">
-            <h2>Report</h2>
-          </div>
           <div className="Report-item">
             <table className="table">
               <thead className="Report-headerTable">

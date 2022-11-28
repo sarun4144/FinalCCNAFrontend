@@ -1,5 +1,4 @@
 .Report_wrap {
-    background-color: #ffffff;
     padding: 20px;
     width: 100%;
     display: flex;
@@ -29,7 +28,7 @@
 
 .Report-item {
     text-decoration: none;
-    padding: 50px;
+    padding: 15px;
     position: relative;
     height: 400px;
     overflow: auto;
