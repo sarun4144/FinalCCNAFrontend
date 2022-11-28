@@ -74,7 +74,7 @@ function ExamTestEasy() {
         //code
         loadData(Exid);
         HardlogS(UserID)
-
+        recordlist(Exid)
     }, [Exid, UserID]);
 
 
