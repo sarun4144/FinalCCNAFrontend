@@ -54,7 +54,7 @@ function ExamTestEasy() {
   // console.log(log2.length)
   useEffect(() => {
     //code
-    if (localStorage.showresult == "true") {
+    if (localStorage.showresult === "true") {
       setShowResults(true)
     }
     setRecord(JSON.parse(localStorage.result))
@@ -134,11 +134,11 @@ function ExamTestEasy() {
 
   const optionClicked = (isCorrect) => {
     // Increment the score
-    if (Selector == selectValueS.length) {
+    if (Selector === selectValueS.length) {
       let i = 0
       let d = 0
       while (i < isCorrect.length) {
-        if (isCorrect[i].isCorrect == false) {
+        if (isCorrect[i].isCorrect === false) {
           document.getElementById(isCorrect[i].index).className = "ExamTeasyButton1false "
           d = -1
           console.log("False ", d)
@@ -149,13 +149,14 @@ function ExamTestEasy() {
         }
         i++
       }
-      if (i == isCorrect.length && d == isCorrect.length) {
+      if (i === isCorrect.length && d === isCorrect.length) {
         setAnswerdetail(true)
         console.log("true")
         setANSiscorrect(true)
 
       } else {
         console.log("false")
+        setAnswerdetail(true)
         setANSiscorrect(false)
       }
     } else {
@@ -185,7 +186,7 @@ function ExamTestEasy() {
     const payload3 = {
       Docount: 1
     }
-    if (docount == undefined) {
+    if (docount === undefined) {
       CountStamp(Exid, payload3).then(res => {
         console.log(res.data)
       }).catch(err => {
@@ -243,7 +244,7 @@ function ExamTestEasy() {
   }
 
   function countdown() {
-    if (counter == 0 && min !== 0) {
+    if (counter === 0 && min !== 0) {
       setMin(min - 1);
       setCounter(59);
     } else {
@@ -267,7 +268,7 @@ function ExamTestEasy() {
     for (var index = 0; index < Choices.length; index++) {
       document.getElementById(index + 1).className = "ExamTeasyButton1"
     }
-    if (index == Choices.length) {
+    if (index === Choices.length) {
       if (currentQuestion + 1 < Data.length) {
         if (ANSiscorrect) {
           localStorage.setItem("score", score + 1)
@@ -340,7 +341,7 @@ function ExamTestEasy() {
                   <div key={index} className="result-Question">
 
                     <div className="ExamTeasyQuestion">
-                      {item.ANSiscorrect && item.selectValueS.length == item.CorrectANS.length ? (
+                      {item.ANSiscorrect && item.selectValueS.length === item.CorrectANS.length ? (
                         <div className="result-q-True"><h2>Question: {index + 1}</h2></div>
                       ) : (
                         <div className="result-q-false"><h2>Question: {index + 1}</h2></div>
