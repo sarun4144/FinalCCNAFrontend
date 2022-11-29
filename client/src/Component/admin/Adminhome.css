@@ -5,7 +5,6 @@
   margin-left: 90px;
   margin-right: 90px;
   margin-top: 80px;
-  background-color: white;
 }
 
 .adminprofile {
@@ -20,7 +19,7 @@
   overflow-y: auto;
 }
 
-.admin-card-header{
+.admin-card-header {
   background-color: #333;
   color: white;
   padding-left: 16px;
@@ -28,6 +27,7 @@
 }
 
 .examadd-card {
+  background-color: white;
   border-radius: 5px;
   padding: 15px;
   margin-left: 25px;
@@ -40,4 +40,19 @@
 
 .adminwrap {
   width: 100%;
+}
+
+.admin-menu-container {
+  margin-top: 20px;
+}
+
+.admin-cat-manage {
+  border-radius: 10px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  background-color: white;
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+  overflow-y: auto;
 }

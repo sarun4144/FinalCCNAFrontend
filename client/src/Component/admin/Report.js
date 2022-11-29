@@ -3,6 +3,9 @@ import "./Report.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Repotlist } from "../../Function/Reportlog";
 import Dropdown from "react-bootstrap/Dropdown";
+import AdminToolbar from "./AdminToolbar";
+import "./Adminhome.css";
+
 function Report() {
   const [Data, setData] = useState([]);
   const [Datalog, setDatalog] = useState([]);
@@ -34,31 +37,32 @@ function Report() {
 
 
   return (
-    <div>
+    <div className="adminwrap">
+      <AdminToolbar />
       <div className="Report_wrap">
         <div className="Report-column">
           <div className="Report-header">
             <h2>Report</h2>
           </div>
           <Dropdown>
-              <Dropdown.Toggle variant="primary" id="dropdown-cat">
-                {catText}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                {Data.map((item, index) => (
-                  <Dropdown.Item
-                    key={index}
-                    onClick={() => {
-                      setSelect(item.ExamId);
-                      setDropDownText(item.ExName);
-                    }}
-                  >
-                    {item.ExName}
-                  </Dropdown.Item>
-                ))}
-                <Dropdown.Item as="button" onClick={(id) => { setSelect(""); setDropDownText("ALL") }}>ALL</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+            <Dropdown.Toggle variant="primary" id="dropdown-cat">
+              {catText}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {Data.map((item, index) => (
+                <Dropdown.Item
+                  key={index}
+                  onClick={() => {
+                    setSelect(item.ExamId);
+                    setDropDownText(item.ExName);
+                  }}
+                >
+                  {item.ExName}
+                </Dropdown.Item>
+              ))}
+              <Dropdown.Item as="button" onClick={(id) => { setSelect(""); setDropDownText("ALL") }}>ALL</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
           <div className="Report-item">
             <table className="table">
               <thead className="Report-headerTable">
@@ -68,25 +72,25 @@ function Report() {
                   <th scope="col">Username</th>
                   <th scope="col">Text</th>
                 </tr>
-              </thead>  
-             
+              </thead>
+
               <tbody >
-                
-                  {filterExamList.map((item, idex) => (
-                    <>
-                      {item.Log.map((item2, idex2) =>
-                        <tr className="Report-table ">
-                          <td>{item2.Number}</td>
-                          <td>{item2.Name}</td>
-                          <td>{item2.Username}</td>
-                          <td>{item2.Text}</td>
-                          </tr>
-                      )}
-                    </>
-                  ))}
-              
-              </tbody> 
-             
+
+                {filterExamList.map((item, idex) => (
+                  <>
+                    {item.Log.map((item2, idex2) =>
+                      <tr className="Report-table ">
+                        <td>{item2.Number}</td>
+                        <td>{item2.Name}</td>
+                        <td>{item2.Username}</td>
+                        <td>{item2.Text}</td>
+                      </tr>
+                    )}
+                  </>
+                ))}
+
+              </tbody>
+
             </table>
           </div>
         </div>

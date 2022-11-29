@@ -98,9 +98,9 @@ function ManagAdmin() {
       confirmButtonText: 'ยืนยัน',
       confirmButtonColor: 'green',
     })
-    if(password) {
+    if (password) {
       setValues({ ...values, id: id, password: password });
-      changePassword(user.userStore.user.token,values.id, { values })
+      changePassword(user.userStore.user.token, values.id, { values })
         .then(res => {
           Swal.fire({
             title: 'แก้ไข Password สำเร็จ',
@@ -118,87 +118,91 @@ function ManagAdmin() {
   const roleData = ["admin", "user"];
   return (
     <div className="adminwrap">
-      <AdminToolbar/>
-    <div className='admincontainer'>
-      <div className='row'>
-        
-        <div className='col' >
-          <h1>Admin Management Page</h1>
-          <Table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Email</th>
-                <th scope="col">Username</th>
-                <th scope="col">Role</th>
-                <th scope="col">Status</th>
-                <th scope="col">Create</th>
-                <th scope="col">Update</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item, index) =>
-                <tr key={index}>
-                  <th >{item.email}</th>
-                  <td>{item.username}</td>
-                  <td>
-                    {item.role === 'admin'
-                      ?
-                      <select
-                        className="form-select"
-                        style={{ width: "100px", backgroundColor: "lightgreen" }}
-                        defaultValue={item.role}
-                        onChange={e => handleChangeRole(e, item._id)}
-                      >
-                        {roleData.map((item, index) =>
-                          <option value={item} key={index}>
-                            {item}
-                          </option>
-                        )}
+      <AdminToolbar />
+      <div className='admincontainer'>
+        <div className="admin-menu-container">
+          <div className="adminprofile">
+            <div className='row'>
 
-                      </select>
-                      : <select
-                        className="form-select"
-                        style={{ width: "100px", backgroundColor: "lightskyblue" }}
-                        defaultValue={item.role}
-                        onChange={e => handleChangeRole(e, item._id)}
-                      >
-                        {roleData.map((item, index) =>
-                          <option value={item} key={index}>
-                            {item}
-                          </option>
-                        )}
+              <div className='col' >
+                <div className="admin-card-header"><h1>Admin Management Page</h1></div>
+                <Table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Email</th>
+                      <th scope="col">Username</th>
+                      <th scope="col">Role</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Create</th>
+                      <th scope="col">Update</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.map((item, index) =>
+                      <tr key={index}>
+                        <th >{item.email}</th>
+                        <td>{item.username}</td>
+                        <td>
+                          {item.role === 'admin'
+                            ?
+                            <select
+                              className="form-select"
+                              style={{ width: "100px", backgroundColor: "lightgreen" }}
+                              defaultValue={item.role}
+                              onChange={e => handleChangeRole(e, item._id)}
+                            >
+                              {roleData.map((item, index) =>
+                                <option value={item} key={index}>
+                                  {item}
+                                </option>
+                              )}
 
-                      </select>
-                    }
-                  </td>
+                            </select>
+                            : <select
+                              className="form-select"
+                              style={{ width: "100px", backgroundColor: "lightskyblue" }}
+                              defaultValue={item.role}
+                              onChange={e => handleChangeRole(e, item._id)}
+                            >
+                              {roleData.map((item, index) =>
+                                <option value={item} key={index}>
+                                  {item}
+                                </option>
+                              )}
 
-                  <td>
-                    <Switch checked={item.enabled} color="success" onChange={e => handleChangeStatus(e, item._id)} />
-                  </td>
-                  <td>
-                    {moment(item.createdAt).locale("th").format("ll")}
-                  </td>
-                  <td>
-                    {moment(item.updatedAt)
-                      .locale("th")
-                      .startOf(item.updatedAt)
-                      .fromNow()}
-                  </td>
-                  <td>
-                    <button type="button" className="btn btn-danger"> <AiFillDelete onClick={() => handleRemove(item._id)} /> </button>
-                    <button type="button" className="btn btn-secondary"><AiFillEdit onClick={() => ShowEdit(item._id)} /></button>
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </Table>
+                            </select>
+                          }
+                        </td>
+
+                        <td>
+                          <Switch checked={item.enabled} color="success" onChange={e => handleChangeStatus(e, item._id)} />
+                        </td>
+                        <td>
+                          {moment(item.createdAt).locale("th").format("ll")}
+                        </td>
+                        <td>
+                          {moment(item.updatedAt)
+                            .locale("th")
+                            .startOf(item.updatedAt)
+                            .fromNow()}
+                        </td>
+                        <td>
+                          <button type="button" className="btn btn-danger"> <AiFillDelete onClick={() => handleRemove(item._id)} /> </button>
+                          <button type="button" className="btn btn-secondary"><AiFillEdit onClick={() => ShowEdit(item._id)} /></button>
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+            <div className='col-md-2'>
+            </div>
+          </div>
         </div>
       </div>
-      <div className='col-md-2'>
-      </div>
-    </div>
-    </div>
+    </div >
   )
 
 

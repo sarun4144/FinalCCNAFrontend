@@ -78,15 +78,17 @@ function ExamAdd() {
       <AdminToolbar/>
     <div className='admincontainer'>
       <div className='examadd-card'>
+        <div className="admin-card-header"><h1>ADD EXAM</h1></div>
+        <br />
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="exampleFormControlInput1">ชื่อข้อสอบ</label>
-            <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="ชื่อข้อสอบ" rows="3" name="name" onChange={handleChange} required />
+            <label htmlFor="exampleFormControlInput1">Exam name</label>
+            <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Exam name" rows="3" name="name" onChange={handleChange} required />
           </div>
           <br />
 
           <div className="form-group">
-            <label htmlFor="exampleFormControlInput1">Titel</label>
+            <label htmlFor="exampleFormControlInput1">Title</label>
             <input className="form-control" id="exampleFormControlInput1" name="title" onChange={handleChange} required></input>
           </div>
           <br />
