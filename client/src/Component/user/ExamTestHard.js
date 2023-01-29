@@ -60,10 +60,7 @@ function ExamTestEasy() {
     //cookie
     const [cookies, setCookie] = useCookies(['Result']);
 
-<<<<<<< HEAD
  console.log(Log.length)
-=======
->>>>>>> 9799135a734fd7a271ecc4dc3bbcadd61b7bbb01
     useEffect(() => {
         //code
         if (localStorage.showresult === "true") {
