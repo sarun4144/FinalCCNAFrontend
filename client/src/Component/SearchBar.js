@@ -74,7 +74,7 @@ const SearchBar = () => {
     }
 
     function SeeExam(id, catid, category) {
-        if (role) {
+        // if (role) {
             if (role === "admin") {
                 navigate("/admin/home")
             } else {
@@ -88,18 +88,18 @@ const SearchBar = () => {
                 localStorage.setItem('catid', catid)
                 navigate("/user/extest")
             }
-        } else {
-            Swal.fire({
-                position: 'top',
-                title: 'Error!',
-                text: "กรุณา Login",
-                icon: 'error',
-                iconColor: 'Red',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'ตกลง'
-            })
-            navigate("/login")
-        }
+        // } else {
+        //     Swal.fire({
+        //         position: 'top',
+        //         title: 'Error!',
+        //         text: "กรุณา Login",
+        //         icon: 'error',
+        //         iconColor: 'Red',
+        //         confirmButtonColor: '#3085d6',
+        //         confirmButtonText: 'ตกลง'
+        //     })
+        //     navigate("/login")
+        // }
     }
 
 

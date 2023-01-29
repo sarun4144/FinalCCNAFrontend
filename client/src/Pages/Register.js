@@ -60,16 +60,16 @@ function Register() {
                 <div className="col-md-6 offset-md-3" >
                     <div className="regis-card">
                         <div className="row">
-                            <div class="col-1"></div>
+                            <div className="col-1"></div>
                             <div className="regis-header">
                                 <h1 className="title">Register</h1>
                             </div>
-                            <div class="col-1"></div>
+                            <div className="col-1"></div>
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="form-group" >
                                 <label>Username: </label>
-                                <input className="form-control" type="text" name="username" autoFocus placeholder="Username" onChange={handleChange} />
+                                <input className="form-control" type="text" name="username" autoFocus placeholder="Username" onChange={handleChange}required />
                             </div>
                             <br />
                             <div className="form-group">
@@ -84,7 +84,7 @@ function Register() {
                             <br />
                             <div className="form-group">
                                 <label >Email : </label>
-                                <input className="form-control" type="email" name="email" placeholder="Email" onChange={handleChange} />
+                                <input className="form-control" type="email" name="email" placeholder="Email" onChange={handleChange} required/>
                             </div>
 
                             <br />

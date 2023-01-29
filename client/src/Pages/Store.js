@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { listexam } from "../Function/Exam";
+import { listexam,removeExam} from "../Function/Exam";
 import { listCategory } from "../Function/Category";
 import { checkin } from "../Store/examSilce";
 import { checkout } from "../Store/examSilce";
 import './Store.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Swal from 'sweetalert2'
+import Confirm from "../Alert/Confirm"
 
 //Notify
 
@@ -56,9 +57,34 @@ function Store() {
     localStorage.setItem('catid', catid)
     navigate("/admin/examchoices");
   }
+  function DeleteBTN(id) {
+    const EXAM = {
+      examid: id,
+    }
+    Confirm.fire({
+      title: 'ยืนยัน!!',
+      text: "คุณต้องการจะลบ User ใช่หรืไม่",
+      icon: 'warning',
+    }).then((result) => {
+      if (result.isConfirmed) {
+      
+        removeExam(id).then((res) => {
+          console.log("Delete", res);
+          Swal.fire({
+            title: 'ลบ Exam สำเร็จ!',
+            text: 'Exam ได้ถูกลบแล้ว',
+            icon: 'success'
+          })
+          loadData(Token)
+        }).catch((err) => {
+          console.log(err.response);
+        });
+      }
+    })
+  }
 
   function SeeExam(id, catid, category) {
-    if (role) {
+    // if (role) {
       if (role === "admin") {
         navigate("/admin/home")
       } else {
@@ -72,18 +98,18 @@ function Store() {
         localStorage.setItem('catid', catid)
         navigate("/user/extest")
       }
-    } else {
-      Swal.fire({
-        position: 'top',
-        title: 'Error!',
-        text: "กรุณา Login",
-        icon: 'error',
-        iconColor: 'Red',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'ตกลง'
-      })
-      navigate("/login")
-    }
+    // } else {
+    //   Swal.fire({
+    //     position: 'top',
+    //     title: 'Error!',
+    //     text: "กรุณา Login",
+    //     icon: 'error',
+    //     iconColor: 'Red',
+    //     confirmButtonColor: '#3085d6',
+    //     confirmButtonText: 'ตกลง'
+    //   })
+    //   navigate("/login")
+    // }
   }
   const [catText, setDropDownText] = useState("Select Category");
   const filterExamList = exame.filter((exam) => {
@@ -119,7 +145,7 @@ function Store() {
             <div key={i} className='store-card'>
               <div >
                 <div className="form-group">
-                  <h1>{item.name}</h1>
+                  <div className="store-card-header"><h1>{item.name}</h1></div>
                 </div>
                 <div className="form-group">
                   <h4>{item.title}</h4>
@@ -133,7 +159,8 @@ function Store() {
                   <div className="form-group">
                     <h5>Creat at : {item.date}</h5>
                   </div>
-                  <button type="submit" className="btn btn-danger" onClick={(id) => EditBTN(item._id, item.Categoryid, cat.name)}>Edit</button>
+                  <button type="submit" className="btn btn-warning" onClick={(id) => EditBTN(item._id, item.Categoryid, cat.name)}>Edit</button> &nbsp;
+                  <button type="submit" className="btn btn-danger" onClick={(id) => DeleteBTN(item._id)}>Delete</button>
                 </div>
               )}
             </div>
@@ -164,7 +191,7 @@ function Store() {
           <div key={i} className='store-card'>
             <form >
               <div className="form-group">
-                <h1>{item.name}</h1>
+              <div className="store-card-header"><h1>{item.name}</h1></div>
               </div>
               <div className="form-group">
                 <h4>{item.title}</h4>
@@ -206,7 +233,7 @@ function Store() {
         <div key={i} className='store-card'>
           <form >
             <div className="form-group">
-              <h1>{item.name}</h1>
+            <div className="store-card-header"><h1>{item.name}</h1></div>
             </div>
             <div className="form-group">
               <h4>{item.title}</h4>

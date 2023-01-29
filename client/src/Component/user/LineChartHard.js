@@ -3,15 +3,13 @@ import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { FakeData } from './FakeData';
 import { useSelector } from "react-redux";
-import { EastlogS, Easylog } from "../../Function/Person"
+import { Hardlog } from "../../Function/Person"
 
-const LineChart = () => {
+const LineChartHard = () => {
     const user = useSelector((state) => ({ ...state }))
     const Userid = user.userStore.user.ObjectID
 
-    const [dataExamEasy, setDataExamEasy] = useState([]);
-
-
+    const [dataExamHard, setDataExamHard] = useState([]);
 
     useEffect(() => {
         loadExamData(Userid)
@@ -23,10 +21,9 @@ const LineChart = () => {
 
     }, [])
 
-
     function loadExamData(id) {
-        Easylog(id).then((res) => {
-            setDataExamEasy(res.data);
+        Hardlog(id).then((res) => {
+            setDataExamHard(res.data);
         });
         /*
         const payload = {
@@ -38,23 +35,10 @@ const LineChart = () => {
       });*/
     }
 
-    const DataName = Object.values(dataExamEasy);
-    /*console.log(DataName)*/
-    // const [scoreData, setScoreData] = useState({
+    const DataName = Object.values(dataExamHard);
 
-    //     labels: FakeData.map((data) => data.Category),
-    //     datasets: [
-    //         {
-    //             label: "Score",
-    //             data: FakeData.map((data) => data.Score),
-    //             backgroundColor: "cyan",
-    //             borderColor: "black",
-    //             borderWidth: 2,
-    //         }
-    //     ]
-    // })
     const labelsL = DataName.slice(DataName.length - 5, DataName.length).map((data) => data.Examname);
-    const dataEasyL = {
+    const dataHardL = {
         labels: labelsL,
         datasets: [{
             label: 'Score',
@@ -68,8 +52,9 @@ const LineChart = () => {
             borderWidth: 2,
         }]
     };
+
     const labelsS = DataName.map((data) => data.Examname);
-    const dataEasyS = {
+    const dataHardS = {
         labels: labelsS,
         datasets: [{
             label: 'Score',
@@ -87,12 +72,12 @@ const LineChart = () => {
     return (
         <div>
             {DataName.length > 5 ?
-                <Line data={dataEasyL}></Line>
+                <Line data={dataHardL}></Line>
                 :
-                <Line data={dataEasyS}></Line>
+                <Line data={dataHardS}></Line>
             }
         </div>
     )
 }
 
-export default LineChart
+export default LineChartHard

@@ -73,17 +73,20 @@ function CategoryAdd() {
       icon: 'warning',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: 'ลบ Category สำเร็จ!',
-          text: 'Category ได้ถูกลบแล้ว',
-          icon: 'success'
-        })
-        console.log(user.userStore.user.token, id)
-        removeCategory(user.userStore.user.token, id).then((res) => {
+        removeCategory(Token, id).then((res) => {
           console.log("Delete", res);
-          loadData(user.userStore.user.token);
+          Swal.fire({
+            title: 'ลบ Category สำเร็จ!',
+            text: res.data,
+            icon: 'success'
+          })
+          loadData(Token)
         }).catch((err) => {
-          console.log(err.response);
+          Swal.fire({
+            title: 'Error',
+            text: err.response.data,
+            icon: 'error'
+          })
         });
       }
     })
@@ -92,34 +95,39 @@ function CategoryAdd() {
   
   return (
     <div className='adminwrap'>
-      <AdminToolbar/>
-    <div className='admincontainer' >
-      
-      <h1 style={{ textAlign: "center" }}> Admin CategoryManagement Page </h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label form="exampleFormControlInput1">ชื่อหวมดหมู่ข้อสอบ</label>
-          <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="หมวดหมู่ข้อสอบ" rows="3" name="name" onChange={handleChange} required />
+      <AdminToolbar />
+      <div className='admincontainer' >
+        <div className="admin-cat-manage">
+          <div className="admin-card-header"><h1>Category Management Page</h1></div>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label form="exampleFormControlInput1">Category Name</label>
+              <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Category Name" rows="3" name="name" onChange={handleChange} required />
+            </div>
+
+            <br />
+
+            <button type="submit" className="btn btn-primary">Submit</button>
+
+          </form>
+          <br />
+          <hr />
+          <br />
+          <div className="admin-card-header"><h1> Category List </h1></div>
+          <br />
+          <ul className="list-group">
+            {category.map((item, index) =>
+              <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                {item.name}
+                <button type="button" className="btn btn-danger" onClick={() => handleRemove(item._id)}>
+                  <span className="badge badge-light">X</span>
+                </button>
+              </li>
+            )}
+          </ul>
+          <br />
         </div>
-
-        <br />
-
-        <button type="submit" className="btn btn-primary">Submit</button>
-
-      </form>
-      <hr />
-      <h1 style={{ textAlign: "center" }}> Category List </h1>
-      <ul className="list-group">
-        {category.map((item, index) =>
-          <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-            {item.name}
-            <button type="button" className="btn btn-danger" onClick={() => handleRemove(item._id)}>
-            <span className="badge badge-light">X</span>
-            </button>
-          </li>
-        )}
-      </ul>
-    </div>
+      </div>
     </div>
 
   )

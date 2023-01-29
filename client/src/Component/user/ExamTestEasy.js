@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { currentexam, EasyRecord,CountStamp } from "../../Function/Exam";
-import { Rerecord ,Rerecordlist} from "../../Function/Reportlog";
+import { currentexam, EasyRecord, CountStamp } from "../../Function/Exam";
+import { Rerecord, Rerecordlist } from "../../Function/Reportlog";
 import { useCookies } from 'react-cookie';
 import "./ExamTestEasy.css";
 import Swal from 'sweetalert2'
-
+import Confirm from "../../Alert/Confirm";
 import { Easylog } from "../../Function/Person"
+import { useNavigate } from "react-router-dom";
 
 function ExamTestEasy() {
   const exam = useSelector((state) => ({ ...state }));
@@ -14,6 +15,7 @@ function ExamTestEasy() {
   const UserID = exam.userStore.user.ObjectID
   const Username = exam.userStore.user.username
   const Catname = exam.examStore.exam.category
+  const navigate = useNavigate();
 
   const [data, setData] = useState([]);
   const [exame, setExam] = useState([]);
@@ -52,7 +54,7 @@ function ExamTestEasy() {
   // console.log(log2.length)
   useEffect(() => {
     //code
-    if (localStorage.showresult == "true") {
+    if (localStorage.showresult === "true") {
       setShowResults(true)
     }
     setRecord(JSON.parse(localStorage.result))
@@ -132,11 +134,11 @@ function ExamTestEasy() {
 
   const optionClicked = (isCorrect) => {
     // Increment the score
-    if (Selector == selectValueS.length) {
+    if (Selector === selectValueS.length) {
       let i = 0
       let d = 0
       while (i < isCorrect.length) {
-        if (isCorrect[i].isCorrect == false) {
+        if (isCorrect[i].isCorrect === false) {
           document.getElementById(isCorrect[i].index).className = "ExamTeasyButton1false "
           d = -1
           console.log("False ", d)
@@ -147,13 +149,14 @@ function ExamTestEasy() {
         }
         i++
       }
-      if (i == isCorrect.length && d == isCorrect.length) {
+      if (i === isCorrect.length && d === isCorrect.length) {
         setAnswerdetail(true)
         console.log("true")
         setANSiscorrect(true)
 
       } else {
         console.log("false")
+        setAnswerdetail(true)
         setANSiscorrect(false)
       }
     } else {
@@ -183,7 +186,7 @@ function ExamTestEasy() {
     const payload3 = {
       Docount: 1
     }
-    if (docount == undefined) {
+    if (docount === undefined) {
       CountStamp(Exid, payload3).then(res => {
         console.log(res.data)
       }).catch(err => {
@@ -198,16 +201,42 @@ function ExamTestEasy() {
     }
     EasyRecord(Exid, payload)
       .then(res => {
-        setScore(preve => 0);
-        localStorage.setItem("score", 0)
-        setCurrentQuestion(preve => 0);
-        localStorage.setItem("currentQuestion", 0)
-        setShowResults(false);
-        localStorage.setItem("showresult", false)
-        setRecord(false);
-        localStorage.setItem("result", 0)
-        setANSiscorrect(false)
-        setAnswerdetail(false)
+        Confirm.fire({
+          title: 'ยืนยัน!!',
+          text: res.data,
+          icon: 'sucess',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: 'Do it again',
+              text: 'Enjoy',
+              icon: 'success'
+            })
+            setScore(preve => 0);
+            localStorage.setItem("score", 0)
+            setCurrentQuestion(preve => 0);
+            localStorage.setItem("currentQuestion", 0)
+            setShowResults(false);
+            localStorage.setItem("showresult", false)
+            setRecord(false);
+            localStorage.setItem("result", 0)
+            setANSiscorrect(false)
+            setAnswerdetail(false)
+          } else {
+            setScore(preve => 0);
+            localStorage.setItem("score", 0)
+            setCurrentQuestion(preve => 0);
+            localStorage.setItem("currentQuestion", 0)
+            setShowResults(false);
+            localStorage.setItem("showresult", false)
+            setRecord(false);
+            localStorage.setItem("result", 0)
+            setANSiscorrect(false)
+            setAnswerdetail(false)
+            navigate("/user/extest")
+          }
+        })
+
       }).catch(err => {
         console.log(err);
       })
@@ -215,7 +244,7 @@ function ExamTestEasy() {
   }
 
   function countdown() {
-    if (counter == 0 && min !== 0) {
+    if (counter === 0 && min !== 0) {
       setMin(min - 1);
       setCounter(59);
     } else {
@@ -239,7 +268,7 @@ function ExamTestEasy() {
     for (var index = 0; index < Choices.length; index++) {
       document.getElementById(index + 1).className = "ExamTeasyButton1"
     }
-    if (index == Choices.length) {
+    if (index === Choices.length) {
       if (currentQuestion + 1 < Data.length) {
         if (ANSiscorrect) {
           localStorage.setItem("score", score + 1)
@@ -263,24 +292,24 @@ function ExamTestEasy() {
     }
   }
 
-  const ShowReportQuestion = async(name, question) => {
-    const {value: text } = await Swal.fire({
+  const ShowReportQuestion = async (name, question) => {
+    const { value: text } = await Swal.fire({
       title: name + " ข้อที่ " + question,
-      input: 'textarea', 
+      input: 'textarea',
       inputLabel: 'รายงานปัญหา',
       inputPlaceholder: 'ปัญหาหรือข้อผิดพลาดที่พบ',
       confirmButtonText: 'ยืนยัน',
       confirmButtonColor: 'orange',
     })
-    if(text) {
-    const Reload={
-        Number:question,
-        Name:name,
-        Username:Username,
-        Text:text,
+    if (text) {
+      const Reload = {
+        Number: question,
+        Name: name,
+        Username: Username,
+        Text: text,
       }
       Bog.push(Reload)
-      Rerecord(Exid,Bog)
+      Rerecord(Exid, Bog)
         .then(res => {
           Swal.fire({
             title: 'รายงานปัญหาสำเร็จ',
@@ -312,7 +341,7 @@ function ExamTestEasy() {
                   <div key={index} className="result-Question">
 
                     <div className="ExamTeasyQuestion">
-                      {item.ANSiscorrect && item.selectValueS.length == item.CorrectANS.length ? (
+                      {item.ANSiscorrect && item.selectValueS.length === item.CorrectANS.length ? (
                         <div className="result-q-True"><h2>Question: {index + 1}</h2></div>
                       ) : (
                         <div className="result-q-false"><h2>Question: {index + 1}</h2></div>
@@ -425,7 +454,7 @@ function ExamTestEasy() {
 
                 )}
               </div>
-              <button className="ExamTeasyGobutton1" onClick={restartGame}>restartGame</button>
+              <button className="ExamTeasyGobutton1" onClick={restartGame}>Submit to Record</button>
             </div>
 
           )
@@ -443,7 +472,7 @@ function ExamTestEasy() {
                       <br />
                       <span>{item.Question}</span>
                       <br />
-                      <div onClick={() => ShowReportQuestion(exame.name ,currentQuestion + 1)}>รายงานปัญหา</div>
+                      <button className="btn btn-warning" onClick={() => ShowReportQuestion(exame.name, currentQuestion + 1)}>รายงานปัญหา</button>
                     </div>
                     <center>
                       {item.images.map((pic, Ipic) =>

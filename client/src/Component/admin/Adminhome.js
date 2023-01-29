@@ -7,35 +7,32 @@ import AdminToolbar from './AdminToolbar';
 import { useSelector } from 'react-redux';
 
 function Adminhome() {
-  const admin = useSelector((state) => ({...state}))
+  const admin = useSelector((state) => ({ ...state }))
   const adminUsername = admin.userStore.user.username
   const role = admin.userStore.user.role
   const email = admin.userStore.user.email
 
   return (
     <div className='adminwrap'>
-      <AdminToolbar/>
-    <div className='admincontainer'>
-      
-        <div className='row'>
-          <center><h1> Admin Home</h1></center>
+      <AdminToolbar />
+      <div className='admincontainer'>
+        <div className='admin-menu-container'>
+          <div className='row'>
             <div className='col-md-3'>
-                 <Navbaradmin/>
+              <Navbaradmin />
             </div>
-            <div className='col-md-6'>
-                
-            </div>
-            <div className='col-md-3'>
-              
+            <div className='col-md-9'>
+
               <div className='adminprofile'>
-              <div className='admin-card-header'><h2>Admin Profile</h2> </div> 
-              <li>Adminname : {adminUsername}</li>
-              <li>Role : {role}</li>
-              <li>Email : {email}</li>
+                <div className='admin-card-header'><h2>Admin Profile</h2> </div>
+                <li>Adminname : {adminUsername}</li>
+                <li>Role : {role}</li>
+                <li>Email : {email}</li>
               </div>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
     </div>
   )
 }

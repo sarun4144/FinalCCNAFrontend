@@ -35,6 +35,13 @@
     margin-right: 10px;
 }
 
+.store-card-header {
+    background-color: #333;
+    color: white;
+    padding-left: 16px;
+    border-radius: 3px;
+}
+
 .cat-search-container {
     margin-left: 25px;
     margin-top: 10px;

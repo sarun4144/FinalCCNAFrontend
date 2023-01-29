@@ -2,48 +2,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;1,100;1,200&display=swap');
 
 .mainBackground {
-    background: #23242a;
+   background: #23242a;
 }
 
 .content-container {
-    margin-left: 25px;
-    margin-right: 25px;
-    /*background-color: #ffffff10;*/
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 10px;
+    
 }
 
 .content-con {
-    display: flex;
     justify-content: center;
-    background-color: transparent;
-    font-family: 'Mitr', sans-serif;
-    font-weight: 300;
-    font-size: x-large;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.content-con:first-child,
-.content-con:last-child {
-    padding: 4rem;
-
-}
-
-.content-l img {
-    width: 100%;
     border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     overflow: hidden;
     overflow-y: auto;
+    background-color: white;
 }
 
-.content-r {
-    padding: 2rem;
+.content-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.content-con-header {
+    background-color: #333;
+    color: white;
+    padding-left: 16px;
+    border-radius: 3px;
+}
+
+.content-card {
+    display: flex;
+    flex-direction: column;
+    margin-right: 5px;
+    padding: 15px;
     text-align: left;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     overflow: hidden;
     overflow-y: auto;
     border-radius: 3px;
     background-color: white;
+    width: auto;
+    min-width: 415px;
+}
+
+.content-Head{
+    font-size: 3rem;
+    font-weight: 500;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.35);
+    color: primary;
+}
+
+.content-Text{
+    font-size: 2rem;
+    font-weight: 500;
+    text-shadow: 2px 2px  rgba(0, 0, 0, 0.35);
 }
 
 @media screen and (max-width: 480px) {

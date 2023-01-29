@@ -2,7 +2,6 @@
 
 
 .ExamThardcards_wrap {
-    background-color: #ffffff;
     padding: 20px;
     width: 100%;
     display: flex;
@@ -19,7 +18,7 @@
 }
 
 .ExamThardcard_inner {
-    background: #ecebeb;
+    background: white;
     border-radius: 5px;
     padding: 35px 20px;
     width: 100%;

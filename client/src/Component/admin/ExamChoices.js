@@ -37,6 +37,7 @@ function ExamChoices() {
   const Catname = store.examStore.exam.category
   const Catid = store.examStore.exam.catid
 
+  console.log(Data)
   useEffect(() => {
     loadData(EXid)
 

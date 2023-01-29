@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;500;600;700&display=swap');
 
 .Excards_wrap {
-    background-color: #ffffff;
+
     padding: 20px;
     width: 100%;
     display: flex;
@@ -17,7 +17,7 @@
 }
 
 .Excard_inner {
-    background: #ecebeb;
+    background: white;
     border-radius: 5px;
     padding: 35px 20px;
     width: 100%;
@@ -91,6 +91,7 @@
 }
 
 .sameCat-card {
+    background: white;
     border-radius: 5px;
     margin-top: 10px;
     padding: 15px;

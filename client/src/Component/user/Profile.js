@@ -4,7 +4,9 @@ import './Profile.css'
 import * as AiIcons from "react-icons/ai";
 import Swal from 'sweetalert2'
 import LineChart from "./LineChart";
+import LineChartHard from "./LineChartHard";
 import RadarChart from "./RadarChart";
+import RadarChartHard from "./RadarChartHard";
 import Table from 'react-bootstrap/Table';
 import { ChangeName, reads, Hardlog, Easylog } from "../../Function/Person"
 import { useNavigate } from "react-router-dom";
@@ -17,6 +19,9 @@ function Profile() {
   const [dataExamHard, setDataExamHard] = useState([]);
   const [dataExamEasy, setDataExamEasy] = useState([]);
 
+  const [showLine, setShowLine] = useState("easy");
+  const [showRadar, setShowRadar] = useState("easy")
+
   const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
@@ -25,8 +30,6 @@ function Profile() {
   //console.log(username)
   //console.log(role)
   // console.log(email)
-  console.log("Hard", dataExamHard)
-  console.log("Easy", dataExamEasy)
   const openInNewTab = url => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
@@ -113,16 +116,20 @@ function Profile() {
         <div className="col-md-6">
           <div className="profile-card">
             <div className="profile-card-header"><h1>Statistics - Line Chart</h1></div>
+            <button className="btn btn-success" onClick={() => setShowLine("easy")}>EASY</button>&nbsp;
+            <button className="btn btn-warning" onClick={() => setShowLine("hard")}>HARD</button>
             <div className="profile-card-content">
-              <LineChart></LineChart>
+             <>{ showLine === "easy" ? <LineChart></LineChart> : <LineChartHard></LineChartHard>}</>
             </div>
           </div>
         </div>
         <div className="col-md-6">
           <div className="profile-card">
             <div className="profile-card-header"><h1>Statistics - Radar Chart</h1></div>
+            <button className="btn btn-success" onClick={() => setShowRadar("easy")}>EASY</button>&nbsp;
+            <button className="btn btn-warning" onClick={() => setShowRadar("hard")}>HARD</button>
             <div className="profile-card-content">
-              <RadarChart></RadarChart>
+              <>{ showRadar === "easy" ? <RadarChart></RadarChart> : <RadarChartHard></RadarChartHard>}</>
             </div>
           </div>
         </div>

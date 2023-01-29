@@ -107,8 +107,8 @@ function App() {
               <Route path="/user/ResultHard" element={<UserRoute><><ResultHard /></> </UserRoute>} />
               <Route path="/user/ResultEasy" element={<UserRoute><><ResultEasy /></> </UserRoute>} />
 
-              <Route path="/user/extest" element={<UserRoute><><ExampleTest /></> </UserRoute>} />
-              <Route path="/user/example" element={<UserRoute><><Example /></></UserRoute>} />
+              <Route path="/user/extest" element={<><ExampleTest /></>} />
+              <Route path="/user/example" element={<><Example /></>} />
               <Route path="/user/examtesteasy" element={<UserRoute><><ExamTestEasy /></> </UserRoute>} />
               <Route path="/user/examtesthard" element={<UserRoute><><ExamTestHard /></> </UserRoute>} />
 
