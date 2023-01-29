@@ -14,7 +14,6 @@ function Login() {
   const [value, setValue] = useState({
     email: " ",
     password: " "
-
   })
 
   const roleBaseRedirect = (role) => {

@@ -85,9 +85,7 @@ function Store() {
       navigate("/login")
     }
   }
-
   const [catText, setDropDownText] = useState("Select Category");
-
   const filterExamList = exame.filter((exam) => {
     if (select === "") {
       return exam;
@@ -106,7 +104,6 @@ function Store() {
               <Dropdown.Toggle variant="primary" id="dropdown-cat">
                 {catText}
               </Dropdown.Toggle>
-
               <Dropdown.Menu>
                 {category.map((item, catindex) =>
                   <Dropdown.Item key={catindex} as="button" onClick={(id) => { setSelect(item._id); setDropDownText(item.name) }}>{item.name}</Dropdown.Item>

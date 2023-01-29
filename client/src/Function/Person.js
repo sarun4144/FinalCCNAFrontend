@@ -1,11 +1,9 @@
 import axios from 'axios'
 
-export const listUser = async (authtoken) =>
+export const listUser = async () =>
   await axios.get(process.env.REACT_APP_API + "/person",
     {
-      headers: {
-        authtoken
-      }
+      
     });
 export const reads = async (authtoken,id) =>
   await axios.get(process.env.REACT_APP_API + "/reads/"+id,
