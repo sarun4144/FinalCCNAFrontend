@@ -96,7 +96,7 @@ function Content() {
                             <div className="content-card">
                                 <div className="content-con-header">
                                     <h2>
-                                        {indexN + 1} ) {itemN.name}
+                                        {indexN + 1}  {itemN.name}
                                     </h2>
                                 </div>
                                 <div className="content-Text">

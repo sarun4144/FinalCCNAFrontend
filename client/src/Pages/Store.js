@@ -58,9 +58,7 @@ function Store() {
     navigate("/admin/examchoices");
   }
   function DeleteBTN(id) {
-    const EXAM = {
-      examid: id,
-    }
+
     Confirm.fire({
       title: 'ยืนยัน!!',
       text: "คุณต้องการจะลบ User ใช่หรืไม่",
