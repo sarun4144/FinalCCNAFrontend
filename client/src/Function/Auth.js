@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 export const register = async (value) =>
-  await axios.post(process.env.REACT_APP_API_AUTH_AUTH + "/register", value ,{
+  await axios.post(process.env.REACT_APP_API_AUTH + "/register", value ,{
     headers: {
         'Content-Type': 'application/json'
     }
